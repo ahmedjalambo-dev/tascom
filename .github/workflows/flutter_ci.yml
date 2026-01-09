@@ -1,0 +1,32 @@
+name: Flutter CI
+
+on:
+  pull_request:
+    # Trigger the checks when merging into main OR dev
+    branches: [ "main", "dev" ] 
+  push:
+    # Optional: Run checks after merging to dev to ensure it's still green
+    branches: [ "dev" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Check Formatting
+        # Fails if code isn't formatted
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze (Linting)
+        # Fails if there are errors/warnings
+        run: flutter analyze
+
+      - name: Run Tests
+        run: flutter test
