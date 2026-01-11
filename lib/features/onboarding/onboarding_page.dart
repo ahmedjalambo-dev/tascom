@@ -39,10 +39,12 @@ class OnBoardPage extends StatelessWidget {
                 child: Text(
                   'Skip',
                   style: TextStyle(
-                    color: halfScreenImage 
-                        ? MyColors.brand.purple  // for onboarding 2
-                        : Colors.white,  // for onboarding 1 3
-                   
+                    color: halfScreenImage
+                        ? MyColors
+                              .brand
+                              .purple // for onboarding 2
+                        : Colors.white, // for onboarding 1 3
+
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     letterSpacing: 0.5,
@@ -65,7 +67,7 @@ class OnBoardPage extends StatelessWidget {
         Container(
           height: screenHeight / 2,
           width: double.infinity,
-          child: Image.asset(imagePath, fit: BoxFit.cover), 
+          child: Image.asset(imagePath, fit: BoxFit.cover),
         ),
         Expanded(
           child: Container(

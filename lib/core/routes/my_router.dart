@@ -6,7 +6,6 @@ class MyRouter {
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case MyRoutes.onboarding:
-        
         return MaterialPageRoute(
           builder: (context) => const OnBoardingScreen(),
         );

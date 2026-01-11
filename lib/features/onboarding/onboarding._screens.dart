@@ -13,7 +13,6 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final PageController _controller = PageController();
   int currentPage = 0;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +34,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   subtitle:
                       "Discover a community where tasks are shared, help is exchanged, and trust is built.",
                   imagePath: 'assets/images/onbord1.png',
-                  imageFit: BoxFit.fill, onSkipPressed: () {  },
-
-                  
+                  imageFit: BoxFit.fill,
+                  onSkipPressed: () {},
                 ),
                 OnBoardPage(
                   title: " Connect Locally, Act Fast",
@@ -46,7 +44,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   imagePath: 'assets/images/onbord2.png',
                   imageFit: BoxFit.fill,
                   halfScreenImage: true,
-                  onSkipPressed: () {  },
+                  onSkipPressed: () {},
                 ),
                 OnBoardPage(
                   title: "Exchange Skills with Points",
@@ -54,14 +52,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       "Offer your skills, earn points, and use them to request help from others.  No money involved.",
                   imagePath: 'assets/images/onbord3.png',
                   imageFit: BoxFit.fill,
-                    
-                    onSkipPressed: () {  },
+
+                  onSkipPressed: () {},
                 ),
               ],
             ),
             SizedBox(height: 50),
             //nav button with cirle indicator
-                 if (currentPage == 0 || currentPage == 1) // show only on pages 1 and 2
+            if (currentPage == 0 ||
+                currentPage == 1) // show only on pages 1 and 2
               Positioned(
                 bottom: 40,
                 left: 0,
@@ -72,7 +71,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     lineWidth: 4,
                     percent: (currentPage + 1) / 3,
                     progressColor: Colors.white,
-                    backgroundColor:  Colors.white,
+                    backgroundColor: Colors.white,
                     animation: true,
                     circularStrokeCap: CircularStrokeCap.round,
                     center: GestureDetector(
@@ -97,7 +96,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     ),
                   ),
                 ),
-            ),
+              ),
           ],
         ),
       ),

@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(375, 812), 
+      designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
@@ -23,8 +23,6 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           onGenerateRoute: MyRouter().generateRoute,
           initialRoute: MyRoutes.onboarding,
-
-         
         );
       },
       child: const OnBoardingScreen(), // ⬅️ أو SplashScreen
