@@ -36,13 +36,13 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator>
     );
 
     _previousProgress = (widget.currentPage + 1) / widget.totalPages;
-    _progressAnimation = Tween<double>(
-      begin: _previousProgress,
-      end: _previousProgress,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
+    _progressAnimation =
+        Tween<double>(begin: _previousProgress, end: _previousProgress).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: Curves.easeInOut,
+          ),
+        );
   }
 
   @override
@@ -52,13 +52,13 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator>
       _previousProgress = (oldWidget.currentPage + 1) / oldWidget.totalPages;
       final newProgress = (widget.currentPage + 1) / widget.totalPages;
 
-      _progressAnimation = Tween<double>(
-        begin: _previousProgress,
-        end: newProgress,
-      ).animate(CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeInOut,
-      ));
+      _progressAnimation =
+          Tween<double>(begin: _previousProgress, end: newProgress).animate(
+            CurvedAnimation(
+              parent: _animationController,
+              curve: Curves.easeInOut,
+            ),
+          );
 
       _animationController.forward(from: 0.0);
     }
