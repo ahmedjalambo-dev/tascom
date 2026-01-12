@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/routes/my_router.dart';
-import 'package:tascom/features/onboarding/onboarding._screens.dart';
 
 void main() {
   runApp(const MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -26,7 +24,6 @@ class MyApp extends StatelessWidget {
           initialRoute: MyRoutes.onboarding,
         );
       },
-      child: const OnBoardingScreen(), // ⬅️ أو SplashScreen
     );
   }
 }
