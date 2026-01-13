@@ -46,6 +46,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     "Offer your skills, earn points, and use them to request help from others. No money involved.",
                 imagePath: 'assets/images/onboarding-3.png',
                 onSkipTap: () {},
+                isLastPage: true,
               ),
             ],
           ),

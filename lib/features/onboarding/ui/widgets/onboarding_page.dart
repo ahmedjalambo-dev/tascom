@@ -9,6 +9,7 @@ class OnBoardingPage extends StatelessWidget {
   final String subtitle;
   final String imagePath;
   final bool isSecondPage;
+  final bool isLastPage;
   final void Function()? onSkipTap;
 
   const OnBoardingPage({
@@ -18,6 +19,7 @@ class OnBoardingPage extends StatelessWidget {
     required this.imagePath,
     required this.onSkipTap,
     this.isSecondPage = false,
+    this.isLastPage = false,
   });
 
   @override
@@ -58,17 +60,21 @@ class OnBoardingPage extends StatelessWidget {
             ],
           ),
           //skip button
-          Positioned(
-            top: 72.h,
-            right: 24.w,
-            child: GestureDetector(
-              onTap: onSkipTap,
-              child: Text(
-                'Skip',
-                style: MyTextStyle.body.body1.copyWith(
-                  color: isSecondPage
-                      ? MyColors.brand.purple
-                      : MyColors.text.white,
+          Visibility(
+            // visible ture if not the last page
+            visible: isLastPage ? false : true,
+            child: Positioned(
+              top: 72.h,
+              right: 24.w,
+              child: GestureDetector(
+                onTap: onSkipTap,
+                child: Text(
+                  'Skip',
+                  style: MyTextStyle.body.body1.copyWith(
+                    color: isSecondPage
+                        ? MyColors.brand.purple
+                        : MyColors.text.white,
+                  ),
                 ),
               ),
             ),
