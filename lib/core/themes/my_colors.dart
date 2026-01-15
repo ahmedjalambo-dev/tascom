@@ -92,7 +92,7 @@ class AppBackgroundColors {
   final Color primary = const Color(0xFFF9F9FB);
 
   /// Card/Hover background - Light Purple (#F4F0FF)
-  final Color cardHover = const Color(0xFFF4F0FF);
+  final Color cardHover = const Color.fromARGB(255, 216, 201, 255);
 
   /// Secondary background (post bars) - White (#FFFFFF)
   final Color secondary = const Color(0xFFFFFFFF);
