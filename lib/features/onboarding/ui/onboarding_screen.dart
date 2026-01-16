@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tascom/core/extentions/extentions.dart';
+import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/features/onboarding/ui/widgets/custom_progress_indicator.dart';
 import 'package:tascom/features/onboarding/ui/widgets/onboarding_page.dart';
@@ -30,7 +32,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 subtitle:
                     "Discover a community where tasks are shared, help is exchanged, and trust is built.",
                 imagePath: 'assets/images/onboarding-1.png',
-                onSkipTap: () {},
+                onSkipTap: () => context.pushReplacementNamed(MyRoutes.home),
               ),
               OnBoardingPage(
                 title: " Connect Locally, Act Fast",
@@ -38,14 +40,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     "Find trusted helpers near you, available today or even right now.",
                 imagePath: 'assets/images/onboarding-2.png',
                 isSecondPage: true,
-                onSkipTap: () {},
+                onSkipTap: () => context.pushReplacementNamed(MyRoutes.home),
               ),
-              OnBoardingPage(
+              const OnBoardingPage(
                 title: "Exchange Skills with Points",
                 subtitle:
                     "Offer your skills, earn points, and use them to request help from others. No money involved.",
                 imagePath: 'assets/images/onboarding-3.png',
-                onSkipTap: () {},
                 isLastPage: true,
               ),
             ],
@@ -59,10 +60,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               child: CustomProgressIndicator(
                 currentPage: currentPage,
                 totalPages: 3,
-                onNextTap: () => _pageController.nextPage(
-                  duration: const Duration(milliseconds: 350),
-                  curve: Curves.easeInOut,
-                ),
+                onNextTap: () {
+                  if (currentPage == 2) {
+                    context.pushReplacementNamed(MyRoutes.home);
+                  } else {
+                    _pageController.nextPage(
+                      duration: const Duration(milliseconds: 350),
+                      curve: Curves.easeInOut,
+                    );
+                  }
+                },
               ),
             ),
           ),
