@@ -5,6 +5,7 @@ import 'package:tascom/features/profile/widgets/profile_header.dart';
 import 'package:tascom/features/profile/widgets/stats_row.dart';
 import 'package:tascom/features/profile/widgets/task_list_item.dart';
 import 'package:tascom/features/profile/widgets/task_tabs.dart';
+import 'package:tascom/features/settings/ui/screen/settings_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -88,7 +89,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           IconButton(
             icon: const Icon(Icons.settings_outlined, color: Color(0xFF251455),),
             onPressed: () {
-               // Settings action
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SettingsScreen()),
+                );
             },
           ),
         ],

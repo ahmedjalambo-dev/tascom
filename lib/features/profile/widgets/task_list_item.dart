@@ -226,17 +226,18 @@ class TaskListItem extends StatelessWidget {
       //هنا حالة المهمة خلصت ما فى أزرار فقط معلومات
           if (task.status.toLowerCase() == 'canceled') ...[
              const SizedBox(height: 12),
-               Row(
+              
+               const Row(
                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                  children: [
                      Row(
-                      children: const [
+                      children: [
                         Icon(Icons.person_outline, size: 16, color: Colors.grey),
                          SizedBox(width: 4),
                         Text("Claimed by Me", style: TextStyle(color: Color(0XFFB0B0B0), fontSize: 12),)
                       ],
                      ),
-                      const Text("-300pts", style: TextStyle(color:Color(0XFFB0B0B0) , fontSize: 12),)
+                      Text("-300pts", style: TextStyle(color:Color(0XFFB0B0B0) , fontSize: 12),)
                  ],
                )
           ],
@@ -244,11 +245,11 @@ class TaskListItem extends StatelessWidget {
        
 if (task.status.toLowerCase() == 'completed') ...[
   const SizedBox(height: 12),
-  Row(
+  const Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       Row(
-        children: const [
+        children: [
           Icon(Icons.percent_outlined, size: 16, color: Colors.grey),
           SizedBox(width: 4),
           Text(
@@ -261,7 +262,7 @@ if (task.status.toLowerCase() == 'completed') ...[
           ),
         ],
       ),
-      const Text(
+      Text(
         "+300 pts",
         style: TextStyle(
           color: Color(0xFFB0B0B0),
