@@ -83,6 +83,7 @@ flutter:
     - assets/icons/priority/
     - assets/icons/search/
     - assets/icons/app-bar/
+    - assets/icons/navbar/
 
 
 

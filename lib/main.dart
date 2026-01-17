@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           title: 'Tascom App',
           debugShowCheckedModeBanner: false,
           onGenerateRoute: MyRouter().generateRoute,
-          initialRoute: MyRoutes.home,
+          initialRoute: MyRoutes.main,
         );
       },
     );

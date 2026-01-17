@@ -65,40 +65,38 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.background.primary,
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Header with location and icons
-            const HomeHeader(),
-            // Search bar with filter
-            HomeSearchBar(
-              controller: _searchController,
-              onChanged: (value) {
-                // Search functionality can be added here
+      body: Column(
+        children: [
+          // Header with location and icons
+          const HomeHeader(),
+          // Search bar with filter
+          HomeSearchBar(
+            controller: _searchController,
+            onChanged: (value) {
+              // Search functionality can be added here
+            },
+          ),
+          SizedBox(height: 8.h),
+          // Category filter chips
+          CategoryFilterList(
+            categories: mockCategories,
+            selectedCategoryId: _selectedCategoryId,
+            onCategorySelected: _onCategorySelected,
+          ),
+          SizedBox(height: 8.h),
+          // Posts section
+          Expanded(
+            child: PostsSection(
+              tasks: _tasks,
+              onLikeTap: _onLikeTap,
+              onBookmarkTap: _onBookmarkTap,
+              onClaimTap: _onClaimTap,
+              onTaskTap: (index) {
+                // Navigate to task detail
               },
             ),
-            SizedBox(height: 8.h),
-            // Category filter chips
-            CategoryFilterList(
-              categories: mockCategories,
-              selectedCategoryId: _selectedCategoryId,
-              onCategorySelected: _onCategorySelected,
-            ),
-            SizedBox(height: 8.h),
-            // Posts section
-            Expanded(
-              child: PostsSection(
-                tasks: _tasks,
-                onLikeTap: _onLikeTap,
-                onBookmarkTap: _onBookmarkTap,
-                onClaimTap: _onClaimTap,
-                onTaskTap: (index) {
-                  // Navigate to task detail
-                },
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
