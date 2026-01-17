@@ -107,7 +107,7 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator>
               // icon
               child: Center(
                 child: SvgPicture.asset(
-                  'assets/icons/stroke.svg',
+                  'assets/icons/arrow_next.svg',
                   width: 24.w,
                   height: 24.h,
                 ),
