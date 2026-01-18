@@ -17,7 +17,7 @@ class OnBoardingPage extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.imagePath,
-    required this.onSkipTap,
+    this.onSkipTap,
     this.isSecondPage = false,
     this.isLastPage = false,
   });
