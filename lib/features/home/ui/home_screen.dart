@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/widgets/spacing_widgets.dart';
 import 'package:tascom/features/home/data/mock_data.dart';
 import 'package:tascom/features/home/data/models/task_model.dart';
 import 'widgets/home_header.dart';
@@ -67,6 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: MyColors.background.primary,
       body: Column(
         children: [
+          VerticalSpace(24.h),
           // Header with location and icons
           const HomeHeader(),
           // Search bar with filter
