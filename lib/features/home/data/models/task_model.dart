@@ -1,9 +1,5 @@
 /// Priority levels for tasks.
-enum TaskPriority {
-  high,
-  medium,
-  low,
-}
+enum TaskPriority { high, medium, low }
 
 /// Model representing a task/post in the home feed.
 class TaskModel {

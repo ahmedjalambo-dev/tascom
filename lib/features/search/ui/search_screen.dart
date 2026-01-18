@@ -15,11 +15,7 @@ class SearchScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.search,
-                size: 64.sp,
-                color: MyColors.brand.purple,
-              ),
+              Icon(Icons.search, size: 64.sp, color: MyColors.brand.purple),
               SizedBox(height: 16.h),
               Text(
                 'Search',

@@ -19,9 +19,7 @@ class MyRouter {
           builder: (context) => const MainNavigationScreen(),
         );
       case MyRoutes.addPost:
-        return MaterialPageRoute(
-          builder: (context) => const AddPostScreen(),
-        );
+        return MaterialPageRoute(builder: (context) => const AddPostScreen());
       default:
         return null;
     }

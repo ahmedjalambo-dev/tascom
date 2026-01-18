@@ -47,57 +47,58 @@ class CustomBottomNavBar extends StatelessWidget {
                   height: 70.h,
                   color: MyColors.text.white,
                   child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    // Left side items
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          _NavBarItem(
-                            iconPath: 'assets/icons/navbar/home.svg',
-                            activeIconPath:
-                                'assets/icons/navbar/home-solid.svg',
-                            isActive: currentIndex == 0,
-                            onTap: () => onTap(0),
-                          ),
-                          _NavBarItem(
-                            iconPath: 'assets/icons/navbar/search.svg',
-                            activeIconPath:
-                                'assets/icons/navbar/search-solid.svg',
-                            isActive: currentIndex == 1,
-                            onTap: () => onTap(1),
-                          ),
-                        ],
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      // Left side items
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            _NavBarItem(
+                              iconPath: 'assets/icons/navbar/home.svg',
+                              activeIconPath:
+                                  'assets/icons/navbar/home-solid.svg',
+                              isActive: currentIndex == 0,
+                              onTap: () => onTap(0),
+                            ),
+                            _NavBarItem(
+                              iconPath: 'assets/icons/navbar/search.svg',
+                              activeIconPath:
+                                  'assets/icons/navbar/search-solid.svg',
+                              isActive: currentIndex == 1,
+                              onTap: () => onTap(1),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    // Center space for FAB
-                    SizedBox(width: 90.w),
-                    // Right side items
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          _NavBarItem(
-                            iconPath: 'assets/icons/navbar/ai.svg',
-                            activeIconPath: 'assets/icons/navbar/ai-solid.svg',
-                            isActive: currentIndex == 2,
-                            onTap: () => onTap(2),
-                          ),
-                          _NavBarItem(
-                            iconPath: 'assets/icons/navbar/user.svg',
-                            activeIconPath:
-                                'assets/icons/navbar/user-solid.svg',
-                            isActive: currentIndex == 3,
-                            onTap: () => onTap(3),
-                          ),
-                        ],
+                      // Center space for FAB
+                      SizedBox(width: 90.w),
+                      // Right side items
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            _NavBarItem(
+                              iconPath: 'assets/icons/navbar/ai.svg',
+                              activeIconPath:
+                                  'assets/icons/navbar/ai-solid.svg',
+                              isActive: currentIndex == 2,
+                              onTap: () => onTap(2),
+                            ),
+                            _NavBarItem(
+                              iconPath: 'assets/icons/navbar/user.svg',
+                              activeIconPath:
+                                  'assets/icons/navbar/user-solid.svg',
+                              isActive: currentIndex == 3,
+                              onTap: () => onTap(3),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
             ),
           ),
           // Floating Action Button

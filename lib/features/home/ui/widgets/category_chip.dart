@@ -26,7 +26,9 @@ class CategoryChip extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
         decoration: BoxDecoration(
-          color: isSelected ? MyColors.brand.purple : MyColors.background.secondary,
+          color: isSelected
+              ? MyColors.brand.purple
+              : MyColors.background.secondary,
           borderRadius: BorderRadius.circular(20.r),
           border: isSelected
               ? null

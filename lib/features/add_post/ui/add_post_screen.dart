@@ -14,17 +14,12 @@ class AddPostScreen extends StatelessWidget {
         backgroundColor: MyColors.background.secondary,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(
-            Icons.close,
-            color: MyColors.text.primary,
-          ),
+          icon: Icon(Icons.close, color: MyColors.text.primary),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
           'Add Post',
-          style: MyTextStyle.heading.h32.copyWith(
-            color: MyColors.text.primary,
-          ),
+          style: MyTextStyle.heading.h32.copyWith(color: MyColors.text.primary),
         ),
         centerTitle: true,
       ),
