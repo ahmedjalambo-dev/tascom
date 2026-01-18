@@ -372,20 +372,20 @@ class TaskCard extends StatelessWidget {
     }
   }
 
-  IconData _getCategoryIcon(String category) {
-    switch (category.toLowerCase()) {
-      case 'home services':
-        return Icons.home_outlined;
-      case 'repairs':
-        return Icons.build_outlined;
-      case 'errands':
-        return Icons.shopping_cart_outlined;
-      case 'cleaning':
-        return Icons.cleaning_services_outlined;
-      case 'delivery':
-        return Icons.local_shipping_outlined;
-      default:
-        return Icons.category_outlined;
-    }
-  }
+  // IconData _getCategoryIcon(String category) {
+  //   switch (category.toLowerCase()) {
+  //     case 'home services':
+  //       return Icons.home_outlined;
+  //     case 'repairs':
+  //       return Icons.build_outlined;
+  //     case 'errands':
+  //       return Icons.shopping_cart_outlined;
+  //     case 'cleaning':
+  //       return Icons.cleaning_services_outlined;
+  //     case 'delivery':
+  //       return Icons.local_shipping_outlined;
+  //     default:
+  //       return Icons.category_outlined;
+  //   }
+  // }
 }
