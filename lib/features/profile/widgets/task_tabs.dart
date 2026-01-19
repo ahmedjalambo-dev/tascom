@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_style.dart';
 
 class TaskTabs extends StatelessWidget {
   final bool isPostedSelected;
@@ -15,12 +18,10 @@ class TaskTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(4),
+      padding: EdgeInsets.all(4.r),
       decoration: BoxDecoration(
-        
-        color: Color(0xffEEEEF5),
-
-        borderRadius: BorderRadius.circular(40),
+        color: MyColors.background.primary,
+        borderRadius: BorderRadius.circular(40.r),
       ),
       child: Row(
         children: [
@@ -29,16 +30,16 @@ class TaskTabs extends StatelessWidget {
               onTap: onPostedTap,
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                padding: const EdgeInsets.symmetric(vertical: 12),
+                padding: EdgeInsets.symmetric(vertical: 12.h),
                 decoration: BoxDecoration(
-                  color: isPostedSelected ? Colors.white : Colors.transparent,
-                  borderRadius: BorderRadius.circular(40),
+                  color: isPostedSelected ? MyColors.text.white : Colors.transparent,
+                  borderRadius: BorderRadius.circular(40.r),
                   boxShadow: isPostedSelected
                       ? [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.05),
-                            blurRadius: 4,
-                            offset: const Offset(0, 2),
+                            blurRadius: 4.r,
+                            offset: Offset(0, 2.h),
                           )
                         ]
                       : [],
@@ -46,12 +47,11 @@ class TaskTabs extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Text(
                   "Posted",
-                  style: TextStyle(
+                  style: MyTextStyle.body.body1.copyWith(
                     color: isPostedSelected
-                        ? const Color(0xFF6B39F4)
-                        : const Color(0xFF6E6E6E),
+                        ? MyColors.brand.purple
+                        : MyColors.text.secondary,
                     fontWeight: FontWeight.w600,
-                    fontSize: 16,
                   ),
                 ),
               ),
@@ -62,16 +62,16 @@ class TaskTabs extends StatelessWidget {
               onTap: onClaimedTap,
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                padding: const EdgeInsets.symmetric(vertical: 12),
+                padding: EdgeInsets.symmetric(vertical: 12.h),
                 decoration: BoxDecoration(
-                  color: !isPostedSelected ? Colors.white : Colors.transparent,
-                  borderRadius: BorderRadius.circular(50),
+                  color: !isPostedSelected ? MyColors.text.white : Colors.transparent,
+                  borderRadius: BorderRadius.circular(50.r),
                   boxShadow: !isPostedSelected
                       ? [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.05),
-                            blurRadius: 4,
-                            offset: const Offset(0, 2),
+                            blurRadius: 4.r,
+                            offset: Offset(0, 2.h),
                           )
                         ]
                       : [],
@@ -79,12 +79,11 @@ class TaskTabs extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Text(
                   "Claimed",
-                  style: TextStyle(
+                  style: MyTextStyle.body.body2.copyWith(
                     color: !isPostedSelected
-                        ? const Color(0xFF6C38F7)
-                        : const Color(0xFF757575),
+                        ? MyColors.brand.purple
+                        : MyColors.text.secondary,
                     fontWeight: FontWeight.bold,
-                    fontSize: 14,
                   ),
                 ),
               ),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/features/profile/data/task_model.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_style.dart';
 
 class TaskListItem extends StatelessWidget {
   final TaskModel task;
@@ -14,15 +17,15 @@ class TaskListItem extends StatelessWidget {
   Color _getStatusColor() {
     switch (task.status.toLowerCase()) {
       case 'active':
-        return const Color(0xFF0FA632); 
+        return MyColors.status.active; 
       case 'in progress':
-        return const Color(0xFFD97706); 
+        return MyColors.status.inProgress; 
       case 'completed':
-        return const Color(0xFF2F5FE3); 
+        return MyColors.status.completed; 
       case 'canceled':
-        return const Color(0xFFC24141); 
+        return MyColors.status.cancelled; 
       default:
-        return Colors.grey;
+        return MyColors.text.secondary;
     }
   }
 
@@ -33,12 +36,12 @@ class TaskListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(16),
+      margin: EdgeInsets.only(bottom: 16.h),
+      padding: EdgeInsets.all(16.r),
       decoration: BoxDecoration(
-        color: Color(0XFFF9FAFB), // Changed to white for better contrast
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color:Colors.grey.withOpacity(0.1)),
+        color: MyColors.background.secondary,
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(color: MyColors.border.border.withOpacity(0.1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,27 +49,28 @@ class TaskListItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                //العنوان
-                task.title,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF251455),
+              Expanded(
+                child: Text(
+                  //العنوان
+                  task.title,
+                  style: MyTextStyle.body.body2.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: MyColors.text.primary,
+                  ),
                 ),
               ),
+              SizedBox(width: 8.w),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
                 decoration: BoxDecoration(
                   color: _getStatusBackgroundColor(),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: Text(
                   //الحالة
                   task.status,
-                  style: TextStyle(
+                  style: MyTextStyle.label.label2.copyWith(
                     color: _getStatusColor(),
-                    fontSize: 10,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -77,11 +81,9 @@ class TaskListItem extends StatelessWidget {
           //الوقت منذ نشر المهمة
           Text(
             "Posted ${task.timeAgo}",
-            style: const TextStyle(
-              fontSize: 12,
-              color: Color(0xFFB0B0B0),
+            style: MyTextStyle.label.label1.copyWith(
+              color: MyColors.text.third,
               fontWeight: FontWeight.w700,
-              
             ),
           ),
           const SizedBox(height: 12),
@@ -90,57 +92,55 @@ class TaskListItem extends StatelessWidget {
           //هنا لو فى متقدمين أعرض اسمه وصوته اذا لا تجاهل
           if (task.applicantsCount != null)
           
-             Row(
-               children: [
-                 const Icon(Icons.person, size: 16,color: Color(0XFF28A745), ),
-                 const SizedBox(width: 4),
+              Row(
+                children: [
+                   Icon(Icons.person, size: 16.sp, color: MyColors.status.completed),
+                   SizedBox(width: 4.w),
                  //عدد المتقدمين للمهمة
-                 Text(
-                   "${task.applicantsCount} applicants",
-                   style: const TextStyle(
-                     fontSize: 13,
-                     color: Color(0xFF28A745),
-                     fontWeight: FontWeight.w500,
-                   ),
-                 ),
+                  Text(
+                    "${task.applicantsCount} applicants",
+                    style: MyTextStyle.body.body2.copyWith(
+                      color: MyColors.status.completed,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 13.sp,
+                    ),
+                  ),
                ],
              ),
 
           if (task.helperName != null)
           //عرض اسم الشخص المتقدم للمهمة
-             Padding(
-               padding: const EdgeInsets.only(bottom: 8.0),
-               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 8,vertical: 4),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(50),
+              Padding(
+                padding: EdgeInsets.only(bottom: 8.0.h),
+                child: Container(
+                 padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                 decoration: BoxDecoration(
+                   color: MyColors.background.secondary,
+                   borderRadius: BorderRadius.circular(50.r),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.03),
-                      blurRadius: 10,
-                      offset: Offset(0, 4)
-
+                      blurRadius: 10.r,
+                      offset: Offset(0, 4.h),
                     )
                   ]
                 ),
                  child: Row(
                   mainAxisSize: MainAxisSize.min,
-                   children: [
-                     CircleAvatar(
-                       radius: 10,
-                       backgroundImage: NetworkImage("https://i.pravatar.cc/300?img=12"), // Placeholder
-                     ),
-                     const SizedBox(width: 8),
+                    children: [
+                      CircleAvatar(
+                        radius: 10.r,
+                        backgroundImage: const NetworkImage("https://i.pravatar.cc/300?img=12"), // Placeholder
+                      ),
+                      SizedBox(width: 8.w),
                      //هنا عرض اسم الشخص المتقدم للخدمة
-                     Text(
-                       "Helper: ${task.helperName}",
-                       style: const TextStyle(
-                         fontSize: 13,
-                         color: Color(0xFF251455),
-                         fontWeight: FontWeight.w500,
-                       ),
-                     ),
+                      Text(
+                        "Helper: ${task.helperName}",
+                        style: MyTextStyle.label.label1.copyWith(
+                          color: MyColors.text.primary,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                    ],
                  ),
                ),
@@ -150,9 +150,9 @@ class TaskListItem extends StatelessWidget {
           
           Row(
             children: [
-             _buildTag(Icons.home_repair_service, task.category),
-             const SizedBox(width: 12),
-             _buildTag(Icons.location_on, task.location),
+              _buildTag(Icons.home_repair_service, task.category),
+              SizedBox(width: 12.w),
+              _buildTag(Icons.location_on, task.location),
             ],
           ),
            //هنا حالة انا اكتيف
@@ -162,24 +162,23 @@ class TaskListItem extends StatelessWidget {
             Align(
               alignment: AlignmentGeometry.centerRight,
               child: SizedBox(
-                height: 32,
+                height: 32.h,
                 child: OutlinedButton.icon(
                   onPressed: () {},
-                  icon: const Icon(Icons.restore_from_trash_outlined, size: 20, color: Color(0XFFDA392C)),
-                  label: const Text(
+                  icon: Icon(Icons.restore_from_trash_outlined, size: 20.sp, color: MyColors.status.cancelled),
+                  label: Text(
                     "Remove task",
-                    style: TextStyle(
-                      color: Color(0xFFDA392C),
+                    style: MyTextStyle.label.label2.copyWith(
+                      color: MyColors.status.cancelled,
                       fontWeight: FontWeight.w600,
-                      fontSize: 12,
                     ),
                   ),
                   style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Color(0XFFDA392C), width: 1.5), // Stronger red
+                    side: BorderSide(color: MyColors.status.cancelled, width: 1.5.w), // Stronger red
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(30.r),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
                   ),
                 ),
               ),
@@ -193,29 +192,32 @@ class TaskListItem extends StatelessWidget {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: (){}, 
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:  const Color(0xFF6C38F7),
+                     style: ElevatedButton.styleFrom(
+                      backgroundColor: MyColors.brand.purple,
                        shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(30.r),
                       ),
                       elevation: 0,
                     ),
-                    child: const Text("Mark as done", style: TextStyle(color: Colors.white, fontSize: 12,fontWeight: FontWeight.w600),)
+                    child: Text("Mark as done", style: MyTextStyle.label.label1.copyWith(color: MyColors.text.white, fontWeight: FontWeight.w600),)
                   )
                 ),
                 const SizedBox(width: 12),
                  Expanded(
                   child: OutlinedButton.icon(
                     onPressed: () {},
-                    icon: const Icon(Icons.close, size: 16, color: Color(0xFFF44336)),
-                    label: const Text(
+                    icon: Icon(Icons.close, size: 16.sp, color: MyColors.status.cancelled),
+                    label: Text(
                       "Cancel task",
-                      style: TextStyle(color: Color(0xFFDA392C), fontSize: 12,fontWeight: FontWeight.w600),
+                      style: MyTextStyle.label.label2.copyWith(
+                        color: MyColors.status.cancelled,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Color(0xFFDA392C)),
+                      side: BorderSide(color: MyColors.status.cancelled),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(30.r),
                       ),
                     ),
                   ),
@@ -227,17 +229,17 @@ class TaskListItem extends StatelessWidget {
           if (task.status.toLowerCase() == 'canceled') ...[
              const SizedBox(height: 12),
               
-               const Row(
+               Row(
                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                  children: [
                      Row(
                       children: [
-                        Icon(Icons.person_outline, size: 16, color: Colors.grey),
-                         SizedBox(width: 4),
-                        Text("Claimed by Me", style: TextStyle(color: Color(0XFFB0B0B0), fontSize: 12),)
+                        Icon(Icons.person_outline, size: 16.sp, color: MyColors.text.third),
+                         SizedBox(width: 4.w),
+                        Text("Claimed by Me", style: MyTextStyle.label.label2.copyWith(color: MyColors.text.third),)
                       ],
                      ),
-                      Text("-300pts", style: TextStyle(color:Color(0XFFB0B0B0) , fontSize: 12),)
+                      Text("-300pts", style: MyTextStyle.label.label2.copyWith(color: MyColors.text.third),)
                  ],
                )
           ],
@@ -245,18 +247,17 @@ class TaskListItem extends StatelessWidget {
        
 if (task.status.toLowerCase() == 'completed') ...[
   const SizedBox(height: 12),
-  const Row(
+  Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       Row(
         children: [
-          Icon(Icons.percent_outlined, size: 16, color: Colors.grey),
-          SizedBox(width: 4),
+          Icon(Icons.percent_outlined, size: 16.sp, color: MyColors.text.third),
+          SizedBox(width: 4.w),
           Text(
             "Claimed by Ali Ahmad",
-            style: TextStyle(
-              color: Color(0xFFB0B0B0),
-              fontSize: 12,
+            style: MyTextStyle.label.label2.copyWith(
+              color: MyColors.text.third,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -264,9 +265,8 @@ if (task.status.toLowerCase() == 'completed') ...[
       ),
       Text(
         "+300 pts",
-        style: TextStyle(
-          color: Color(0xFFB0B0B0),
-          fontSize: 12,
+        style: MyTextStyle.label.label2.copyWith(
+          color: MyColors.text.third,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -307,24 +307,22 @@ if (task.status.toLowerCase() == 'completed') ...[
 
   Widget _buildTag(IconData icon, String text) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
       decoration: BoxDecoration(
-        //color: const Color(0xFFF3F1FA), // Light purple bg
-        color: Color(0xFFF4F0FF),
-        borderRadius: BorderRadius.circular(8),
+        color: MyColors.background.cardHover,
+        borderRadius: BorderRadius.circular(8.r),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 14, color: const Color(0xFF6B39F4)),
-          const SizedBox(width: 4),
+          Icon(icon, size: 14.sp, color: MyColors.brand.purple),
+          SizedBox(width: 4.w),
           Flexible(
             child: Text(
               text,
-              style: const TextStyle(
+              style: MyTextStyle.label.label2.copyWith(
                 fontSize: 11,
-               
-                color: Color(0xFF6B39F4),
+                color: MyColors.brand.purple,
                 fontWeight: FontWeight.w500,
               ),
               overflow: TextOverflow.ellipsis,

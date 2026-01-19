@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_style.dart';
 
 class CustomDatePicker extends StatelessWidget {
   final String initialValue; // نغيرها لـ String لتناسب حقل النص
@@ -20,33 +23,31 @@ class CustomDatePicker extends StatelessWidget {
       children: [
         Text(
           "Date of birth",
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600, // حسب الديزاين FontWeight.w600
-            color: const Color(0xFF1A1A40), // لون داكن قريب من الأسود البنفسجي
+          style: MyTextStyle.body.body1.copyWith(
+            fontWeight: FontWeight.w600,
+            color: MyColors.text.primary,
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8.h),
         TextFormField(
           controller: textController,
           decoration: InputDecoration(
             hintText: "DD/MM/YYYY",
-            contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+            contentPadding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
             filled: true,
-            fillColor: Colors.white,
+            fillColor: MyColors.background.secondary,
             // تنسيق الحدود لتكون دائرية وخفيفة كما في الصورة
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.shade100, width: 1),
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: BorderSide(color: MyColors.border.border),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Colors.purple, width: 1),
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: BorderSide(color: MyColors.brand.purple),
             ),
           ),
-          style: TextStyle(
-            color: Colors.grey[600],
-            fontSize: 14,
+          style: MyTextStyle.body.body2.copyWith(
+            color: MyColors.text.secondary,
           ),
         ),
       ],

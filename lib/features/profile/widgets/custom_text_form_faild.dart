@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_style.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -25,37 +28,37 @@ class CustomTextFormField extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-                color: Colors.deepPurple[900], // Dark purple for labels
-              ),
+          style: MyTextStyle.body.body1.copyWith(
+            fontWeight: FontWeight.w500,
+            color: MyColors.text.primary,
+          ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8.h),
         TextFormField(
           controller: controller,
           maxLines: maxLines,
-          style: Theme.of(context).textTheme.bodyMedium,
+          style: MyTextStyle.body.body1,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: TextStyle(color: Colors.grey[400]),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            hintStyle: MyTextStyle.body.body2.copyWith(color: MyColors.text.third),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(color: Colors.grey.shade200),
+              borderRadius: BorderRadius.circular(16.r),
+              borderSide: BorderSide(color: MyColors.border.border),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(color: Colors.grey.shade200),
+              borderRadius: BorderRadius.circular(16.r),
+              borderSide: BorderSide(color: MyColors.border.border),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: const BorderSide(color: Colors.purple),
+              borderRadius: BorderRadius.circular(16.r),
+              borderSide: BorderSide(color: MyColors.brand.purple),
             ),
             suffixIcon: suffix,
           ),
           validator: validator,
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16.h),
       ],
     );
   }

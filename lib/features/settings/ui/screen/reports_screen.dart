@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/features/settings/data/models/report_model.dart';
 import 'package:tascom/features/settings/widgets/report_card.dart';
 
 import 'package:tascom/features/settings/widgets/reports_empty_state.dart';
+import 'package:tascom/core/widgets/custom_pill_dropdown.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_style.dart';
 
 class ReportsScreen extends StatefulWidget {
   const ReportsScreen({super.key});
@@ -37,14 +41,12 @@ class _ReportsScreenState extends State<ReportsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.background.secondary,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Reports",
-          style: TextStyle(
-            color: Color(0xFF251455),
-            fontWeight: FontWeight.w500,
-            fontSize: 18,
+          style: MyTextStyle.heading.h32.copyWith(
+            color: MyColors.text.primary,
           ),
         ),
         shape: const RoundedRectangleBorder(
@@ -53,9 +55,13 @@ class _ReportsScreenState extends State<ReportsScreen> {
           )
         ),
         centerTitle: true,
-        backgroundColor: Color(0XFFF9FAFB),
+        backgroundColor: MyColors.background.primary,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF251455), size: 20),
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            color: MyColors.text.primary,
+            size: 20.sp,
+          ),
           onPressed: () => Navigator.pop(context),
         ),
         elevation: 0,
@@ -73,90 +79,23 @@ class _ReportsScreenState extends State<ReportsScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 "Reported",
-                style: TextStyle(
-                  color: Color(0xFF251455),
+                style: MyTextStyle.body.body2.copyWith(
+                  color: MyColors.text.primary,
                   fontWeight: FontWeight.w600,
-                  fontSize: 14,
                 ),
               ),
-            // --- بداية جزء الدروب داون المطور ---
-            IntrinsicWidth(
-              child: Container(
-                height: 24,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20), // شكل الـ Pill بالكامل
-                  border: Border.all(
-                    color: const Color(0xFFE5E7EB),
-                    width: 1, // سمك خفيف وبسيط
-                  ),
-                ),
-                child: Stack(
-                  children: [
-                    // 1. التصميم المرئي المختصر والأنيق
-                    Center( // التأكد من سنترة النص والأيقونة تماماً في المنتصف
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              selectedFilter,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Color(0xFF251455),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const SizedBox(width: 6),
-                            const Icon(
-                              Icons.keyboard_arrow_down,
-                              size: 14,
-                              color: Color(0xFF251455),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    // 2. الوظيفة (خفية فوق الزر)
-                    Positioned.fill(
-                      child: Opacity(
-                        opacity: 0,
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            value: selectedFilter,
-                            isExpanded: true,
-                            menuWidth: 120, // عرض القائمة المنبثقة
-                            alignment: AlignmentDirectional.bottomEnd,
-                            items: ['All', 'Pending', 'Resolved'].map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(
-                                  value,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    color: Color(0xFF251455),
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              if (newValue != null) {
-                                setState(() => selectedFilter = newValue);
-                              }
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            CustomPillDropdown<String>(
+              value: selectedFilter,
+              items: const ['All', 'Pending', 'Resolved'],
+              itemLabelBuilder: (value) => value,
+              onChanged: (newValue) {
+                if (newValue != null) {
+                  setState(() => selectedFilter = newValue);
+                }
+              },
             ),
-            // --- نهاية جزء الدروب داون المطور ---
           ],
         ),
       ),

@@ -7,6 +7,8 @@ import 'package:tascom/features/settings/ui/screen/notifications_settings_screen
 import 'package:tascom/features/settings/ui/screen/saved_tasks_screen.dart';
 import 'package:tascom/features/settings/widgets/logout_dialog.dart';
 import 'package:tascom/features/settings/widgets/settings_tile.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_style.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -14,20 +16,19 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.background.secondary,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Settings",
-          style: TextStyle(
-            color: Color(0xFF251455),
+          style: MyTextStyle.heading.h32.copyWith(
+            color: MyColors.text.primary,
             fontWeight: FontWeight.w600,
-            fontSize: 20,
           ),
         ),
         centerTitle: true,
-        backgroundColor: const Color(0xFFF9FAFB), // Purple color from design
+        backgroundColor: MyColors.background.primary, 
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Color(0XFF251455)),
+          icon: Icon(Icons.arrow_back_ios_new, color: MyColors.text.primary),
           onPressed: () => Navigator.pop(context),
         ),
         elevation: 0,
@@ -59,12 +60,12 @@ class SettingsScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  const Divider(
+                  Divider(
                     height: 1,
                     thickness: 1,
                     indent: 24,
                     endIndent: 24,
-                    color: Color(0xFFEDF1F4),
+                    color: MyColors.border.border,
                   ), // Divider with indent matching icon width
                   SettingsTile(
                     icon: SvgPicture.asset(
@@ -82,12 +83,12 @@ class SettingsScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  const Divider(
+                  Divider(
                     height: 1,
                     thickness: 1,
                     indent: 24,
                     endIndent: 24,
-                    color: Color(0xFFEDF1F4),
+                    color: MyColors.border.border,
                   ),
                   SettingsTile(
                     icon: SvgPicture.asset(
@@ -105,12 +106,12 @@ class SettingsScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  const Divider(
+                  Divider(
                     height: 1,
                     thickness: 1,
                     indent: 24,
                     endIndent: 24,
-                    color: Color(0xFFEDF1F4),
+                    color: MyColors.border.border,
                   ),
                   SettingsTile(
                     icon: SvgPicture.asset(
@@ -129,12 +130,12 @@ class SettingsScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  const Divider(
+                  Divider(
                     height: 1,
                     thickness: 1,
                     indent: 24,
                     endIndent: 24,
-                    color: Color(0xFFEDF1F4),
+                    color: MyColors.border.border,
                   ),
                   SettingsTile(
                     icon: SvgPicture.asset(
@@ -152,12 +153,12 @@ class SettingsScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  const Divider(
+                  Divider(
                     height: 1,
                     thickness: 1,
                     indent: 24,
                     endIndent: 24,
-                    color: Color(0xFFEDF1F4),
+                    color: MyColors.border.border,
                   ),
                   SettingsTile(
                     icon: SvgPicture.asset(
@@ -179,12 +180,12 @@ class SettingsScreen extends StatelessWidget {
                     },
                     showArrow: false,
                   ),
-                  const Divider(
+                  Divider(
                     height: 1,
                     thickness: 1,
                     indent: 24,
                     endIndent: 24,
-                    color: Color(0xFFEDF1F4),
+                    color: MyColors.border.border,
                   ),
                 ],
               ),

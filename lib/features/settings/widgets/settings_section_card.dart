@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/themes/my_colors.dart';
 
 class SettingsSectionCard extends StatelessWidget {
   final List<Widget> children;
@@ -14,7 +15,7 @@ class SettingsSectionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: backgroundColor ?? const Color(0xFFF9F5FF),
+        color: backgroundColor ?? MyColors.background.cardHover,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(

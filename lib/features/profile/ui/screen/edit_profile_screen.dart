@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/features/profile/widgets/custom_text_form_faild.dart';
 import 'package:tascom/features/profile/widgets/date_of_birth_faild.dart';
 import 'package:tascom/features/profile/widgets/gender_dropdown.dart';
 import 'package:tascom/features/profile/widgets/skills_field.dart';
 import 'package:tascom/features/profile/widgets/profile_image_picker.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_style.dart';
 
 class EditProfileScreen extends StatefulWidget {
   EditProfileScreen({super.key});
@@ -29,17 +32,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:Color(0xffFFFFFF),
+      backgroundColor: MyColors.background.secondary,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Edit Profile",
-          style: TextStyle(fontWeight: FontWeight.w600,fontSize: 20),
+          style: MyTextStyle.heading.h22.copyWith(fontWeight: FontWeight.w600),
         ),
-        backgroundColor:Color(0xffF9FAFB),
+        backgroundColor: MyColors.background.primary,
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
+          icon: Icon(Icons.arrow_back_ios_new, color: MyColors.text.primary, size: 20.sp),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -68,10 +71,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 onPressed: () {
                   // TODO: Implement change phone number logic
                 },
-                child: const Text(
+                child: Text(
                   "Change",
-                  style: TextStyle(
-                    color: Color(0xFF6C38F7), // Purple color
+                  style: MyTextStyle.button.secondaryButton2.copyWith(
+                    color: MyColors.brand.purple,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -104,9 +107,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
       ),
       bottomNavigationBar: Container(
-        padding: const EdgeInsets.only(left: 24, right: 24, bottom: 20, top: 10),
-        decoration: const BoxDecoration(
-          color: Colors.white,
+        padding: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 20.h, top: 10.h),
+        decoration: BoxDecoration(
+          color: MyColors.background.secondary,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -116,9 +119,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               height: 56,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF6C38F7),
+                  backgroundColor: MyColors.brand.purple,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(30.r),
                   ),
                   elevation: 0,
                 ),
@@ -127,11 +130,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     print("Confirm Pressed");
                   }
                 },
-                child: const Text(
+                child: Text(
                   "Confirm",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
+                  style: MyTextStyle.button.primaryButton1.copyWith(
+                    color: MyColors.text.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -139,11 +141,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ),
             const SizedBox(height: 20),
             Container(
-              width: 134,
-              height: 5,
+              width: 134.w,
+              height: 5.h,
               decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(100),
+                color: MyColors.text.primary,
+                borderRadius: BorderRadius.circular(100.r),
               ),
             ),
           ],

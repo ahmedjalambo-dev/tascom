@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_style.dart';
 
 class LanguageScreen extends StatefulWidget {
   const LanguageScreen({super.key});
@@ -39,24 +42,26 @@ class _LanguageScreenState extends State<LanguageScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "App Language",
-          style: TextStyle(
-            color: Color(0xFF251455),
-            fontWeight: FontWeight.w600,
-            fontSize: 20,
+          style: MyTextStyle.heading.h22.copyWith(
+            color: MyColors.text.primary,
           ),
         ),
         centerTitle: true,
-        backgroundColor: Color(0XFFF9FAFB),
+        backgroundColor: MyColors.background.primary,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF251455), size: 18,),
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            color: MyColors.text.primary,
+            size: 18.sp,
+          ),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.check, color: Color(0xFF6B39F4)),
+            icon: Icon(Icons.check, color: MyColors.brand.purple, size: 24.sp),
             onPressed: () {
               Navigator.pop(context); // Confirm selection and go back
             },
@@ -68,19 +73,18 @@ class _LanguageScreenState extends State<LanguageScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "You Selected",
-              style: TextStyle(
-                fontSize: 16,
+              style: MyTextStyle.body.body1.copyWith(
                 fontWeight: FontWeight.w600,
-                color: Color(0xFF251455),
+                color: MyColors.text.primary,
               ),
             ),
             const SizedBox(height: 12),
             Container(
               decoration: BoxDecoration(
-                border: Border.all(color: const Color(0xFFE0E0E0)),
-                borderRadius: BorderRadius.circular(30), // Rounded corners
+                border: Border.all(color: MyColors.border.border),
+                borderRadius: BorderRadius.circular(30.r), // Rounded corners
               ),
               child: ListTile(
                 leading: Container(
@@ -92,10 +96,9 @@ class _LanguageScreenState extends State<LanguageScreen> {
                 ),
                 title: Text(
                   selectedLangMap['name']!,
-                  style: const TextStyle(
-                    fontSize: 14,
+                  style: MyTextStyle.body.body2.copyWith(
                     fontWeight: FontWeight.w500,
-                    color: Color(0xFF251455),
+                    color: MyColors.text.primary,
                   ),
                 ),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
@@ -112,20 +115,22 @@ class _LanguageScreenState extends State<LanguageScreen> {
               },
               decoration: InputDecoration(
                 hintText: "Search",
-                hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
-                prefixIcon: const Icon(Icons.search, color: Color(0xFF251455)),
-                contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                hintStyle: MyTextStyle.body.body2.copyWith(
+                  color: MyColors.text.third,
+                ),
+                prefixIcon: Icon(Icons.search, color: MyColors.text.primary, size: 20.sp),
+                contentPadding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                  borderRadius: BorderRadius.circular(12.r),
+                  borderSide: BorderSide(color: MyColors.border.border),
                 ),
                 enabledBorder: OutlineInputBorder(
-                   borderRadius: BorderRadius.circular(12),
-                   borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                   borderRadius: BorderRadius.circular(12.r),
+                   borderSide: BorderSide(color: MyColors.border.border),
                 ),
                 focusedBorder: OutlineInputBorder(
-                   borderRadius: BorderRadius.circular(12),
-                   borderSide: const BorderSide(color: Color(0xFF6C38F7)),
+                   borderRadius: BorderRadius.circular(12.r),
+                   borderSide: BorderSide(color: MyColors.brand.purple),
                 ),
               ),
             ),
@@ -133,8 +138,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
              Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0xFFE0E0E0)),
-                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: MyColors.border.border),
+                  borderRadius: BorderRadius.circular(16.r),
                 ),
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(vertical: 8),
@@ -144,7 +149,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                     final isSelected = lang['code'] == selectedLanguageCode;
                 
                     return Container(
-                      color: isSelected ? const Color(0xFFF3EFFF) : Colors.transparent, // Highlight selected
+                      color: isSelected ? MyColors.background.cardHover : Colors.transparent, // Highlight selected
                       child: ListTile(
                         leading: Container(
                           width: 30,
@@ -154,10 +159,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         ),
                         title: Text(
                           lang['name']!,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
-                            color: const Color(0xFF251455),
+                          style: MyTextStyle.body.body2.copyWith(
+                            color: MyColors.text.primary,
                           ),
                         ),
                         onTap: () {

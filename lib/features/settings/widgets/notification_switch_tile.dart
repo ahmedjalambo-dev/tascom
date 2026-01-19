@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../core/themes/my_colors.dart';
+import '../../../core/themes/my_text_style.dart';
 
 class NotificationSwitchTile extends StatelessWidget {
   final String title;
@@ -21,19 +24,18 @@ class NotificationSwitchTile extends StatelessWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(
-              color: Color(0xFF251455),
+            style: MyTextStyle.body.body1.copyWith(
+              color: MyColors.text.primary,
               fontWeight: FontWeight.w500,
-              fontSize: 16,
             ),
           ),
           Switch(
             value: value,
             onChanged: onChanged,
-            activeColor: Colors.white,
-            activeTrackColor: const Color(0xFF7F56D9),
-            inactiveThumbColor: Colors.white,
-            inactiveTrackColor: const Color(0xFFEAECF0),
+            activeColor: MyColors.text.white,
+            activeTrackColor: MyColors.brand.purple,
+            inactiveThumbColor: MyColors.text.white,
+            inactiveTrackColor: MyColors.states.disabled,
           ),
         ],
       ),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_style.dart';
 
 class SkillsField extends StatefulWidget {
   const SkillsField({super.key});
@@ -39,46 +42,46 @@ class _SkillsFieldState extends State<SkillsField> {
       children: [
         Text(
           "Skills",
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-                color: Colors.deepPurple[900],
-              ),
+          style: MyTextStyle.body.body1.copyWith(
+            fontWeight: FontWeight.w500,
+            color: MyColors.text.primary,
+          ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8.h),
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey.shade200),
-            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: MyColors.border.border),
+            borderRadius: BorderRadius.circular(16.r),
           ),
           child: Wrap(
-            spacing: 8,
+            spacing: 8.w,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               ..._skills.map(
                 (skill) => Chip(
-                  backgroundColor: const Color(0xFFF3E8FF), // Light purple bg
-                  labelStyle: const TextStyle(
-                      color: Color(0xFF6C38F7), fontWeight: FontWeight.bold),
+                  backgroundColor: MyColors.background.cardHover,
+                  labelStyle: MyTextStyle.label.label1.copyWith(
+                      color: MyColors.brand.purple, fontWeight: FontWeight.bold),
                   side: BorderSide.none,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
+                      borderRadius: BorderRadius.circular(8.r)),
                   label: Text(skill),
-                  deleteIcon: const Icon(Icons.close, size: 18, color: Colors.grey),
+                  deleteIcon: Icon(Icons.close, size: 18.sp, color: MyColors.text.third),
                   onDeleted: () => _removeSkill(skill),
                 ),
               ),
               ConstrainedBox(
-                constraints: const BoxConstraints(minWidth: 100, maxWidth: 150),
+                constraints: BoxConstraints(minWidth: 100.w, maxWidth: 150.w),
                 child: TextField(
                   controller: _controller,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: "Select Skills ...",
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
+                    hintStyle: MyTextStyle.body.body2.copyWith(color: MyColors.text.third),
                     border: InputBorder.none,
                     isDense: true,
-                    contentPadding: EdgeInsets.symmetric(vertical: 10),
+                    contentPadding: EdgeInsets.symmetric(vertical: 10.h),
                   ),
                   onSubmitted: (_) => _addSkill(),
                 ),
@@ -86,7 +89,7 @@ class _SkillsFieldState extends State<SkillsField> {
             ],
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16.h),
       ],
     );
   }

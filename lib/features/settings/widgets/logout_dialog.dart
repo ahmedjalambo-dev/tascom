@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../core/themes/my_colors.dart';
+import '../../../core/themes/my_text_style.dart';
 
 class LogoutDialog extends StatelessWidget {
   final VoidCallback onLogout;
@@ -11,42 +14,40 @@ class LogoutDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
+      backgroundColor: MyColors.background.secondary,
       child: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: 64,
-              height: 64,
-              decoration: const BoxDecoration(
-                color: Color(0xFFF9F5FF),
+              width: 64.w,
+              height: 64.h,
+              decoration: BoxDecoration(
+                color: MyColors.background.cardHover,
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.logout,
-                color: Color(0xFF7F56D9),
-                size: 28,
+                color: MyColors.brand.purple,
+                size: 28.sp,
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               "Logout of Tascom?",
-              style: TextStyle(
-                fontSize: 18,
+              style: MyTextStyle.heading.h32.copyWith(
                 fontWeight: FontWeight.w600,
-                color: Color(0xFF251455),
+                color: MyColors.text.primary,
               ),
             ),
             const SizedBox(height: 8),
-            const Text(
+            Text(
               "Are you sure you want to logout?\nYou will need to sign in again to\naccess your account and tasks.",
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                color: Color(0xFF475467),
+              style: MyTextStyle.body.body2.copyWith(
+                color: MyColors.text.secondary,
                 height: 1.5,
               ),
             ),
@@ -57,14 +58,14 @@ class LogoutDialog extends StatelessWidget {
                   child: OutlinedButton(
                     onPressed: () => Navigator.pop(context),
                     style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      side: const BorderSide(color: Color(0xFFD0D5DD)),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      side: BorderSide(color: MyColors.border.border),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.r)),
                     ),
-                    child: const Text(
+                    child: Text(
                       "Cancel",
-                      style: TextStyle(
-                        color: Color(0xFF344054),
+                      style: MyTextStyle.button.secondaryButton2.copyWith(
+                        color: MyColors.text.primary,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -78,15 +79,15 @@ class LogoutDialog extends StatelessWidget {
                       onLogout();
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF7F56D9),
-                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      backgroundColor: MyColors.brand.purple,
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
                       elevation: 0,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.r)),
                     ),
-                    child: const Text(
+                    child: Text(
                       "Logout",
-                      style: TextStyle(
-                        color: Colors.white,
+                      style: MyTextStyle.button.secondaryButton2.copyWith(
+                        color: MyColors.text.white,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

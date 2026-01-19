@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_style.dart';
 
 class GenderDropdown extends StatelessWidget {
   const GenderDropdown({
@@ -17,38 +20,38 @@ class GenderDropdown extends StatelessWidget {
       children: [
         Text(
           "Gender",
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-                color: Colors.deepPurple[900],
-              ),
+          style: MyTextStyle.body.body1.copyWith(
+            fontWeight: FontWeight.w500,
+            color: MyColors.text.primary,
+          ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8.h),
         DropdownButtonFormField<String>(
           value: value,
-          icon: const Icon(Icons.keyboard_arrow_down, color: Colors.purple),
+          icon: Icon(Icons.keyboard_arrow_down, color: MyColors.brand.purple, size: 24.sp),
           decoration: InputDecoration(
-             contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+             contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
              border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(color: Colors.grey.shade200),
+              borderRadius: BorderRadius.circular(16.r),
+              borderSide: BorderSide(color: MyColors.border.border),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(color: Colors.grey.shade200),
+              borderRadius: BorderRadius.circular(16.r),
+              borderSide: BorderSide(color: MyColors.border.border),
             ),
              focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: const BorderSide(color: Colors.purple),
+              borderRadius: BorderRadius.circular(16.r),
+              borderSide: BorderSide(color: MyColors.brand.purple),
             ),
           ),
-          items: const [
+          items: [
             DropdownMenuItem(
               value: 'Male',
-              child: Text('Male'),
+              child: Text('Male', style: MyTextStyle.body.body1),
             ),
             DropdownMenuItem(
               value: 'Female',
-              child: Text('Female'),
+              child: Text('Female', style: MyTextStyle.body.body1),
             ),
           ],
           onChanged: onChanged,
@@ -59,7 +62,7 @@ class GenderDropdown extends StatelessWidget {
             return null;
           },
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16.h),
       ],
     );
   }

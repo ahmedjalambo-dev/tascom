@@ -60,6 +60,18 @@ class AppStatusColors {
 
   /// In Progress status - Orange (#D97706)
   final Color inProgress = const Color(0xFFD97706);
+
+  /// Pending status - Amber/Orange (#D97706)
+  final Color pending = const Color(0xFFD97706);
+
+  /// Pending status background - Light Orange (#FFF2E0)
+  final Color pendingBg = const Color(0xFFFFF2E0);
+
+  /// Resolved status - Light Green (#28A745)
+  final Color resolved = const Color(0xFF28A745);
+
+  /// Resolved status background - Very Light Green (#F2FFF5)
+  final Color resolvedBg = const Color(0xFFF2FFF5);
 }
 
 /// Helper class for 'Text' colors.

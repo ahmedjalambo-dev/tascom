@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/features/settings/widgets/notification_switch_tile.dart';
 import 'package:tascom/features/settings/widgets/settings_section_card.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_style.dart';
 
 class NotificationsSettingsScreen extends StatefulWidget {
   const NotificationsSettingsScreen({super.key});
@@ -20,20 +23,22 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.background.secondary,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Notifications Settings",
-          style: TextStyle(
-            color: Color(0xFF251455),
-            fontWeight: FontWeight.w600,
-            fontSize: 20,
+          style: MyTextStyle.heading.h22.copyWith(
+            color: MyColors.text.primary,
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: MyColors.background.primary,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF251455), size: 20),
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            color: MyColors.text.primary,
+            size: 20.sp,
+          ),
           onPressed: () => Navigator.pop(context),
         ),
         elevation: 0,
@@ -61,16 +66,15 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
               const SizedBox(height: 32),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
+                children: [
+                   Text(
                     "Advanced",
-                    style: TextStyle(
-                      color: Color(0xFF251455),
+                    style: MyTextStyle.heading.h32.copyWith(
+                      color: MyColors.text.primary,
                       fontWeight: FontWeight.w600,
-                      fontSize: 18,
                     ),
                   ),
-                  Icon(Icons.keyboard_arrow_down, color: Color(0xFF251455)),
+                  Icon(Icons.keyboard_arrow_down, color: MyColors.text.primary),
                 ],
               ),
               const SizedBox(height: 16),

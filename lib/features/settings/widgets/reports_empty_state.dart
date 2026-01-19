@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_style.dart';
 
 class ReportsEmptyState extends StatelessWidget {
   const ReportsEmptyState({super.key});
@@ -12,30 +15,28 @@ class ReportsEmptyState extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 120,
-              height: 120,
+              width: 120.w,
+              height: 120.h,
               decoration: BoxDecoration(
-                color: const Color(0xFFF9F5FF),
-                borderRadius: BorderRadius.circular(24),
+                color: MyColors.background.cardHover,
+                borderRadius: BorderRadius.circular(24.r),
               ),
-              child: const Icon(Icons.search, size: 60, color: Color(0xFF7F56D9)),
+              child: Icon(Icons.search, size: 60.sp, color: MyColors.brand.purple),
             ),
             const SizedBox(height: 24),
-            const Text(
+            Text(
               "No reported tasks yet",
-              style: TextStyle(
-                fontSize: 18,
+              style: MyTextStyle.heading.h32.copyWith(
                 fontWeight: FontWeight.w600,
-                color: Color(0xFF251455),
+                color: MyColors.text.primary,
               ),
             ),
             const SizedBox(height: 8),
-            const Text(
+            Text(
               "There are no tasks reported at the moment.\nIf an issue arises, reported tasks\nwill appear here for review.",
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                color: Color(0xFF475467),
+              style: MyTextStyle.body.body2.copyWith(
+                color: MyColors.text.secondary,
                 height: 1.5,
               ),
             ),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/features/settings/widgets/saved_task_card.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_style.dart';
 
 class SavedTasksScreen extends StatelessWidget {
   const SavedTasksScreen({super.key});
@@ -35,20 +38,22 @@ class SavedTasksScreen extends StatelessWidget {
     ]; 
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.background.secondary,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Saved Tasks",
-          style: TextStyle(
-             color: Color(0xFF251455),
-            fontWeight: FontWeight.w600,
-            fontSize: 20,
+          style: MyTextStyle.heading.h22.copyWith(
+            color: MyColors.text.primary,
           ),
         ),
         centerTitle: true,
-        backgroundColor: const Color(0xFFF9FAFB),
+        backgroundColor: MyColors.background.primary,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF251455),size:20 ,),
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            color: MyColors.text.primary,
+            size: 20.sp,
+          ),
           onPressed: () => Navigator.pop(context),
         ),
         elevation: 0,
@@ -59,35 +64,32 @@ class SavedTasksScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                    Container(
-                    width: 140,
-                    height: 140,
-                    padding: EdgeInsets.all(10),
+                    width: 140.w,
+                    height: 140.h,
+                    padding: EdgeInsets.all(10.r),
                     
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF5F2FF), // Light purple background for icon
-                      borderRadius: BorderRadius.circular(20),
+                      color: MyColors.background.cardHover, // Light purple background for icon
+                      borderRadius: BorderRadius.circular(20.r),
                     ),
                     child: Image.asset('assets/images/Group.png'),
-                    //const Icon(Icons.search, size: 50, color: Color(0xFF6C38F7)), // Magnifying glass
                   ),
                   const SizedBox(height: 24),
-                  const Text(
+                  Text(
                     "No saved tasks yet.",
-                    style: TextStyle(
-                      fontSize: 18,
+                    style: MyTextStyle.heading.h32.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF251455),
+                      color: MyColors.text.primary,
                     ),
                   ),
                   const SizedBox(height: 12),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 40.w),
                     child: Text(
                       "You haven't saved any tasks yet.\nSave tasks to easily find and review them later.",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey,
+                      style: MyTextStyle.body.body2.copyWith(
+                        color: MyColors.text.secondary,
                         height: 1.5,
                       ),
                     ),

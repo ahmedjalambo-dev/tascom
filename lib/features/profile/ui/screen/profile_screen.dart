@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/features/profile/data/task_model.dart';
 import 'package:tascom/features/profile/widgets/empty_state_widget.dart';
 import 'package:tascom/features/profile/widgets/profile_header.dart';
@@ -6,6 +7,9 @@ import 'package:tascom/features/profile/widgets/stats_row.dart';
 import 'package:tascom/features/profile/widgets/task_list_item.dart';
 import 'package:tascom/features/profile/widgets/task_tabs.dart';
 import 'package:tascom/features/settings/ui/screen/settings_screen.dart';
+import 'package:tascom/core/widgets/custom_pill_dropdown.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_style.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -16,6 +20,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   bool isPostedSelected = true;
+  String selectedTaskFilter = 'All';
 
   // Mock Data
   final List<TaskModel> allTasks = [
@@ -72,22 +77,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.white, // White background for the bottom part
+      backgroundColor: MyColors.background.secondary, // White background for the bottom part
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Profile",
-          style: TextStyle(
-            fontSize: 20,
+          style: MyTextStyle.heading.h32.copyWith(
+            color: MyColors.text.primary,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF251455),
           ),
         ),
         centerTitle: true,
-        backgroundColor: const Color(0xFFF9FAFB), // AppBar matches top section
+        backgroundColor: MyColors.background.primary, // AppBar matches top section
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings_outlined, color: Color(0xFF251455),),
+            icon: Icon(Icons.settings_outlined, color: MyColors.text.primary),
             onPressed: () {
                 Navigator.push(
                   context,
@@ -102,27 +106,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             // Top Section with Grey Background
             Container(
-              color: const Color(0xFFF9FAFB),
+              color: MyColors.background.primary,
               width: double.infinity,
-              padding: const EdgeInsets.only(bottom: 24),
-              // ignore: prefer_const_constructors
+              padding: EdgeInsets.only(bottom: 24.h),
               child: Column(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24.0),
-                    child: ProfileHeader(),
+                   Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.0.w),
+                    child: const ProfileHeader(),
                   ),
-                  const SizedBox(height: 24),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24.0),
-                    child: StatsRow(),
+                   SizedBox(height: 24.h),
+                   Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.0.w),
+                    child: const StatsRow(),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 24),
+             SizedBox(height: 24.h),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              padding: EdgeInsets.symmetric(horizontal: 24.0.w),
               child: TaskTabs(
                 isPostedSelected: isPostedSelected,
                 onPostedTap: () {
@@ -139,65 +142,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             
             // Bottom Section (Grey background from Scaffold)
-            const SizedBox(height: 24),
+            SizedBox(height: 24.h),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              padding: EdgeInsets.symmetric(horizontal: 24.0.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     "Your tasks",
-                    style: TextStyle(
-                      fontSize: 18,
+                    style: MyTextStyle.heading.h32.copyWith(
+                      color: MyColors.text.primary,
                       fontWeight: FontWeight.w500,
-                      color: Color(0xFF251455),
                     ),
                   ),
-                  DropdownButtonHideUnderline(
-                    child: Container(
-                      height: 32,
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      decoration: BoxDecoration(
-                        color: Color(0XFFFFFFFF),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: Color(0XFFCCCCCC)),
-                      ),
-                      child: DropdownButton<String>(
-                        value: "All",
-                        icon: const Icon(Icons.keyboard_arrow_down,color: Color(0XFF251455),),
-                        selectedItemBuilder: (context) {
-                          return <String>['All', 'Active', 'Completed'].map((String value){
-                            return Center(
-                              child: Text(
-                                value,
-                                style: const TextStyle(
-                color: Color(0xFF251455),
-                fontWeight: FontWeight.bold,
-                fontSize: 12,
-              ),
-                              ),
-                            );
-                          }).toList();
-                        },
-                        items: <String>['All', 'Active', 'Completed']
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        //هنا شو المستخدم اختار
-                        onChanged: (String? newValue) {
-                          // Handle filter change
-                        },
-                        style: const TextStyle(color: Colors.black, fontSize: 14),
-                      ),
-                    ),
+                  CustomPillDropdown<String>(
+                    value: selectedTaskFilter,
+                    items: const ['All', 'Active', 'Completed'],
+                    itemLabelBuilder: (value) => value,
+                    height: 32.h,
+                    onChanged: (newValue) {
+                      if (newValue != null) {
+                        setState(() => selectedTaskFilter = newValue);
+                      }
+                    },
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+             SizedBox(height: 16.h),
             //هنا هل قائمة المهام فاضية
             //نعم → EmptyState
             //لا → ListView
@@ -212,7 +184,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               )
             else
               ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                padding: EdgeInsets.symmetric(horizontal: 24.0.w),
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: visibleTasks.length,
@@ -220,26 +192,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   return TaskListItem(task: visibleTasks[index]);
                 },
               ),
-            const SizedBox(height: 40),
+             SizedBox(height: 40.h),
             // Bottom Navbar placeholder area if needed, or keeping it clean
              Padding(
-               padding: const EdgeInsets.only(bottom: 20),
+               padding: EdgeInsets.only(bottom: 20.h),
                child: Row(
                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                  children: [
-                     Icon(Icons.home_outlined, color: Colors.grey.shade300, size: 28,),
-                     Icon(Icons.search, color: Colors.grey.shade300, size: 28,),
+                     Icon(Icons.home_outlined, color: MyColors.text.disable, size: 28.sp),
+                     Icon(Icons.search, color: MyColors.text.disable, size: 28.sp),
                      Container(
-                       height: 50,
-                       width: 50,
-                       decoration: const BoxDecoration(
-                         color: Color(0xFF6C38F7),
+                       height: 50.h,
+                       width: 50.w,
+                       decoration: BoxDecoration(
+                         color: MyColors.brand.purple,
                          shape: BoxShape.circle,
                        ),
-                       child: const Icon(Icons.add, color: Colors.white),
+                       child: Icon(Icons.add, color: MyColors.text.white, size: 24.sp),
                      ),
-                     Icon(Icons.work_outline, color: Colors.grey.shade300, size: 28,),
-                     const Icon(Icons.person, color:  Color(0xFF6C38F7), size: 28,),
+                     Icon(Icons.work_outline, color: MyColors.text.disable, size: 28.sp),
+                     Icon(Icons.person, color: MyColors.brand.purple, size: 28.sp),
                  ],
                ),
              )

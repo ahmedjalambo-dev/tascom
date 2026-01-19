@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_style.dart';
 
 class StatsRow extends StatelessWidget {
   const StatsRow({super.key});
@@ -6,15 +9,15 @@ class StatsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+      padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        color: MyColors.text.white,
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.03),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            blurRadius: 10.r,
+            offset: Offset(0, 4.h),
           ),
         ],
       ),
@@ -35,18 +38,16 @@ class StatsRow extends StatelessWidget {
       children: [
         Text(
           value,
-          style: const TextStyle(
-            fontSize: 14,
+          style: MyTextStyle.body.body2.copyWith(
             fontWeight: FontWeight.bold,
-            color: Color(0xFF251455),
+            color: MyColors.text.primary,
           ),
         ),
-        const SizedBox(height: 4),
+        SizedBox(height: 4.h),
         Text(
           label,
-          style: const TextStyle(
-            fontSize: 12,
-            color: Color(0xFFB0B0B0),
+          style: MyTextStyle.label.label1.copyWith(
+            color: MyColors.text.third,
           ),
         ),
       ],

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import '../../../core/themes/my_colors.dart';
+import '../../../core/themes/my_text_style.dart';
 
 class SavedTaskCard extends StatelessWidget {
   final String imagePath;
@@ -21,17 +22,17 @@ class SavedTaskCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0XFFFFFFFF),
-        borderRadius: BorderRadius.circular(12),
+        color: MyColors.background.secondary,
+        borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.05),
+            color: Colors.black.withOpacity(0.05),
             spreadRadius: 0,
             blurRadius: 4,
             offset: const Offset(0, 1),
           ),
         ],
-        border: Border.all(color: const Color(0XFFF1F0F0).withOpacity(0.3)),
+        border: Border.all(color: MyColors.border.postBorder),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +42,7 @@ class SavedTaskCard extends StatelessWidget {
             borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
             child: Image.asset(
               imagePath,
-              height: 120, // Adjust height as needed
+              height: 120.h, // Adjust height as needed
               width: double.infinity,
               fit: BoxFit.cover,
            
@@ -63,15 +64,14 @@ class SavedTaskCard extends StatelessWidget {
                         title,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
+                        style: MyTextStyle.body.body2.copyWith(
                           fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          color: Color(0xFF251455),
+                          color: MyColors.text.primary,
                         ),
                       ),
                     ),
                     const SizedBox(width: 8),
-                    const Icon(Icons.bookmark, color: Color(0xFF6B39F4), size: 24),
+                    Icon(Icons.bookmark, color: MyColors.brand.purple, size: 24.sp),
                   ],
                 ),
                 const SizedBox(height: 8),
@@ -81,10 +81,9 @@ class SavedTaskCard extends StatelessWidget {
                     const SizedBox(width: 4),
                     Text(
                       points,
-                      style: const TextStyle(
-                        color: Color(0xFF6B39F4),
+                      style: MyTextStyle.label.label1.copyWith(
+                        color: MyColors.brand.purple,
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
                       ),
                     ),
                   ],
@@ -94,9 +93,8 @@ class SavedTaskCard extends StatelessWidget {
                   description,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: Color(0XFF6E6E6E),
-                    fontSize: 10,
+                  style: MyTextStyle.label.label2.copyWith(
+                    color: MyColors.text.secondary,
                   ),
                 ),
               ],

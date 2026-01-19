@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_style.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({super.key});
@@ -13,40 +14,38 @@ class ProfileHeader extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: Colors.white,
-              width: 3,
+              color: MyColors.text.white,
+              width: 3.w,
             ),
             boxShadow: [
                BoxShadow(
                 color: Colors.black.withOpacity(0.05),
-                spreadRadius: 1,
-                blurRadius: 10,
+                spreadRadius: 1.r,
+                blurRadius: 10.r,
               ),
             ]
           ),
-          child: const CircleAvatar(
-            //35
-            radius: 57,
-            backgroundImage: NetworkImage(
+          child: CircleAvatar(
+            radius: 57.r,
+            backgroundImage: const NetworkImage(
                 "https://i.pravatar.cc/300?img=5"), // Placeholder image
           ),
         ),
         const SizedBox(height: 8),
-        const Text(
+        Text(
           "Sara Mahdi",
-          style: TextStyle(
-            fontSize: 18,
+          style: MyTextStyle.heading.h32.copyWith(
+            color: MyColors.text.primary,
             fontWeight: FontWeight.w500,
-            color: Color(0xFF251455), // Dark text
           ),
         ),
         const SizedBox(height: 4),
         Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
 
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(40),
-             color:Color(0xFFFFFFFF),
+            borderRadius: BorderRadius.circular(40.r),
+             color: MyColors.text.white,
           ),
          
           child: Row(
@@ -54,11 +53,14 @@ class ProfileHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Icon(Icons.star, color: Color(0xFFFFC107), size: 18),
-              const SizedBox(width: 4),
+              Icon(Icons.star, color: MyColors.icons.star, size: 18.sp),
+              SizedBox(width: 4.w),
              Text("4.5 (120 reviews)",
              textAlign: TextAlign.center,
-             style: TextStyle(fontSize: 12,fontWeight: FontWeight.w500,color: Color(0XFF251455)),)
+             style: MyTextStyle.label.label1.copyWith(
+               fontWeight: FontWeight.w500,
+               color: MyColors.text.primary,
+             ),)
             ],
           ),
         ),
