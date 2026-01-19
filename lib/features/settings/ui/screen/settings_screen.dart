@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tascom/features/profile/ui/screen/edit_profile_screen.dart';
+import 'package:tascom/features/settings/ui/screen/reports_screen.dart';
 import 'package:tascom/features/settings/ui/screen/language_screen.dart';
+import 'package:tascom/features/settings/ui/screen/notifications_settings_screen.dart';
 import 'package:tascom/features/settings/ui/screen/saved_tasks_screen.dart';
+import 'package:tascom/features/settings/widgets/logout_dialog.dart';
 import 'package:tascom/features/settings/widgets/settings_tile.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -117,7 +120,14 @@ class SettingsScreen extends StatelessWidget {
                       height: 24,
                     ),
                     title: "Notification ",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const NotificationsSettingsScreen(),
+                        ),
+                      );
+                    },
                   ),
                   const Divider(
                     height: 1,
@@ -133,7 +143,14 @@ class SettingsScreen extends StatelessWidget {
                       height: 24,
                     ),
                     title: "Reports",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ReportsScreen(),
+                        ),
+                      );
+                    },
                   ),
                   const Divider(
                     height: 1,
@@ -149,7 +166,17 @@ class SettingsScreen extends StatelessWidget {
                       height: 24,
                     ),
                     title: "Log Out",
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => LogoutDialog(
+                          onLogout: () {
+                            // Implement logout logic here
+                            print("User logged out");
+                          },
+                        ),
+                      );
+                    },
                     showArrow: false,
                   ),
                   const Divider(
