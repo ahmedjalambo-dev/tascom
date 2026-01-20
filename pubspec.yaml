@@ -82,6 +82,15 @@ flutter:
     - assets/images/signuplogo.png
     - assets/icons/stroke.svg
     - assets/icons/signUp/
+    - assets/images/
+    - assets/icons/
+    - assets/icons/post/
+    - assets/icons/post-categories/
+    - assets/icons/priority/
+    - assets/icons/search/
+    - assets/icons/app-bar/
+    - assets/icons/navbar/
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
