@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tascom/features/settings/data/models/report_model.dart';
+
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
+import 'package:tascom/features/settings/reports/models';
 
 class ReportCard extends StatelessWidget {
   final ReportModel report;

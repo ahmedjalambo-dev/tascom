@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
+import 'package:tascom/core/widgets/spacing_widgets.dart';
 
 class ReportsEmptyState extends StatelessWidget {
   const ReportsEmptyState({super.key});
@@ -14,19 +17,13 @@ class ReportsEmptyState extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: 120.w,
-              height: 120.h,
-              decoration: BoxDecoration(
-                color: MyColors.background.cardHover,
-                borderRadius: BorderRadius.circular(24.r),
-              ),
-              child: Icon(Icons.search, size: 60.sp, color: MyColors.brand.purple),
-            ),
-            const SizedBox(height: 24),
+              SvgPicture.asset('assets/svg/Objects.svg'),
+        
+           const VerticalSpace(16),
+
             Text(
               "No reported tasks yet",
-              style: MyTextStyle.heading.h32.copyWith(
+              style: MyTextStyle.heading.h22.copyWith(
                 fontWeight: FontWeight.w600,
                 color: MyColors.text.primary,
               ),

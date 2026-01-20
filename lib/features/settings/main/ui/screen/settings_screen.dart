@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tascom/features/settings/points/ui/screen/points_history_screen.dart';
 import 'package:tascom/features/profile/ui/screen/edit_profile_screen.dart';
-import 'package:tascom/features/settings/ui/screen/reports_screen.dart';
-import 'package:tascom/features/settings/ui/screen/language_screen.dart';
-import 'package:tascom/features/settings/ui/screen/notifications_settings_screen.dart';
-import 'package:tascom/features/settings/ui/screen/saved_tasks_screen.dart';
-import 'package:tascom/features/settings/widgets/logout_dialog.dart';
-import 'package:tascom/features/settings/widgets/settings_tile.dart';
+import 'package:tascom/features/settings/reports/ui/screen/reports_screen.dart';
+import 'package:tascom/features/settings/language/ui/screen/language_screen.dart';
+import 'package:tascom/features/settings/notifications/ui/screen/notifications_settings_screen.dart';
+import 'package:tascom/features/settings/saved_tasks/ui/screen/saved_tasks_screen.dart';
+import 'package:tascom/features/settings/logout/logout_dialog.dart';
+import 'package:tascom/features/settings/delete_account/ui/screen/delete_account_screen.dart';
+import 'package:tascom/features/settings/main/ui/widgets/settings_tile.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
 
@@ -83,6 +85,44 @@ class SettingsScreen extends StatelessWidget {
                       );
                     },
                   ),
+
+                   Divider(
+                    height: 1,
+                    thickness: 1,
+                    indent: 24,
+                    endIndent: 24,
+                    color: MyColors.border.border,
+                  ),
+                    SettingsTile(
+                    icon: SvgPicture.asset(
+                      'assets/svg/stroke.svg',
+                      width: 24,
+                      height: 24,
+                    ),
+                    title: "Points History",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const PointsHistoryScreen(),
+                        ),
+                      );
+                    },
+                  ),
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
                   Divider(
                     height: 1,
                     thickness: 1,
@@ -144,6 +184,36 @@ class SettingsScreen extends StatelessWidget {
                       height: 24,
                     ),
                     title: "Reports",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ReportsScreen(),
+                        ),
+                      );
+                    },
+                  ),
+
+
+
+   Divider(
+                    height: 1,
+                    thickness: 1,
+                    indent: 24,
+                    endIndent: 24,
+                    color: MyColors.border.border,
+                  ),
+
+
+
+
+                   SettingsTile(
+                    icon: SvgPicture.asset(
+                      'assets/svg/unavailable.svg',
+                      width: 24,
+                      height: 24,
+                    ),
+                    title: "Delete Account",
                     onTap: () {
                       Navigator.push(
                         context,

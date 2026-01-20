@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tascom/features/settings/data/models/report_model.dart';
-import 'package:tascom/features/settings/widgets/report_card.dart';
+import 'package:tascom/features/settings/reports/models';
 
-import 'package:tascom/features/settings/widgets/reports_empty_state.dart';
+import 'package:tascom/features/settings/reports/ui/widgets/report_card.dart';
+
+import 'package:tascom/features/settings/reports/ui/widgets/reports_empty_state.dart';
 import 'package:tascom/core/widgets/custom_pill_dropdown.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
@@ -45,7 +46,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
       appBar: AppBar(
         title: Text(
           "Reports",
-          style: MyTextStyle.heading.h32.copyWith(
+          style: MyTextStyle.heading.h22.copyWith(
             color: MyColors.text.primary,
           ),
         ),

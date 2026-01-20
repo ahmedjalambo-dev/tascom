@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/features/profile/data/task_model.dart';
-import 'package:tascom/features/profile/widgets/empty_state_widget.dart';
-import 'package:tascom/features/profile/widgets/profile_header.dart';
-import 'package:tascom/features/profile/widgets/stats_row.dart';
-import 'package:tascom/features/profile/widgets/task_list_item.dart';
-import 'package:tascom/features/profile/widgets/task_tabs.dart';
-import 'package:tascom/features/settings/ui/screen/settings_screen.dart';
+import 'package:tascom/features/profile/ui/widgets/empty_state_widget.dart';
+import 'package:tascom/features/profile/ui/widgets/profile_header.dart';
+import 'package:tascom/features/profile/ui/widgets/stats_row.dart';
+import 'package:tascom/features/profile/ui/widgets/task_list_item.dart';
+import 'package:tascom/features/profile/ui/widgets/task_tabs.dart';
+
 import 'package:tascom/core/widgets/custom_pill_dropdown.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
+import 'package:tascom/features/settings/main/ui/screen/settings_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

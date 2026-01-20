@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../core/themes/my_colors.dart';
-import '../../../core/themes/my_text_style.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_style.dart';
 
 class NotificationSwitchTile extends StatelessWidget {
   final String title;

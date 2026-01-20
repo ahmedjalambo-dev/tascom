@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+
 
 class SettingsSectionCard extends StatelessWidget {
   final List<Widget> children;

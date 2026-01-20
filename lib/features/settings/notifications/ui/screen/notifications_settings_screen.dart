@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tascom/features/settings/widgets/notification_switch_tile.dart';
-import 'package:tascom/features/settings/widgets/settings_section_card.dart';
+import 'package:tascom/features/settings/notifications/ui/widgets/notification_switch_tile.dart';
+import 'package:tascom/features/settings/main/ui/widgets/settings_section_card.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
 
@@ -45,7 +45,7 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

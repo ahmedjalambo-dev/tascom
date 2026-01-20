@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart' show SvgPicture;
+
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
 
@@ -17,18 +19,9 @@ class EmptyStateWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(height: 40.h),
-       
-        Container(
-          width: 120.w,
-          height: 120.h,
-          decoration: BoxDecoration(
-            color: MyColors.background.cardHover,
-            borderRadius: BorderRadius.circular(16.r),
-          ),
-          child: Icon(Icons.search, size: 60.sp, color: MyColors.brand.purple),
-          alignment: Alignment.center,
-        ),
+            SvgPicture.asset('assets/svg/Objects.svg'),
         SizedBox(height: 24.h),
+
         Text(
           "You have no active tasks yet.",
           style: MyTextStyle.heading.h32.copyWith(
@@ -42,7 +35,7 @@ class EmptyStateWidget extends StatelessWidget {
           child: Text(
             "Post a task or help others in your community to get started.",
             textAlign: TextAlign.center,
-            style: MyTextStyle.body.body2.copyWith(
+            style: MyTextStyle.body.body1.copyWith(
               color: MyColors.text.secondary,
               height: 1.5,
             ),

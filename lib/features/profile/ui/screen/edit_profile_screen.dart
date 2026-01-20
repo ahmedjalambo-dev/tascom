@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tascom/features/profile/widgets/custom_text_form_faild.dart';
-import 'package:tascom/features/profile/widgets/date_of_birth_faild.dart';
-import 'package:tascom/features/profile/widgets/gender_dropdown.dart';
-import 'package:tascom/features/profile/widgets/skills_field.dart';
-import 'package:tascom/features/profile/widgets/profile_image_picker.dart';
+import 'package:tascom/features/profile/ui/widgets/custom_text_form_faild.dart';
+import 'package:tascom/features/profile/ui/widgets/date_of_birth_faild.dart';
+import 'package:tascom/features/profile/ui/widgets/gender_dropdown.dart';
+import 'package:tascom/features/profile/ui/widgets/skills_field.dart';
+import 'package:tascom/features/profile/ui/widgets/profile_image_picker.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
 
