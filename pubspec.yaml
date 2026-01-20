@@ -84,6 +84,8 @@ flutter:
     - assets/icons/search/
     - assets/icons/app-bar/
     - assets/icons/navbar/
+    - assets/icons/registration/
+
 
 
 
