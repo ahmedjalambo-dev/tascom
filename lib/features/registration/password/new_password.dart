@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:tascom/core/helpers/validator.dart';
 import 'package:tascom/core/themes/my_colors.dart';
-import 'package:tascom/core/themes/my_text_style.dart' show MyTextStyle;
+import 'package:tascom/core/themes/my_text_style.dart';
 import 'package:tascom/core/widgets/my_buttom.dart';
 import 'package:tascom/core/widgets/my_input.dart';
 
-class LogIn extends StatefulWidget {
-  const LogIn({super.key});
+class NewPassword extends StatefulWidget {
+  const NewPassword({super.key});
 
   @override
-  State<LogIn> createState() => _LogInState();
+  State<NewPassword> createState() => _NewPasswordState();
 }
 
 final _formKey = GlobalKey<FormState>();
-final nameController = TextEditingController();
-final emailController = TextEditingController();
-final phoneController = TextEditingController();
-final passwordController = TextEditingController();
-final confirmPasswordController = TextEditingController();
+final NewpasswordController = TextEditingController();
+final confirmNewPasswordController = TextEditingController();
 
-class _LogInState extends State<LogIn> {
+class _NewPasswordState extends State<NewPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,31 +34,38 @@ class _LogInState extends State<LogIn> {
               ),
               const SizedBox(height: 20),
               Text(
-                'Welcome Back!',
+                'Create New Password',
                 style: MyTextStyle.heading.h21.copyWith(
                   color: MyColors.text.primary,
+                ),
+              ),
+              Text(
+                'Create a new password to secure you account',
+                style: MyTextStyle.body.body2.copyWith(
+                  color: MyColors.text.secondary,
                 ),
               ),
               const SizedBox(height: 20),
 
               MyInput(
-                label: 'Email',
-                controller: emailController,
-                hintText: 'example@gmail.com',
-                validator: (value) => Validator.validateEmail(value),
+                label: 'Create New Password',
+                controller: NewpasswordController,
+                hintText: '********',
+                validator: (value) => Validator.validatePassword(value),
+                obscureText: true,
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Image.asset(
-                    'assets/icons/registration/person.png',
+                    'assets/icons/registration/lock.png',
                     width: 24,
                     height: 24,
                   ),
                 ),
+                passwordIcon: true,
               ),
-
               MyInput(
-                label: 'Password',
-                controller: passwordController,
+                label: 'Confirm New Password',
+                controller: confirmNewPasswordController,
                 hintText: '********',
                 validator: (value) => Validator.validatePassword(value),
                 obscureText: true,
@@ -76,35 +80,13 @@ class _LogInState extends State<LogIn> {
                 passwordIcon: true,
               ),
 
-              const SizedBox(width: 8),
-              InkWell(
-                onTap: () {
-                  print('Terms & Privacy clicked');
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/forget_password');
-                      },
-                      child: Text(
-                        'Forgot Password?',
-                        style: MyTextStyle.button.secondaryButton2.copyWith(
-                          color: MyColors.brand.purple,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               const SizedBox(height: 20),
               MyBottom(
-                text: 'Login',
+                text: 'Send Reset Link',
                 color: MyColors.brand.purple,
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
-                    print('Form is valid');
+                    Navigator.pushNamed(context, '/log_in');
                   } else {
                     print('Form has errors');
                   }
@@ -112,35 +94,11 @@ class _LogInState extends State<LogIn> {
               ),
               const SizedBox(height: 20),
 
-              Text(
-                'Or continue with',
-                style: MyTextStyle.body.body2.copyWith(
-                  color: MyColors.text.secondary,
-                ),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Image.asset('assets/icons/registration/google.png'),
-                  ),
-                  const SizedBox(width: 20),
-                  InkWell(
-                    onTap: () {},
-                    child: Image.asset(
-                      'assets/icons/registration/facebook.png',
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Dont Have An Account?',
+                    'Back to ',
                     style: MyTextStyle.body.body2.copyWith(
                       color: MyColors.text.secondary,
                     ),
@@ -148,10 +106,10 @@ class _LogInState extends State<LogIn> {
                   const SizedBox(width: 5),
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, '/sign_up');
+                      Navigator.pushNamed(context, '/log_in');
                     },
                     child: Text(
-                      'Sign Up',
+                      'Log In',
                       style: MyTextStyle.button.primaryButton1.copyWith(
                         color: MyColors.brand.purple,
                       ),
