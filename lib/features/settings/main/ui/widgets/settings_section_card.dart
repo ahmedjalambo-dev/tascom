@@ -19,6 +19,7 @@ class SettingsSectionCard extends StatelessWidget {
         color: backgroundColor ?? MyColors.background.cardHover,
         borderRadius: BorderRadius.circular(16),
       ),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Column(
         children: children,
       ),

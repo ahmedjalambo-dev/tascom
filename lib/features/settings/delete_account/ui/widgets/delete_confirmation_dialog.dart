@@ -9,13 +9,20 @@ class DeleteConfirmationDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      insetPadding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Stack(
         clipBehavior: Clip.none,
         alignment: Alignment.topCenter,
         children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(24.w, 60.h, 24.w, 24.h),
+          Container(
+            margin: EdgeInsets.only(top: 40.h),
+            padding: EdgeInsets.fromLTRB(16.w, 48.h, 16.w, 16.h),
+            decoration: BoxDecoration(
+              color: MyColors.background.secondary,
+              borderRadius: BorderRadius.circular(24.r),
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -23,7 +30,7 @@ class DeleteConfirmationDialog extends StatelessWidget {
                   "Delete Account",
                   style: MyTextStyle.heading.h22.copyWith(
                     color: MyColors.text.primary,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 SizedBox(height: 12.h),
@@ -60,11 +67,12 @@ class DeleteConfirmationDialog extends StatelessWidget {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          // TODO: Implement delete logic
+                          // TODO: Implement actual delete logic
                           Navigator.pop(context);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: MyColors.states.error,
+                          elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24.r),
                           ),
@@ -84,21 +92,21 @@ class DeleteConfirmationDialog extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: -40.h,
+            top: 0,
             child: Container(
-              padding: EdgeInsets.all(16.r),
+              padding: EdgeInsets.all(12.r),
               decoration: BoxDecoration(
-                color: const Color(0xFFFFF2F2), // Very light red
+                color: Color(0xFFFFF1F1),
                 shape: BoxShape.circle,
               ),
               child: Container(
-                padding: EdgeInsets.all(12.r),
+                padding: EdgeInsets.all(10.r), // Inner padding for the icon
                 decoration: BoxDecoration(
-                  color: MyColors.states.error.withOpacity(0.1),
+                  color: Color(0xFFFFE4E4),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
-                  Icons.delete_outline,
+                  Icons.delete_forever_outlined,
                   color: MyColors.states.error,
                   size: 32.sp,
                 ),

@@ -19,6 +19,7 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
   bool newMessages = false;
   bool taskCompleted = true;
   bool taskCanceled = true;
+  bool _isAdvancedExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
         title: Text(
           "Notifications Settings",
           style: MyTextStyle.heading.h22.copyWith(
-            color: MyColors.text.primary,
+            color:Color(0XFF263238)
           ),
         ),
         centerTitle: true,
@@ -64,44 +65,58 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
                 ],
               ),
               const SizedBox(height: 32),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                   Text(
-                    "Advanced",
-                    style: MyTextStyle.heading.h32.copyWith(
-                      color: MyColors.text.primary,
-                      fontWeight: FontWeight.w600,
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _isAdvancedExpanded = !_isAdvancedExpanded;
+                  });
+                },
+                behavior: HitTestBehavior.opaque,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Advanced",
+                      style: MyTextStyle.heading.h32.copyWith(
+                        color: MyColors.text.primary,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  Icon(Icons.keyboard_arrow_down, color: MyColors.text.primary),
-                ],
+                    //هنا بخلى السهم يدور للاسفل والاعلى
+                    Transform.rotate(
+                      angle: _isAdvancedExpanded ? 3.14 : 0, // 180 degrees in radians
+                      child: Icon(Icons.keyboard_arrow_down, color: MyColors.text.primary),
+                    ),
+                  ],
+                ),
+
               ),
               const SizedBox(height: 16),
-              SettingsSectionCard(
-                children: [
-                  NotificationSwitchTile(
-                    title: "Task updates",
-                    value: taskUpdates,
-                    onChanged: (val) => setState(() => taskUpdates = val),
-                  ),
-                  NotificationSwitchTile(
-                    title: "New messages",
-                    value: newMessages,
-                    onChanged: (val) => setState(() => newMessages = val),
-                  ),
-                  NotificationSwitchTile(
-                    title: "Task completed",
-                    value: taskCompleted,
-                    onChanged: (val) => setState(() => taskCompleted = val),
-                  ),
-                  NotificationSwitchTile(
-                    title: "Task canceled",
-                    value: taskCanceled,
-                    onChanged: (val) => setState(() => taskCanceled = val),
-                  ),
-                ],
-              ),
+              if (_isAdvancedExpanded)
+                SettingsSectionCard(
+                  children: [
+                    NotificationSwitchTile(
+                      title: "Task updates",
+                      value: taskUpdates,
+                      onChanged: (val) => setState(() => taskUpdates = val),
+                    ),
+                    NotificationSwitchTile(
+                      title: "New messages",
+                      value: newMessages,
+                      onChanged: (val) => setState(() => newMessages = val),
+                    ),
+                    NotificationSwitchTile(
+                      title: "Task completed",
+                      value: taskCompleted,
+                      onChanged: (val) => setState(() => taskCompleted = val),
+                    ),
+                    NotificationSwitchTile(
+                      title: "Task canceled",
+                      value: taskCanceled,
+                      onChanged: (val) => setState(() => taskCanceled = val),
+                    ),
+                  ],
+                ),
             ],
           ),
         ),

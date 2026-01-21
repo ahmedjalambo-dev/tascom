@@ -17,12 +17,14 @@ class ConsequenceItem extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(4.r),
             decoration: BoxDecoration(
-              color: MyColors.background.primary,
+             //color: MyColors.background.primary,
+             color: MyColors.text.disable,
+             
               shape: BoxShape.circle,
             ),
             child: Icon(
               Icons.check,
-              color: MyColors.text.disable,
+              color: MyColors.text.white,
               size: 14.sp,
             ),
           ),

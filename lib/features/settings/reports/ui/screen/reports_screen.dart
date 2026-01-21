@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tascom/features/settings/reports/models';
+import 'package:tascom/features/settings/reports/data/report_model.dart';
+//import 'package:tascom/features/settings/reports/models';
 
 import 'package:tascom/features/settings/reports/ui/widgets/report_card.dart';
 

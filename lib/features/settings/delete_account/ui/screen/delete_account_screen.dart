@@ -36,9 +36,10 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.background.primary,
+      //backgroundColor: MyColors.background.primary,
+            backgroundColor: MyColors.background.secondary,
       appBar: AppBar(
-        backgroundColor: MyColors.background.secondary,
+        backgroundColor: MyColors.background.primary,
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
@@ -66,7 +67,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: 4.h),
+            SizedBox(height: 8.h),
             Text(
               "Permanently remove your account and data from Tascom.",
               style: MyTextStyle.body.body2.copyWith(color: MyColors.text.secondary),

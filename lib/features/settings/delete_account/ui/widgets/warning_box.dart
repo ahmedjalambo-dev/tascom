@@ -11,12 +11,12 @@ class WarningBox extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16.r),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFEBEE), // Light red background matching design
-        borderRadius: BorderRadius.circular(8.r),
+        color: const Color(0xFFFFDADA), // Light red background matching design
+        
         border: Border(
           left: BorderSide(
             color: MyColors.states.error,
-            width: 4.w,
+            width: 10.w,
           ),
         ),
       ),
@@ -26,15 +26,17 @@ class WarningBox extends StatelessWidget {
           Row(
             children: [
               Icon(
-                Icons.error_outline,
+         Icons.report_problem,
                 color: MyColors.states.error,
-                size: 20.sp,
+                size: 24.sp,
+                
               ),
               SizedBox(width: 8.w),
               Expanded(
                 child: Text(
                   "Warning: This action is permanent",
                   style: MyTextStyle.body.body2.copyWith(
+                  
                     color: MyColors.states.error,
                     fontWeight: FontWeight.w600,
                   ),
@@ -46,6 +48,7 @@ class WarningBox extends StatelessWidget {
           Text(
             "Once you delete your account, all of your data will be permanently lost. Please be certain.",
             style: MyTextStyle.caption.captionNotes.copyWith(
+    
               color: MyColors.states.error,
               height: 1.5,
             ),
