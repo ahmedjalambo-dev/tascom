@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
 
@@ -15,26 +16,40 @@ class LogoutDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+       
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
       backgroundColor: MyColors.background.secondary,
-      child: Padding(
-        padding: const EdgeInsets.all(24),
+      child: Container(
+         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
+      decoration: BoxDecoration(
+        color: MyColors.background.secondary,
+        borderRadius: BorderRadius.circular(24.r),
+      ),
+        
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: 64.w,
-              height: 64.h,
+              padding: EdgeInsets.all(12.r),
               decoration: BoxDecoration(
-                color: MyColors.background.cardHover,
+                color:Color(0XFFF9F5FF),
                 shape: BoxShape.circle,
               ),
-              child: Icon(
-                Icons.logout,
-                color: MyColors.brand.purple,
-                size: 28.sp,
+              child: Container(
+                padding: EdgeInsets.all(10.r),
+              decoration: BoxDecoration(
+                color: Color(0XFFF4EBFF),
+                shape: BoxShape.circle,
               ),
+              child: SvgPicture.asset('assets/svg/Logout.svg'),
+              
             ),
+              
+           
+            ),
+            
+        
+        
             const SizedBox(height: 16),
             Text(
               "Logout of Tascom?",
@@ -59,7 +74,7 @@ class LogoutDialog extends StatelessWidget {
                   child: OutlinedButton(
                     onPressed: () => Navigator.pop(context),
                     style: OutlinedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      padding: EdgeInsets.symmetric(vertical: 8.h),
                       side: BorderSide(color: MyColors.border.border),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.r)),
                     ),
@@ -81,7 +96,7 @@ class LogoutDialog extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: MyColors.brand.purple,
-                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      padding: EdgeInsets.symmetric(vertical: 8.h),
                       elevation: 0,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.r)),
                     ),

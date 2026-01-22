@@ -92,12 +92,12 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
               controller: _deleteController,
               decoration: InputDecoration(
                 hintText: "DELETE",
-                hintStyle: MyTextStyle.body.body2.copyWith(color: MyColors.text.disable),
+                hintStyle: MyTextStyle.body.body2.copyWith(color: MyColors.text.secondary),
                 filled: true,
                 fillColor: MyColors.background.secondary,
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
-                  borderSide: BorderSide(color: MyColors.border.border),
+                  borderRadius: BorderRadius.circular(16.r),
+                  borderSide: BorderSide(color: Color(0xFFF0EBFE)),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
@@ -107,34 +107,41 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                   borderRadius: BorderRadius.circular(12.r),
                   borderSide: BorderSide(color: MyColors.brand.purple),
                 ),
-                suffixIcon: Icon(Icons.square, color: MyColors.background.primary, size: 20.sp), // Placeholder for the box in design
+                suffixIcon: Icon(Icons.square, color: Color(0XFFD9D9D9), size: 20.sp), // Placeholder for the box in design
               ),
             ),
             SizedBox(height: 40.h),
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _isDeleteEnabled
-                    ? () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => const DeleteConfirmationDialog(),
-                        );
-                      }
-                    : null,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: MyColors.brand.purple,
-                  disabledBackgroundColor: MyColors.brand.purple.withOpacity(0.5),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.r),
-                  ),
-                  padding: EdgeInsets.symmetric(vertical: 16.h),
-                ),
-                child: Text(
-                  "Delete Account",
-                  style: MyTextStyle.button.primaryButton1.copyWith(color: MyColors.text.white),
-                ),
-              ),
+         child:      ElevatedButton(
+  onPressed: () {
+    if (!_isDeleteEnabled) return;
+
+    showDialog(
+      context: context,
+      builder: (context) => const DeleteConfirmationDialog(),
+    );
+  },
+  style: ElevatedButton.styleFrom(
+    backgroundColor: const Color(0xFF6B39F4),
+    foregroundColor: MyColors.text.white,
+    elevation: 0,
+    splashFactory: NoSplash.splashFactory,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(103.r),
+    ),
+    padding: EdgeInsets.symmetric(vertical: 16.h),
+  ),
+  
+  child: Text(
+    "Delete Account",
+    style: MyTextStyle.button.primaryButton1.copyWith(
+      color: MyColors.text.white,
+    ),
+  ),
+),
+
+             
             ),
             SizedBox(height: 24.h),
           ],

@@ -59,9 +59,10 @@ class _PointsHistoryScreenState extends State<PointsHistoryScreen> {
     final totalPoints = isEmpty ? 0 : 5385;
 
     return Scaffold(
-      backgroundColor: MyColors.background.primary,
+    backgroundColor: MyColors.background.secondary,
+
       appBar: AppBar(
-        backgroundColor: MyColors.background.secondary,
+        backgroundColor: MyColors.background.primary,
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
@@ -103,7 +104,7 @@ class _PointsHistoryScreenState extends State<PointsHistoryScreen> {
           "History",
           style: MyTextStyle.heading.h32.copyWith(
             color: MyColors.text.primary,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
           ),
         ),
         CustomPillDropdown<String>(

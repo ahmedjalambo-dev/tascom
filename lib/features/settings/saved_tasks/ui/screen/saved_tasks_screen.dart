@@ -48,6 +48,9 @@ class SavedTasksScreen extends StatelessWidget {
         ),
         centerTitle: true,
         backgroundColor: MyColors.background.primary,
+         shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(16.r)),
+        ),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios_new,

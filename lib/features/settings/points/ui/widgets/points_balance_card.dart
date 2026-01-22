@@ -15,7 +15,7 @@ class PointsBalanceCard extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
-        color: MyColors.background.cardHover.withOpacity(0.4),
+       color: Color(0xFFF9FAFB),
         borderRadius: BorderRadius.circular(16.r),
       ),
       child: Column(
@@ -33,16 +33,16 @@ class PointsBalanceCard extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 'assets/svg/zap.svg',
-                width: 16.w,
+                width: 24.w,
                 colorFilter: ColorFilter.mode(
                   MyColors.brand.purple,
                   BlendMode.srcIn,
                 ),
               ),
-              SizedBox(width: 8.w),
+              SizedBox(width: 4.w),
               Text(
                 "${balance.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},')} pts",
-                style: MyTextStyle.heading.h22.copyWith(
+                style: MyTextStyle.heading.h32.copyWith(
                   color: MyColors.brand.purple,
                   fontWeight: FontWeight.w700,
                 ),
