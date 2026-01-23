@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: MyTheme.lightTheme,
           onGenerateRoute: MyRouter().generateRoute,
-          initialRoute: MyRoutes.login,
+          initialRoute: MyRoutes.onboarding,
         );
       },
     );
