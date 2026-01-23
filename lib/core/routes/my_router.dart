@@ -38,19 +38,6 @@ class MyRouter {
         );
       case MyRoutes.addPost:
         return MaterialPageRoute(builder: (context) => const AddPostScreen());
-      case MyRoutes.login:
-        return MaterialPageRoute(builder: (context) => const LoginScreen());
-      case MyRoutes.signUp:
-        return MaterialPageRoute(builder: (context) => const SignUpScreen());
-      case MyRoutes.forgotPassword:
-        return MaterialPageRoute(
-          builder: (context) => const ForgotPasswordScreen(),
-        );
-      case MyRoutes.createNewPassword:
-        return MaterialPageRoute(
-          builder: (context) => const CreateNewPasswordScreen(),
-        );
-
       default:
         return null;
     }
