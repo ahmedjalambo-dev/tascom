@@ -32,7 +32,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 subtitle:
                     "Discover a community where tasks are shared, help is exchanged, and trust is built.",
                 imagePath: 'assets/images/onboarding-1.png',
-                onSkipTap: () => context.pushReplacementNamed(MyRoutes.logIn),
+                onSkipTap: () => context.pushReplacementNamed(MyRoutes.login),
               ),
               OnBoardingPage(
                 title: " Connect Locally, Act Fast",
@@ -40,7 +40,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     "Find trusted helpers near you, available today or even right now.",
                 imagePath: 'assets/images/onboarding-2.png',
                 isSecondPage: true,
-                onSkipTap: () => context.pushReplacementNamed(MyRoutes.logIn),
+                onSkipTap: () => context.pushReplacementNamed(MyRoutes.login),
               ),
               const OnBoardingPage(
                 title: "Exchange Skills with Points",
@@ -62,7 +62,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 totalPages: 3,
                 onNextTap: () {
                   if (currentPage == 2) {
-                    context.pushReplacementNamed(MyRoutes.logIn);
+                    context.pushReplacementNamed(MyRoutes.login);
                   } else {
                     _pageController.nextPage(
                       duration: const Duration(milliseconds: 350),

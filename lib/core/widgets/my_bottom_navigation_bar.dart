@@ -4,12 +4,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 
 /// Custom floating bottom navigation bar with a curved notch for a FAB.
-class CustomBottomNavBar extends StatelessWidget {
+class MyBottomNavigationBar extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int> onTap;
   final VoidCallback onFabTap;
 
-  const CustomBottomNavBar({
+  const MyBottomNavigationBar({
     super.key,
     required this.currentIndex,
     required this.onTap,
