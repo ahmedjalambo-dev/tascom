@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/routes/my_router.dart';
+import 'package:tascom/core/themes/my_theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,8 +21,9 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Tascom App',
           debugShowCheckedModeBanner: false,
+          theme: MyTheme.lightTheme,
           onGenerateRoute: MyRouter().generateRoute,
-          initialRoute: MyRoutes.main,
+          initialRoute: MyRoutes.login,
         );
       },
     );

@@ -32,14 +32,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 subtitle:
                     "Discover a community where tasks are shared, help is exchanged, and trust is built.",
                 imagePath: 'assets/images/onboarding-1.png',
-
-                onSkipTap: () {
-                                    Navigator.pushReplacementNamed(context, MyRoutes.signUp);
-
-                },
-
                 onSkipTap: () => context.pushReplacementNamed(MyRoutes.home),
-
               ),
               OnBoardingPage(
                 title: " Connect Locally, Act Fast",
@@ -47,10 +40,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     "Find trusted helpers near you, available today or even right now.",
                 imagePath: 'assets/images/onboarding-2.png',
                 isSecondPage: true,
-                onSkipTap: () {
-                  Navigator.pushReplacementNamed(context, MyRoutes.signUp);
-
-                },
                 onSkipTap: () => context.pushReplacementNamed(MyRoutes.home),
               ),
               const OnBoardingPage(
@@ -58,11 +47,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 subtitle:
                     "Offer your skills, earn points, and use them to request help from others. No money involved.",
                 imagePath: 'assets/images/onboarding-3.png',
-                onSkipTap: () {
-                  Navigator.pushReplacementNamed(context, MyRoutes.signUp);
-                },
-
-
                 isLastPage: true,
               ),
             ],
@@ -74,20 +58,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             right: 0,
             child: Center(
               child: CustomProgressIndicator(
-  currentPage: currentPage,
-  totalPages: 3,
-  onNextTap: () {
-    if (currentPage == 2) {
-      Navigator.pushReplacementNamed(context, MyRoutes.signUp);
-    } else {
-      _pageController.nextPage(
-        duration: const Duration(milliseconds: 350),
-        curve: Curves.easeInOut,
-      );
-    }
-  },
-),
-
                 currentPage: currentPage,
                 totalPages: 3,
                 onNextTap: () {
@@ -107,5 +77,4 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       ),
     );
   }
-  
 }
