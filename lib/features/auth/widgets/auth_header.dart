@@ -33,9 +33,7 @@ class AuthHeader extends StatelessWidget {
         VerticalSpace(logoTitleSpacing.h),
         Text(
           title,
-          style: MyTextStyle.heading.h21.copyWith(
-            color: MyColors.text.primary,
-          ),
+          style: MyTextStyle.heading.h21.copyWith(color: MyColors.text.primary),
         ),
         VerticalSpace(bottomSpacing.h),
       ],

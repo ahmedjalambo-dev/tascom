@@ -107,15 +107,14 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
           keyboardType: widget.textInputType,
           obscureText: widget.isObscureText ?? false,
           focusNode: _focusNode,
-          style: widget.inputTextStyle ?? Theme.of(context).textTheme.bodyMedium,
+          style:
+              widget.inputTextStyle ?? Theme.of(context).textTheme.bodyMedium,
           decoration: InputDecoration(
             isDense: true,
             prefixIcon: _buildPrefixIcon(),
-            prefixIconConstraints: (widget.prefix != null || widget.prefixSvgPath != null)
-                ? BoxConstraints(
-                    minWidth: 24.w,
-                    minHeight: 24.h,
-                  )
+            prefixIconConstraints:
+                (widget.prefix != null || widget.prefixSvgPath != null)
+                ? BoxConstraints(minWidth: 24.w, minHeight: 24.h)
                 : null,
             // 1. Padding: Uses Theme defaults unless overridden here
             contentPadding: widget.contentPadding,
@@ -128,7 +127,8 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
             // 3. Hint: Theme sets the color and style
             hintText: widget.hintText,
             hintStyle:
-                widget.hintStyle ?? Theme.of(context).inputDecorationTheme.hintStyle,
+                widget.hintStyle ??
+                Theme.of(context).inputDecorationTheme.hintStyle,
 
             // 4. Icon
             suffixIcon: widget.suffixIcon,
