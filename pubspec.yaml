@@ -89,6 +89,8 @@ flutter:
     - assets/icons/app-bar/
     - assets/icons/navbar/
     - assets/icons/auth/
+    - assets/icons/registration/
+
 
 
 
