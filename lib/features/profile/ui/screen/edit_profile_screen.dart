@@ -41,6 +41,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         backgroundColor: MyColors.background.primary,
         elevation: 0,
         centerTitle: true,
+         shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(16.r)),
+        ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new, color: MyColors.text.primary, size: 20.sp),
           onPressed: () => Navigator.pop(context),

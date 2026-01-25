@@ -10,6 +10,7 @@ class TaskModel {
   final String location;
   final String? distance;
   final bool isPostedByMe;
+  final String? posterName; // الشخص الذي نشر المهمة أصلاً
 
   TaskModel({
     required this.id,
@@ -22,5 +23,6 @@ class TaskModel {
     required this.location,
     this.distance,
     required this.isPostedByMe,
+    this.posterName,
   });
 }

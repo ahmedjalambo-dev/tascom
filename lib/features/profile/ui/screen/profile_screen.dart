@@ -30,7 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       title: "Help move boxes",
       timeAgo: "2 days ago",
       status: "Active",
-      applicantsCount: "22",
+     
       category: "Home Services",
       location: "Nablus, Palestine",
       isPostedByMe: true,
@@ -42,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       status: "In Progress",
       helperName: "Ali Rayyan",
       category: "Home Services",
-      location: "Palestine, Nablus/3km",
+      location: "Palestine, Nablus",
       isPostedByMe: true,
     ),
     TaskModel(
@@ -57,11 +57,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     TaskModel(
       id: "4",
       title: "Help move boxes",
-      timeAgo: "Cancelled date: 25/12/2025",
+      timeAgo: "25/12/2025",
       status: "Canceled",
       helperName: "Ali Rayyan",
       category: "Home Services",
-      location: "Palestine, Nablus/3km",
+      location: "Palestine, Nablus",
       isPostedByMe: true,
     ),
   ];
@@ -72,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     //اختيار المهام المعروضة
     List<TaskModel> visibleTasks;
     if (isPostedSelected) {
-       visibleTasks = allTasks.where((t) => t.status == 'Active' || t.status == 'Completed').toList();
+       visibleTasks = allTasks.where((t) => t.status == 'Active' || t.status == 'Completed'||t.status == 'In Progress').toList();
     } else {
        visibleTasks = allTasks.where((t) => t.status == 'In Progress' || t.status == 'Canceled').toList();
     }
@@ -160,7 +160,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     value: selectedTaskFilter,
                     items: const ['All', 'Active', 'Completed'],
                     itemLabelBuilder: (value) => value,
-                    height: 32.h,
+                   
                     onChanged: (newValue) {
                       if (newValue != null) {
                         setState(() => selectedTaskFilter = newValue);
@@ -176,12 +176,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
             //لا → ListView
             if (visibleTasks.isEmpty)
               EmptyStateWidget(
-                onActionPressed: () {
-                  // TODO: Navigate to Create Task Screen when available
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Navigate to Create Task Screen")),
-                  );
-                },
+
+
+                // تخصيص النصوص بناءً على التبويب
+    title: isPostedSelected 
+        ? "You have no active tasks yet." 
+        : "You have no active tasks yet.", // العنوان نفسه في الصورتين
+    description: isPostedSelected 
+        ? "Post a task in your community to get started." 
+        : "Claim a task in your community to get started.", // هنا الاختلاف (Post vs Claim)
+    buttonText: isPostedSelected 
+        ? "Post a task" 
+        : "Claim a task", // هنا الاختلاف في الزر
+    onActionPressed: () {
+      if (isPostedSelected) {
+        // منطق إضافة مهمة
+      } else {
+        // منطق البحث عن مهمة للمطالبة بها
+      }
+    },
               )
             else
               ListView.builder(
@@ -190,7 +203,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: visibleTasks.length,
                 itemBuilder: (context, index) {
-                  return TaskListItem(task: visibleTasks[index]);
+                  return TaskListItem(task: visibleTasks[index],
+                  isPostedTab: isPostedSelected,
+                  );
                 },
               ),
              SizedBox(height: 40.h),

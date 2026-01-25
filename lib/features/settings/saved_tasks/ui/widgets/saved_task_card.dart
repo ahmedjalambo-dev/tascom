@@ -39,21 +39,21 @@ class SavedTaskCard extends StatelessWidget {
         children: [
           // Image Section
           ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(12.r)),
             child: Image.asset(
               imagePath,
-              height: 120.h, // Adjust height as needed
+              height: 105.h, // تقليل بسيط للارتفاع لراحة النص
               width: double.infinity,
               fit: BoxFit.cover,
-           
             ),
           ),
           
           // Content Section
           Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: EdgeInsets.all(10.r), // Standardized padding
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min, // Ensure column only takes needed space
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,34 +67,37 @@ class SavedTaskCard extends StatelessWidget {
                         style: MyTextStyle.body.body2.copyWith(
                           fontWeight: FontWeight.bold,
                           color: MyColors.text.primary,
+                          fontSize: 13.sp, // Slightly more compact
                         ),
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    Icon(Icons.bookmark, color: MyColors.brand.purple, size: 24.sp),
+                    SizedBox(width: 4.w),
+                    Icon(Icons.bookmark, color: MyColors.brand.purple, size: 20.sp),
                   ],
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 6.h),
                 Row(
                   children: [
-                    SvgPicture.asset('assets/svg/zap.svg'),
-                    const SizedBox(width: 4),
+                    SvgPicture.asset('assets/svg/zap.svg', width: 14.sp),
+                    SizedBox(width: 4.w),
                     Text(
                       points,
                       style: MyTextStyle.label.label1.copyWith(
                         color: MyColors.brand.purple,
                         fontWeight: FontWeight.w500,
+                        fontSize: 11.sp,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 6.h),
                 Text(
                   description,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: MyTextStyle.label.label2.copyWith(
                     color: MyColors.text.secondary,
+                    fontSize: 10.sp,
                   ),
                 ),
               ],

@@ -19,9 +19,9 @@ class PointHistoryItem extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 12.h),
       padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
-        color: MyColors.background.secondary,
+        color: MyColors.background.primary,
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: MyColors.background.cardHover),
+        border: Border.all(color: MyColors.background.primary),
       ),
       child: Row(
         children: [

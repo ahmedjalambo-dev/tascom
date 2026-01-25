@@ -16,7 +16,7 @@ class PointsEmptyState extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset(
-              'assets/svg/zap.svg',
+              'assets/svg/solid.svg',
               width: 140.w,
               colorFilter: ColorFilter.mode(
                 MyColors.brand.purple.withOpacity(0.1),
@@ -36,6 +36,7 @@ class PointsEmptyState extends StatelessWidget {
             Text(
               "Complete tasks to start earning points.",
               textAlign: TextAlign.center,
+              maxLines: 1,
               style: MyTextStyle.body.body2.copyWith(
                 color: MyColors.text.secondary,
                 height: 1.5,

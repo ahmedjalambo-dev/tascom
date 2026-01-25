@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; // تأكدي من الاستيراد
 
 class CustomPillDropdown<T> extends StatelessWidget {
   final T value;
@@ -17,21 +19,23 @@ class CustomPillDropdown<T> extends StatelessWidget {
     required this.items,
     required this.onChanged,
     required this.itemLabelBuilder,
-    this.height = 24.0,
-    this.menuWidth = 120.0,
+    this.height = 24.0, // سيتم تحويلها لـ .h عند الاستخدام
+    this.menuWidth = 120.0, // سيتم تحويلها لـ .w عند الاستخدام
     this.textColor = const Color(0xFF251455),
     this.borderColor = const Color(0xFFCCCCCC),
-    this.fontSize = 12.0,
+    this.fontSize = 12.0, // سيتم تحويلها لـ .sp عند الاستخدام
   });
 
   @override
   Widget build(BuildContext context) {
     return IntrinsicWidth(
       child: Container(
-        height: height,
+        // استخدمي .h هنا لضمان تناسق الطول في كل الصفحات
+        height: height.h, 
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(8),
+          // استخدمي .r للزوايا
+          borderRadius: BorderRadius.circular(8.r), 
           border: Border.all(
             color: borderColor,
             width: 1,
@@ -39,25 +43,25 @@ class CustomPillDropdown<T> extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            // 1. Visual Design
             Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
+                // padding متجاوب
+                padding: EdgeInsets.symmetric(horizontal: 8.w), 
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       itemLabelBuilder(value),
                       style: TextStyle(
-                        fontSize: fontSize,
+                        fontSize: fontSize.sp, // نص متجاوب
                         color: textColor,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const SizedBox(width: 6),
+                    SizedBox(width: 6.w),
                     Icon(
                       Icons.keyboard_arrow_down,
-                      size: fontSize + 2,
+                      size: (fontSize + 2).sp, // أيقونة متناسبة مع الخط
                       color: textColor,
                     ),
                   ],
@@ -65,7 +69,6 @@ class CustomPillDropdown<T> extends StatelessWidget {
               ),
             ),
 
-            // 2. Functional Component (Hidden)
             Positioned.fill(
               child: Opacity(
                 opacity: 0,
@@ -73,7 +76,7 @@ class CustomPillDropdown<T> extends StatelessWidget {
                   child: DropdownButton<T>(
                     value: value,
                     isExpanded: true,
-                    menuWidth: menuWidth,
+                    menuWidth: menuWidth.w, // عرض القائمة متجاوب
                     alignment: AlignmentDirectional.bottomEnd,
                     items: items.map((T item) {
                       return DropdownMenuItem<T>(
@@ -81,7 +84,7 @@ class CustomPillDropdown<T> extends StatelessWidget {
                         child: Text(
                           itemLabelBuilder(item),
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 14.sp, // حجم نص القائمة
                             color: textColor,
                           ),
                         ),

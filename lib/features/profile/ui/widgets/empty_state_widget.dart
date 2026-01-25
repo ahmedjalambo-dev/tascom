@@ -7,10 +7,16 @@ import 'package:tascom/core/themes/my_text_style.dart';
 
 class EmptyStateWidget extends StatelessWidget {
   final VoidCallback? onActionPressed;
+  final String title;
+  final String description;
+  final String buttonText;
 
   const EmptyStateWidget({
     super.key,
     this.onActionPressed,
+    this.title = "You have no active tasks yet.",
+    this.description = "Post a task in your community to get started.",
+    this.buttonText = "Post a task",
   });
 
   @override
@@ -19,48 +25,55 @@ class EmptyStateWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(height: 40.h),
-            SvgPicture.asset('assets/svg/Objects.svg'),
+        // تأكدي من مسار الصورة الصحيح في مشروعك
+        SvgPicture.asset('assets/svg/Objects.svg'),
         SizedBox(height: 24.h),
 
+        // العنوان
         Text(
-          "You have no active tasks yet.",
+          title,
+          textAlign: TextAlign.center,
           style: MyTextStyle.heading.h32.copyWith(
             fontWeight: FontWeight.w600,
             color: MyColors.text.primary,
           ),
         ),
         SizedBox(height: 8.h),
+
+        // الوصف (تم تعديل المسافات لضمان سطر واحد)
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 40.w),
+          padding: EdgeInsets.symmetric(horizontal: 20.w), // تقليل المسافة الجانبية لإعطاء مساحة للنص
           child: Text(
-            "Post a task or help others in your community to get started.",
+            description,
             textAlign: TextAlign.center,
-            style: MyTextStyle.body.body1.copyWith(
+            maxLines: 1, // إجبار النص على سطر واحد
+            overflow: TextOverflow.ellipsis, // وضع نقاط في حال كان النص أطول من الشاشة
+            style: MyTextStyle.body.body2.copyWith(
               color: MyColors.text.secondary,
-              height: 1.5,
+              height: 1.2, // تقليل الارتفاع يجعل السطر يبدو متوازناً
             ),
           ),
         ),
+
         SizedBox(height: 32.h),
-       Padding(
-         padding: EdgeInsets.symmetric(horizontal: 24.w),
-         child: SizedBox(
-           width: double.infinity,
+
+        // الزر
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
+          child: SizedBox(
+            width: double.infinity,
             height: 48.h,
             child: ElevatedButton(
-              
               onPressed: onActionPressed,
               style: ElevatedButton.styleFrom(
                 backgroundColor: MyColors.brand.purple,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.r),
                 ),
-                padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
                 elevation: 0,
               ),
-              
               child: Text(
-                "Post a task",
+                buttonText,
                 style: MyTextStyle.button.primaryButton1.copyWith(
                   fontWeight: FontWeight.w600,
                   color: MyColors.text.white,
@@ -68,8 +81,167 @@ class EmptyStateWidget extends StatelessWidget {
               ),
             ),
           ),
-       ),
+        ),
       ],
     );
   }
 }
+
+//import 'package:flutter/material.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:flutter_svg/svg.dart' show SvgPicture;
+
+// import 'package:tascom/core/themes/my_colors.dart';
+// import 'package:tascom/core/themes/my_text_style.dart';
+
+// class EmptyStateWidget extends StatelessWidget {
+//   final VoidCallback? onActionPressed;
+//   final String title;
+//   final String description;
+//   final String buttonText;
+
+//   const EmptyStateWidget({
+//     super.key,
+//     this.onActionPressed,
+//     this.title = "You have no active tasks yet.",
+//     this.description = "Post a task in your community to get started.",
+//     this.buttonText = "Post a task",
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: [
+//         SizedBox(height: 40.h),
+//         SvgPicture.asset('assets/svg/Objects.svg'),
+//         SizedBox(height: 24.h),
+
+//         Text(
+//           title, // استخدام العنوان المتغير
+//           style: MyTextStyle.heading.h32.copyWith(
+//             fontWeight: FontWeight.w600,
+//             color: MyColors.text.primary,
+//           ),
+//         ),
+//         SizedBox(height: 8.h),
+//         Padding(
+//           padding: EdgeInsets.symmetric(horizontal: 40.w),
+//           child: Text(
+        
+//             description, // استخدام الوصف المتغير
+//             textAlign: TextAlign.center,
+//             style: MyTextStyle.body.body2.copyWith(
+//               color: MyColors.text.secondary,
+//               height: 1.5,
+              
+              
+//             ),
+//           ),
+//         ),
+//         SizedBox(height: 32.h),
+//         Padding(
+//           padding: EdgeInsets.symmetric(horizontal: 24.w),
+//           child: SizedBox(
+//             width: double.infinity,
+//             height: 48.h,
+//             child: ElevatedButton(
+//               onPressed: onActionPressed,
+//               style: ElevatedButton.styleFrom(
+//                 backgroundColor: MyColors.brand.purple,
+//                 shape: RoundedRectangleBorder(
+//                   borderRadius: BorderRadius.circular(30.r),
+//                 ),
+//                 padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
+//                 elevation: 0,
+//               ),
+//               child: Text(
+//                 buttonText, // استخدام نص الزر المتغير
+//                 style: MyTextStyle.button.primaryButton1.copyWith(
+//                   fontWeight: FontWeight.w600,
+//                   color: MyColors.text.white,
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
+// //
+// // import 'package:flutter/material.dart';
+// // import 'package:flutter_screenutil/flutter_screenutil.dart';
+// // import 'package:flutter_svg/svg.dart' show SvgPicture;
+
+// // import 'package:tascom/core/themes/my_colors.dart';
+// // import 'package:tascom/core/themes/my_text_style.dart';
+
+// // class EmptyStateWidget extends StatelessWidget {
+// //   final VoidCallback? onActionPressed;
+
+// //   const EmptyStateWidget({
+// //     super.key,
+// //     this.onActionPressed,
+// //   });
+
+// //   @override
+// //   Widget build(BuildContext context) {
+// //     return Column(
+// //       mainAxisAlignment: MainAxisAlignment.center,
+// //       children: [
+// //         SizedBox(height: 40.h),
+// //             SvgPicture.asset('assets/svg/Objects.svg'),
+// //         SizedBox(height: 24.h),
+
+// //         Text(
+// //           "You have no active tasks yet.",
+// //           style: MyTextStyle.heading.h32.copyWith(
+// //             fontWeight: FontWeight.w600,
+// //             color: MyColors.text.primary,
+// //           ),
+// //         ),
+// //         SizedBox(height: 8.h),
+// //         Padding(
+// //           padding: EdgeInsets.symmetric(horizontal: 40.w),
+// //           child: Text(
+// //             "Post a task in your community to get started.",
+// //             textAlign: TextAlign.center,
+// //             style: MyTextStyle.body.body2.copyWith(
+// //               color: MyColors.text.secondary,
+// //               height: 1.5,
+// //             ),
+// //           ),
+// //         ),
+// //         SizedBox(height: 32.h),
+// //        Padding(
+// //          padding: EdgeInsets.symmetric(horizontal: 24.w),
+// //          child: SizedBox(
+// //            width: double.infinity,
+// //             height: 48.h,
+// //             child: ElevatedButton(
+              
+// //               onPressed: onActionPressed,
+// //               style: ElevatedButton.styleFrom(
+// //                 backgroundColor: MyColors.brand.purple,
+// //                 shape: RoundedRectangleBorder(
+// //                   borderRadius: BorderRadius.circular(30.r),
+// //                 ),
+// //                 padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
+// //                 elevation: 0,
+// //               ),
+              
+// //               child: Text(
+// //                 "Post a task",
+// //                 style: MyTextStyle.button.primaryButton1.copyWith(
+// //                   fontWeight: FontWeight.w600,
+// //                   color: MyColors.text.white,
+// //                 ),
+// //               ),
+// //             ),
+// //           ),
+// //        ),
+// //       ],
+// //     );
+// //   }
+// // }

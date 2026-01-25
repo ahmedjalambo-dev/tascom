@@ -11,6 +11,8 @@ import 'package:tascom/features/settings/delete_account/ui/screen/delete_account
 import 'package:tascom/features/settings/main/ui/widgets/settings_tile.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
+import 'package:tascom/features/settings/security/ui/screens/change_password_screen.dart';
+
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -177,6 +179,57 @@ class SettingsScreen extends StatelessWidget {
                     endIndent: 24,
                     color: MyColors.border.border,
                   ),
+
+
+
+
+
+
+                SettingsTile(
+                    icon: SvgPicture.asset(
+                      'assets/svg/lock-password.svg',
+
+                      width: 24,
+                      height: 24,
+                    ),
+                    title: "Change Password",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ChangePasswordScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  Divider(
+                    height: 1,
+                    thickness: 1,
+                    indent: 24,
+                    endIndent: 24,
+                    color: MyColors.border.border,
+                  ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                   SettingsTile(
                     icon: SvgPicture.asset(
                       'assets/svg/reports_flag.svg',
