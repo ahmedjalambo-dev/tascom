@@ -26,12 +26,14 @@ class AppPasswordField extends StatefulWidget {
 
 class _AppPasswordFieldState extends State<AppPasswordField> {
   bool _obscureText = true;
+  String? _currentError; // يخزن حالة الخطأ الحالية
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // العنوان
         Text(
           widget.title,
           style: MyTextStyle.body.body1.copyWith(
@@ -40,33 +42,46 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
           ),
         ),
         SizedBox(height: 8.h),
+
+        // حقل الإدخال
         TextFormField(
           controller: widget.controller,
           obscureText: _obscureText,
-          style: MyTextStyle.body.body1.copyWith(color: MyColors.text.primary),
+          style: MyTextStyle.body.body1.copyWith(
+            color: MyColors.text.primary,
+          ),
           decoration: InputDecoration(
-            hintText: widget.hintText ?? '********',
-            hintStyle: MyTextStyle.body.body2.copyWith(color: MyColors.text.third),
-            contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+            hintText: widget.hintText ?? '\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022',
+            hintStyle: MyTextStyle.body.body2.copyWith(
+              color: MyColors.text.primary,
+              fontSize: 18.sp
+            ),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 16.w,
+              vertical: 16.h,
+            ),
             prefixIcon: Padding(
               padding: EdgeInsets.all(12.w),
               child: SvgPicture.asset(
                 'assets/svg/lock-password.svg',
                 width: 20.w,
                 height: 20.w,
-                colorFilter: ColorFilter.mode(MyColors.text.primary, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(
+                  MyColors.text.primary,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
             suffixIcon: IconButton(
               icon: Icon(
-                _obscureText ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                _obscureText
+                    ? Icons.visibility_off_outlined
+                    : Icons.visibility_outlined,
                 color: MyColors.text.primary,
                 size: 20.sp,
               ),
               onPressed: () {
-                setState(() {
-                  _obscureText = !_obscureText;
-                });
+                setState(() => _obscureText = !_obscureText);
               },
             ),
             border: OutlineInputBorder(
@@ -85,10 +100,31 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
               borderRadius: BorderRadius.circular(16.r),
               borderSide: BorderSide(color: MyColors.states.error),
             ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.r),
+              borderSide: BorderSide(color: MyColors.states.error),
+            ),
           ),
-          validator: widget.validator,
+
+          // validator مع التحكم في helperText
+          validator: (value) {
+            final result = widget.validator?.call(value);
+            setState(() {
+              _currentError = result;
+            });
+            return result;
+          },
+
+          // إزالة الخطأ عند بدء الكتابة
+          onChanged: (_) {
+            if (_currentError != null) {
+              setState(() => _currentError = null);
+            }
+          },
         ),
-        if (widget.helperText != null) ...[
+
+        // helperText يظهر فقط إذا لا يوجد خطأ
+        if (widget.helperText != null && _currentError == null) ...[
           SizedBox(height: 4.h),
           Text(
             widget.helperText!,
@@ -97,8 +133,10 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
             ),
           ),
         ],
+
         SizedBox(height: 16.h),
       ],
     );
   }
 }
+
