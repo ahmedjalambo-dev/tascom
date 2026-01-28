@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
-import 'package:tascom/features/widgets/Category_widget.dart';
-import 'package:tascom/features/widgets/selectable_icon_group.dart';
-import 'package:tascom/features/widgets/sliderWidget.dart';
+import 'package:tascom/features/ui/widgets/Category_widget.dart';
+import 'package:tascom/features/ui/widgets/selectable_icon_group.dart';
+import 'package:tascom/features/ui/widgets/sliderWidget.dart';
 
 class FilterSearch extends StatelessWidget {
   const FilterSearch({super.key});
@@ -12,7 +12,7 @@ class FilterSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Container(
         height: 850,
 
@@ -56,14 +56,14 @@ class FilterSearch extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8.h),
-            const SliderExample(min: 0, max: 200),
+            const SliderView(min: 0, max: 200),
             Text(
               'Location',
               style: MyTextStyle.heading.h32.copyWith(
                 color: MyColors.text.primary,
               ),
             ),
-            const SliderExample(min: 0, max: 2000),
+            const SliderView(min: 0, max: 2000),
             const SizedBox(height: 20),
 
             SizedBox(

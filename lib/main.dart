@@ -1,10 +1,18 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tascom/features/screen/searchScreen.dart';
-import 'package:tascom/features/widgets/sliderWidget.dart';
+import 'package:tascom/features/ui/screen/searchScreen.dart';
+import 'package:tascom/features/ui/widgets/sliderWidget.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+      enabled: false,
+      builder: (BuildContext context) {
+        return const MyApp();
+      },
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

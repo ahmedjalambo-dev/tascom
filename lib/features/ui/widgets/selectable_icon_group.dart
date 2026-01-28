@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
-import 'package:tascom/features/widgets/selectable_icon.dart';
+import 'package:tascom/features/ui/widgets/selectable_icon.dart';
 
 class SelectableIconGroup extends StatefulWidget {
   const SelectableIconGroup({super.key});
