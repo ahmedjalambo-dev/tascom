@@ -27,8 +27,10 @@ class ResultWidget extends StatelessWidget {
                 border: Border.all(color: MyColors.border.border),
               ),
               child: CircleAvatar(
-                backgroundImage: AssetImage(icon),
                 radius: 14.r,
+                child: icon.endsWith('.svg')
+                    ? SvgPicture.asset(icon)
+                    : Image.asset(icon),
               ),
             ),
             SizedBox(width: 8.w),

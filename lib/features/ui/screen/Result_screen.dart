@@ -248,7 +248,7 @@ class _ResultSearchState extends State<ResultSearch> {
     ProfileModel(
       id: '1',
       name: 'Tala Ahmad',
-      imageUrl: 'assets/images/profile.jpg',
+      imageUrl: 'assets/images/Avatar Image.png',
       rating: 4.2,
       country: 'Palestine',
       city: 'Nablus',
@@ -263,7 +263,7 @@ class _ResultSearchState extends State<ResultSearch> {
     ProfileModel(
       id: '2',
       name: 'Asmaa Ahmad',
-      imageUrl: 'assets/images/profile.jpg',
+      imageUrl: 'assets/images/Avatar Image.png',
       rating: 4.2,
       country: 'Palestine',
       city: 'Nablus',
@@ -278,7 +278,7 @@ class _ResultSearchState extends State<ResultSearch> {
     ProfileModel(
       id: '3',
       name: 'Ali Ahmad',
-      imageUrl: 'assets/images/profile.jpg',
+      imageUrl: 'assets/images/Avatar Image.png',
       rating: 4.2,
       country: 'Palestine',
       city: 'Nablus',
@@ -293,7 +293,7 @@ class _ResultSearchState extends State<ResultSearch> {
     ProfileModel(
       id: '4',
       name: 'Tala Al-Farsi',
-      imageUrl: 'assets/images/profile.jpg',
+      imageUrl: 'assets/images/Avatar Image.png',
       rating: 4.2,
       country: 'Palestine',
       city: 'Nablus',
@@ -308,7 +308,7 @@ class _ResultSearchState extends State<ResultSearch> {
     ProfileModel(
       id: '5',
       name: 'Omar Al-Farsi',
-      imageUrl: 'assets/images/profile.jpg',
+      imageUrl: 'assets/images/Avatar Image.png',
       rating: 4.2,
       country: 'Palestine',
       city: 'Nablus',
@@ -323,7 +323,7 @@ class _ResultSearchState extends State<ResultSearch> {
     ProfileModel(
       id: '6',
       name: 'Sara Al-Farsi',
-      imageUrl: 'assets/images/profile.jpg',
+      imageUrl: 'assets/images/Avatar Image.png',
       rating: 4.2,
       country: 'Palestine',
       city: 'Nablus',
@@ -338,7 +338,7 @@ class _ResultSearchState extends State<ResultSearch> {
     ProfileModel(
       id: '7',
       name: 'Lina Al-Farsi',
-      imageUrl: 'assets/images/profile.jpg',
+      imageUrl: 'assets/images/Avatar Image.png',
       rating: 4.2,
       country: 'Palestine',
       city: 'Nablus',

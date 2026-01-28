@@ -29,7 +29,9 @@ class ProfileCard extends StatelessWidget {
                 height: 64,
                 child: CircleAvatar(
                   radius: 50.r,
-                  backgroundImage: AssetImage(profile.imageUrl),
+                  child: profile.imageUrl.endsWith('.svg')
+                      ? SvgPicture.asset(profile.imageUrl)
+                      : Image.asset(profile.imageUrl),
                 ),
               ),
               SizedBox(width: 10.w),

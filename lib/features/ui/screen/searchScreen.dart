@@ -37,9 +37,15 @@ class _SearchscreenState extends State<Searchscreen> {
       if (!mounted) return;
       setState(() {});
     });
-    _searchController.addListener(_updateSearchResults);
+    _searchController.addListener(_updateLists);
 
-    _dropdownValue.addListener(_updateSearchResults);
+    _dropdownValue.addListener(_updateLists);
+    _updateLists();
+  }
+
+  void _updateLists() {
+    _updateSearchResults();
+    _updateRecentList();
   }
 
   void _updateSearchResults() {
@@ -52,8 +58,20 @@ class _SearchscreenState extends State<Searchscreen> {
     });
   }
 
+  void _updateRecentList() {
+    if (!mounted) return;
+    setState(() {
+      if (_dropdownValue.text == 'Tasks') {
+        RecentList = RecentListTasks;
+      } else {
+        RecentList = RecentListProfiles;
+      }
+    });
+  }
+
   RadioGroupController myController = RadioGroupController();
   List<Object> _searchResults = [];
+  List<Object> RecentList = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -177,11 +195,11 @@ class _SearchscreenState extends State<Searchscreen> {
                           return _dropdownValue.text == 'Tasks'
                               ? ResultWidget(
                                   titleText: (result as TaskModel).title,
-                                  icon: 'assets/images/TaskIcon.png',
+                                  icon: (result as TaskModel).imageUrl,
                                 )
                               : ResultWidget(
                                   titleText: (result as ProfileModel).name,
-                                  icon: 'assets/images/profile.jpg',
+                                  icon: (result as ProfileModel).imageUrl,
                                 );
                         },
                         separatorBuilder: (BuildContext context, int index) {
@@ -218,10 +236,15 @@ class _SearchscreenState extends State<Searchscreen> {
                 itemCount: min(RecentList.length, 4),
                 itemBuilder: (context, index) {
                   final result = RecentList[index];
-                  return Recentwidget(
-                    titleText: result.title,
-                    icon: result.imageUrl,
-                  );
+                  return _dropdownValue.text == 'Tasks'
+                      ? Recentwidget(
+                          titleText: (result as TaskModel).title,
+                          icon: result.imageUrl,
+                        )
+                      : Recentwidget(
+                          titleText: (result as ProfileModel).name,
+                          icon: (result as ProfileModel).imageUrl,
+                        );
                 },
                 separatorBuilder: (BuildContext context, int index) {
                   return SizedBox(height: 12.h);
@@ -238,7 +261,7 @@ class _SearchscreenState extends State<Searchscreen> {
     ProfileModel(
       id: '1',
       name: 'Tala Ahmad',
-      imageUrl: 'assets/images/profile.jpg',
+      imageUrl: 'assets/images/Avatar Image.png',
       rating: 4.2,
       country: 'Palestine',
       city: 'Nablus',
@@ -253,7 +276,7 @@ class _SearchscreenState extends State<Searchscreen> {
     ProfileModel(
       id: '2',
       name: 'Asmaa Ahmad',
-      imageUrl: 'assets/images/profile.jpg',
+      imageUrl: 'assets/images/Avatar Image.png',
       rating: 4.2,
       country: 'Palestine',
       city: 'Nablus',
@@ -268,7 +291,7 @@ class _SearchscreenState extends State<Searchscreen> {
     ProfileModel(
       id: '3',
       name: 'Ali Ahmad',
-      imageUrl: 'assets/images/profile.jpg',
+      imageUrl: 'assets/images/Avatar Image.png',
       rating: 4.2,
       country: 'Palestine',
       city: 'Nablus',
@@ -283,7 +306,7 @@ class _SearchscreenState extends State<Searchscreen> {
     ProfileModel(
       id: '4',
       name: 'Tala Al-Farsi',
-      imageUrl: 'assets/images/profile.jpg',
+      imageUrl: 'assets/images/Avatar Image.png',
       rating: 4.2,
       country: 'Palestine',
       city: 'Nablus',
@@ -298,7 +321,7 @@ class _SearchscreenState extends State<Searchscreen> {
     ProfileModel(
       id: '5',
       name: 'Omar Al-Farsi',
-      imageUrl: 'assets/images/profile.jpg',
+      imageUrl: 'assets/images/Avatar Image.png',
       rating: 4.2,
       country: 'Palestine',
       city: 'Nablus',
@@ -313,7 +336,7 @@ class _SearchscreenState extends State<Searchscreen> {
     ProfileModel(
       id: '6',
       name: 'Sara Al-Farsi',
-      imageUrl: 'assets/images/profile.jpg',
+      imageUrl: 'assets/images/Avatar Image.png',
       rating: 4.2,
       country: 'Palestine',
       city: 'Nablus',
@@ -328,7 +351,7 @@ class _SearchscreenState extends State<Searchscreen> {
     ProfileModel(
       id: '7',
       name: 'Lina Al-Farsi',
-      imageUrl: 'assets/images/profile.jpg',
+      imageUrl: 'assets/images/Avatar Image.png',
       rating: 4.2,
       country: 'Palestine',
       city: 'Nablus',
@@ -348,7 +371,7 @@ class _SearchscreenState extends State<Searchscreen> {
       description: 'Walk my dog in the park',
       status: 'Open',
       category: 'Pet Care',
-      imageUrl: 'assets/images/dog_walking.jpg',
+      imageUrl: 'assets/images/PetCare2.svg',
     ),
     TaskModel(
       id: '2',
@@ -356,7 +379,7 @@ class _SearchscreenState extends State<Searchscreen> {
       description: 'Take care of my cat',
       status: 'In Progress',
       category: 'Pet Care',
-      imageUrl: 'assets/images/pet_sitting.jpg',
+      imageUrl: 'assets/images/PetCare2.svg',
     ),
     TaskModel(
       id: '3',
@@ -364,7 +387,7 @@ class _SearchscreenState extends State<Searchscreen> {
       description: 'Fix a broken chair leg',
       status: 'Completed',
       category: 'Repairs',
-      imageUrl: 'assets/images/furniture_repair.jpg',
+      imageUrl: 'assets/images/Repairs.svg',
     ),
     TaskModel(
       id: '4',
@@ -372,7 +395,7 @@ class _SearchscreenState extends State<Searchscreen> {
       description: 'Teach guitar',
       status: 'Open',
       category: 'Tutoring',
-      imageUrl: 'assets/images/teaching_skill.jpg',
+      imageUrl: 'assets/images/Tutoring.svg',
     ),
     TaskModel(
       id: '5',
@@ -396,7 +419,7 @@ class _SearchscreenState extends State<Searchscreen> {
     }).toList();
   }
 
-  List<TaskModel> RecentList = [
+  List<TaskModel> RecentListTasks = [
     TaskModel(
       id: '2',
       title: 'Pet Sitting',
@@ -428,6 +451,38 @@ class _SearchscreenState extends State<Searchscreen> {
       status: 'Open',
       category: 'Tutoring',
       imageUrl: 'assets/images/Tutoring.svg',
+    ),
+  ];
+  List<ProfileModel> RecentListProfiles = [
+    ProfileModel(
+      id: '1',
+      name: 'Tala Ahmad',
+      imageUrl: 'assets/images/Avatar Image.png',
+      rating: 4.2,
+      country: 'Palestine',
+      city: 'Nablus',
+      description: 'I enjoy helping others and exchanging tasks fairly.',
+      skills: [
+        'Animal Care',
+        'Pet Sitting',
+        'Dog Walking',
+        'Feeding & Basic Care',
+      ],
+    ),
+    ProfileModel(
+      id: '2',
+      name: 'Omar Al-Farsi',
+      imageUrl: 'assets/images/Avatar Image.png',
+      rating: 4.5,
+      country: 'Palestine',
+      city: 'Nablus',
+      description: 'I enjoy helping others and exchanging tasks fairly.',
+      skills: [
+        'Animal Care',
+        'Pet Sitting',
+        'Dog Walking',
+        'Feeding & Basic Care',
+      ],
     ),
   ];
 }

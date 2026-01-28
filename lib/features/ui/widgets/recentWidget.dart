@@ -20,12 +20,20 @@ class Recentwidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Leading
-            SvgPicture.asset(
-              icon,
-              width: 24.w,
-              height: 22.h,
-              color: MyColors.brand.purple,
-            ),
+            icon.endsWith('.svg')
+                ? SvgPicture.asset(
+                    icon,
+                    width: 24.w,
+                    height: 22.h,
+                    color: MyColors.brand.purple,
+                  )
+                : Image.asset(
+                    icon,
+                    width: 24.w,
+                    height: 22.h,
+                    //color: MyColors.brand.purple,
+                  ),
+
             SizedBox(width: 8.w),
 
             // Title
