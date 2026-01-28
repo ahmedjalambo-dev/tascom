@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tascom/core/themes/my_colors.dart';
 
 // The font family specified in the design.
 const String kFontFamily = 'Poppins';
@@ -68,6 +69,12 @@ class AppHeadingStyles {
     fontFamily: kFontFamily,
     fontWeight: FontWeight.w500, // Medium
     fontSize: 18.0.sp,
+  );
+
+    final TextStyle sectionTitle = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 18,
+    height: 1.5,
   );
 }
 

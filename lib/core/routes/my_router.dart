@@ -3,6 +3,7 @@ import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/features/add_post/ui/add_post_screen.dart';
 import 'package:tascom/features/home/ui/home_screen.dart';
 import 'package:tascom/features/navigation/ui/main_navigation_screen.dart';
+import 'package:tascom/features/notification/ui/notification_screen.dart';
 import 'package:tascom/features/onboarding/ui/onboarding_screen.dart';
 
 class MyRouter {
@@ -20,6 +21,11 @@ class MyRouter {
         );
       case MyRoutes.addPost:
         return MaterialPageRoute(builder: (context) => const AddPostScreen());
+      case MyRoutes.notification:
+        return MaterialPageRoute(
+          builder: (context) => const NotificationScreen(),
+        );
+
       default:
         return null;
     }

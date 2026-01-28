@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
 import 'package:tascom/core/widgets/spacing_widgets.dart';
@@ -68,7 +69,7 @@ class HomeHeader extends StatelessWidget {
 
           // Action icons
           GestureDetector(
-            onTap: onNotificationTap,
+            onTap: (){ Navigator.of(context).pushNamed(MyRoutes.notification);},
             child: SvgPicture.asset(
               'assets/icons/app-bar/notification.svg',
               width: 24.sp,
