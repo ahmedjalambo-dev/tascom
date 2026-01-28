@@ -51,6 +51,7 @@ dependencies:
   cached_network_image: ^3.4.1
   shared_preferences: ^2.5.4
   flutter_secure_storage: ^10.0.0
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
@@ -81,18 +82,8 @@ flutter:
     - assets/images/onboarding-3.png
     - assets/icons/signUp/
     - assets/images/
-    - assets/icons/
-    - assets/icons/post/
-    - assets/icons/post-categories/
-    - assets/icons/priority/
-    - assets/icons/search/
-    - assets/icons/app-bar/
-    - assets/icons/navbar/
-    - assets/icons/auth/
-    - assets/icons/registration/
-
-
-
+    - assets/svg/
+  #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
