@@ -23,73 +23,81 @@ class TaskTabs extends StatelessWidget {
         color: MyColors.background.primary,
         borderRadius: BorderRadius.circular(40.r),
       ),
-      child: Row(
-        children: [
-          Expanded(
-            child: GestureDetector(
-              onTap: onPostedTap,
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                padding: EdgeInsets.symmetric(vertical: 12.h),
-                decoration: BoxDecoration(
-                  color: isPostedSelected ? MyColors.text.white : Colors.transparent,
-                  borderRadius: BorderRadius.circular(40.r),
-                  boxShadow: isPostedSelected
-                      ? [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.05),
-                            blurRadius: 4.r,
-                            offset: Offset(0, 2.h),
-                          )
-                        ]
-                      : [],
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  "Posted",
-                  style: MyTextStyle.body.body1.copyWith(
-                    color: isPostedSelected
-                        ? MyColors.brand.purple
-                        : MyColors.text.secondary,
-                    fontWeight: FontWeight.w600,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final tabWidth = (constraints.maxWidth - 8.r) / 2;
+          return Stack(
+            children: [
+              // Sliding indicator
+              AnimatedPositioned(
+                duration: const Duration(milliseconds: 250),
+                curve: Curves.easeInOut,
+                left: isPostedSelected ? 0 : tabWidth,
+                top: 0,
+                bottom: 0,
+                width: tabWidth,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: MyColors.text.white,
+                    borderRadius: BorderRadius.circular(40.r),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.05),
+                        blurRadius: 4.r,
+                        offset: Offset(0, 2.h),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ),
-          ),
-          Expanded(
-            child: GestureDetector(
-              onTap: onClaimedTap,
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                padding: EdgeInsets.symmetric(vertical: 12.h),
-                decoration: BoxDecoration(
-                  color: !isPostedSelected ? MyColors.text.white : Colors.transparent,
-                  borderRadius: BorderRadius.circular(50.r),
-                  boxShadow: !isPostedSelected
-                      ? [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.05),
-                            blurRadius: 4.r,
-                            offset: Offset(0, 2.h),
-                          )
-                        ]
-                      : [],
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  "Claimed",
-                  style: MyTextStyle.body.body2.copyWith(
-                    color: !isPostedSelected
-                        ? MyColors.brand.purple
-                        : MyColors.text.secondary,
-                    fontWeight: FontWeight.bold,
+              // Tab labels
+              Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: onPostedTap,
+                      behavior: HitTestBehavior.opaque,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 10.h),
+                        alignment: Alignment.center,
+                        child: AnimatedDefaultTextStyle(
+                          duration: const Duration(milliseconds: 200),
+                          style: MyTextStyle.body.body1.copyWith(
+                            color: isPostedSelected
+                                ? MyColors.brand.purple
+                                : MyColors.text.secondary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          child: const Text("Posted"),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: onClaimedTap,
+                      behavior: HitTestBehavior.opaque,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 10.h),
+                        alignment: Alignment.center,
+                        child: AnimatedDefaultTextStyle(
+                          duration: const Duration(milliseconds: 200),
+                          style: MyTextStyle.body.body2.copyWith(
+                            color: !isPostedSelected
+                                ? MyColors.brand.purple
+                                : MyColors.text.secondary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          child: const Text("Claimed"),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       ),
     );
   }

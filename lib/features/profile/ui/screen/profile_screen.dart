@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tascom/core/extentions/extentions.dart';
+import 'package:tascom/core/routes/my_routes.dart';
+import 'package:tascom/core/widgets/spacing_widgets.dart';
 import 'package:tascom/features/profile/data/task_model.dart';
+import 'package:tascom/features/profile/data/mock_profile_data.dart';
+import 'package:tascom/features/profile/utils/task_constants.dart';
 import 'package:tascom/features/profile/ui/widgets/empty_state_widget.dart';
 import 'package:tascom/features/profile/ui/widgets/profile_header.dart';
 import 'package:tascom/features/profile/ui/widgets/stats_row.dart';
 import 'package:tascom/features/profile/ui/widgets/task_list_item.dart';
 import 'package:tascom/features/profile/ui/widgets/task_tabs.dart';
+import 'package:tascom/features/reviews/ui/screens/rate_helper_screen.dart';
 
 import 'package:tascom/core/widgets/custom_pill_dropdown.dart';
 import 'package:tascom/core/themes/my_colors.dart';
@@ -21,84 +29,63 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   bool isPostedSelected = true;
-  String selectedTaskFilter = 'All';
+  String selectedTaskFilter = TaskFilter.all;
 
-  // Mock Data
-  final List<TaskModel> allTasks = [
-    TaskModel(
-      id: "1",
-      title: "Help move boxes",
-      timeAgo: "2 days ago",
-      status: "Active",
-     
-      category: "Home Services",
-      location: "Nablus, Palestine",
-      isPostedByMe: true,
-    ),
-    TaskModel(
-      id: "2",
-      title: "Help move boxes",
-      timeAgo: "2 days ago",
-      status: "In Progress",
-      helperName: "Ali Rayyan",
-      category: "Home Services",
-      location: "Palestine, Nablus",
-      isPostedByMe: true,
-    ),
-    TaskModel(
-        id: "3",
-        title: "Help move boxes",
-        timeAgo: "2 days ago",
-        status: "Completed",
-        helperName: "Ali Rayyan",
-        category: "Home Services",
-        location: "Nablus, Palestine",
-        isPostedByMe: true),
-    TaskModel(
-      id: "4",
-      title: "Help move boxes",
-      timeAgo: "25/12/2025",
-      status: "Canceled",
-      helperName: "Ali Rayyan",
-      category: "Home Services",
-      location: "Palestine, Nablus",
-      isPostedByMe: true,
-    ),
-  ];
+  /// Filters tasks based on the current tab and selected filter.
+  List<TaskModel> _getFilteredTasks() {
+    final List<TaskModel> allTasks = MockProfileData.tasks;
+
+    // First filter by tab (Posted or Claimed)
+    List<TaskModel> tabFiltered;
+    if (isPostedSelected) {
+      tabFiltered = allTasks
+          .where(
+            (t) =>
+                t.status == TaskStatus.active ||
+                t.status == TaskStatus.completed ||
+                t.status == TaskStatus.inProgress,
+          )
+          .toList();
+    } else {
+      tabFiltered = allTasks
+          .where(
+            (t) =>
+                t.status == TaskStatus.inProgress ||
+                t.status == TaskStatus.canceled,
+          )
+          .toList();
+    }
+
+    // Then apply dropdown filter
+    if (selectedTaskFilter == TaskFilter.all) {
+      return tabFiltered;
+    }
+
+    return tabFiltered.where((t) => t.status == selectedTaskFilter).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
-    // For 'Posted' we show specific tasks, for 'Claimed' we show others to match the screenshots
-    //اختيار المهام المعروضة
-    List<TaskModel> visibleTasks;
-    if (isPostedSelected) {
-       visibleTasks = allTasks.where((t) => t.status == 'Active' || t.status == 'Completed'||t.status == 'In Progress').toList();
-    } else {
-       visibleTasks = allTasks.where((t) => t.status == 'In Progress' || t.status == 'Canceled').toList();
-    }
+    final visibleTasks = _getFilteredTasks();
 
     return Scaffold(
-      backgroundColor: MyColors.background.secondary, // White background for the bottom part
+      backgroundColor: MyColors.background.secondary,
+
       appBar: AppBar(
         title: Text(
           "Profile",
-          style: MyTextStyle.heading.h32.copyWith(
-            color: MyColors.text.primary,
-            fontWeight: FontWeight.bold,
-          ),
+          style: MyTextStyle.heading.h22.copyWith(color: MyColors.text.primary),
         ),
         centerTitle: true,
-        backgroundColor: MyColors.background.primary, // AppBar matches top section
+        backgroundColor: MyColors.background.primary,
         elevation: 0,
         actions: [
-          IconButton(
-            icon: Icon(Icons.settings_outlined, color: MyColors.text.primary),
-            onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SettingsScreen()),
-                );
-            },
+          GestureDetector(
+            onTap: () => context.pushNamed(MyRoutes.settings),
+            child: Padding(
+              padding: EdgeInsetsDirectional.only(end: 25.w),
+              child: SvgPicture.asset('assets/icons/settings-stroke.svg'),
+            ),
           ),
         ],
       ),
@@ -112,37 +99,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: EdgeInsets.only(bottom: 24.h),
               child: Column(
                 children: [
-                   Padding(
+                  Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24.0.w),
-                    child: const ProfileHeader(),
+                    child: const ProfileHeader(
+                      profile: MockProfileData.profile,
+                    ),
                   ),
-                   SizedBox(height: 24.h),
-                   Padding(
+                  VerticalSpace(16.h),
+                  Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24.0.w),
-                    child: const StatsRow(),
+                    child: const StatsRow(profile: MockProfileData.profile),
                   ),
                 ],
               ),
             ),
-             SizedBox(height: 24.h),
+            VerticalSpace(24.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.0.w),
               child: TaskTabs(
                 isPostedSelected: isPostedSelected,
                 onPostedTap: () {
+                  HapticFeedback.selectionClick();
                   setState(() {
                     isPostedSelected = true;
                   });
                 },
                 onClaimedTap: () {
+                  HapticFeedback.selectionClick();
                   setState(() {
                     isPostedSelected = false;
                   });
                 },
               ),
             ),
-            
-            // Bottom Section (Grey background from Scaffold)
+
+            // Task Filter and List Section
             SizedBox(height: 24.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.0.w),
@@ -158,9 +149,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   CustomPillDropdown<String>(
                     value: selectedTaskFilter,
-                    items: const ['All', 'Active','On Progress','Completed','Cancelled'],
+                    items: TaskFilter.options,
                     itemLabelBuilder: (value) => value,
-                   
                     onChanged: (newValue) {
                       if (newValue != null) {
                         setState(() => selectedTaskFilter = newValue);
@@ -170,31 +160,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
-             SizedBox(height: 16.h),
-            //هنا هل قائمة المهام فاضية
-            //نعم → EmptyState
-            //لا → ListView
+            SizedBox(height: 16.h),
+
+            // Task List or Empty State
             if (visibleTasks.isEmpty)
               EmptyStateWidget(
-
-
-                // تخصيص النصوص بناءً على التبويب
-    title: isPostedSelected 
-        ? "You have no active tasks yet." 
-        : "You have no active tasks yet.", // العنوان نفسه في الصورتين
-    description: isPostedSelected 
-        ? "Post a task in your community to get started." 
-        : "Claim a task in your community to get started.", // هنا الاختلاف (Post vs Claim)
-    buttonText: isPostedSelected 
-        ? "Post a task" 
-        : "Claim a task", // هنا الاختلاف في الزر
-    onActionPressed: () {
-      if (isPostedSelected) {
-        // منطق إضافة مهمة
-      } else {
-        // منطق البحث عن مهمة للمطالبة بها
-      }
-    },
+                title: isPostedSelected
+                    ? "You have no active tasks yet."
+                    : "You have no active tasks yet.",
+                description: isPostedSelected
+                    ? "Post a task in your community to get started."
+                    : "Claim a task in your community to get started.",
+                buttonText: isPostedSelected ? "Post a task" : "Claim a task",
+                onActionPressed: () {
+                  if (isPostedSelected) {
+                    // Logic for posting a task
+                  } else {
+                    // Logic for claiming a task
+                  }
+                },
               )
             else
               ListView.builder(
@@ -203,34 +187,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: visibleTasks.length,
                 itemBuilder: (context, index) {
-                  return TaskListItem(task: visibleTasks[index],
-                  isPostedTab: isPostedSelected,
+                  return TaskListItem(
+                    task: visibleTasks[index],
+                    isPostedTab: isPostedSelected,
+                    onMarkAsDone: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const RateHelperScreen(),
+                        ),
+                      );
+                    },
                   );
                 },
               ),
-             SizedBox(height: 40.h),
-            // Bottom Navbar placeholder area if needed, or keeping it clean
-             Padding(
-               padding: EdgeInsets.only(bottom: 20.h),
-               child: Row(
-                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                 children: [
-                     Icon(Icons.home_outlined, color: MyColors.text.disable, size: 28.sp),
-                     Icon(Icons.search, color: MyColors.text.disable, size: 28.sp),
-                     Container(
-                       height: 50.h,
-                       width: 50.w,
-                       decoration: BoxDecoration(
-                         color: MyColors.brand.purple,
-                         shape: BoxShape.circle,
-                       ),
-                       child: Icon(Icons.add, color: MyColors.text.white, size: 24.sp),
-                     ),
-                     Icon(Icons.work_outline, color: MyColors.text.disable, size: 28.sp),
-                     Icon(Icons.person, color: MyColors.brand.purple, size: 28.sp),
-                 ],
-               ),
-             )
+            SizedBox(height: 100.h),
           ],
         ),
       ),

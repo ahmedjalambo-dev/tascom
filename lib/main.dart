@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tascom/features/profile/ui/screen/profile_screen.dart';
+import 'package:tascom/core/routes/my_routes.dart';
+import 'package:tascom/core/routes/my_router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,10 +18,10 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
+          title: 'Tascom App',
           debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData(),
-          home: const ProfileScreen(),
+          onGenerateRoute: MyRouter().generateRoute,
+          initialRoute: MyRoutes.onboarding,
         );
       },
     );

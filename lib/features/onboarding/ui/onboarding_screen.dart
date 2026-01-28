@@ -62,7 +62,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 totalPages: 3,
                 onNextTap: () {
                   if (currentPage == 2) {
-                    context.pushReplacementNamed(MyRoutes.login);
+                    context.pushReplacementNamed(MyRoutes.main);
                   } else {
                     _pageController.nextPage(
                       duration: const Duration(milliseconds: 350),

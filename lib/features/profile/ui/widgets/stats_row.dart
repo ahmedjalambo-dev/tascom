@@ -2,9 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
+import 'package:tascom/features/profile/data/profile_model.dart';
 
+/// Widget that displays the user's stats in a horizontal row.
 class StatsRow extends StatelessWidget {
-  const StatsRow({super.key});
+  final ProfileModel profile;
+
+  const StatsRow({super.key, required this.profile});
+
+  /// Formats a number with thousand separators.
+  String _formatNumber(int number) {
+    return number.toString().replaceAllMapped(
+      RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+      (Match m) => '${m[1]},',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,21 +25,26 @@ class StatsRow extends StatelessWidget {
       decoration: BoxDecoration(
         color: MyColors.text.white,
         borderRadius: BorderRadius.circular(16.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.03),
-            blurRadius: 10.r,
-            offset: Offset(0, 4.h),
-          ),
-        ],
+        border: Border.all(color: MyColors.border.border, width: 1.w),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(child: _buildStatItem("5,375", "Points")),
-          Expanded(child: _buildStatItem("30", "Posted")),
-          Expanded(child: _buildStatItem("15", "Claimed")),
-          Expanded(child: _buildStatItem("65", "Completed")),
+          Expanded(
+            child: _buildStatItem(_formatNumber(profile.points), "Points"),
+          ),
+          Expanded(
+            child: _buildStatItem(profile.postedCount.toString(), "Posted"),
+          ),
+          Expanded(
+            child: _buildStatItem(profile.claimedCount.toString(), "Claimed"),
+          ),
+          Expanded(
+            child: _buildStatItem(
+              profile.completedCount.toString(),
+              "Completed",
+            ),
+          ),
         ],
       ),
     );
@@ -46,12 +63,9 @@ class StatsRow extends StatelessWidget {
         SizedBox(height: 4.h),
         Text(
           label,
-          style: MyTextStyle.label.label1.copyWith(
-            color: MyColors.text.third,
-          ),
+          style: MyTextStyle.label.label1.copyWith(color: MyColors.text.third),
         ),
       ],
     );
   }
 }
-

@@ -7,4 +7,5 @@ class MyRoutes {
   static const String home = '/home';
   static const String main = '/main';
   static const String addPost = '/add-post';
+  static const String settings = '/settings';
 }

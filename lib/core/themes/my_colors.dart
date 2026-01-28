@@ -72,6 +72,8 @@ class AppStatusColors {
 
   /// Resolved status background - Very Light Green (#F2FFF5)
   final Color resolvedBg = const Color(0xFFF2FFF5);
+
+  Color? get warning => null;
 }
 
 /// Helper class for 'Text' colors.

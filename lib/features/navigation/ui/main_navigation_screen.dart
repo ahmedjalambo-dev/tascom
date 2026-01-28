@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/widgets/my_bottom_navigation_bar.dart';
 import 'package:tascom/features/home/ui/home_screen.dart';
+import 'package:tascom/features/profile/ui/screen/profile_screen.dart';
 import 'package:tascom/features/search/ui/search_screen.dart';
 import 'package:tascom/features/ai/ui/ai_screen.dart';
-import 'package:tascom/features/profile/ui/profile_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});

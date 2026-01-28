@@ -2,68 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
+import 'package:tascom/core/widgets/spacing_widgets.dart';
+import 'package:tascom/features/profile/data/profile_model.dart';
+import 'package:tascom/features/profile/ui/widgets/rate_and_review.dart';
 
+/// Widget that displays the user's profile header with avatar, name, and rating.
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader({super.key});
+  final ProfileModel profile;
+
+  const ProfileHeader({super.key, required this.profile});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: MyColors.text.white,
-              width: 3.w,
-            ),
-            boxShadow: [
-               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.05),
-                spreadRadius: 1.r,
-                blurRadius: 10.r,
-              ),
-            ]
-          ),
-          child: CircleAvatar(
-            radius: 57.r,
-            backgroundImage: const NetworkImage(
-                "https://i.pravatar.cc/300?img=5"), // Placeholder image
-          ),
+        CircleAvatar(
+          radius: 48.r,
+          backgroundImage: NetworkImage(profile.avatarUrl),
         ),
-        const SizedBox(height: 8),
+        VerticalSpace(8.h),
         Text(
-          "Sara Mahdi",
-          style: MyTextStyle.heading.h32.copyWith(
-            color: MyColors.text.primary,
-            fontWeight: FontWeight.w500,
-          ),
+          profile.name,
+          style: MyTextStyle.heading.h32.copyWith(color: MyColors.text.primary),
         ),
-        const SizedBox(height: 4),
-        Container(
-            padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(40.r),
-             color: MyColors.text.white,
-          ),
-         
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-           crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(Icons.star, color: MyColors.icons.star, size: 18.sp),
-              SizedBox(width: 4.w),
-             Text("4.5 (120 reviews)",
-             textAlign: TextAlign.center,
-             style: MyTextStyle.label.label1.copyWith(
-               fontWeight: FontWeight.w500,
-               color: MyColors.text.primary,
-             ),)
-            ],
-          ),
-        ),
+        VerticalSpace(4.h),
+        RateAndReviews(profile: profile),
       ],
     );
   }

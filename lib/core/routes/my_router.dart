@@ -8,6 +8,7 @@ import 'package:tascom/features/auth/sign_up/sign_up_screen.dart';
 import 'package:tascom/features/home/ui/home_screen.dart';
 import 'package:tascom/features/navigation/ui/main_navigation_screen.dart';
 import 'package:tascom/features/onboarding/ui/onboarding_screen.dart';
+import 'package:tascom/features/settings/main/ui/screen/settings_screen.dart';
 
 class MyRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -38,6 +39,8 @@ class MyRouter {
         );
       case MyRoutes.addPost:
         return MaterialPageRoute(builder: (context) => const AddPostScreen());
+      case MyRoutes.settings:
+        return MaterialPageRoute(builder: (context) => const SettingsScreen());
       default:
         return null;
     }
