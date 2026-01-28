@@ -158,7 +158,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   CustomPillDropdown<String>(
                     value: selectedTaskFilter,
-                    items: const ['All', 'Active', 'Completed'],
+                    items: const ['All', 'Active','On Progress','Completed','Cancelled'],
                     itemLabelBuilder: (value) => value,
                    
                     onChanged: (newValue) {

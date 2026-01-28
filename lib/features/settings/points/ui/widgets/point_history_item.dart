@@ -76,7 +76,7 @@ class PointHistoryItem extends StatelessWidget {
       ),
       padding: EdgeInsets.all(10.w),
       child: SvgPicture.asset(
-        point.status == PointStatus.completed ? 'assets/svg/stroke.svg' : 'assets/svg/unavailable.svg',
+        point.status == PointStatus.completed ? 'assets/svg/arrow_top.svg' : 'assets/svg/arrow_bot.svg',
         colorFilter: ColorFilter.mode(MyColors.brand.purple, BlendMode.srcIn),
       ),
     );
