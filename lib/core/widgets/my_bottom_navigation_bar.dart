@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tascom/core/constants/my_icons.dart';
 import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/widgets/my_spacing.dart';
 
 /// Custom floating bottom navigation bar with a curved notch for a FAB.
 class MyBottomNavigationBar extends StatelessWidget {
@@ -55,16 +57,14 @@ class MyBottomNavigationBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             _NavBarItem(
-                              iconPath: 'assets/icons/navbar/home.svg',
-                              activeIconPath:
-                                  'assets/icons/navbar/home-solid.svg',
+                              iconPath: MyIcons.homeStroke,
+                              activeIconPath: MyIcons.homeSolid,
                               isActive: currentIndex == 0,
                               onTap: () => onTap(0),
                             ),
                             _NavBarItem(
-                              iconPath: 'assets/icons/navbar/search.svg',
-                              activeIconPath:
-                                  'assets/icons/navbar/search-solid.svg',
+                              iconPath: MyIcons.search,
+                              activeIconPath: MyIcons.search,
                               isActive: currentIndex == 1,
                               onTap: () => onTap(1),
                             ),
@@ -72,23 +72,21 @@ class MyBottomNavigationBar extends StatelessWidget {
                         ),
                       ),
                       // Center space for FAB
-                      SizedBox(width: 90.w),
+                      const HorizontalSpace(90),
                       // Right side items
                       Expanded(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             _NavBarItem(
-                              iconPath: 'assets/icons/navbar/ai.svg',
-                              activeIconPath:
-                                  'assets/icons/navbar/ai-solid.svg',
+                              iconPath: MyIcons.aiStroke,
+                              activeIconPath: MyIcons.aiSolid,
                               isActive: currentIndex == 2,
                               onTap: () => onTap(2),
                             ),
                             _NavBarItem(
-                              iconPath: 'assets/icons/navbar/user.svg',
-                              activeIconPath:
-                                  'assets/icons/navbar/user-solid.svg',
+                              iconPath: MyIcons.userStroke,
+                              activeIconPath: MyIcons.userSolid,
                               isActive: currentIndex == 3,
                               onTap: () => onTap(3),
                             ),
@@ -156,7 +154,7 @@ class _NavBarItem extends StatelessWidget {
           width: 28.sp,
           height: 28.sp,
           colorFilter: ColorFilter.mode(
-            isActive ? MyColors.brand.purple : MyColors.text.third,
+            isActive ? MyColors.brand.purple : MyColors.border.border,
             BlendMode.srcIn,
           ),
         ),

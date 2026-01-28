@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tascom/core/themes/my_text_style.dart';
+import 'package:tascom/core/themes/my_text_styles.dart';
 
 class MyButton extends StatelessWidget {
   const MyButton({
@@ -33,10 +33,10 @@ class MyButton extends StatelessWidget {
         foregroundColor:
             foregroundColor ?? Theme.of(context).colorScheme.onPrimary,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? 103.dg),
+          borderRadius: BorderRadius.circular(borderRadius ?? 100.dg),
         ),
       ),
-      child: Text(text, style: textStyle ?? MyTextStyle.button.primaryButton1),
+      child: Text(text, style: textStyle ?? MyTextStyles.button.primaryButton1),
     );
   }
 }

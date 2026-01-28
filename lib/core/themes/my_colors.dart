@@ -103,13 +103,13 @@ class AppBackgroundColors {
   const AppBackgroundColors._();
 
   /// Primary background - Off-White (#F9F9FB)
-  final Color primary = const Color(0xFFF9F9FB);
+  final Color primary = const Color(0xFFFFFFFF);
 
   /// Card/Hover background - Light Purple (#F4F0FF)
   final Color cardHover = const Color.fromARGB(255, 216, 201, 255);
 
   /// Secondary background (post bars) - White (#FFFFFF)
-  final Color secondary = const Color(0xFFFFFFFF);
+  final Color secondary = const Color(0xFFF5F5F6);
 }
 
 /// Helper class for 'Border' colors.
@@ -118,7 +118,7 @@ class AppBorderColors {
   const AppBorderColors._();
 
   /// Standard border color - Light Gray (#DBDBDB)
-  final Color border = const Color(0xFFDBDBDB);
+  final Color border = const Color(0xFFd1c2fc);
 
   /// Post border color - Very Light Gray (#F1F0F0)
   final Color postBorder = const Color(0xFFF1F0F0);

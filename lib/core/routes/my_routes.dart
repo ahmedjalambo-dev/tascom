@@ -4,8 +4,12 @@ class MyRoutes {
   static const String login = '/login';
   static const String forgotPassword = '/forgot_password';
   static const String createNewPassword = '/create_new_password';
+  static const String root = '/root';
   static const String home = '/home';
-  static const String main = '/main';
-  static const String addPost = '/add-post';
+  static const String addTask = '/add_task';
+  static const String taskDetails = '/task_details';
+  static const String search = '/search';
+  static const String ai = '/ai';
+  static const String profile = '/profile';
   static const String settings = '/settings';
 }
