@@ -27,7 +27,7 @@ class GenderDropdown extends StatelessWidget {
         ),
         SizedBox(height: 8.h),
         DropdownButtonFormField<String>(
-          value: value,
+          initialValue: value,
           icon: Icon(Icons.keyboard_arrow_down, color: MyColors.brand.purple, size: 24.sp),
           decoration: InputDecoration(
              contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),

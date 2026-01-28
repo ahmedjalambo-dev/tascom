@@ -19,7 +19,7 @@ class ProfileHeader extends StatelessWidget {
             ),
             boxShadow: [
                BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: Colors.black.withValues(alpha: 0.05),
                 spreadRadius: 1.r,
                 blurRadius: 10.r,
               ),

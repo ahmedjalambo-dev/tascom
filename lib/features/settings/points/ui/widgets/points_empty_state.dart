@@ -19,7 +19,7 @@ class PointsEmptyState extends StatelessWidget {
               'assets/svg/solid.svg',
               width: 140.w,
               colorFilter: ColorFilter.mode(
-                MyColors.brand.purple.withOpacity(0.1),
+                MyColors.brand.purple.withValues(alpha: 0.1),
                 BlendMode.srcIn,
               ),
             ),

@@ -25,14 +25,14 @@ class DeleteConfirmationDialog extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.all(12.r),
-              decoration: BoxDecoration(
-                color: const Color(0xFFFEF3F2),
+              decoration: const BoxDecoration(
+                color: Color(0xFFFEF3F2),
                 shape: BoxShape.circle,
               ),
               child: Container(
                 padding: EdgeInsets.all(10.r),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFEE4E2),
+                decoration: const BoxDecoration(
+                  color: Color(0xFFFEE4E2),
                   shape: BoxShape.circle,
                 ),
                 child:  SvgPicture.asset('assets/svg/delete_icon.svg'),

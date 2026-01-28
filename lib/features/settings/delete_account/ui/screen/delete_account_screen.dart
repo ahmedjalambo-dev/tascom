@@ -97,7 +97,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                 fillColor: MyColors.background.secondary,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16.r),
-                  borderSide: BorderSide(color: Color(0xFFF0EBFE)),
+                  borderSide: const BorderSide(color: Color(0xFFF0EBFE)),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
@@ -107,7 +107,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                   borderRadius: BorderRadius.circular(12.r),
                   borderSide: BorderSide(color: MyColors.brand.purple),
                 ),
-                suffixIcon: Icon(Icons.square, color: Color(0XFFD9D9D9), size: 20.sp), // Placeholder for the box in design
+                suffixIcon: Icon(Icons.square, color: const Color(0XFFD9D9D9), size: 20.sp), // Placeholder for the box in design
               ),
             ),
             SizedBox(height: 40.h),

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 enum PointStatus { completed, cancelled }
 
 class PointModel {

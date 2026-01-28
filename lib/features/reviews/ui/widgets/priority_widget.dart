@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
 
 class PriorityWidget extends StatelessWidget {
@@ -14,7 +13,7 @@ class PriorityWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
       decoration: BoxDecoration(
-        color: Color(0xFFFFDADA),
+        color: const Color(0xFFFFDADA),
         borderRadius: BorderRadius.circular(8.r),
       ),
       child: Row(

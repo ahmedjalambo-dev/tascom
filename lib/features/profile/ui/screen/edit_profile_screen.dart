@@ -9,7 +9,7 @@ import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  EditProfileScreen({super.key});
+  const EditProfileScreen({super.key});
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -18,7 +18,7 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController userNameController = TextEditingController();
 
-  final TextEditingController PhoneNumberController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
 
   final TextEditingController aboutMeController = TextEditingController();
 
@@ -67,7 +67,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               },
             ),
             CustomTextFormField(
-              controller: PhoneNumberController,
+              controller: phoneNumberController,
               hintText: "059-000-0000",
               title: "Phone Number",
               suffix: TextButton(
@@ -104,7 +104,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 });
               },
             ),
-            CustomDatePicker(),
+            const CustomDatePicker(),
             const SizedBox(height: 100), // Add some spacing at the bottom so content isn't hidden by the fixed button if it overlaps, although bottomNavBar pushes content up usually.
           ],
         ),

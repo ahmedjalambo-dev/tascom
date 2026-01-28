@@ -35,7 +35,7 @@ class TaskListItem extends StatelessWidget {
     }
   }
 
-  Color _getStatusBackgroundColor() => _getStatusColor().withOpacity(0.1);
+  Color _getStatusBackgroundColor() => _getStatusColor().withValues(alpha: 0.1);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class TaskListItem extends StatelessWidget {
       decoration: BoxDecoration(
         color: MyColors.background.primary,
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: MyColors.border.border.withOpacity(0.1)),
+        border: Border.all(color: MyColors.border.border.withValues(alpha: 0.1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +103,7 @@ class TaskListItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(50.r),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.03),
+                      color: Colors.black.withValues(alpha: 0.03),
                       blurRadius: 10.r,
                       offset: Offset(0, 4.h),
                     )
@@ -151,7 +151,7 @@ class TaskListItem extends StatelessWidget {
               margin: EdgeInsets.symmetric(vertical: 16.h),
               width: double.infinity,
               height: 1.2.h,
-              color: MyColors.border.border.withOpacity(0.4),
+              color: MyColors.border.border.withValues(alpha: 0.4),
             ),
 
             // أزرار حالة Active (فقط في تبويب المنشورات الخاصة بي)

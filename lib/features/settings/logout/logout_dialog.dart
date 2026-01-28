@@ -31,13 +31,13 @@ class LogoutDialog extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.all(12.r),
-              decoration: BoxDecoration(
-                color:Color(0XFFF9F5FF),
+              decoration: const BoxDecoration(
+                color: Color(0XFFF9F5FF),
                 shape: BoxShape.circle,
               ),
               child: Container(
                 padding: EdgeInsets.all(10.r),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0XFFF4EBFF),
                 shape: BoxShape.circle,
               ),

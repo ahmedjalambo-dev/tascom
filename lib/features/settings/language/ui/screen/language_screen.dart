@@ -129,7 +129,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                       thumbVisibility: true,
                       thickness: 3.w,
                       radius: Radius.circular(10.r),
-                      thumbColor: MyColors.border.border.withOpacity(0.5),
+                      thumbColor: MyColors.border.border.withValues(alpha: 0.5),
                       padding: EdgeInsets.only(right: 6.w),     
                       mainAxisMargin: 25.h, 
                       child: ListView.builder(

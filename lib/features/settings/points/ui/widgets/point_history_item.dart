@@ -13,8 +13,6 @@ class PointHistoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isCancelled = point.status == PointStatus.cancelled;
-
     return Container(
       margin: EdgeInsets.only(bottom: 12.h),
       padding: EdgeInsets.all(12.w),
@@ -90,7 +88,7 @@ class PointHistoryItem extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: Text(

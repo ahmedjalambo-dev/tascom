@@ -15,7 +15,7 @@ class PointsBalanceCard extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
-       color: Color(0xFFF9FAFB),
+       color: const Color(0xFFF9FAFB),
         borderRadius: BorderRadius.circular(16.r),
       ),
       child: Column(

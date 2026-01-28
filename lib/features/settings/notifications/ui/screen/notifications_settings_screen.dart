@@ -29,7 +29,7 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
         title: Text(
           "Notifications Settings",
           style: MyTextStyle.heading.h22.copyWith(
-            color:Color(0XFF263238)
+            color: const Color(0XFF263238)
           ),
         ),
         centerTitle: true,

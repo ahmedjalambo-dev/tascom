@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
 import 'package:tascom/features/reviews/ui/widgets/feedback_section.dart';
@@ -36,13 +35,13 @@ class RateHelperScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            HelperInfoSection(),
+            const HelperInfoSection(),
             SizedBox(height: 24.h),
-             TaskOverviewSection(),
-             SizedBox(height: 24.h),
-           RatingSection(),
-             SizedBox(height: 24.h),
-         FeedbackSection(),
+            const TaskOverviewSection(),
+            SizedBox(height: 24.h),
+            const RatingSection(),
+            SizedBox(height: 24.h),
+            const FeedbackSection(),
      
           ],
         ),

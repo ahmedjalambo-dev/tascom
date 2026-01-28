@@ -8,10 +8,10 @@ class CustomDatePicker extends StatelessWidget {
   final TextEditingController? controller;
 
   const CustomDatePicker({
-    Key? key,
+    super.key,
     this.initialValue = "01/01/2026",
     this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
