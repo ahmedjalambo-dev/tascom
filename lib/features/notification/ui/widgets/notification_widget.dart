@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
 import 'package:tascom/features/notification/ui/widgets/avatar_widget.dart';
+
 class NotificationItem extends StatelessWidget {
   final String name;
   final String message;
@@ -31,9 +32,7 @@ class NotificationItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Avatar(
-            image: AssetImage('assets/images/Avatarimage.png'),
-          ),
+          const Avatar(image: AssetImage('assets/images/AvatarImage.png')),
           const SizedBox(width: 8),
           Expanded(
             child: Column(
