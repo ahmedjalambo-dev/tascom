@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/features/add_post/ui/add_post_screen.dart';
+import 'package:tascom/features/ai/ui/ai_screen.dart';
 import 'package:tascom/features/auth/create_new_password/ui/create_new_password_screen.dart';
 import 'package:tascom/features/auth/forgot_password/ui/forgot_password_screen.dart';
 import 'package:tascom/features/auth/login/ui/login_screen.dart';
@@ -38,6 +39,8 @@ class MyRouter {
         );
       case MyRoutes.addPost:
         return MaterialPageRoute(builder: (context) => const AddPostScreen());
+         case MyRoutes.ai:
+        return MaterialPageRoute(builder: (context) => const AiScreen());
       default:
         return null;
     }
