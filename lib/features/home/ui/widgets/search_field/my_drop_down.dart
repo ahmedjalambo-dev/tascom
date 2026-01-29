@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tascom/core/constants/my_icons.dart';
 import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_styles.dart';
+import 'package:tascom/core/widgets/my_spacing.dart';
 
 class MyDropDown extends StatefulWidget {
   const MyDropDown({
@@ -23,8 +25,9 @@ class MyDropDown extends StatefulWidget {
 class _MyDropDownState extends State<MyDropDown> {
   bool _isOpen = false;
 
-  String get _selectedValue =>
-      widget.controller.text.isEmpty ? widget.items.first : widget.controller.text;
+  String get _selectedValue => widget.controller.text.isEmpty
+      ? widget.items.first
+      : widget.controller.text;
 
   @override
   void initState() {
@@ -44,9 +47,7 @@ class _MyDropDownState extends State<MyDropDown> {
         widget.onChanged(value);
       },
       offset: Offset(0, 40.h),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.r),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
       color: MyColors.background.primary,
       itemBuilder: (context) => widget.items
           .map(
@@ -54,13 +55,13 @@ class _MyDropDownState extends State<MyDropDown> {
               value: item,
               child: Text(
                 item,
-                style: TextStyle(
-                  fontSize: 14.sp,
+                style: MyTextStyles.label.label2.copyWith(
                   color: item == _selectedValue
                       ? MyColors.brand.purple
                       : MyColors.text.primary,
-                  fontWeight:
-                      item == _selectedValue ? FontWeight.w600 : FontWeight.w400,
+                  fontWeight: item == _selectedValue
+                      ? FontWeight.w600
+                      : FontWeight.w400,
                 ),
               ),
             ),
@@ -74,19 +75,17 @@ class _MyDropDownState extends State<MyDropDown> {
           children: [
             Text(
               _selectedValue,
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
+              style: MyTextStyles.label.label1.copyWith(
                 color: MyColors.brand.purple,
               ),
             ),
-            SizedBox(width: 4.w),
+            const HorizontalSpace(4),
             SvgPicture.asset(
               _isOpen ? MyIcons.arrowUp : MyIcons.arrowDown,
               width: 16.w,
               height: 16.h,
               colorFilter: ColorFilter.mode(
-                MyColors.brand.purple,
+                MyColors.icons.icon,
                 BlendMode.srcIn,
               ),
             ),

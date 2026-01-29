@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/widgets/my_bottom_navigation_bar.dart';
 import 'package:tascom/features/ai/ai_screen.dart';
-import 'package:tascom/features/home/home_screen.dart';
+import 'package:tascom/features/home/ui/home_screen.dart';
 import 'package:tascom/features/search/search_screen.dart';
 import 'package:tascom/features/user/profile_screen.dart';
 

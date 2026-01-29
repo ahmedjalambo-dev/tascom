@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/features/ai/ai_screen.dart';
-import 'package:tascom/features/home/add_task_screen.dart';
-import 'package:tascom/features/home/home_screen.dart';
-import 'package:tascom/features/home/task_details_screen.dart';
+import 'package:tascom/features/home/ui/add_task_screen.dart';
+import 'package:tascom/features/home/ui/home_screen.dart';
+import 'package:tascom/features/home/ui/task_details_screen.dart';
 import 'package:tascom/features/registration/create_new_password/create_new_password_screen.dart';
 import 'package:tascom/features/registration/forgot_password/forgot_password_screen.dart';
 import 'package:tascom/features/registration/lgoin/login_screen.dart';
