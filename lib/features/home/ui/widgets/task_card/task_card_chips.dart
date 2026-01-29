@@ -48,8 +48,8 @@ class _CategoryChip extends StatelessWidget {
         children: [
           SvgPicture.asset(
             category.icon,
-            width: 16.w,
-            height: 16.w,
+            width: 18.w,
+            height: 18.w,
             colorFilter: ColorFilter.mode(category.textColor, BlendMode.srcIn),
           ),
           const HorizontalSpace(6),
@@ -57,7 +57,6 @@ class _CategoryChip extends StatelessWidget {
             category.displayName,
             style: MyTextStyles.label.label1.copyWith(
               color: category.textColor,
-              fontWeight: FontWeight.w500,
             ),
           ),
         ],
@@ -84,8 +83,8 @@ class _PriorityChip extends StatelessWidget {
         children: [
           SvgPicture.asset(
             priority.icon,
-            width: 16.w,
-            height: 16.w,
+            width: 18.w,
+            height: 18.w,
             colorFilter: ColorFilter.mode(priority.textColor, BlendMode.srcIn),
           ),
           const HorizontalSpace(6),
@@ -93,7 +92,6 @@ class _PriorityChip extends StatelessWidget {
             priority.displayName,
             style: MyTextStyles.label.label1.copyWith(
               color: priority.textColor,
-              fontWeight: FontWeight.w500,
             ),
           ),
         ],

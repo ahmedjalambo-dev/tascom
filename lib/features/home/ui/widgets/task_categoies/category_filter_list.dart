@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/features/home/data/models/filter_category.dart';
 import 'package:tascom/features/home/ui/widgets/task_categoies/category_filter_chip.dart';
 
@@ -20,10 +21,11 @@ class CategoryFilterList extends StatelessWidget {
     return SizedBox(
       height: 40.h,
       child: ListView.separated(
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         itemCount: categories.length,
-        separatorBuilder: (context, index) => SizedBox(width: 8.w),
+        separatorBuilder: (context, index) => const HorizontalSpace(8),
         itemBuilder: (context, index) {
           final category = categories[index];
           final isSelected = category.id == selectedId;

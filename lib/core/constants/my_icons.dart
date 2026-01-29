@@ -49,7 +49,7 @@ abstract class MyIcons {
   static const String miningStroke = '$_basePath/mining_stroke.svg';
   static const String miningSolid = '$_basePath/mining_solid.svg';
   static const String teachingStroke = '$_basePath/teaching_stroke.svg';
-  static const String teachingSolid = '$_basePath/teaching_Solid.svg';
+  static const String teachingSolid = '$_basePath/teaching_solid.svg';
 
   // task items
   static const String starSolid = '$_basePath/star_solid.svg';

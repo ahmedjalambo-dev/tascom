@@ -29,7 +29,8 @@ class CategoryFilterChip extends StatelessWidget {
 
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
           color: backgroundColor,
@@ -42,7 +43,7 @@ class CategoryFilterChip extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             SvgPicture.asset(
-              category.icon,
+              isSelected ? category.selctedIcon : category.unSelctedIcon,
               width: 18.w,
               height: 18.w,
               colorFilter: ColorFilter.mode(contentColor, BlendMode.srcIn),
@@ -50,10 +51,7 @@ class CategoryFilterChip extends StatelessWidget {
             const HorizontalSpace(8),
             Text(
               category.title,
-              style: MyTextStyles.label.label1.copyWith(
-                color: contentColor,
-                fontWeight: FontWeight.w500,
-              ),
+              style: MyTextStyles.label.label1.copyWith(color: contentColor),
             ),
           ],
         ),

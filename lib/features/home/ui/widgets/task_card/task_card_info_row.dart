@@ -24,20 +24,17 @@ class TaskCardInfoRow extends StatelessWidget {
       children: [
         // Location
         SvgPicture.asset(
-          MyIcons.locationStroke,
-          width: 16.w,
-          height: 16.w,
-          colorFilter: ColorFilter.mode(
-            MyColors.text.secondary,
-            BlendMode.srcIn,
-          ),
+          MyIcons.locationSolid,
+          width: 18.w,
+          height: 18.w,
+          colorFilter: ColorFilter.mode(MyColors.brand.purple, BlendMode.srcIn),
         ),
         const HorizontalSpace(4),
         Flexible(
           child: Text(
             location,
             style: MyTextStyles.label.label1.copyWith(
-              color: MyColors.text.secondary,
+              color: MyColors.text.primary,
             ),
             overflow: TextOverflow.ellipsis,
           ),
@@ -47,18 +44,15 @@ class TaskCardInfoRow extends StatelessWidget {
         // Duration
         SvgPicture.asset(
           MyIcons.progress,
-          width: 16.w,
-          height: 16.w,
-          colorFilter: ColorFilter.mode(
-            MyColors.text.secondary,
-            BlendMode.srcIn,
-          ),
+          width: 18.w,
+          height: 18.w,
+          colorFilter: ColorFilter.mode(MyColors.brand.purple, BlendMode.srcIn),
         ),
         const HorizontalSpace(4),
         Text(
           duration,
           style: MyTextStyles.label.label1.copyWith(
-            color: MyColors.text.secondary,
+            color: MyColors.text.primary,
           ),
         ),
         const HorizontalSpace(12),
@@ -66,16 +60,15 @@ class TaskCardInfoRow extends StatelessWidget {
         // Points
         SvgPicture.asset(
           MyIcons.pointsSolid,
-          width: 16.w,
-          height: 16.w,
+          width: 18.w,
+          height: 18.w,
           colorFilter: ColorFilter.mode(MyColors.brand.purple, BlendMode.srcIn),
         ),
         const HorizontalSpace(4),
         Text(
           '$points points',
           style: MyTextStyles.label.label1.copyWith(
-            color: MyColors.brand.purple,
-            fontWeight: FontWeight.w500,
+            color: MyColors.text.primary,
           ),
         ),
       ],

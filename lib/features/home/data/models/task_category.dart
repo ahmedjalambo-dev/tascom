@@ -35,19 +35,19 @@ extension TaskCategoryExtension on TaskCategory {
   String get icon {
     switch (this) {
       case TaskCategory.homeService:
-        return MyIcons.homeServiceStroke;
+        return MyIcons.homeServiceSolid;
       case TaskCategory.repairs:
-        return MyIcons.miningStroke;
+        return MyIcons.miningSolid;
       case TaskCategory.pet:
-        return MyIcons.petStroke;
+        return MyIcons.petSolid;
       case TaskCategory.shopping:
-        return MyIcons.cartStroke;
+        return MyIcons.cartSolid;
       case TaskCategory.transportation:
-        return MyIcons.carStroke;
+        return MyIcons.carSolid;
       case TaskCategory.labor:
-        return MyIcons.miningStroke;
+        return MyIcons.miningSolid;
       case TaskCategory.teaching:
-        return MyIcons.teachingStroke;
+        return MyIcons.teachingSolid;
     }
   }
 

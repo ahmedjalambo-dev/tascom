@@ -55,16 +55,7 @@ class _SearchFieldState extends State<SearchField> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16.r),
-        boxShadow: [
-          BoxShadow(
-            color: MyColors.background.secondary,
-            blurRadius: 14,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(16.r)),
       child: TextField(
         focusNode: widget.focusNode,
         controller: widget.searchController,
@@ -157,14 +148,14 @@ class _SearchFieldState extends State<SearchField> {
   OutlineInputBorder _buildBorder() {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(16.r),
-      borderSide: BorderSide.none,
+      borderSide: BorderSide(color: MyColors.border.border, width: 1.0),
     );
   }
 
   OutlineInputBorder _buildFocusedBorder() {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(16.r),
-      borderSide: BorderSide(color: MyColors.brand.purple, width: 1.5),
+      borderSide: BorderSide(color: MyColors.brand.purple, width: 1),
     );
   }
 }

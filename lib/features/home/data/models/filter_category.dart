@@ -1,13 +1,15 @@
 class FilterCategory {
   final String id;
   final String title;
-  final String icon;
+  final String selctedIcon;
+  final String unSelctedIcon;
   final bool isViewAll;
 
   const FilterCategory({
     required this.id,
     required this.title,
-    required this.icon,
+    required this.selctedIcon,
+    required this.unSelctedIcon,
     this.isViewAll = false,
   });
 }
