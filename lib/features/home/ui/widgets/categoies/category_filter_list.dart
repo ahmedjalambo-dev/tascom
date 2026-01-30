@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/features/home/data/models/filter_category.dart';
-import 'package:tascom/features/home/ui/widgets/task_categoies/category_filter_chip.dart';
+import 'package:tascom/features/home/ui/widgets/categoies/category_filter_chip.dart';
 
 class CategoryFilterList extends StatelessWidget {
   final List<FilterCategory> categories;

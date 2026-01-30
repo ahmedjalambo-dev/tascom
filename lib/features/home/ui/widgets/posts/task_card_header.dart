@@ -5,12 +5,12 @@ import 'package:tascom/core/constants/my_icons.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
-import 'package:tascom/features/home/data/models/task_post.dart';
+import 'package:tascom/features/home/data/models/task_model.dart';
 
 class TaskCardHeader extends StatelessWidget {
-  final TaskPost taskPost;
+  final TaskModel taskModel;
 
-  const TaskCardHeader({super.key, required this.taskPost});
+  const TaskCardHeader({super.key, required this.taskModel});
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +20,12 @@ class TaskCardHeader extends StatelessWidget {
         CircleAvatar(
           radius: 20.r,
           backgroundColor: MyColors.background.secondary,
-          backgroundImage: taskPost.userAvatar != null
-              ? AssetImage(taskPost.userAvatar!)
+          backgroundImage: taskModel.author.avatar != null
+              ? AssetImage(taskModel.author.avatar!)
               : null,
-          child: taskPost.userAvatar == null
+          child: taskModel.author.avatar == null
               ? Text(
-                  taskPost.userName[0].toUpperCase(),
+                  taskModel.author.name[0].toUpperCase(),
                   style: MyTextStyles.body.body1.copyWith(
                     color: MyColors.brand.purple,
                     fontWeight: FontWeight.w600,
@@ -43,7 +43,7 @@ class TaskCardHeader extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    taskPost.userName,
+                    taskModel.author.name,
                     style: MyTextStyles.body.body2.copyWith(
                       color: MyColors.text.primary,
                       fontWeight: FontWeight.w500,
@@ -61,7 +61,7 @@ class TaskCardHeader extends StatelessWidget {
                   ),
                   const HorizontalSpace(4),
                   Text(
-                    taskPost.userRating.toString(),
+                    taskModel.author.rating.toString(),
                     style: MyTextStyles.label.label1.copyWith(
                       color: MyColors.text.secondary,
                     ),
@@ -69,7 +69,7 @@ class TaskCardHeader extends StatelessWidget {
                 ],
               ),
               Text(
-                taskPost.timeAgo,
+                taskModel.timeAgo,
                 style: MyTextStyles.label.label2.copyWith(
                   color: MyColors.text.third,
                 ),

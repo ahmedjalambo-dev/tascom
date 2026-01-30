@@ -77,4 +77,8 @@ abstract class MyIcons {
   static const String sendStroke = '$_basePath/send_stroke.svg';
 
   static const String arrowBack = '$_basePath/arrow_back.svg';
+
+  // status icons
+  static const String trueStroke = '$_basePath/true_stroke.svg';
+  static const String trueSolid = '$_basePath/true_solid.svg';
 }

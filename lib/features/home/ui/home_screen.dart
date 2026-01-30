@@ -3,14 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
+import 'package:tascom/core/widgets/dialogs/claim_confirmation_dialog.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/features/home/data/filter_categories_data.dart';
-import 'package:tascom/features/home/data/task_post_mock_data.dart';
-import 'package:tascom/features/home/ui/widgets/task_categoies/category_filter_list.dart';
+import 'package:tascom/features/home/data/models/task_model.dart';
+import 'package:tascom/features/home/data/task_mock_data.dart';
+import 'package:tascom/features/home/ui/widgets/categoies/category_filter_list.dart';
 import 'package:tascom/features/home/ui/widgets/home_app_bar.dart';
-import 'package:tascom/features/home/ui/widgets/posts_filter_dropdown.dart';
-import 'package:tascom/features/home/ui/widgets/search_field/search_field.dart';
-import 'package:tascom/features/home/ui/widgets/task_card/task_card.dart';
+import 'package:tascom/features/home/ui/widgets/posts/posts_filter_dropdown.dart';
+import 'package:tascom/features/home/ui/widgets/search/search_field.dart';
+import 'package:tascom/features/home/ui/widgets/posts/task_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,6 +26,13 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _selectedItemController = TextEditingController();
   String _selectedCategoryId = 'all';
+  late List<TaskModel> _tasks;
+
+  @override
+  void initState() {
+    super.initState();
+    _tasks = List.from(mockTaskPosts);
+  }
 
   @override
   void dispose() {
@@ -31,6 +40,15 @@ class _HomeScreenState extends State<HomeScreen> {
     _searchController.dispose();
     _selectedItemController.dispose();
     super.dispose();
+  }
+
+  Future<void> _handleClaimTask(int index) async {
+    final confirmed = await showClaimConfirmationDialog(context);
+    if (confirmed == true) {
+      setState(() {
+        _tasks[index] = _tasks[index].copyWith(isClaimed: true);
+      });
+    }
   }
 
   @override
@@ -93,22 +111,22 @@ class _HomeScreenState extends State<HomeScreen> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              itemCount: mockTaskPosts.length,
+              itemCount: _tasks.length,
               separatorBuilder: (context, index) => const VerticalSpace(16),
               itemBuilder: (context, index) {
-                final taskPost = mockTaskPosts[index];
+                final taskModel = _tasks[index];
                 return TaskCard(
-                  taskPost: taskPost,
+                  taskModel: taskModel,
                   onTap: () {
                     Navigator.pushNamed(
                       context,
                       MyRoutes.taskDetails,
-                      arguments: taskPost,
+                      arguments: taskModel,
                     );
                   },
-                  onClaimTap: () {
-                    // Handle claim task
-                  },
+                  onClaimTap: taskModel.isClaimed
+                      ? null
+                      : () => _handleClaimTask(index),
                 );
               },
             ),

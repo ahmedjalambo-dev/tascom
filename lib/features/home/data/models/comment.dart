@@ -1,8 +1,10 @@
+import 'package:tascom/core/helpers/time_helper.dart';
+
 class Comment {
   final String id;
   final String userName;
   final String? userAvatar;
-  final String timeAgo;
+  final DateTime createdAt;
   final String? location;
   final String content;
   final bool isAuthor;
@@ -12,10 +14,12 @@ class Comment {
     required this.id,
     required this.userName,
     this.userAvatar,
-    required this.timeAgo,
+    required this.createdAt,
     this.location,
     required this.content,
     this.isAuthor = false,
     this.replies = const [],
   });
+
+  String get timeAgo => calculateTimeAgo(createdAt);
 }

@@ -6,7 +6,7 @@ import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/features/home/data/models/comment.dart';
-import 'package:tascom/features/home/ui/widgets/comment_tile.dart';
+import 'package:tascom/features/home/ui/widgets/comments/comment_tile.dart';
 
 class CommentsSection extends StatelessWidget {
   final List<Comment> comments;

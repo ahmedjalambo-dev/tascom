@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/features/ai/ai_screen.dart';
-import 'package:tascom/features/home/data/models/task_post.dart';
+import 'package:tascom/features/home/data/models/task_model.dart';
 import 'package:tascom/features/home/ui/add_task_screen.dart';
 import 'package:tascom/features/home/ui/home_screen.dart';
 import 'package:tascom/features/home/ui/task_details_screen.dart';
@@ -40,9 +40,9 @@ class MyRouter {
       case MyRoutes.addTask:
         return MaterialPageRoute(builder: (context) => const AddTaskScreen());
       case MyRoutes.taskDetails:
-        final taskPost = settings.arguments as TaskPost;
+        final taskModel = settings.arguments as TaskModel;
         return MaterialPageRoute(
-          builder: (context) => TaskDetailsScreen(taskPost: taskPost),
+          builder: (context) => TaskDetailsScreen(taskModel: taskModel),
         );
       case MyRoutes.search:
         return MaterialPageRoute(builder: (context) => const SearchScreen());

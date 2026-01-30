@@ -10,6 +10,7 @@ class TaskCardActions extends StatelessWidget {
   final int likeCount;
   final int commentCount;
   final bool isLiked;
+  final bool isClaimed;
   final VoidCallback? onLikeTap;
   final VoidCallback? onCommentTap;
   final VoidCallback? onShareTap;
@@ -20,6 +21,7 @@ class TaskCardActions extends StatelessWidget {
     required this.likeCount,
     required this.commentCount,
     this.isLiked = false,
+    this.isClaimed = false,
     this.onLikeTap,
     this.onCommentTap,
     this.onShareTap,
@@ -102,10 +104,13 @@ class TaskCardActions extends StatelessWidget {
 
         // Claim Task Button
         ElevatedButton(
-          onPressed: onClaimTap,
+          onPressed: isClaimed ? null : onClaimTap,
           style: ElevatedButton.styleFrom(
-            backgroundColor: MyColors.brand.purple,
+            backgroundColor:
+                isClaimed ? MyColors.status.active : MyColors.brand.purple,
             foregroundColor: MyColors.text.white,
+            disabledBackgroundColor: MyColors.status.active,
+            disabledForegroundColor: MyColors.text.white,
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(100.r),
@@ -113,7 +118,7 @@ class TaskCardActions extends StatelessWidget {
             elevation: 0,
           ),
           child: Text(
-            'Claim Task',
+            isClaimed ? 'Task Claimed' : 'Claim Task',
             style: MyTextStyles.button.smallButtons.copyWith(
               color: MyColors.text.white,
             ),

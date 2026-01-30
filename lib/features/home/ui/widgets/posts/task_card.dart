@@ -3,15 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
-import 'package:tascom/features/home/data/models/task_post.dart';
-import 'package:tascom/features/home/ui/widgets/task_card/task_card_actions.dart';
-import 'package:tascom/features/home/ui/widgets/task_card/task_card_chips.dart';
-import 'package:tascom/features/home/ui/widgets/task_card/task_card_header.dart';
-import 'package:tascom/features/home/ui/widgets/task_card/task_card_image.dart';
-import 'package:tascom/features/home/ui/widgets/task_card/task_card_info_row.dart';
+import 'package:tascom/features/home/data/models/task_model.dart';
+import 'package:tascom/features/home/ui/widgets/posts/task_card_actions.dart';
+import 'package:tascom/features/home/ui/widgets/posts/task_card_chips.dart';
+import 'package:tascom/features/home/ui/widgets/posts/task_card_header.dart';
+import 'package:tascom/features/home/ui/widgets/posts/task_card_image.dart';
+import 'package:tascom/features/home/ui/widgets/posts/task_card_info_row.dart';
 
 class TaskCard extends StatelessWidget {
-  final TaskPost taskPost;
+  final TaskModel taskModel;
   final VoidCallback? onTap;
   final VoidCallback? onLikeTap;
   final VoidCallback? onCommentTap;
@@ -20,7 +20,7 @@ class TaskCard extends StatelessWidget {
 
   const TaskCard({
     super.key,
-    required this.taskPost,
+    required this.taskModel,
     this.onTap,
     this.onLikeTap,
     this.onCommentTap,
@@ -44,12 +44,12 @@ class TaskCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Header: Avatar, Name, Rating, Bookmark, Menu
-              TaskCardHeader(taskPost: taskPost),
+              TaskCardHeader(taskModel: taskModel),
               const VerticalSpace(12),
 
               // Title
               Text(
-                taskPost.title,
+                taskModel.title,
                 style: MyTextStyles.body.body1.copyWith(
                   color: MyColors.text.primary,
                   fontWeight: FontWeight.w600,
@@ -59,7 +59,7 @@ class TaskCard extends StatelessWidget {
 
               // Description
               Text(
-                taskPost.description,
+                taskModel.description,
                 style: MyTextStyles.body.body2.copyWith(
                   color: MyColors.text.secondary,
                 ),
@@ -70,30 +70,31 @@ class TaskCard extends StatelessWidget {
 
               // Category and Priority Chips
               TaskCardChips(
-                category: taskPost.category,
-                priority: taskPost.priority,
+                category: taskModel.category,
+                priority: taskModel.priority,
               ),
               const VerticalSpace(12),
 
               // Info Row: Location, Duration, Points
               TaskCardInfoRow(
-                location: taskPost.location,
-                duration: taskPost.duration,
-                points: taskPost.points,
+                location: taskModel.location.name,
+                duration: taskModel.duration,
+                points: taskModel.metrics.points,
               ),
 
               // Optional Image
-              if (taskPost.imageUrl != null) ...[
+              if (taskModel.imageUrl != null) ...[
                 const VerticalSpace(12),
-                TaskCardImage(imageUrl: taskPost.imageUrl!),
+                TaskCardImage(imageUrl: taskModel.imageUrl!),
               ],
 
               const VerticalSpace(12),
 
               // Actions: Like, Comment, Share, Claim Button
               TaskCardActions(
-                likeCount: taskPost.likeCount,
-                commentCount: taskPost.commentCount,
+                likeCount: taskModel.likeCount,
+                commentCount: taskModel.commentCount,
+                isClaimed: taskModel.isClaimed,
                 onLikeTap: onLikeTap,
                 onCommentTap: onCommentTap,
                 onShareTap: onShareTap,

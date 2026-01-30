@@ -22,7 +22,7 @@ class MyBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 110.h,
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
@@ -47,7 +47,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                 child: Container(
                   height: 70.h,
                   decoration: BoxDecoration(
-                    color: MyColors.text.white,
+                    color: MyColors.background.secondary,
                     borderRadius: BorderRadius.circular(8.r),
                     boxShadow: [
                       BoxShadow(
