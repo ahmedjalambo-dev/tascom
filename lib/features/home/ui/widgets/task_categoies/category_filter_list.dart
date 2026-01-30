@@ -21,7 +21,6 @@ class CategoryFilterList extends StatelessWidget {
     return SizedBox(
       height: 40.h,
       child: ListView.separated(
-        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         itemCount: categories.length,

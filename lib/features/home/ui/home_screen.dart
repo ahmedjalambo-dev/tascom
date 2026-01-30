@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
@@ -99,7 +100,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 return TaskCard(
                   taskPost: taskPost,
                   onTap: () {
-                    // Navigate to task details
+                    Navigator.pushNamed(
+                      context,
+                      MyRoutes.taskDetails,
+                      arguments: taskPost,
+                    );
                   },
                   onClaimTap: () {
                     // Handle claim task

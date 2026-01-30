@@ -3,7 +3,7 @@ abstract class MyIcons {
   static const String _basePath = 'assets/icons';
 
   // onboarding
-  static const String arrowLeft = '$_basePath/arrow_left.svg';
+  static const String arrowLeft = '$_basePath/arrow_forward.svg';
 
   // sign up
   static const String googleLogo = '$_basePath/google_logo.svg';
@@ -72,4 +72,9 @@ abstract class MyIcons {
   static const String likeSolid = '$_basePath/like_solid.svg';
   static const String chatStroke = '$_basePath/chat_stroke.svg'; // comment
   static const String forwardStroke = '$_basePath/forward_stroke.svg'; // share
+
+  // comments
+  static const String sendStroke = '$_basePath/send_stroke.svg';
+
+  static const String arrowBack = '$_basePath/arrow_back.svg';
 }

@@ -36,10 +36,9 @@ class MyBottomNavigationBar extends StatelessWidget {
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.1),
-                    blurRadius: 20,
-                    spreadRadius: 0,
-                    offset: const Offset(0, 4),
+                    blurRadius: 15,
+                    color: MyColors.text.secondary.withAlpha(60),
+                    spreadRadius: 2,
                   ),
                 ],
               ),
@@ -47,7 +46,17 @@ class MyBottomNavigationBar extends StatelessWidget {
                 clipper: _NavBarClipper(),
                 child: Container(
                   height: 70.h,
-                  color: MyColors.text.white,
+                  decoration: BoxDecoration(
+                    color: MyColors.text.white,
+                    borderRadius: BorderRadius.circular(8.r),
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 15,
+                        color: MyColors.text.secondary.withAlpha(60),
+                        spreadRadius: 2,
+                      ),
+                    ],
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [

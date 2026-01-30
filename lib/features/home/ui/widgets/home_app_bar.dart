@@ -14,7 +14,6 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return MyAppBar(
       leading: Row(
-        mainAxisSize: MainAxisSize.min,
         children: [
           SvgPicture.asset(
             MyIcons.locationStroke,
