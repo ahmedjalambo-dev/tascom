@@ -9,7 +9,7 @@ class Validator {
 
   /// Validates an email address.
   /// Returns an error string if invalid, otherwise null.
-  static String? validateEmail(String? email) {
+  static String? validateEmail(String? email, String s) {
     if (email == null || email.isEmpty) {
       return 'Email cannot be empty.';
     }
@@ -23,7 +23,7 @@ class Validator {
   /// It checks for minimum length, and the presence of uppercase,
   /// lowercase, digit, and special characters sequentially,
   /// returning the first error found.
-  static String? validatePassword(String? password) {
+  static String? validatePassword(String? password, String s) {
     if (password == null || password.isEmpty) {
       return 'Password cannot be empty.';
     }
@@ -99,4 +99,20 @@ class Validator {
     }
     return null; // Return null if validation is successful
   }
+}
+
+/// Validates a phone number.
+
+String? validatePhone(String? phone, {int minLength = 10, int maxLength = 15}) {
+  if (phone == null || phone.isEmpty) {
+    return 'Phone number cannot be empty.';
+  }
+  final digitsOnly = RegExp(r'^\d+$');
+  if (!digitsOnly.hasMatch(phone)) {
+    return 'Phone number must contain digits only.';
+  }
+  if (phone.length < minLength || phone.length > maxLength) {
+    return 'Phone number must be between $minLength and $maxLength digits.';
+  }
+  return null; // valid
 }
