@@ -205,6 +205,7 @@ class _ResultSearchState extends State<ResultSearch> {
       status: 'Open',
       category: 'Pet Care',
       imageUrl: 'assets/images/dog_walking.jpg',
+      location: 'New York',
     ),
     TaskModel(
       id: '2',
@@ -213,6 +214,7 @@ class _ResultSearchState extends State<ResultSearch> {
       status: 'In Progress',
       category: 'Pet Care',
       imageUrl: 'assets/images/pet_sitting.jpg',
+      location: 'New York',
     ),
     TaskModel(
       id: '3',
@@ -221,6 +223,7 @@ class _ResultSearchState extends State<ResultSearch> {
       status: 'Completed',
       category: 'Repairs',
       imageUrl: 'assets/images/furniture_repair.jpg',
+      location: 'New York',
     ),
     TaskModel(
       id: '4',
@@ -229,6 +232,16 @@ class _ResultSearchState extends State<ResultSearch> {
       status: 'Open',
       category: 'Tutoring',
       imageUrl: 'assets/images/teaching_skill.jpg',
+      location: 'New York',
+    ),
+    TaskModel(
+      id: '5',
+      title: 'Dog Training',
+      description: 'Train my dog to follow commands',
+      status: 'Open',
+      category: 'Pet Care',
+      imageUrl: 'assets/images/teaching_skill.jpg',
+      location: 'New York',
     ),
   ];
 

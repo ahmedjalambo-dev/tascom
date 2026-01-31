@@ -373,6 +373,7 @@ class _SearchscreenState extends State<Searchscreen> {
       status: 'Open',
       category: 'Pet Care',
       imageUrl: 'assets/images/PetCare2.svg',
+      location: 'New York',
     ),
     TaskModel(
       id: '2',
@@ -381,6 +382,7 @@ class _SearchscreenState extends State<Searchscreen> {
       status: 'In Progress',
       category: 'Pet Care',
       imageUrl: 'assets/images/PetCare2.svg',
+      location: 'New York',
     ),
     TaskModel(
       id: '3',
@@ -389,6 +391,7 @@ class _SearchscreenState extends State<Searchscreen> {
       status: 'Completed',
       category: 'Repairs',
       imageUrl: 'assets/images/Repairs.svg',
+      location: 'New York',
     ),
     TaskModel(
       id: '4',
@@ -397,6 +400,7 @@ class _SearchscreenState extends State<Searchscreen> {
       status: 'Open',
       category: 'Tutoring',
       imageUrl: 'assets/images/Tutoring.svg',
+      location: 'New York',
     ),
     TaskModel(
       id: '5',
@@ -405,6 +409,7 @@ class _SearchscreenState extends State<Searchscreen> {
       status: 'Open',
       category: 'Transportation',
       imageUrl: 'assets/images/Transportation.svg',
+      location: 'New York',
     ),
   ];
 
@@ -428,6 +433,7 @@ class _SearchscreenState extends State<Searchscreen> {
       status: 'In Progress',
       category: 'Pet Care',
       imageUrl: 'assets/images/PetCare2.svg',
+      location: 'New York',
     ),
     TaskModel(
       id: '3',
@@ -436,6 +442,7 @@ class _SearchscreenState extends State<Searchscreen> {
       status: 'Completed',
       category: 'Repairs',
       imageUrl: 'assets/images/Repairs.svg',
+      location: 'New York',
     ),
     TaskModel(
       id: '5',
@@ -444,6 +451,7 @@ class _SearchscreenState extends State<Searchscreen> {
       status: 'Open',
       category: 'Transportation',
       imageUrl: 'assets/images/Transportation.svg',
+      location: 'New York',
     ),
     TaskModel(
       id: '4',
@@ -452,6 +460,7 @@ class _SearchscreenState extends State<Searchscreen> {
       status: 'Open',
       category: 'Tutoring',
       imageUrl: 'assets/images/Tutoring.svg',
+      location: 'New York',
     ),
   ];
   List<ProfileModel> recentListProfiles = [

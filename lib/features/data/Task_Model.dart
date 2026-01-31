@@ -5,6 +5,7 @@ class TaskModel {
   final String status;
   final String category;
   final String imageUrl;
+  final String location;
 
   TaskModel({
     required this.id,
@@ -13,5 +14,6 @@ class TaskModel {
     required this.status,
     required this.category,
     required this.imageUrl,
+    required this.location,
   });
 }
