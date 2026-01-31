@@ -151,18 +151,6 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
-    return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) {
-        return MaterialApp(
-          title: 'Tascom App',
-          debugShowCheckedModeBanner: false,
-          onGenerateRoute: MyRouter().generateRoute,
-          initialRoute: MyRoutes.onboarding,
-        );
-      },
     );
   }
 }
