@@ -36,7 +36,7 @@ class SelectableIcon extends StatelessWidget {
             padding: const EdgeInsets.all(3.0),
             child: SvgPicture.asset(
               'assets/images/Vector.svg',
-              width: 20, // icon size
+              width: 20,
               height: 20,
               colorFilter: const ColorFilter.mode(
                 Colors.white,
