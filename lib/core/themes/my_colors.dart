@@ -60,6 +60,20 @@ class AppStatusColors {
 
   /// In Progress status - Orange (#D97706)
   final Color inProgress = const Color(0xFFD97706);
+
+  /// Pending status - Amber/Orange (#D97706)
+  final Color pending = const Color(0xFFD97706);
+
+  /// Pending status background - Light Orange (#FFF2E0)
+  final Color pendingBg = const Color(0xFFFFF2E0);
+
+  /// Resolved status - Light Green (#28A745)
+  final Color resolved = const Color(0xFF28A745);
+
+  /// Resolved status background - Very Light Green (#F2FFF5)
+  final Color resolvedBg = const Color(0xFFF2FFF5);
+
+  Color? get warning => null;
 }
 
 /// Helper class for 'Text' colors.
@@ -92,7 +106,7 @@ class AppBackgroundColors {
   final Color primary = const Color(0xFFF9F9FB);
 
   /// Card/Hover background - Light Purple (#F4F0FF)
-  final Color cardHover = const Color(0xFFF4F0FF);
+  final Color cardHover = const Color.fromARGB(255, 216, 201, 255);
 
   /// Secondary background (post bars) - White (#FFFFFF)
   final Color secondary = const Color(0xFFFFFFFF);
