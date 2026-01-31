@@ -25,7 +25,10 @@ class CategoryButton extends StatelessWidget {
         icon,
         width: 18.w,
         height: 16.h,
-        color: isSelected ? MyColors.background.primary : MyColors.text.primary,
+        colorFilter: ColorFilter.mode(
+          isSelected ? MyColors.background.primary : MyColors.text.primary,
+          BlendMode.srcIn,
+        ),
       ),
       label: Text(
         label,

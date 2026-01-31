@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tascom/core/routes/my_routes.dart';
-import 'package:tascom/features/ui/screen/Result_screen.dart';
 
-import 'package:tascom/features/ui/widgets/CustomDropdown.dart';
+import 'package:tascom/features/ui/widgets/custom_drop_down.dart';
 
 class Searchbar extends StatefulWidget {
   final FocusNode focusNode;
@@ -34,12 +32,18 @@ class _SearchbarState extends State<Searchbar> {
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withValues(
+              alpha: 0.08,
+              red: 0,
+              green: 0,
+              blue: 0,
+            ),
             blurRadius: 14,
             offset: const Offset(0, 4),
             spreadRadius: 0,

@@ -1,21 +1,18 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:radio_group_v2/widgets/view_models/radio_group_controller.dart';
-import 'package:tascom/core/routes/my_router.dart';
-import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
-import 'package:tascom/features/data/Profile_Model.dart';
-import 'package:tascom/features/data/Task_Model.dart';
-import 'package:tascom/features/ui/screen/Result_screen.dart';
-import 'package:tascom/features/ui/widgets/CustomDropdown.dart';
-import 'package:tascom/features/ui/widgets/Filter_Search.dart';
-import 'package:tascom/features/ui/widgets/filterChip.dart';
-import 'package:tascom/features/ui/widgets/recentWidget.dart';
+import 'package:tascom/features/data/profile_Model.dart';
+import 'package:tascom/features/data/task_model.dart';
+import 'package:tascom/features/ui/screen/result_screen.dart';
+import 'package:tascom/features/ui/widgets/filter_search.dart';
+import 'package:tascom/features/ui/widgets/filter_chip.dart';
+import 'package:tascom/features/ui/widgets/recent_widget.dart';
 import 'package:tascom/features/ui/widgets/result_widget.dart';
-import 'package:tascom/features/ui/widgets/searchBar.dart';
+
+import 'package:tascom/features/ui/widgets/search_bar.dart';
 
 class Searchscreen extends StatefulWidget {
   const Searchscreen({super.key});
@@ -62,16 +59,16 @@ class _SearchscreenState extends State<Searchscreen> {
     if (!mounted) return;
     setState(() {
       if (_dropdownValue.text == 'Tasks') {
-        RecentList = RecentListTasks;
+        recentList = recentListTasks;
       } else {
-        RecentList = RecentListProfiles;
+        recentList = recentListProfiles;
       }
     });
   }
 
   RadioGroupController myController = RadioGroupController();
   List<Object> _searchResults = [];
-  List<Object> RecentList = [];
+  List<Object> recentList = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,17 +120,21 @@ class _SearchscreenState extends State<Searchscreen> {
                 onChanged: (value) {
                   setState(() {
                     if (_dropdownValue.text == 'Tasks') {
-                      _searchResults = ListTask.where(
-                        (task) => task.title.toLowerCase().contains(
-                          value.toLowerCase(),
-                        ),
-                      ).toList();
+                      _searchResults = listTask
+                          .where(
+                            (task) => task.title.toLowerCase().contains(
+                              value.toLowerCase(),
+                            ),
+                          )
+                          .toList();
                     } else {
-                      _searchResults = ListProfile.where(
-                        (profile) => profile.name.toLowerCase().contains(
-                          value.toLowerCase(),
-                        ),
-                      ).toList();
+                      _searchResults = listProfile
+                          .where(
+                            (profile) => profile.name.toLowerCase().contains(
+                              value.toLowerCase(),
+                            ),
+                          )
+                          .toList();
                     }
                   });
                 },
@@ -195,11 +196,11 @@ class _SearchscreenState extends State<Searchscreen> {
                           return _dropdownValue.text == 'Tasks'
                               ? ResultWidget(
                                   titleText: (result as TaskModel).title,
-                                  icon: (result as TaskModel).imageUrl,
+                                  icon: (result).imageUrl,
                                 )
                               : ResultWidget(
                                   titleText: (result as ProfileModel).name,
-                                  icon: (result as ProfileModel).imageUrl,
+                                  icon: (result).imageUrl,
                                 );
                         },
                         separatorBuilder: (BuildContext context, int index) {
@@ -233,9 +234,9 @@ class _SearchscreenState extends State<Searchscreen> {
               ListView.separated(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: min(RecentList.length, 4),
+                itemCount: min(recentList.length, 4),
                 itemBuilder: (context, index) {
-                  final result = RecentList[index];
+                  final result = recentList[index];
                   return _dropdownValue.text == 'Tasks'
                       ? Recentwidget(
                           titleText: (result as TaskModel).title,
@@ -243,7 +244,7 @@ class _SearchscreenState extends State<Searchscreen> {
                         )
                       : Recentwidget(
                           titleText: (result as ProfileModel).name,
-                          icon: (result as ProfileModel).imageUrl,
+                          icon: (result).imageUrl,
                         );
                 },
                 separatorBuilder: (BuildContext context, int index) {
@@ -257,7 +258,7 @@ class _SearchscreenState extends State<Searchscreen> {
     );
   }
 
-  List<ProfileModel> ListProfile = [
+  List<ProfileModel> listProfile = [
     ProfileModel(
       id: '1',
       name: 'Tala Ahmad',
@@ -364,7 +365,7 @@ class _SearchscreenState extends State<Searchscreen> {
       ],
     ),
   ];
-  List<TaskModel> ListTask = [
+  List<TaskModel> listTask = [
     TaskModel(
       id: '1',
       title: 'Dog Walking',
@@ -407,19 +408,19 @@ class _SearchscreenState extends State<Searchscreen> {
     ),
   ];
 
-  List<Object> getTasks(query) {
-    return ListTask.where((task) {
+  List<Object> getTasks(String query) {
+    return listTask.where((task) {
       return task.title.toLowerCase().contains(query.toLowerCase());
     }).toList();
   }
 
-  List<Object> getProfiles(query) {
-    return ListProfile.where((profile) {
+  List<Object> getProfiles(String query) {
+    return listProfile.where((profile) {
       return profile.name.toLowerCase().contains(query.toLowerCase());
     }).toList();
   }
 
-  List<TaskModel> RecentListTasks = [
+  List<TaskModel> recentListTasks = [
     TaskModel(
       id: '2',
       title: 'Pet Sitting',
@@ -453,7 +454,7 @@ class _SearchscreenState extends State<Searchscreen> {
       imageUrl: 'assets/images/Tutoring.svg',
     ),
   ];
-  List<ProfileModel> RecentListProfiles = [
+  List<ProfileModel> recentListProfiles = [
     ProfileModel(
       id: '1',
       name: 'Tala Ahmad',

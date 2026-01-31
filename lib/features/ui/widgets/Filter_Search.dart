@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
-import 'package:tascom/features/ui/widgets/Category_widget.dart';
+import 'package:tascom/features/ui/widgets/category_widget.dart';
 import 'package:tascom/features/ui/widgets/selectable_icon_group.dart';
-import 'package:tascom/features/ui/widgets/sliderWidget.dart';
+import 'package:tascom/features/ui/widgets/slider_widget.dart';
 
 class FilterSearch extends StatelessWidget {
   const FilterSearch({super.key});
@@ -13,14 +13,14 @@ class FilterSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Container(
+      child: SizedBox(
         height: 850,
 
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Center(
               child: Text(
                 "Search Filter",
@@ -38,8 +38,8 @@ class FilterSearch extends StatelessWidget {
             ),
             SizedBox(height: 16.h),
 
-            CategoryWidget(),
-            SizedBox(height: 20),
+            const CategoryWidget(),
+            const SizedBox(height: 20),
             Text(
               'Priority',
               style: MyTextStyle.heading.h32.copyWith(

@@ -1,15 +1,14 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
-import 'package:tascom/features/data/Profile_Model.dart';
-import 'package:tascom/features/data/Task_Model.dart';
-import 'package:tascom/features/ui/widgets/Filter_Search.dart';
-import 'package:tascom/features/ui/widgets/Profile_card.dart';
-import 'package:tascom/features/ui/widgets/searchBar.dart';
+import 'package:tascom/features/data/profile_Model.dart';
+import 'package:tascom/features/data/task_model.dart';
+import 'package:tascom/features/ui/widgets/filter_search.dart';
+
+import 'package:tascom/features/ui/widgets/profile_card.dart';
+import 'package:tascom/features/ui/widgets/search_bar.dart';
 
 class ResultSearch extends StatefulWidget {
   const ResultSearch({
@@ -178,7 +177,7 @@ class _ResultSearchState extends State<ResultSearch> {
           child: ListView.separated(
             physics: const BouncingScrollPhysics(),
             itemCount: _searchResults.length,
-            separatorBuilder: (_, __) => SizedBox(height: 24.h),
+            separatorBuilder: (_, _) => SizedBox(height: 24.h),
             itemBuilder: (context, index) {
               final item = _searchResults[index];
               print('${dropdownController.text} aaa');
@@ -198,7 +197,7 @@ class _ResultSearchState extends State<ResultSearch> {
   }
 
   // ====== MOCK DATA ======
-  List<TaskModel> ListTask = [
+  List<TaskModel> listTask = [
     TaskModel(
       id: '1',
       title: 'Dog Walking',
@@ -234,17 +233,19 @@ class _ResultSearchState extends State<ResultSearch> {
   ];
 
   List<TaskModel> getTasks(String query) {
-    if (query.isEmpty) return ListTask;
-    return ListTask.where(
-      (task) =>
-          task.title.toLowerCase().contains(query.toLowerCase()) ||
-          task.category.toLowerCase().contains(query.toLowerCase()) ||
-          task.description.toLowerCase().contains(query.toLowerCase()) ||
-          task.status.toLowerCase().contains(query.toLowerCase()),
-    ).toList();
+    if (query.isEmpty) return listTask;
+    return listTask
+        .where(
+          (task) =>
+              task.title.toLowerCase().contains(query.toLowerCase()) ||
+              task.category.toLowerCase().contains(query.toLowerCase()) ||
+              task.description.toLowerCase().contains(query.toLowerCase()) ||
+              task.status.toLowerCase().contains(query.toLowerCase()),
+        )
+        .toList();
   }
 
-  static List<ProfileModel> ListProfile = [
+  static List<ProfileModel> listProfile = [
     ProfileModel(
       id: '1',
       name: 'Tala Ahmad',
@@ -353,9 +354,11 @@ class _ResultSearchState extends State<ResultSearch> {
   ];
 
   List<ProfileModel> getProfiles(String query) {
-    if (query.isEmpty) return ListProfile;
-    return ListProfile.where(
-      (profile) => profile.name.toLowerCase().contains(query.toLowerCase()),
-    ).toList();
+    if (query.isEmpty) return listProfile;
+    return listProfile
+        .where(
+          (profile) => profile.name.toLowerCase().contains(query.toLowerCase()),
+        )
+        .toList();
   }
 }

@@ -25,7 +25,10 @@ class Recentwidget extends StatelessWidget {
                     icon,
                     width: 24.w,
                     height: 22.h,
-                    color: MyColors.brand.purple,
+                    colorFilter: ColorFilter.mode(
+                      MyColors.brand.purple,
+                      BlendMode.srcIn,
+                    ),
                   )
                 : Image.asset(
                     icon,

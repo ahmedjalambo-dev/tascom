@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
-import 'package:tascom/features/data/Profile_Model.dart';
+import 'package:tascom/features/data/profile_Model.dart';
 
 class ProfileCard extends StatelessWidget {
   final ProfileModel profile;
@@ -96,13 +96,13 @@ class ProfileCard extends StatelessWidget {
                   width: 16.w,
                 ),
                 style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
+                  padding: WidgetStateProperty.all(
                     const EdgeInsets.symmetric(vertical: 0, horizontal: 17),
                   ),
-                  backgroundColor: MaterialStateProperty.all(
+                  backgroundColor: WidgetStateProperty.all(
                     MyColors.brand.purple,
                   ),
-                  shape: MaterialStateProperty.all(
+                  shape: WidgetStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(103.r),
                     ),

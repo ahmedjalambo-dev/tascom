@@ -54,16 +54,11 @@ dependencies:
   carousel_slider: ^5.1.1
   device_preview: ^1.3.1
 
+  animated_custom_dropdown: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  animated_custom_dropdown: ^1.5.0
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the

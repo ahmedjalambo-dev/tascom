@@ -38,7 +38,10 @@ class SelectableIcon extends StatelessWidget {
               'assets/images/Vector.svg',
               width: 20, // icon size
               height: 20,
-              color: Colors.white,
+              colorFilter: const ColorFilter.mode(
+                Colors.white,
+                BlendMode.srcIn,
+              ),
             ),
           ),
         ),

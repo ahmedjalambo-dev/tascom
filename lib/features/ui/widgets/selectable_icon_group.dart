@@ -30,7 +30,7 @@ class _SelectableIconGroupState extends State<SelectableIconGroup> {
                 });
               },
             ),
-            SizedBox(width: 10.0),
+            const SizedBox(width: 10.0),
             Text(
               'High',
               style: MyTextStyle.body.body2.copyWith(
@@ -51,7 +51,7 @@ class _SelectableIconGroupState extends State<SelectableIconGroup> {
                 });
               },
             ),
-            SizedBox(width: 10.0),
+            const SizedBox(width: 10.0),
             Text(
               'Medium',
               style: MyTextStyle.body.body2.copyWith(
@@ -72,7 +72,7 @@ class _SelectableIconGroupState extends State<SelectableIconGroup> {
                 });
               },
             ),
-            SizedBox(width: 10.0),
+            const SizedBox(width: 10.0),
             Text(
               'Low',
               style: MyTextStyle.body.body2.copyWith(
