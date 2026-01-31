@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/features/ui/screen/searchScreen.dart';
 import 'package:tascom/features/ui/widgets/sliderWidget.dart';
-import 'package:tascom/core/routes/my_routes.dart';
-import 'package:tascom/core/routes/my_router.dart';
 
 void main() {
   runApp(
@@ -20,6 +18,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   // Widget build(BuildContext context) {
   //   return MaterialApp(
