@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_style.dart';
-import 'package:tascom/features/data/profile_Model.dart';
+import 'package:tascom/features/data/profile_model.dart';
+//import 'package:tascom/features/data/profile_model.dart';
 import 'package:tascom/features/data/task_model.dart';
 import 'package:tascom/features/ui/widgets/filter_search.dart';
 
@@ -189,6 +190,8 @@ class _ResultSearchState extends State<ResultSearch> {
                       ),
                     )
                   : ProfileCard(profile: item as ProfileModel);
+
+              //ProfileCard(profile: item as ProfileModel);
             },
           ),
         ),
