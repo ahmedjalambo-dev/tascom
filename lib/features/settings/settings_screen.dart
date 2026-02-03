@@ -64,7 +64,9 @@ class SettingsScreen extends StatelessWidget {
                 _SettingsMenuItem(
                   icon: MyIcons.reportsStroke,
                   label: 'Reports',
-                  onTap: () {},
+                  onTap: () {
+                    context.pushNamed(MyRoutes.reports);
+                  },
                 ),
                 _SettingsMenuItem(
                   icon: MyIcons.deleteAccountStroke,

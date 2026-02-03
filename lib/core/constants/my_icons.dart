@@ -104,4 +104,8 @@ abstract class MyIcons {
   // Points History
   static const String upArrow = '$_basePath/up_arrow.svg';
   static const String downArrow = '$_basePath/down_arrow.svg';
+
+  // Reports
+  static const String alertStroke = '$_basePath/alert_stroke.svg';
+  static const String alertSolid = '$_basePath/alert_solid.svg';
 }
