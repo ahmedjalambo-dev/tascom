@@ -24,6 +24,8 @@ class TaskModel {
   final List<Comment> comments;
   final String? imageUrl;
   final bool isClaimed;
+  final UserModel? helper;
+  final DateTime? cancelledAt;
 
   const TaskModel({
     required this.id,
@@ -42,6 +44,8 @@ class TaskModel {
     this.comments = const [],
     this.imageUrl,
     this.isClaimed = false,
+    this.helper,
+    this.cancelledAt,
   });
 
   String get timeAgo => calculateTimeAgo(createdAt);
@@ -63,6 +67,8 @@ class TaskModel {
     List<Comment>? comments,
     String? imageUrl,
     bool? isClaimed,
+    UserModel? helper,
+    DateTime? cancelledAt,
   }) {
     return TaskModel(
       id: id ?? this.id,
@@ -81,6 +87,8 @@ class TaskModel {
       comments: comments ?? this.comments,
       imageUrl: imageUrl ?? this.imageUrl,
       isClaimed: isClaimed ?? this.isClaimed,
+      helper: helper ?? this.helper,
+      cancelledAt: cancelledAt ?? this.cancelledAt,
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 
 enum TaskStatus {
+  active,
   open,
   inProgress,
   completed,
@@ -11,6 +12,8 @@ enum TaskStatus {
 extension TaskStatusExtension on TaskStatus {
   String get displayName {
     switch (this) {
+      case TaskStatus.active:
+        return 'Active';
       case TaskStatus.open:
         return 'Open';
       case TaskStatus.inProgress:
@@ -24,12 +27,14 @@ extension TaskStatusExtension on TaskStatus {
 
   Color get backgroundColor {
     switch (this) {
+      case TaskStatus.active:
+        return const Color(0xFFE8F5E9);
       case TaskStatus.open:
         return MyColors.priority.medium.bg;
       case TaskStatus.inProgress:
-        return MyColors.brand.purple.withValues(alpha: 0.1);
+        return const Color(0xFFFFF3E0);
       case TaskStatus.completed:
-        return MyColors.priority.low.bg;
+        return const Color(0xFFE3F2FD);
       case TaskStatus.cancelled:
         return MyColors.priority.high.bg;
     }
@@ -37,12 +42,14 @@ extension TaskStatusExtension on TaskStatus {
 
   Color get textColor {
     switch (this) {
+      case TaskStatus.active:
+        return MyColors.status.active;
       case TaskStatus.open:
         return MyColors.priority.medium.text;
       case TaskStatus.inProgress:
-        return MyColors.brand.purple;
+        return MyColors.status.inProgress;
       case TaskStatus.completed:
-        return MyColors.priority.low.text;
+        return MyColors.status.completed;
       case TaskStatus.cancelled:
         return MyColors.priority.high.text;
     }

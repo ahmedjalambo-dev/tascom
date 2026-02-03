@@ -6,6 +6,7 @@ import 'package:tascom/core/constants/my_images.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
 import 'package:tascom/core/widgets/my_button.dart';
+import 'package:tascom/core/widgets/my_label.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/core/widgets/my_text_field.dart';
 
@@ -86,28 +87,27 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                 VerticalSpace(32.h),
 
                 // New Password
-                _buildLabeledField(
-                  label: 'New Password',
-                  child: MyTextField(
-                    controller: _passwordController,
-                    focusNode: _passwordFocus,
-                    hintText: '********',
-                    textInputType: TextInputType.visiblePassword,
-                    isObscureText: _obscurePassword,
-                    prefixIcon: _buildPrefixIcon(
-                      MyIcons.lockPassword,
-                      _passwordFocus,
-                    ),
-                    suffixIcon: GestureDetector(
-                      onTap: () =>
-                          setState(() => _obscurePassword = !_obscurePassword),
-                      child: Padding(
-                        padding: EdgeInsets.all(12.dg),
-                        child: SvgPicture.asset(
-                          _obscurePassword ? MyIcons.eyeOff : MyIcons.eye,
-                          width: 24.w,
-                          height: 24.h,
-                        ),
+                const MyLabel('New Password'),
+                const VerticalSpace(8),
+                MyTextField(
+                  controller: _passwordController,
+                  focusNode: _passwordFocus,
+                  hintText: '********',
+                  textInputType: TextInputType.visiblePassword,
+                  obscureText: _obscurePassword,
+                  prefixIcon: _buildPrefixIcon(
+                    MyIcons.lockPassword,
+                    _passwordFocus,
+                  ),
+                  suffixIcon: GestureDetector(
+                    onTap: () =>
+                        setState(() => _obscurePassword = !_obscurePassword),
+                    child: Padding(
+                      padding: EdgeInsets.all(12.dg),
+                      child: SvgPicture.asset(
+                        _obscurePassword ? MyIcons.eyeOff : MyIcons.eye,
+                        width: 24.w,
+                        height: 24.h,
                       ),
                     ),
                   ),
@@ -115,32 +115,31 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                 VerticalSpace(16.h),
 
                 // Confirm New Password
-                _buildLabeledField(
-                  label: 'Confirm New Password',
-                  child: MyTextField(
-                    controller: _confirmPasswordController,
-                    focusNode: _confirmPasswordFocus,
-                    hintText: '********',
-                    textInputType: TextInputType.visiblePassword,
-                    isObscureText: _obscureConfirmPassword,
-                    prefixIcon: _buildPrefixIcon(
-                      MyIcons.lockPassword,
-                      _confirmPasswordFocus,
+                const MyLabel('Confirm New Password'),
+                const VerticalSpace(8),
+                MyTextField(
+                  controller: _confirmPasswordController,
+                  focusNode: _confirmPasswordFocus,
+                  hintText: '********',
+                  textInputType: TextInputType.visiblePassword,
+                  obscureText: _obscureConfirmPassword,
+                  prefixIcon: _buildPrefixIcon(
+                    MyIcons.lockPassword,
+                    _confirmPasswordFocus,
+                  ),
+                  suffixIcon: GestureDetector(
+                    onTap: () => setState(
+                      () =>
+                          _obscureConfirmPassword = !_obscureConfirmPassword,
                     ),
-                    suffixIcon: GestureDetector(
-                      onTap: () => setState(
-                        () =>
-                            _obscureConfirmPassword = !_obscureConfirmPassword,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(12.dg),
-                        child: SvgPicture.asset(
-                          _obscureConfirmPassword
-                              ? MyIcons.eyeOff
-                              : MyIcons.eye,
-                          width: 24.w,
-                          height: 24.h,
-                        ),
+                    child: Padding(
+                      padding: EdgeInsets.all(12.dg),
+                      child: SvgPicture.asset(
+                        _obscureConfirmPassword
+                            ? MyIcons.eyeOff
+                            : MyIcons.eye,
+                        width: 24.w,
+                        height: 24.h,
                       ),
                     ),
                   ),
@@ -162,20 +161,6 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildLabeledField({required String label, required Widget child}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: MyTextStyles.body.body1.copyWith(color: MyColors.text.primary),
-        ),
-        const VerticalSpace(8),
-        child,
-      ],
     );
   }
 

@@ -9,6 +9,7 @@ import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
 import 'package:tascom/core/widgets/my_button.dart';
+import 'package:tascom/core/widgets/my_label.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/core/widgets/my_text_field.dart';
 
@@ -75,41 +76,39 @@ class _LoginScreenState extends State<LoginScreen> {
                 VerticalSpace(32.h),
 
                 // Email
-                _buildLabeledField(
-                  label: 'Email',
-                  child: MyTextField(
-                    controller: _emailController,
-                    focusNode: _emailFocus,
-                    hintText: 'Placeholder@gmail.com',
-                    textInputType: TextInputType.emailAddress,
-                    prefixIcon: _buildPrefixIcon(MyIcons.mail, _emailFocus),
-                  ),
+                const MyLabel('Email'),
+                const VerticalSpace(8),
+                MyTextField(
+                  controller: _emailController,
+                  focusNode: _emailFocus,
+                  hintText: 'Placeholder@gmail.com',
+                  textInputType: TextInputType.emailAddress,
+                  prefixIcon: _buildPrefixIcon(MyIcons.mail, _emailFocus),
                 ),
                 VerticalSpace(16.h),
 
                 // Password
-                _buildLabeledField(
-                  label: 'Password',
-                  child: MyTextField(
-                    controller: _passwordController,
-                    focusNode: _passwordFocus,
-                    hintText: '********',
-                    textInputType: TextInputType.visiblePassword,
-                    isObscureText: _obscurePassword,
-                    prefixIcon: _buildPrefixIcon(
-                      MyIcons.lockPassword,
-                      _passwordFocus,
-                    ),
-                    suffixIcon: GestureDetector(
-                      onTap: () =>
-                          setState(() => _obscurePassword = !_obscurePassword),
-                      child: Padding(
-                        padding: EdgeInsets.all(12.dg),
-                        child: SvgPicture.asset(
-                          _obscurePassword ? MyIcons.eyeOff : MyIcons.eye,
-                          width: 24.w,
-                          height: 24.h,
-                        ),
+                const MyLabel('Password'),
+                const VerticalSpace(8),
+                MyTextField(
+                  controller: _passwordController,
+                  focusNode: _passwordFocus,
+                  hintText: '********',
+                  textInputType: TextInputType.visiblePassword,
+                  obscureText: _obscurePassword,
+                  prefixIcon: _buildPrefixIcon(
+                    MyIcons.lockPassword,
+                    _passwordFocus,
+                  ),
+                  suffixIcon: GestureDetector(
+                    onTap: () =>
+                        setState(() => _obscurePassword = !_obscurePassword),
+                    child: Padding(
+                      padding: EdgeInsets.all(12.dg),
+                      child: SvgPicture.asset(
+                        _obscurePassword ? MyIcons.eyeOff : MyIcons.eye,
+                        width: 24.w,
+                        height: 24.h,
                       ),
                     ),
                   ),
@@ -121,7 +120,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
                     onTap: () {
-                      // Navigate to forgot password
                       context.pushNamed(MyRoutes.forgotPassword);
                     },
                     child: Text(
@@ -161,7 +159,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              // Navigate to sign up
                               context.pushReplacementNamed(MyRoutes.signUp);
                             },
                         ),
@@ -175,20 +172,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildLabeledField({required String label, required Widget child}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: MyTextStyles.body.body1.copyWith(color: MyColors.text.primary),
-        ),
-        const VerticalSpace(8),
-        child,
-      ],
     );
   }
 

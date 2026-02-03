@@ -9,6 +9,7 @@ import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
 import 'package:tascom/core/widgets/my_button.dart';
+import 'package:tascom/core/widgets/my_label.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/core/widgets/my_text_field.dart';
 
@@ -92,47 +93,72 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 VerticalSpace(24.h),
 
                 // Name
-                _buildLabeledField(
-                  label: 'Name',
-                  child: MyTextField(
-                    controller: _nameController,
-                    focusNode: _nameFocus,
-                    hintText: 'Placeholder',
-                    textInputType: TextInputType.name,
-                    prefixIcon: _buildPrefixIcon(
-                      MyIcons.userStroke,
-                      _nameFocus,
-                    ),
+                const MyLabel('Name'),
+                const VerticalSpace(8),
+                MyTextField(
+                  controller: _nameController,
+                  focusNode: _nameFocus,
+                  hintText: 'Placeholder',
+                  textInputType: TextInputType.name,
+                  prefixIcon: _buildPrefixIcon(
+                    MyIcons.userStroke,
+                    _nameFocus,
                   ),
                 ),
                 VerticalSpace(16.h),
 
                 // Email
-                _buildLabeledField(
-                  label: 'Email',
-                  child: MyTextField(
-                    controller: _emailController,
-                    focusNode: _emailFocus,
-                    hintText: 'Placeholder@gmail.com',
-                    textInputType: TextInputType.emailAddress,
-                    prefixIcon: _buildPrefixIcon(MyIcons.mail, _emailFocus),
-                  ),
+                const MyLabel('Email'),
+                const VerticalSpace(8),
+                MyTextField(
+                  controller: _emailController,
+                  focusNode: _emailFocus,
+                  hintText: 'Placeholder@gmail.com',
+                  textInputType: TextInputType.emailAddress,
+                  prefixIcon: _buildPrefixIcon(MyIcons.mail, _emailFocus),
                 ),
                 VerticalSpace(16.h),
 
                 // Phone Number
-                _buildLabeledField(
-                  label: 'Phone Number',
-                  child: MyTextField(
-                    controller: _phoneController,
-                    focusNode: _phoneFocus,
-                    hintText: '059-000-0000',
-                    textInputType: TextInputType.phone,
-                    prefixIcon: _buildPrefixIcon(MyIcons.phone, _phoneFocus),
-                    suffixIcon: Padding(
+                const MyLabel('Phone Number'),
+                const VerticalSpace(8),
+                MyTextField(
+                  controller: _phoneController,
+                  focusNode: _phoneFocus,
+                  hintText: '059-000-0000',
+                  textInputType: TextInputType.phone,
+                  prefixIcon: _buildPrefixIcon(MyIcons.phone, _phoneFocus),
+                  suffixIcon: Padding(
+                    padding: EdgeInsets.all(12.dg),
+                    child: SvgPicture.asset(
+                      MyIcons.flag,
+                      width: 24.w,
+                      height: 24.h,
+                    ),
+                  ),
+                ),
+                VerticalSpace(16.h),
+
+                // Password
+                const MyLabel('Password'),
+                const VerticalSpace(8),
+                MyTextField(
+                  controller: _passwordController,
+                  focusNode: _passwordFocus,
+                  hintText: '********',
+                  textInputType: TextInputType.visiblePassword,
+                  obscureText: _obscurePassword,
+                  prefixIcon: _buildPrefixIcon(
+                    MyIcons.lockPassword,
+                    _passwordFocus,
+                  ),
+                  suffixIcon: GestureDetector(
+                    onTap: () =>
+                        setState(() => _obscurePassword = !_obscurePassword),
+                    child: Padding(
                       padding: EdgeInsets.all(12.dg),
                       child: SvgPicture.asset(
-                        MyIcons.flag,
+                        _obscurePassword ? MyIcons.eyeOff : MyIcons.eye,
                         width: 24.w,
                         height: 24.h,
                       ),
@@ -141,62 +167,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 VerticalSpace(16.h),
 
-                // Password
-                _buildLabeledField(
-                  label: 'Password',
-                  child: MyTextField(
-                    controller: _passwordController,
-                    focusNode: _passwordFocus,
-                    hintText: '********',
-                    textInputType: TextInputType.visiblePassword,
-                    isObscureText: _obscurePassword,
-                    prefixIcon: _buildPrefixIcon(
-                      MyIcons.lockPassword,
-                      _passwordFocus,
-                    ),
-                    suffixIcon: GestureDetector(
-                      onTap: () =>
-                          setState(() => _obscurePassword = !_obscurePassword),
-                      child: Padding(
-                        padding: EdgeInsets.all(12.dg),
-                        child: SvgPicture.asset(
-                          _obscurePassword ? MyIcons.eyeOff : MyIcons.eye,
-                          width: 24.w,
-                          height: 24.h,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                VerticalSpace(16.h),
-
                 // Confirm Password
-                _buildLabeledField(
-                  label: 'Confirm Password',
-                  child: MyTextField(
-                    controller: _confirmPasswordController,
-                    focusNode: _confirmPasswordFocus,
-                    hintText: '12345678',
-                    textInputType: TextInputType.visiblePassword,
-                    isObscureText: _obscureConfirmPassword,
-                    prefixIcon: _buildPrefixIcon(
-                      MyIcons.lockPassword,
-                      _confirmPasswordFocus,
+                const MyLabel('Confirm Password'),
+                const VerticalSpace(8),
+                MyTextField(
+                  controller: _confirmPasswordController,
+                  focusNode: _confirmPasswordFocus,
+                  hintText: '12345678',
+                  textInputType: TextInputType.visiblePassword,
+                  obscureText: _obscureConfirmPassword,
+                  prefixIcon: _buildPrefixIcon(
+                    MyIcons.lockPassword,
+                    _confirmPasswordFocus,
+                  ),
+                  suffixIcon: GestureDetector(
+                    onTap: () => setState(
+                      () =>
+                          _obscureConfirmPassword = !_obscureConfirmPassword,
                     ),
-                    suffixIcon: GestureDetector(
-                      onTap: () => setState(
-                        () =>
-                            _obscureConfirmPassword = !_obscureConfirmPassword,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(12.dg),
-                        child: SvgPicture.asset(
-                          _obscureConfirmPassword
-                              ? MyIcons.eyeOff
-                              : MyIcons.eye,
-                          width: 24.w,
-                          height: 24.h,
-                        ),
+                    child: Padding(
+                      padding: EdgeInsets.all(12.dg),
+                      child: SvgPicture.asset(
+                        _obscureConfirmPassword
+                            ? MyIcons.eyeOff
+                            : MyIcons.eye,
+                        width: 24.w,
+                        height: 24.h,
                       ),
                     ),
                   ),
@@ -276,10 +272,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              // Navigate to login
-                              context.pushReplacementNamed(
-                                MyRoutes.login,
-                              ); // Example navigation
+                              context.pushReplacementNamed(MyRoutes.login);
                             },
                         ),
                       ],
@@ -292,20 +285,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildLabeledField({required String label, required Widget child}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: MyTextStyles.body.body1.copyWith(color: MyColors.text.primary),
-        ),
-        const VerticalSpace(8),
-        child,
-      ],
     );
   }
 

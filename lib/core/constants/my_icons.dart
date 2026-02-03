@@ -81,4 +81,14 @@ abstract class MyIcons {
   // status icons
   static const String trueStroke = '$_basePath/true_stroke.svg';
   static const String trueSolid = '$_basePath/true_solid.svg';
+
+  // add task
+  static const String priorityStroke = '$_basePath/priority_stroke.svg';
+  static const String calenderStroke = '$_basePath/calender_stroke.svg';
+  static const String cancelStroke = '$_basePath/cancel_stroke.svg';
+  static const String uploadImageStroke = '$_basePath/upload_image_stroke.svg';
+  static const String uploadImageSolid = '$_basePath/upload_image_solid.svg';
+
+  // profile
+  static const String settingsStroke = '$_basePath/settings_stroke.svg';
 }

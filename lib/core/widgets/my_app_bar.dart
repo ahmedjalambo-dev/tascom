@@ -31,7 +31,7 @@ class MyAppBar extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             blurRadius: 15,
-            color: MyColors.text.secondary.withAlpha(60),
+            color: MyColors.text.secondary.withAlpha(40),
             spreadRadius: 2,
           ),
         ],
