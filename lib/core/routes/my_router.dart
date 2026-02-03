@@ -14,6 +14,7 @@ import 'package:tascom/features/search/search_screen.dart';
 import 'package:tascom/features/settings/settings_screen.dart';
 import 'package:tascom/features/settings/points_history/points_history_screen.dart';
 import 'package:tascom/features/settings/reports/reports_screen.dart';
+import 'package:tascom/features/settings/delete_account/delete_account_screen.dart';
 import 'package:tascom/features/profile/profile_screen.dart';
 import 'package:tascom/my_root_screen.dart';
 
@@ -62,6 +63,10 @@ class MyRouter {
       case MyRoutes.reports:
         return MaterialPageRoute(
           builder: (context) => const ReportsScreen(),
+        );
+      case MyRoutes.deleteAccount:
+        return MaterialPageRoute(
+          builder: (context) => const DeleteAccountScreen(),
         );
     }
     return null;

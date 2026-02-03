@@ -108,4 +108,9 @@ abstract class MyIcons {
   // Reports
   static const String alertStroke = '$_basePath/alert_stroke.svg';
   static const String alertSolid = '$_basePath/alert_solid.svg';
+
+  // Delete Account
+  static const String trashStroke = '$_basePath/trash_stroke.svg';
+  static const String warningSolid = '$_basePath/warning_solid.svg';
+  static const String checkboxSolid = '$_basePath/checkbox_solid.svg';
 }

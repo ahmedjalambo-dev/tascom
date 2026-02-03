@@ -72,7 +72,9 @@ class SettingsScreen extends StatelessWidget {
                 _SettingsMenuItem(
                   icon: MyIcons.deleteAccountStroke,
                   label: 'Delete Account',
-                  onTap: () {},
+                  onTap: () {
+                    context.pushNamed(MyRoutes.deleteAccount);
+                  },
                 ),
                 _SettingsMenuItem(
                   icon: MyIcons.logoutStroke,

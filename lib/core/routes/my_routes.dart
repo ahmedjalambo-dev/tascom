@@ -14,4 +14,5 @@ class MyRoutes {
   static const String settings = '/settings';
   static const String pointsHistory = '/points_history';
   static const String reports = '/reports';
+  static const String deleteAccount = '/delete_account';
 }
