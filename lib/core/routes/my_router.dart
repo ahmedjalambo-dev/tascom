@@ -12,6 +12,7 @@ import 'package:tascom/features/registration/onboarding/onboarding_screen.dart';
 import 'package:tascom/features/registration/sign_up/sign_up_screen.dart';
 import 'package:tascom/features/search/search_screen.dart';
 import 'package:tascom/features/settings/settings_screen.dart';
+import 'package:tascom/features/settings/points_history/points_history_screen.dart';
 import 'package:tascom/features/profile/profile_screen.dart';
 import 'package:tascom/my_root_screen.dart';
 
@@ -53,6 +54,10 @@ class MyRouter {
         return MaterialPageRoute(builder: (context) => const ProfileScreen());
       case MyRoutes.settings:
         return MaterialPageRoute(builder: (context) => const SettingsScreen());
+      case MyRoutes.pointsHistory:
+        return MaterialPageRoute(
+          builder: (context) => const PointsHistoryScreen(),
+        );
     }
     return null;
   }

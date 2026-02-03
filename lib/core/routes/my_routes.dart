@@ -12,4 +12,5 @@ class MyRoutes {
   static const String ai = '/ai';
   static const String profile = '/profile';
   static const String settings = '/settings';
+  static const String pointsHistory = '/points_history';
 }

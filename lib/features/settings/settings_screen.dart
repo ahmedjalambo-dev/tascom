@@ -42,7 +42,9 @@ class SettingsScreen extends StatelessWidget {
                 _SettingsMenuItem(
                   icon: MyIcons.pointsStroke,
                   label: 'Points History',
-                  onTap: () {},
+                  onTap: () {
+                    context.pushNamed(MyRoutes.pointsHistory);
+                  },
                 ),
                 _SettingsMenuItem(
                   icon: MyIcons.languageStroke,

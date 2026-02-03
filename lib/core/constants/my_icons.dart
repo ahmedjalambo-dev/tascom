@@ -100,4 +100,8 @@ abstract class MyIcons {
   static const String pointsStroke = '$_basePath/points_stroke.svg';
   static const String deleteAccountStroke = '$_basePath/cancel_stroke.svg';
   static const String arrowRight = '$_basePath/arrow_right.svg';
+
+  // Points History
+  static const String upArrow = '$_basePath/up_arrow.svg';
+  static const String downArrow = '$_basePath/down_arrow.svg';
 }
