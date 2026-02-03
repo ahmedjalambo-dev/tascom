@@ -6,6 +6,7 @@ import 'package:tascom/core/extentions/extentions.dart';
 import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
+import 'package:tascom/features/settings/logout/logout_confirmation_dialog.dart';
 import 'package:tascom/core/widgets/my_app_bar.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -76,7 +77,9 @@ class SettingsScreen extends StatelessWidget {
                 _SettingsMenuItem(
                   icon: MyIcons.logoutStroke,
                   label: 'Log Out',
-                  onTap: () {},
+                  onTap: () {
+                    showLogoutConfirmationDialog(context);
+                  },
                   showDivider: false,
                 ),
               ],
@@ -131,13 +134,13 @@ class _SettingsMenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Column(
-        children: [
-          InkWell(
-            onTap: onTap,
-            child: Padding(
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Column(
+          children: [
+            Padding(
               padding: EdgeInsets.symmetric(vertical: 16.h),
               child: Row(
                 children: [
@@ -171,10 +174,10 @@ class _SettingsMenuItem extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-          if (showDivider)
-            Divider(height: 1, color: MyColors.border.postBorder),
-        ],
+            if (showDivider)
+              Divider(height: 1, color: MyColors.border.postBorder),
+          ],
+        ),
       ),
     );
   }
