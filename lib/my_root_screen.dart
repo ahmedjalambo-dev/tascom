@@ -4,7 +4,7 @@ import 'package:tascom/core/widgets/my_bottom_navigation_bar.dart';
 import 'package:tascom/features/ai/ai_screen.dart';
 import 'package:tascom/features/home/ui/home_screen.dart';
 import 'package:tascom/features/search/search_screen.dart';
-import 'package:tascom/features/user/profile_screen.dart';
+import 'package:tascom/features/profile/profile_screen.dart';
 
 class MyRootScreen extends StatefulWidget {
   const MyRootScreen({super.key});

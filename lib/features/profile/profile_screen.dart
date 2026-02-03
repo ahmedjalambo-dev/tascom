@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tascom/core/constants/my_icons.dart';
+import 'package:tascom/core/extentions/extentions.dart';
+import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
 import 'package:tascom/core/widgets/my_app_bar.dart';
@@ -9,11 +11,11 @@ import 'package:tascom/core/widgets/my_filter_dropdown.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/features/home/data/models/task_model.dart';
 import 'package:tascom/features/home/data/models/task_status.dart';
-import 'package:tascom/features/user/data/profile_mock_data.dart';
-import 'package:tascom/features/user/widgets/profile_header.dart';
-import 'package:tascom/features/user/widgets/profile_stats_card.dart';
-import 'package:tascom/features/user/widgets/profile_tab_selector.dart';
-import 'package:tascom/features/user/widgets/profile_task_card.dart';
+import 'package:tascom/features/profile/data/profile_mock_data.dart';
+import 'package:tascom/features/profile/widgets/profile_header.dart';
+import 'package:tascom/features/profile/widgets/profile_stats_card.dart';
+import 'package:tascom/features/profile/widgets/profile_tab_selector.dart';
+import 'package:tascom/features/profile/widgets/profile_task_card.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -244,7 +246,9 @@ class ProfileAppBar extends StatelessWidget {
       ),
       trailing: [
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            context.pushNamed(MyRoutes.settings);
+          },
           child: SvgPicture.asset(
             MyIcons.settingsStroke,
             width: 24.w,

@@ -1,0 +1,177 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tascom/core/constants/my_icons.dart';
+import 'package:tascom/core/extentions/extentions.dart';
+import 'package:tascom/core/routes/my_routes.dart';
+import 'package:tascom/core/themes/my_colors.dart';
+import 'package:tascom/core/themes/my_text_styles.dart';
+import 'package:tascom/core/widgets/my_app_bar.dart';
+
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: MyColors.background.primary,
+      body: Column(
+        children: [
+          _buildAppBar(context),
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                _SettingsMenuItem(
+                  icon: MyIcons.userStroke,
+                  label: 'My Profile',
+                  onTap: () {
+                    context.pop();
+                  },
+                ),
+                _SettingsMenuItem(
+                  icon: MyIcons.requestsStroke,
+                  label: 'Requests',
+                  onTap: () {},
+                ),
+                _SettingsMenuItem(
+                  icon: MyIcons.saveStroke,
+                  label: 'Saved Tasks',
+                  onTap: () {},
+                ),
+                _SettingsMenuItem(
+                  icon: MyIcons.pointsStroke,
+                  label: 'Points History',
+                  onTap: () {},
+                ),
+                _SettingsMenuItem(
+                  icon: MyIcons.languageStroke,
+                  label: 'Language',
+                  onTap: () {},
+                ),
+                _SettingsMenuItem(
+                  icon: MyIcons.notificationStroke,
+                  label: 'Notifications',
+                  onTap: () {},
+                ),
+                _SettingsMenuItem(
+                  icon: MyIcons.lockPassword,
+                  label: 'Change Password',
+                  onTap: () {},
+                ),
+                _SettingsMenuItem(
+                  icon: MyIcons.reportsStroke,
+                  label: 'Reports',
+                  onTap: () {},
+                ),
+                _SettingsMenuItem(
+                  icon: MyIcons.deleteAccountStroke,
+                  label: 'Delete Account',
+                  onTap: () {},
+                ),
+                _SettingsMenuItem(
+                  icon: MyIcons.logoutStroke,
+                  label: 'Log Out',
+                  onTap: () {},
+                  showDivider: false,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAppBar(BuildContext context) {
+    return MyAppBar(
+      leading: GestureDetector(
+        onTap: () => context.pop(),
+        child: Padding(
+          padding: EdgeInsets.only(right: 16.w),
+          child: SvgPicture.asset(
+            MyIcons.arrowBack,
+            width: 24.w,
+            height: 24.h,
+            colorFilter: ColorFilter.mode(
+              MyColors.text.primary,
+              BlendMode.srcIn,
+            ),
+          ),
+        ),
+      ),
+      title: Center(
+        child: Text(
+          'Settings',
+          style: MyTextStyles.heading.h22.copyWith(
+            color: MyColors.text.primary,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SettingsMenuItem extends StatelessWidget {
+  final String icon;
+  final String label;
+  final VoidCallback onTap;
+  final bool showDivider;
+
+  const _SettingsMenuItem({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+    this.showDivider = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      child: Column(
+        children: [
+          InkWell(
+            onTap: onTap,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 16.h),
+              child: Row(
+                children: [
+                  SvgPicture.asset(
+                    icon,
+                    width: 24.w,
+                    height: 24.h,
+                    colorFilter: ColorFilter.mode(
+                      MyColors.text.primary,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  SizedBox(width: 16.w),
+                  Expanded(
+                    child: Text(
+                      label,
+                      style: MyTextStyles.body.body1.copyWith(
+                        color: MyColors.text.primary,
+                      ),
+                    ),
+                  ),
+                  SvgPicture.asset(
+                    MyIcons.arrowRight,
+                    width: 20.w,
+                    height: 20.h,
+                    colorFilter: ColorFilter.mode(
+                      MyColors.text.secondary,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          if (showDivider)
+            Divider(height: 1, color: MyColors.border.postBorder),
+        ],
+      ),
+    );
+  }
+}

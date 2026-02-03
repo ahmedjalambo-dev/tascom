@@ -9,7 +9,7 @@ import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/features/home/data/models/task_category.dart';
 import 'package:tascom/features/home/data/models/task_model.dart';
 import 'package:tascom/features/home/data/models/task_status.dart';
-import 'package:tascom/features/user/widgets/profile_tab_selector.dart';
+import 'package:tascom/features/profile/widgets/profile_tab_selector.dart';
 
 class ProfileTaskCard extends StatelessWidget {
   final TaskModel task;

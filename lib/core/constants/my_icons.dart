@@ -91,4 +91,13 @@ abstract class MyIcons {
 
   // profile
   static const String settingsStroke = '$_basePath/settings_stroke.svg';
+
+  // settings
+  static const String logoutStroke = '$_basePath/logout_stroke.svg';
+  static const String languageStroke = '$_basePath/language_stroke.svg';
+  static const String reportsStroke = '$_basePath/reports_stroke.svg';
+  static const String requestsStroke = '$_basePath/requests_stroke.svg';
+  static const String pointsStroke = '$_basePath/points_stroke.svg';
+  static const String deleteAccountStroke = '$_basePath/cancel_stroke.svg';
+  static const String arrowRight = '$_basePath/arrow_right.svg';
 }
