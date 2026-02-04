@@ -74,8 +74,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
       listener: (context, state) {
         state.maybeWhen(
           success: (response) {
-            // Navigate to home on successful registration
-            context.pushReplacementNamed(MyRoutes.root);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: const Text(
+                  'Account created successfully! Please login.',
+                ),
+                backgroundColor: MyColors.states.success,
+              ),
+            );
+            context.pushReplacementNamed(MyRoutes.login);
           },
           error: (error) {
             // Show error snackbar

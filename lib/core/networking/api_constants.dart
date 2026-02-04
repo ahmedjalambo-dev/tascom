@@ -2,7 +2,7 @@ class ApiConstants {
   ApiConstants._();
 
   // Base URL - Update with actual API URL
-  static const String baseUrl = 'https://tascom.up.railway.app/swagger/';
+  static const String baseUrl = 'https://tascom.up.railway.app/';
 
   // Auth endpoints
   static const String login = 'auth/login';

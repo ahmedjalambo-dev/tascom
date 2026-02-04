@@ -11,7 +11,7 @@ import 'package:tascom/features/home/ui/home_screen.dart';
 import 'package:tascom/features/home/ui/task_details_screen.dart';
 import 'package:tascom/features/registration/create_new_password/create_new_password_screen.dart';
 import 'package:tascom/features/registration/forgot_password/forgot_password_screen.dart';
-import 'package:tascom/features/registration/lgoin/login_screen.dart';
+import 'package:tascom/features/auth/login/ui/login_screen.dart';
 import 'package:tascom/features/registration/onboarding/onboarding_screen.dart';
 import 'package:tascom/features/auth/register/ui/register_screen.dart';
 import 'package:tascom/features/search/search_screen.dart';
