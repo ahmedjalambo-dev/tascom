@@ -1,7 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+
 import 'package:tascom/core/constants/my_icons.dart';
 import 'package:tascom/core/constants/my_images.dart';
 import 'package:tascom/core/extentions/extentions.dart';
@@ -12,6 +14,8 @@ import 'package:tascom/core/widgets/my_button.dart';
 import 'package:tascom/core/widgets/my_label.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/core/widgets/my_text_field.dart';
+import 'package:tascom/features/auth/login/cubit/login_cubit.dart';
+import 'package:tascom/features/auth/login/cubit/login_state.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -49,125 +53,159 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const VerticalSpace(48),
+    return BlocListener<LoginCubit, LoginState>(
+      listener: (context, state) {
+        state.maybeWhen(
+          success: (response) {
+            // Navigate to home on successful login
+            context.pushReplacementNamed(MyRoutes.root);
+          },
+          error: (error) {
+            // Show error snackbar
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(error.message ?? 'Login failed'),
+                backgroundColor: MyColors.states.error,
+              ),
+            );
+          },
+          orElse: () {},
+        );
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const VerticalSpace(48),
 
-                // Logo
-                Center(child: Image.asset(MyImages.tascom, height: 120.h)),
-                VerticalSpace(16.h),
+                  // Logo
+                  Center(child: Image.asset(MyImages.tascom, height: 120.h)),
+                  VerticalSpace(16.h),
 
-                // Title
-                Center(
-                  child: Text(
-                    'Welcome Back!',
-                    style: MyTextStyles.heading.h22.copyWith(
-                      color: MyColors.text.primary,
-                    ),
-                  ),
-                ),
-                VerticalSpace(32.h),
-
-                // Email
-                const MyLabel('Email'),
-                const VerticalSpace(8),
-                MyTextField(
-                  controller: _emailController,
-                  focusNode: _emailFocus,
-                  hintText: 'Placeholder@gmail.com',
-                  textInputType: TextInputType.emailAddress,
-                  prefixIcon: _buildPrefixIcon(MyIcons.mail, _emailFocus),
-                ),
-                VerticalSpace(16.h),
-
-                // Password
-                const MyLabel('Password'),
-                const VerticalSpace(8),
-                MyTextField(
-                  controller: _passwordController,
-                  focusNode: _passwordFocus,
-                  hintText: '********',
-                  textInputType: TextInputType.visiblePassword,
-                  obscureText: _obscurePassword,
-                  prefixIcon: _buildPrefixIcon(
-                    MyIcons.lockPassword,
-                    _passwordFocus,
-                  ),
-                  suffixIcon: GestureDetector(
-                    onTap: () =>
-                        setState(() => _obscurePassword = !_obscurePassword),
-                    child: Padding(
-                      padding: EdgeInsets.all(12.dg),
-                      child: SvgPicture.asset(
-                        _obscurePassword ? MyIcons.eyeOff : MyIcons.eye,
-                        width: 24.w,
-                        height: 24.h,
-                      ),
-                    ),
-                  ),
-                ),
-                const VerticalSpace(8),
-
-                // Forgot Password
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    onTap: () {
-                      context.pushNamed(MyRoutes.forgotPassword);
-                    },
+                  // Title
+                  Center(
                     child: Text(
-                      'Forgot Password?',
-                      style: MyTextStyles.button.secondaryButton2.copyWith(
-                        color: MyColors.brand.purple,
-                      ),
-                    ),
-                  ),
-                ),
-                const VerticalSpace(24),
-
-                // Login Button
-                MyButton(
-                  text: 'Login',
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      context.pushReplacementNamed(MyRoutes.root);
-                    }
-                  },
-                ),
-                const VerticalSpace(24),
-
-                // Don't Have An Account? Sign Up
-                Center(
-                  child: RichText(
-                    text: TextSpan(
-                      style: MyTextStyles.body.body2.copyWith(
+                      'Welcome Back!',
+                      style: MyTextStyles.heading.h22.copyWith(
                         color: MyColors.text.primary,
                       ),
-                      children: [
-                        const TextSpan(text: 'Dont Have An Account? '),
-                        TextSpan(
-                          text: 'Sign Up',
-                          style: MyTextStyles.button.primaryButton1.copyWith(
-                            color: MyColors.brand.purple,
-                          ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              context.pushReplacementNamed(MyRoutes.signUp);
-                            },
-                        ),
-                      ],
                     ),
                   ),
-                ),
-                const VerticalSpace(24),
-              ],
+                  VerticalSpace(32.h),
+
+                  // Email
+                  const MyLabel('Email'),
+                  const VerticalSpace(8),
+                  MyTextField(
+                    controller: _emailController,
+                    focusNode: _emailFocus,
+                    hintText: 'Placeholder@gmail.com',
+                    textInputType: TextInputType.emailAddress,
+                    prefixIcon: _buildPrefixIcon(MyIcons.mail, _emailFocus),
+                  ),
+                  VerticalSpace(16.h),
+
+                  // Password
+                  const MyLabel('Password'),
+                  const VerticalSpace(8),
+                  MyTextField(
+                    controller: _passwordController,
+                    focusNode: _passwordFocus,
+                    hintText: '********',
+                    textInputType: TextInputType.visiblePassword,
+                    obscureText: _obscurePassword,
+                    prefixIcon: _buildPrefixIcon(
+                      MyIcons.lockPassword,
+                      _passwordFocus,
+                    ),
+                    suffixIcon: GestureDetector(
+                      onTap: () =>
+                          setState(() => _obscurePassword = !_obscurePassword),
+                      child: Padding(
+                        padding: EdgeInsets.all(12.dg),
+                        child: SvgPicture.asset(
+                          _obscurePassword ? MyIcons.eyeOff : MyIcons.eye,
+                          width: 24.w,
+                          height: 24.h,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const VerticalSpace(8),
+
+                  // Forgot Password
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: GestureDetector(
+                      onTap: () {
+                        context.pushNamed(MyRoutes.forgotPassword);
+                      },
+                      child: Text(
+                        'Forgot Password?',
+                        style: MyTextStyles.button.secondaryButton2.copyWith(
+                          color: MyColors.brand.purple,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const VerticalSpace(24),
+
+                  // Login Button
+                  BlocBuilder<LoginCubit, LoginState>(
+                    builder: (context, state) {
+                      final isLoading = state.maybeWhen(
+                        loading: () => true,
+                        orElse: () => false,
+                      );
+
+                      return MyButton(
+                        text: isLoading ? 'Loading...' : 'Login',
+                        onPressed: isLoading
+                            ? null
+                            : () {
+                                if (_formKey.currentState!.validate()) {
+                                  context.read<LoginCubit>().login(
+                                        email: _emailController.text.trim(),
+                                        password: _passwordController.text,
+                                      );
+                                }
+                              },
+                      );
+                    },
+                  ),
+                  const VerticalSpace(24),
+
+                  // Don't Have An Account? Sign Up
+                  Center(
+                    child: RichText(
+                      text: TextSpan(
+                        style: MyTextStyles.body.body2.copyWith(
+                          color: MyColors.text.primary,
+                        ),
+                        children: [
+                          const TextSpan(text: 'Dont Have An Account? '),
+                          TextSpan(
+                            text: 'Sign Up',
+                            style: MyTextStyles.button.primaryButton1.copyWith(
+                              color: MyColors.brand.purple,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                context.pushReplacementNamed(MyRoutes.signUp);
+                              },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const VerticalSpace(24),
+                ],
+              ),
             ),
           ),
         ),
