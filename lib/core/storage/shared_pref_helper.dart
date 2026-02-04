@@ -78,6 +78,16 @@ class SharedPrefHelper {
     return _prefs.getString(SharedPrefKeys.userName);
   }
 
+  /// Save user location
+  static Future<void> setUserLocation(String location) async {
+    await _prefs.setString(SharedPrefKeys.userLocation, location);
+  }
+
+  /// Get user location
+  static String? getUserLocation() {
+    return _prefs.getString(SharedPrefKeys.userLocation);
+  }
+
   // ============ App Preferences ============
 
   /// Check if first launch
@@ -114,5 +124,6 @@ class SharedPrefHelper {
     await _prefs.remove(SharedPrefKeys.userId);
     await _prefs.remove(SharedPrefKeys.userEmail);
     await _prefs.remove(SharedPrefKeys.userName);
+    await _prefs.remove(SharedPrefKeys.userLocation);
   }
 }

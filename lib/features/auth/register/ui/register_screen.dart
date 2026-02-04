@@ -296,8 +296,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     name: _nameController.text.trim(),
                                     email: _emailController.text.trim(),
                                     phoneNumber: _phoneController.text.trim(),
-                                    location:
-                                        '0.0,0.0', // TODO: Add location picker
                                     password: _passwordController.text,
                                   );
                                 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:tascom/core/di/injection.dart';
+import 'package:tascom/core/services/location_service.dart';
 import 'package:tascom/core/storage/session_manager.dart';
 import 'package:tascom/core/storage/shared_pref_helper.dart';
 import 'package:tascom/my_app.dart';
@@ -14,6 +15,9 @@ void main() async {
 
   // Initialize session manager
   await SessionManager.instance.initialize();
+
+  // Trigger location fetch (fire and forget)
+  LocationService.getCurrentLocation();
 
   // Initialize dependency injection
   await initDependencies();

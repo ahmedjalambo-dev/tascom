@@ -14,4 +14,5 @@ class SharedPrefKeys {
   static const String isFirstLaunch = 'is_first_launch';
   static const String languageCode = 'language_code';
   static const String themeMode = 'theme_mode';
+  static const String userLocation = 'user_location';
 }
