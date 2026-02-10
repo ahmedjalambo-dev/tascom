@@ -20,12 +20,12 @@ class _RegisterService implements RegisterService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<LoginResponse> register(RegisterRequest request) async {
+  Future<RegisterResponse> register(RegisterRequest request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
-    final _options = _setStreamType<LoginResponse>(
+    final _options = _setStreamType<RegisterResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -36,9 +36,9 @@ class _RegisterService implements RegisterService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late LoginResponse _value;
+    late RegisterResponse _value;
     try {
-      _value = LoginResponse.fromJson(_result.data!);
+      _value = RegisterResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;

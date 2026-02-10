@@ -62,7 +62,7 @@ Future<void> initDependencies() async {
     () => RegisterService(getIt<Dio>()),
   );
   getIt.registerLazySingleton<RegisterRepo>(
-    () => RegisterRepo(getIt<RegisterService>(), getIt<SessionManager>()),
+    () => RegisterRepo(getIt<RegisterService>()),
   );
   getIt.registerFactory<RegisterCubit>(
     () => RegisterCubit(getIt<RegisterRepo>()),

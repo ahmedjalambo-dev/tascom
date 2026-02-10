@@ -19,11 +19,11 @@ class GoogleLoginRepo {
 
       // Save session on successful Google login
       await _sessionManager.setSession(
-        accessToken: response.accessToken,
-        refreshToken: response.refreshToken,
-        userId: response.userId,
-        email: response.user?.email,
-        name: response.user?.name,
+        accessToken: response.data.token,
+        refreshToken: response.data.token,
+        userId: response.data.user.id,
+        email: response.data.user.email,
+        name: response.data.user.name,
       );
 
       return ApiResult.success(response);

@@ -128,7 +128,7 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( LoginResponse response)?  success,TResult Function( ApiErrorModel error)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( RegisterResponse response)?  success,TResult Function( ApiErrorModel error)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
@@ -152,7 +152,7 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( LoginResponse response)  success,required TResult Function( ApiErrorModel error)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( RegisterResponse response)  success,required TResult Function( ApiErrorModel error)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
@@ -175,7 +175,7 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( LoginResponse response)?  success,TResult? Function( ApiErrorModel error)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( RegisterResponse response)?  success,TResult? Function( ApiErrorModel error)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
@@ -260,7 +260,7 @@ class _Success implements RegisterState {
   const _Success(this.response);
   
 
- final  LoginResponse response;
+ final  RegisterResponse response;
 
 /// Create a copy of RegisterState
 /// with the given fields replaced by the non-null parameter values.
@@ -292,11 +292,11 @@ abstract mixin class _$SuccessCopyWith<$Res> implements $RegisterStateCopyWith<$
   factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) = __$SuccessCopyWithImpl;
 @useResult
 $Res call({
- LoginResponse response
+ RegisterResponse response
 });
 
 
-$LoginResponseCopyWith<$Res> get response;
+$RegisterResponseCopyWith<$Res> get response;
 
 }
 /// @nodoc
@@ -312,7 +312,7 @@ class __$SuccessCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? response = null,}) {
   return _then(_Success(
 null == response ? _self.response : response // ignore: cast_nullable_to_non_nullable
-as LoginResponse,
+as RegisterResponse,
   ));
 }
 
@@ -320,9 +320,9 @@ as LoginResponse,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$LoginResponseCopyWith<$Res> get response {
+$RegisterResponseCopyWith<$Res> get response {
   
-  return $LoginResponseCopyWith<$Res>(_self.response, (value) {
+  return $RegisterResponseCopyWith<$Res>(_self.response, (value) {
     return _then(_self.copyWith(response: value));
   });
 }
