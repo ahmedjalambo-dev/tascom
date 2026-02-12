@@ -106,8 +106,9 @@ class TaskCardActions extends StatelessWidget {
         ElevatedButton(
           onPressed: isClaimed ? null : onClaimTap,
           style: ElevatedButton.styleFrom(
-            backgroundColor:
-                isClaimed ? MyColors.status.active : MyColors.brand.purple,
+            backgroundColor: isClaimed
+                ? MyColors.status.active
+                : MyColors.brand.purple,
             foregroundColor: MyColors.text.white,
             disabledBackgroundColor: MyColors.status.active,
             disabledForegroundColor: MyColors.text.white,

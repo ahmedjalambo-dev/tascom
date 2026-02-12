@@ -11,10 +11,7 @@ import 'package:tascom/features/settings/points_history/data/models/points_trans
 class PointsTransactionTile extends StatelessWidget {
   final PointsTransaction transaction;
 
-  const PointsTransactionTile({
-    super.key,
-    required this.transaction,
-  });
+  const PointsTransactionTile({super.key, required this.transaction});
 
   String get _formattedDate {
     final now = DateTime.now();
@@ -106,10 +103,7 @@ class PointsTransactionTile extends StatelessWidget {
           transaction.isEarned ? MyIcons.upArrow : MyIcons.downArrow,
           width: 20.w,
           height: 20.w,
-          colorFilter: ColorFilter.mode(
-            MyColors.brand.purple,
-            BlendMode.srcIn,
-          ),
+          colorFilter: ColorFilter.mode(MyColors.brand.purple, BlendMode.srcIn),
         ),
       ),
     );

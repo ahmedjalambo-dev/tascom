@@ -16,10 +16,8 @@ abstract class LoginResponse with _$LoginResponse {
 
 @freezed
 abstract class LoginData with _$LoginData {
-  const factory LoginData({
-    required UserAuthData user,
-    required String token,
-  }) = _LoginData;
+  const factory LoginData({required UserAuthData user, required String token}) =
+      _LoginData;
 
   factory LoginData.fromJson(Map<String, dynamic> json) =>
       _$LoginDataFromJson(json);

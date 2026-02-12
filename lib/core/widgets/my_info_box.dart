@@ -46,10 +46,12 @@ class MyInfoBox extends StatelessWidget {
             ),
           ),
           SizedBox(height: 12.h),
-          ...items.map((item) => Padding(
-                padding: EdgeInsets.only(bottom: 8.h),
-                child: _buildBulletPoint(item),
-              )),
+          ...items.map(
+            (item) => Padding(
+              padding: EdgeInsets.only(bottom: 8.h),
+              child: _buildBulletPoint(item),
+            ),
+          ),
         ],
       ),
     );

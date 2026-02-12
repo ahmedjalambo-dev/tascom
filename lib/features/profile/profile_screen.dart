@@ -140,15 +140,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               builder: (context, state) {
                 return state.when(
                   initial: () => const SizedBox.shrink(),
-                  loading: () => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
                   loaded: (user) => _buildProfileContent(user),
                   updateSuccess: (user) => _buildProfileContent(user),
                   deleteSuccess: () => const SizedBox.shrink(),
-                  error: (error) => _buildErrorState(
-                    error.message ?? 'Something went wrong',
-                  ),
+                  error: (error) =>
+                      _buildErrorState(error.message ?? 'Something went wrong'),
                 );
               },
             ),
@@ -197,11 +195,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.error_outline,
-              size: 64.sp,
-              color: MyColors.text.third,
-            ),
+            Icon(Icons.error_outline, size: 64.sp, color: MyColors.text.third),
             const VerticalSpace(16),
             Text(
               message,

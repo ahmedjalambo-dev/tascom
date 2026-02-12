@@ -13,34 +13,28 @@ class DioFactory {
     if (_dio != null) return _dio!;
 
     _dio = Dio(_baseOptions);
-    _dio!.interceptors.addAll([
-      _AuthInterceptor(),
-      _createLogger(),
-    ]);
+    _dio!.interceptors.addAll([_AuthInterceptor(), _createLogger()]);
 
     return _dio!;
   }
 
   static BaseOptions get _baseOptions => BaseOptions(
-        baseUrl: ApiConstants.baseUrl,
-        connectTimeout: const Duration(seconds: 30),
-        receiveTimeout: const Duration(seconds: 30),
-        sendTimeout: const Duration(seconds: 30),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-      );
+    baseUrl: ApiConstants.baseUrl,
+    connectTimeout: const Duration(seconds: 30),
+    receiveTimeout: const Duration(seconds: 30),
+    sendTimeout: const Duration(seconds: 30),
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+  );
 
   static PrettyDioLogger _createLogger() => PrettyDioLogger(
-        requestBody: true,
-        requestHeader: true,
-        responseBody: true,
-        responseHeader: false,
-        error: true,
-        compact: true,
-        maxWidth: 90,
-      );
+    requestBody: true,
+    requestHeader: true,
+    responseBody: true,
+    responseHeader: false,
+    error: true,
+    compact: true,
+    maxWidth: 90,
+  );
 }
 
 class _AuthInterceptor extends Interceptor {

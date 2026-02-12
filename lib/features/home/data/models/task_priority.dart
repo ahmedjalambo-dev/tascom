@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tascom/core/constants/my_icons.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 
-enum TaskPriority {
-  high,
-  medium,
-  low,
-}
+enum TaskPriority { high, medium, low }
 
 extension TaskPriorityExtension on TaskPriority {
   String get displayName {

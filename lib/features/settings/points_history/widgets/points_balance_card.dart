@@ -9,10 +9,7 @@ import 'package:tascom/core/widgets/my_spacing.dart';
 class PointsBalanceCard extends StatelessWidget {
   final int balance;
 
-  const PointsBalanceCard({
-    super.key,
-    required this.balance,
-  });
+  const PointsBalanceCard({super.key, required this.balance});
 
   String get _formattedBalance {
     if (balance >= 1000) {

@@ -99,17 +99,16 @@ class _MyFilterDropdownState<T> extends State<MyFilterDropdown<T>> {
     final items = <PopupMenuItem<_DropdownItem<T>>>[];
 
     if (widget.allOptionLabel != null) {
-      items.add(_buildMenuItem(
-        const _DropdownItem(null, isAllOption: true),
-        widget.allOptionLabel!,
-      ));
+      items.add(
+        _buildMenuItem(
+          const _DropdownItem(null, isAllOption: true),
+          widget.allOptionLabel!,
+        ),
+      );
     }
 
     for (final item in widget.items) {
-      items.add(_buildMenuItem(
-        _DropdownItem(item),
-        widget.labelBuilder(item),
-      ));
+      items.add(_buildMenuItem(_DropdownItem(item), widget.labelBuilder(item)));
     }
 
     return items;

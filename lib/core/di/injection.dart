@@ -47,15 +47,11 @@ Future<void> initDependencies() async {
   getIt.registerLazySingleton<SessionManager>(() => SessionManager.instance);
 
   // ============ Auth - Login ============
-  getIt.registerLazySingleton<LoginService>(
-    () => LoginService(getIt<Dio>()),
-  );
+  getIt.registerLazySingleton<LoginService>(() => LoginService(getIt<Dio>()));
   getIt.registerLazySingleton<LoginRepo>(
     () => LoginRepo(getIt<LoginService>(), getIt<SessionManager>()),
   );
-  getIt.registerFactory<LoginCubit>(
-    () => LoginCubit(getIt<LoginRepo>()),
-  );
+  getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt<LoginRepo>()));
 
   // ============ Auth - Register ============
   getIt.registerLazySingleton<RegisterService>(
@@ -80,15 +76,11 @@ Future<void> initDependencies() async {
   );
 
   // ============ Auth - Logout ============
-  getIt.registerLazySingleton<LogoutService>(
-    () => LogoutService(getIt<Dio>()),
-  );
+  getIt.registerLazySingleton<LogoutService>(() => LogoutService(getIt<Dio>()));
   getIt.registerLazySingleton<LogoutRepo>(
     () => LogoutRepo(getIt<LogoutService>(), getIt<SessionManager>()),
   );
-  getIt.registerFactory<LogoutCubit>(
-    () => LogoutCubit(getIt<LogoutRepo>()),
-  );
+  getIt.registerFactory<LogoutCubit>(() => LogoutCubit(getIt<LogoutRepo>()));
 
   // ============ Auth - Forgot Password ============
   getIt.registerLazySingleton<ForgotPasswordService>(
@@ -113,13 +105,7 @@ Future<void> initDependencies() async {
   );
 
   // ============ User ============
-  getIt.registerLazySingleton<UserService>(
-    () => UserService(getIt<Dio>()),
-  );
-  getIt.registerLazySingleton<UserRepo>(
-    () => UserRepo(getIt<UserService>()),
-  );
-  getIt.registerFactory<UserCubit>(
-    () => UserCubit(getIt<UserRepo>()),
-  );
+  getIt.registerLazySingleton<UserService>(() => UserService(getIt<Dio>()));
+  getIt.registerLazySingleton<UserRepo>(() => UserRepo(getIt<UserService>()));
+  getIt.registerFactory<UserCubit>(() => UserCubit(getIt<UserRepo>()));
 }

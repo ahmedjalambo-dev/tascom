@@ -48,82 +48,83 @@ class SettingsScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: MyColors.background.primary,
         body: Column(
-        children: [
-          _buildAppBar(context),
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                _SettingsMenuItem(
-                  icon: MyIcons.userStroke,
-                  label: 'My Profile',
-                  onTap: () {
-                    context.pop();
-                  },
-                ),
-                _SettingsMenuItem(
-                  icon: MyIcons.requestsStroke,
-                  label: 'Requests',
-                  onTap: () {},
-                ),
-                _SettingsMenuItem(
-                  icon: MyIcons.saveStroke,
-                  label: 'Saved Tasks',
-                  onTap: () {},
-                ),
-                _SettingsMenuItem(
-                  icon: MyIcons.pointsStroke,
-                  label: 'Points History',
-                  onTap: () {
-                    context.pushNamed(MyRoutes.pointsHistory);
-                  },
-                ),
-                _SettingsMenuItem(
-                  icon: MyIcons.languageStroke,
-                  label: 'Language',
-                  onTap: () {},
-                ),
-                _SettingsMenuItem(
-                  icon: MyIcons.notificationStroke,
-                  label: 'Notifications',
-                  onTap: () {},
-                ),
-                _SettingsMenuItem(
-                  icon: MyIcons.lockPassword,
-                  label: 'Change Password',
-                  onTap: () {},
-                ),
-                _SettingsMenuItem(
-                  icon: MyIcons.reportsStroke,
-                  label: 'Reports',
-                  onTap: () {
-                    context.pushNamed(MyRoutes.reports);
-                  },
-                ),
-                _SettingsMenuItem(
-                  icon: MyIcons.deleteAccountStroke,
-                  label: 'Delete Account',
-                  onTap: () {
-                    context.pushNamed(MyRoutes.deleteAccount);
-                  },
-                ),
-                _SettingsMenuItem(
-                  icon: MyIcons.logoutStroke,
-                  label: 'Log Out',
-                  onTap: () async {
-                    final confirmed =
-                        await showLogoutConfirmationDialog(context);
-                    if (confirmed == true && context.mounted) {
-                      context.read<LogoutCubit>().logout();
-                    }
-                  },
-                  showDivider: false,
-                ),
-              ],
+          children: [
+            _buildAppBar(context),
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  _SettingsMenuItem(
+                    icon: MyIcons.userStroke,
+                    label: 'My Profile',
+                    onTap: () {
+                      context.pop();
+                    },
+                  ),
+                  _SettingsMenuItem(
+                    icon: MyIcons.requestsStroke,
+                    label: 'Requests',
+                    onTap: () {},
+                  ),
+                  _SettingsMenuItem(
+                    icon: MyIcons.saveStroke,
+                    label: 'Saved Tasks',
+                    onTap: () {},
+                  ),
+                  _SettingsMenuItem(
+                    icon: MyIcons.pointsStroke,
+                    label: 'Points History',
+                    onTap: () {
+                      context.pushNamed(MyRoutes.pointsHistory);
+                    },
+                  ),
+                  _SettingsMenuItem(
+                    icon: MyIcons.languageStroke,
+                    label: 'Language',
+                    onTap: () {},
+                  ),
+                  _SettingsMenuItem(
+                    icon: MyIcons.notificationStroke,
+                    label: 'Notifications',
+                    onTap: () {},
+                  ),
+                  _SettingsMenuItem(
+                    icon: MyIcons.lockPassword,
+                    label: 'Change Password',
+                    onTap: () {},
+                  ),
+                  _SettingsMenuItem(
+                    icon: MyIcons.reportsStroke,
+                    label: 'Reports',
+                    onTap: () {
+                      context.pushNamed(MyRoutes.reports);
+                    },
+                  ),
+                  _SettingsMenuItem(
+                    icon: MyIcons.deleteAccountStroke,
+                    label: 'Delete Account',
+                    onTap: () {
+                      context.pushNamed(MyRoutes.deleteAccount);
+                    },
+                  ),
+                  _SettingsMenuItem(
+                    icon: MyIcons.logoutStroke,
+                    label: 'Log Out',
+                    onTap: () async {
+                      final confirmed = await showLogoutConfirmationDialog(
+                        context,
+                      );
+                      if (confirmed == true && context.mounted) {
+                        context.read<LogoutCubit>().logout();
+                      }
+                    },
+                    showDivider: false,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
       ),
     );
   }

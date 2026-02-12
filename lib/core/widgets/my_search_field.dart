@@ -3,16 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tascom/core/constants/my_icons.dart';
 import 'package:tascom/core/themes/my_colors.dart';
-import 'package:tascom/features/home/ui/widgets/search/my_drop_down.dart';
+import 'package:tascom/core/widgets/my_drop_down.dart';
 
-class SearchField extends StatefulWidget {
+class MySearchField extends StatefulWidget {
   final FocusNode focusNode;
   final TextEditingController searchController;
   final TextEditingController selectedItem;
   final ValueChanged<String> onChanged;
   final ValueChanged<String> onSubmitted;
 
-  const SearchField({
+  const MySearchField({
     super.key,
     required this.focusNode,
     required this.searchController,
@@ -22,10 +22,10 @@ class SearchField extends StatefulWidget {
   });
 
   @override
-  State<SearchField> createState() => _SearchFieldState();
+  State<MySearchField> createState() => _MySearchFieldState();
 }
 
-class _SearchFieldState extends State<SearchField> {
+class _MySearchFieldState extends State<MySearchField> {
   final List<String> _dropdownItems = ['Tasks', 'People'];
 
   @override

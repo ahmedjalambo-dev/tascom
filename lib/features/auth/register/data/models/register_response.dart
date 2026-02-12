@@ -17,13 +17,11 @@ abstract class RegisterResponse with _$RegisterResponse {
 
 @freezed
 abstract class RegisterUserData with _$RegisterUserData {
-  const factory RegisterUserData({
-    String? id,
-    String? name,
-    String? email,
-  }) = _RegisterUserData;
+  const factory RegisterUserData({String? id, String? name, String? email}) =
+      _RegisterUserData;
 
   factory RegisterUserData.fromJson(Map<String, dynamic> json) =>
       _$RegisterUserDataFromJson(json);
 }
+
 // Test123*

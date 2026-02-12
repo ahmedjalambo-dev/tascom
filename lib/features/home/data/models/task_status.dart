@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 
-enum TaskStatus {
-  active,
-  open,
-  inProgress,
-  completed,
-  cancelled,
-}
+enum TaskStatus { active, open, inProgress, completed, cancelled }
 
 extension TaskStatusExtension on TaskStatus {
   String get displayName {

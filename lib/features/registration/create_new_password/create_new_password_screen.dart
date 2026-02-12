@@ -129,15 +129,12 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                   ),
                   suffixIcon: GestureDetector(
                     onTap: () => setState(
-                      () =>
-                          _obscureConfirmPassword = !_obscureConfirmPassword,
+                      () => _obscureConfirmPassword = !_obscureConfirmPassword,
                     ),
                     child: Padding(
                       padding: EdgeInsets.all(12.dg),
                       child: SvgPicture.asset(
-                        _obscureConfirmPassword
-                            ? MyIcons.eyeOff
-                            : MyIcons.eye,
+                        _obscureConfirmPassword ? MyIcons.eyeOff : MyIcons.eye,
                         width: 24.w,
                         height: 24.h,
                       ),

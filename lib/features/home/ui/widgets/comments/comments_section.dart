@@ -85,10 +85,7 @@ class CommentsSection extends StatelessWidget {
                       padding: EdgeInsets.only(
                         bottom: comment.replies.last != reply ? 16.h : 0,
                       ),
-                      child: CommentTile(
-                        comment: reply,
-                        isNested: true,
-                      ),
+                      child: CommentTile(comment: reply, isNested: true),
                     ),
                   ),
                 ],

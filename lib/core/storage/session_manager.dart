@@ -2,11 +2,7 @@ import 'dart:async';
 
 import 'shared_pref_helper.dart';
 
-enum AuthState {
-  initial,
-  authenticated,
-  unauthenticated,
-}
+enum AuthState { initial, authenticated, unauthenticated }
 
 class SessionManager {
   SessionManager._();
