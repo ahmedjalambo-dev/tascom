@@ -130,11 +130,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       items: TaskPriority.values,
       labelBuilder: (priority) => priority.displayName,
       selectedItem: _selectedPriority,
-      leadingBuilder: (priority) => SvgPicture.asset(
-        priority.icon,
-        width: 24.w,
-        height: 24.h,
-      ),
+      leadingBuilder: (priority) =>
+          SvgPicture.asset(priority.icon, width: 24.w, height: 24.h),
       selectedColorBuilder: (priority) => priority.textColor,
     );
     if (result != null) {
@@ -209,7 +206,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     const MyUserProfileRow(
                       name: 'Ahmed Khaled',
                       subtitle: 'Palestine, Gaza city',
-                      avatarUrl: 'https://randomuser.me/api/portraits/men/32.jpg',
+                      avatarUrl:
+                          'https://randomuser.me/api/portraits/men/32.jpg',
                     ),
                     const VerticalSpace(24),
 
@@ -251,7 +249,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     MyImagePicker(
                       selectedImage: _selectedImage,
                       onPickImage: _pickImage,
-                      onRemoveImage: () => setState(() => _selectedImage = null),
+                      onRemoveImage: () =>
+                          setState(() => _selectedImage = null),
                     ),
                     const VerticalSpace(24),
 
@@ -269,7 +268,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     const VerticalSpace(8),
                     MySelector(
                       icon: _selectedCategory?.icon ?? MyIcons.dashboardStroke,
-                      label: _selectedCategory?.displayName ?? 'Select Category',
+                      label:
+                          _selectedCategory?.displayName ?? 'Select Category',
                       isPlaceholder: _selectedCategory == null,
                       onTap: _showCategoryPicker,
                     ),
@@ -279,7 +279,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     const VerticalSpace(8),
                     MySelector(
                       icon: _selectedPriority?.icon ?? MyIcons.priorityStroke,
-                      label: _selectedPriority?.displayName ?? 'Select Priority',
+                      label:
+                          _selectedPriority?.displayName ?? 'Select Priority',
                       isPlaceholder: _selectedPriority == null,
                       onTap: _showPriorityPicker,
                     ),
@@ -304,11 +305,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         MyInfoBoxItem(
                           prefix: 'Points: ',
                           highlighted: '5 points',
-                          suffix: ' will be deducted once the task is completed, based on the task details',
+                          suffix:
+                              ' will be deducted once the task is completed, based on the task details',
                         ),
                         MyInfoBoxItem(
                           prefix: 'Accurate Information: ',
-                          suffix: 'Make sure all details (category, priority, and location) are correct to avoid confusion and attract the right helper',
+                          suffix:
+                              'Make sure all details (category, priority, and location) are correct to avoid confusion and attract the right helper',
                         ),
                       ],
                     ),

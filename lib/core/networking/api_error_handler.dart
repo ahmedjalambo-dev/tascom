@@ -21,9 +21,7 @@ class ApiErrorHandler {
           message: 'Connection timeout. Please check your internet connection.',
         );
       case DioExceptionType.sendTimeout:
-        return const ApiErrorModel(
-          message: 'Send timeout. Please try again.',
-        );
+        return const ApiErrorModel(message: 'Send timeout. Please try again.');
       case DioExceptionType.receiveTimeout:
         return const ApiErrorModel(
           message: 'Receive timeout. Please try again.',
@@ -35,9 +33,7 @@ class ApiErrorHandler {
       case DioExceptionType.badResponse:
         return _handleBadResponse(error.response);
       case DioExceptionType.cancel:
-        return const ApiErrorModel(
-          message: 'Request was cancelled.',
-        );
+        return const ApiErrorModel(message: 'Request was cancelled.');
       case DioExceptionType.connectionError:
         return const ApiErrorModel(
           message: 'No internet connection. Please check your network.',

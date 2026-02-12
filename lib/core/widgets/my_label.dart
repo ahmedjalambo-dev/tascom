@@ -3,10 +3,7 @@ import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
 
 class MyLabel extends StatelessWidget {
-  const MyLabel(
-    this.label, {
-    super.key,
-  });
+  const MyLabel(this.label, {super.key});
 
   final String label;
 

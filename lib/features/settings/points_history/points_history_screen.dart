@@ -51,9 +51,8 @@ class _PointsHistoryScreenState extends State<PointsHistoryScreen> {
                 _buildHistoryHeader(),
                 const VerticalSpace(12),
                 ..._filteredTransactions.map(
-                  (transaction) => PointsTransactionTile(
-                    transaction: transaction,
-                  ),
+                  (transaction) =>
+                      PointsTransactionTile(transaction: transaction),
                 ),
                 const VerticalSpace(24),
               ],

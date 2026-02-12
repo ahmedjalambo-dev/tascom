@@ -7,10 +7,8 @@ part 'user_response.g.dart';
 
 @freezed
 abstract class UserResponse with _$UserResponse {
-  const factory UserResponse({
-    required bool success,
-    required UserModel data,
-  }) = _UserResponse;
+  const factory UserResponse({required bool success, required UserModel data}) =
+      _UserResponse;
 
   factory UserResponse.fromJson(Map<String, dynamic> json) =>
       _$UserResponseFromJson(json);

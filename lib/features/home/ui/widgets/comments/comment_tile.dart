@@ -33,11 +33,7 @@ class CommentTile extends StatelessWidget {
                 : null,
             backgroundColor: MyColors.background.secondary,
             child: comment.userAvatar == null
-                ? Icon(
-                    Icons.person,
-                    size: 20.r,
-                    color: MyColors.icons.icon,
-                  )
+                ? Icon(Icons.person, size: 20.r, color: MyColors.icons.icon)
                 : null,
           ),
           const HorizontalSpace(12),

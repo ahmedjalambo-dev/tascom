@@ -25,7 +25,8 @@ class MySelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveIconColor = iconColor ??
+    final effectiveIconColor =
+        iconColor ??
         (isPlaceholder ? MyColors.text.third : MyColors.brand.purple);
 
     return InkWell(
@@ -53,8 +54,9 @@ class MySelector extends StatelessWidget {
               child: Text(
                 label,
                 style: MyTextStyles.body.body2.copyWith(
-                  color:
-                      isPlaceholder ? MyColors.text.third : MyColors.text.primary,
+                  color: isPlaceholder
+                      ? MyColors.text.third
+                      : MyColors.text.primary,
                 ),
               ),
             ),

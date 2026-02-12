@@ -113,4 +113,8 @@ abstract class MyIcons {
   static const String trashStroke = '$_basePath/trash_stroke.svg';
   static const String warningSolid = '$_basePath/warning_solid.svg';
   static const String checkboxSolid = '$_basePath/checkbox_solid.svg';
+
+  // filter
+  static const String filterStroke = '$_basePath/filter_stroke.svg';
+  static const String filterSolid = '$_basePath/filter_solid.svg';
 }

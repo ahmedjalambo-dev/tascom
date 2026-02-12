@@ -30,6 +30,7 @@ class MyOutlinedButton extends StatelessWidget {
       child: OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
+          minimumSize: const Size.fromWidth(double.infinity),
           side: BorderSide(
             color: borderColor ?? MyColors.border.border,
             width: 1.5,

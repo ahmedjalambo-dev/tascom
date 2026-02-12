@@ -3,9 +3,5 @@ class TaskLocation {
   final double? latitude;
   final double? longitude;
 
-  const TaskLocation({
-    required this.name,
-    this.latitude,
-    this.longitude,
-  });
+  const TaskLocation({required this.name, this.latitude, this.longitude});
 }

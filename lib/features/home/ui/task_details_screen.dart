@@ -12,10 +12,7 @@ import 'package:tascom/features/home/ui/widgets/task_details_app_bar.dart';
 class TaskDetailsScreen extends StatefulWidget {
   final TaskModel taskModel;
 
-  const TaskDetailsScreen({
-    super.key,
-    required this.taskModel,
-  });
+  const TaskDetailsScreen({super.key, required this.taskModel});
 
   @override
   State<TaskDetailsScreen> createState() => _TaskDetailsScreenState();
@@ -54,8 +51,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                   const VerticalSpace(16),
                   TaskCard(
                     taskModel: _taskModel,
-                    onClaimTap:
-                        _taskModel.isClaimed ? null : _handleClaimTask,
+                    onClaimTap: _taskModel.isClaimed ? null : _handleClaimTask,
                   ),
                   const VerticalSpace(24),
                   CommentsSection(

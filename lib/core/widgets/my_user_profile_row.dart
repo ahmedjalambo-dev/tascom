@@ -26,8 +26,7 @@ class MyUserProfileRow extends StatelessWidget {
         CircleAvatar(
           radius: avatarRadius ?? 24.r,
           backgroundColor: MyColors.border.border,
-          backgroundImage:
-              avatarUrl != null ? NetworkImage(avatarUrl!) : null,
+          backgroundImage: avatarUrl != null ? NetworkImage(avatarUrl!) : null,
           child: avatarUrl == null
               ? Icon(
                   Icons.person,

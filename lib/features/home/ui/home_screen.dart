@@ -11,7 +11,7 @@ import 'package:tascom/features/home/data/task_mock_data.dart';
 import 'package:tascom/features/home/ui/widgets/categoies/category_filter_list.dart';
 import 'package:tascom/features/home/ui/widgets/home_app_bar.dart';
 import 'package:tascom/features/home/ui/widgets/posts/posts_filter_dropdown.dart';
-import 'package:tascom/features/home/ui/widgets/search/search_field.dart';
+import 'package:tascom/core/widgets/my_search_field.dart';
 import 'package:tascom/features/home/ui/widgets/posts/task_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             const HomeAppBar(),
             const VerticalSpace(24),
-            SearchField(
+            MySearchField(
               focusNode: _searchFocusNode,
               searchController: _searchController,
               selectedItem: _selectedItemController,

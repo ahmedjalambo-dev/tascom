@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 
-enum TransactionStatus {
-  completed,
-  cancelled,
-}
+enum TransactionStatus { completed, cancelled }
 
 extension TransactionStatusExtension on TransactionStatus {
   String get displayName {
