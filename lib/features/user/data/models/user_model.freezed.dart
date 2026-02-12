@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserModel {
 
- String get id; String get name; String get email; String? get phoneNumber; String? get location; String? get about; List<String>? get skills;@JsonKey(name: 'DOB') DateTime? get dateOfBirth; String? get gender; String? get avatar; double? get rating; int? get reviewCount; int? get points; int? get postedCount; int? get claimedCount; int? get completedCount;
+ String get id; String get name; String get email; String? get phoneNumber; String? get location; String? get about; String? get skills;@JsonKey(name: 'DOB') DateTime? get dateOfBirth; String? get gender; String? get avatar;@JsonKey(name: 'ratingAvg') double? get rating; int? get reviewCount;@JsonKey(name: 'pointsBalance') int? get points; int? get postedCount; int? get claimedCount; int? get completedCount;
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,12 +28,12 @@ $UserModelCopyWith<UserModel> get copyWith => _$UserModelCopyWithImpl<UserModel>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.location, location) || other.location == location)&&(identical(other.about, about) || other.about == about)&&const DeepCollectionEquality().equals(other.skills, skills)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.reviewCount, reviewCount) || other.reviewCount == reviewCount)&&(identical(other.points, points) || other.points == points)&&(identical(other.postedCount, postedCount) || other.postedCount == postedCount)&&(identical(other.claimedCount, claimedCount) || other.claimedCount == claimedCount)&&(identical(other.completedCount, completedCount) || other.completedCount == completedCount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.location, location) || other.location == location)&&(identical(other.about, about) || other.about == about)&&(identical(other.skills, skills) || other.skills == skills)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.reviewCount, reviewCount) || other.reviewCount == reviewCount)&&(identical(other.points, points) || other.points == points)&&(identical(other.postedCount, postedCount) || other.postedCount == postedCount)&&(identical(other.claimedCount, claimedCount) || other.claimedCount == claimedCount)&&(identical(other.completedCount, completedCount) || other.completedCount == completedCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,email,phoneNumber,location,about,const DeepCollectionEquality().hash(skills),dateOfBirth,gender,avatar,rating,reviewCount,points,postedCount,claimedCount,completedCount);
+int get hashCode => Object.hash(runtimeType,id,name,email,phoneNumber,location,about,skills,dateOfBirth,gender,avatar,rating,reviewCount,points,postedCount,claimedCount,completedCount);
 
 @override
 String toString() {
@@ -48,7 +48,7 @@ abstract mixin class $UserModelCopyWith<$Res>  {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) _then) = _$UserModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, String email, String? phoneNumber, String? location, String? about, List<String>? skills,@JsonKey(name: 'DOB') DateTime? dateOfBirth, String? gender, String? avatar, double? rating, int? reviewCount, int? points, int? postedCount, int? claimedCount, int? completedCount
+ String id, String name, String email, String? phoneNumber, String? location, String? about, String? skills,@JsonKey(name: 'DOB') DateTime? dateOfBirth, String? gender, String? avatar,@JsonKey(name: 'ratingAvg') double? rating, int? reviewCount,@JsonKey(name: 'pointsBalance') int? points, int? postedCount, int? claimedCount, int? completedCount
 });
 
 
@@ -74,7 +74,7 @@ as String,phoneNumber: freezed == phoneNumber ? _self.phoneNumber : phoneNumber 
 as String?,location: freezed == location ? _self.location : location // ignore: cast_nullable_to_non_nullable
 as String?,about: freezed == about ? _self.about : about // ignore: cast_nullable_to_non_nullable
 as String?,skills: freezed == skills ? _self.skills : skills // ignore: cast_nullable_to_non_nullable
-as List<String>?,dateOfBirth: freezed == dateOfBirth ? _self.dateOfBirth : dateOfBirth // ignore: cast_nullable_to_non_nullable
+as String?,dateOfBirth: freezed == dateOfBirth ? _self.dateOfBirth : dateOfBirth // ignore: cast_nullable_to_non_nullable
 as DateTime?,gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as String?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
 as String?,rating: freezed == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
@@ -168,7 +168,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String email,  String? phoneNumber,  String? location,  String? about,  List<String>? skills, @JsonKey(name: 'DOB')  DateTime? dateOfBirth,  String? gender,  String? avatar,  double? rating,  int? reviewCount,  int? points,  int? postedCount,  int? claimedCount,  int? completedCount)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String email,  String? phoneNumber,  String? location,  String? about,  String? skills, @JsonKey(name: 'DOB')  DateTime? dateOfBirth,  String? gender,  String? avatar, @JsonKey(name: 'ratingAvg')  double? rating,  int? reviewCount, @JsonKey(name: 'pointsBalance')  int? points,  int? postedCount,  int? claimedCount,  int? completedCount)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserModel() when $default != null:
 return $default(_that.id,_that.name,_that.email,_that.phoneNumber,_that.location,_that.about,_that.skills,_that.dateOfBirth,_that.gender,_that.avatar,_that.rating,_that.reviewCount,_that.points,_that.postedCount,_that.claimedCount,_that.completedCount);case _:
@@ -189,7 +189,7 @@ return $default(_that.id,_that.name,_that.email,_that.phoneNumber,_that.location
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String email,  String? phoneNumber,  String? location,  String? about,  List<String>? skills, @JsonKey(name: 'DOB')  DateTime? dateOfBirth,  String? gender,  String? avatar,  double? rating,  int? reviewCount,  int? points,  int? postedCount,  int? claimedCount,  int? completedCount)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String email,  String? phoneNumber,  String? location,  String? about,  String? skills, @JsonKey(name: 'DOB')  DateTime? dateOfBirth,  String? gender,  String? avatar, @JsonKey(name: 'ratingAvg')  double? rating,  int? reviewCount, @JsonKey(name: 'pointsBalance')  int? points,  int? postedCount,  int? claimedCount,  int? completedCount)  $default,) {final _that = this;
 switch (_that) {
 case _UserModel():
 return $default(_that.id,_that.name,_that.email,_that.phoneNumber,_that.location,_that.about,_that.skills,_that.dateOfBirth,_that.gender,_that.avatar,_that.rating,_that.reviewCount,_that.points,_that.postedCount,_that.claimedCount,_that.completedCount);case _:
@@ -209,7 +209,7 @@ return $default(_that.id,_that.name,_that.email,_that.phoneNumber,_that.location
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String email,  String? phoneNumber,  String? location,  String? about,  List<String>? skills, @JsonKey(name: 'DOB')  DateTime? dateOfBirth,  String? gender,  String? avatar,  double? rating,  int? reviewCount,  int? points,  int? postedCount,  int? claimedCount,  int? completedCount)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String email,  String? phoneNumber,  String? location,  String? about,  String? skills, @JsonKey(name: 'DOB')  DateTime? dateOfBirth,  String? gender,  String? avatar, @JsonKey(name: 'ratingAvg')  double? rating,  int? reviewCount, @JsonKey(name: 'pointsBalance')  int? points,  int? postedCount,  int? claimedCount,  int? completedCount)?  $default,) {final _that = this;
 switch (_that) {
 case _UserModel() when $default != null:
 return $default(_that.id,_that.name,_that.email,_that.phoneNumber,_that.location,_that.about,_that.skills,_that.dateOfBirth,_that.gender,_that.avatar,_that.rating,_that.reviewCount,_that.points,_that.postedCount,_that.claimedCount,_that.completedCount);case _:
@@ -224,7 +224,7 @@ return $default(_that.id,_that.name,_that.email,_that.phoneNumber,_that.location
 @JsonSerializable()
 
 class _UserModel implements UserModel {
-  const _UserModel({required this.id, required this.name, required this.email, this.phoneNumber, this.location, this.about, final  List<String>? skills, @JsonKey(name: 'DOB') this.dateOfBirth, this.gender, this.avatar, this.rating, this.reviewCount, this.points, this.postedCount, this.claimedCount, this.completedCount}): _skills = skills;
+  const _UserModel({required this.id, required this.name, required this.email, this.phoneNumber, this.location, this.about, this.skills, @JsonKey(name: 'DOB') this.dateOfBirth, this.gender, this.avatar, @JsonKey(name: 'ratingAvg') this.rating, this.reviewCount, @JsonKey(name: 'pointsBalance') this.points, this.postedCount, this.claimedCount, this.completedCount});
   factory _UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 
 @override final  String id;
@@ -233,21 +233,13 @@ class _UserModel implements UserModel {
 @override final  String? phoneNumber;
 @override final  String? location;
 @override final  String? about;
- final  List<String>? _skills;
-@override List<String>? get skills {
-  final value = _skills;
-  if (value == null) return null;
-  if (_skills is EqualUnmodifiableListView) return _skills;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(value);
-}
-
+@override final  String? skills;
 @override@JsonKey(name: 'DOB') final  DateTime? dateOfBirth;
 @override final  String? gender;
 @override final  String? avatar;
-@override final  double? rating;
+@override@JsonKey(name: 'ratingAvg') final  double? rating;
 @override final  int? reviewCount;
-@override final  int? points;
+@override@JsonKey(name: 'pointsBalance') final  int? points;
 @override final  int? postedCount;
 @override final  int? claimedCount;
 @override final  int? completedCount;
@@ -265,12 +257,12 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.location, location) || other.location == location)&&(identical(other.about, about) || other.about == about)&&const DeepCollectionEquality().equals(other._skills, _skills)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.reviewCount, reviewCount) || other.reviewCount == reviewCount)&&(identical(other.points, points) || other.points == points)&&(identical(other.postedCount, postedCount) || other.postedCount == postedCount)&&(identical(other.claimedCount, claimedCount) || other.claimedCount == claimedCount)&&(identical(other.completedCount, completedCount) || other.completedCount == completedCount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.location, location) || other.location == location)&&(identical(other.about, about) || other.about == about)&&(identical(other.skills, skills) || other.skills == skills)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.reviewCount, reviewCount) || other.reviewCount == reviewCount)&&(identical(other.points, points) || other.points == points)&&(identical(other.postedCount, postedCount) || other.postedCount == postedCount)&&(identical(other.claimedCount, claimedCount) || other.claimedCount == claimedCount)&&(identical(other.completedCount, completedCount) || other.completedCount == completedCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,email,phoneNumber,location,about,const DeepCollectionEquality().hash(_skills),dateOfBirth,gender,avatar,rating,reviewCount,points,postedCount,claimedCount,completedCount);
+int get hashCode => Object.hash(runtimeType,id,name,email,phoneNumber,location,about,skills,dateOfBirth,gender,avatar,rating,reviewCount,points,postedCount,claimedCount,completedCount);
 
 @override
 String toString() {
@@ -285,7 +277,7 @@ abstract mixin class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Re
   factory _$UserModelCopyWith(_UserModel value, $Res Function(_UserModel) _then) = __$UserModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, String email, String? phoneNumber, String? location, String? about, List<String>? skills,@JsonKey(name: 'DOB') DateTime? dateOfBirth, String? gender, String? avatar, double? rating, int? reviewCount, int? points, int? postedCount, int? claimedCount, int? completedCount
+ String id, String name, String email, String? phoneNumber, String? location, String? about, String? skills,@JsonKey(name: 'DOB') DateTime? dateOfBirth, String? gender, String? avatar,@JsonKey(name: 'ratingAvg') double? rating, int? reviewCount,@JsonKey(name: 'pointsBalance') int? points, int? postedCount, int? claimedCount, int? completedCount
 });
 
 
@@ -310,8 +302,8 @@ as String,email: null == email ? _self.email : email // ignore: cast_nullable_to
 as String,phoneNumber: freezed == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
 as String?,location: freezed == location ? _self.location : location // ignore: cast_nullable_to_non_nullable
 as String?,about: freezed == about ? _self.about : about // ignore: cast_nullable_to_non_nullable
-as String?,skills: freezed == skills ? _self._skills : skills // ignore: cast_nullable_to_non_nullable
-as List<String>?,dateOfBirth: freezed == dateOfBirth ? _self.dateOfBirth : dateOfBirth // ignore: cast_nullable_to_non_nullable
+as String?,skills: freezed == skills ? _self.skills : skills // ignore: cast_nullable_to_non_nullable
+as String?,dateOfBirth: freezed == dateOfBirth ? _self.dateOfBirth : dateOfBirth // ignore: cast_nullable_to_non_nullable
 as DateTime?,gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as String?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
 as String?,rating: freezed == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable

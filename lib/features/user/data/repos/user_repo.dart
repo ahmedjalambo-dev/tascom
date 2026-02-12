@@ -14,7 +14,7 @@ class UserRepo {
   Future<ApiResult<UserModel>> getUser(String id) async {
     try {
       final response = await _userService.getUser(id);
-      return ApiResult.success(response);
+      return ApiResult.success(response.data);
     } catch (error) {
       return ApiResult.failure(ApiErrorHandler.handle(error));
     }
@@ -37,7 +37,7 @@ class UserRepo {
         gender: request.gender,
         file: request.avatarFile,
       );
-      return ApiResult.success(response);
+      return ApiResult.success(response.data);
     } catch (error) {
       return ApiResult.failure(ApiErrorHandler.handle(error));
     }

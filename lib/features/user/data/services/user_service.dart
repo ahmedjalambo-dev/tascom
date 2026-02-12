@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../../core/networking/api_constants.dart';
-import '../models/user_model.dart';
+import '../models/user_response.dart';
 
 part 'user_service.g.dart';
 
@@ -13,14 +13,14 @@ abstract class UserService {
   factory UserService(Dio dio) = _UserService;
 
   @GET('${ApiConstants.users}/{id}')
-  Future<UserModel> getUser(@Path('id') String id);
+  Future<UserResponse> getUser(@Path('id') String id);
 
   @DELETE('${ApiConstants.users}/{id}')
   Future<void> deleteUser(@Path('id') String id);
 
   @MultiPart()
   @PATCH('${ApiConstants.users}/{id}')
-  Future<UserModel> updateUser(
+  Future<UserResponse> updateUser(
     @Path('id') String id, {
     @Part(name: 'name') String? name,
     @Part(name: 'email') String? email,

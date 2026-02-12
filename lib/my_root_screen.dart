@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tascom/core/di/injection.dart';
 import 'package:tascom/core/routes/my_routes.dart';
+import 'package:tascom/core/storage/session_manager.dart';
 import 'package:tascom/core/widgets/my_bottom_navigation_bar.dart';
 import 'package:tascom/features/ai/ai_screen.dart';
 import 'package:tascom/features/home/ui/home_screen.dart';
 import 'package:tascom/features/search/search_screen.dart';
 import 'package:tascom/features/profile/profile_screen.dart';
+import 'package:tascom/features/user/cubit/user_cubit.dart';
 
 class MyRootScreen extends StatefulWidget {
   const MyRootScreen({super.key});
@@ -16,11 +20,21 @@ class MyRootScreen extends StatefulWidget {
 class _MyRootScreenState extends State<MyRootScreen> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = const [
-    HomeScreen(),
-    SearchScreen(),
-    AiScreen(),
-    ProfileScreen(),
+  late final List<Widget> _screens = [
+    const HomeScreen(),
+    const SearchScreen(),
+    const AiScreen(),
+    BlocProvider(
+      create: (_) {
+        final cubit = getIt<UserCubit>();
+        final userId = SessionManager.instance.currentUserId;
+        if (userId != null) {
+          cubit.getUser(userId);
+        }
+        return cubit;
+      },
+      child: const ProfileScreen(),
+    ),
   ];
 
   void _onTabTapped(int index) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tascom/core/constants/my_icons.dart';
@@ -16,6 +17,10 @@ import 'package:tascom/features/profile/widgets/profile_header.dart';
 import 'package:tascom/features/profile/widgets/profile_stats_card.dart';
 import 'package:tascom/features/profile/widgets/profile_tab_selector.dart';
 import 'package:tascom/features/profile/widgets/profile_task_card.dart';
+import 'package:tascom/features/user/cubit/user_cubit.dart';
+import 'package:tascom/features/user/cubit/user_state.dart';
+import 'package:tascom/features/user/data/models/user_model.dart';
+import 'package:tascom/core/storage/session_manager.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -131,37 +136,97 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           const ProfileAppBar(),
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const VerticalSpace(16),
-                  ProfileHeader(
-                    name: ProfileData.currentUser.name,
-                    avatarUrl: ProfileData.currentUser.avatar,
-                    rating: ProfileData.currentUser.rating,
-                    reviewCount: ProfileData.reviewCount,
+            child: BlocBuilder<UserCubit, UserState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: () => const SizedBox.shrink(),
+                  loading: () => const Center(
+                    child: CircularProgressIndicator(),
                   ),
-                  const VerticalSpace(24),
-                  const ProfileStatsCard(
-                    points: ProfileData.points,
-                    postedCount: ProfileData.postedCount,
-                    claimedCount: ProfileData.claimedCount,
-                    completedCount: ProfileData.completedCount,
+                  loaded: (user) => _buildProfileContent(user),
+                  updateSuccess: (user) => _buildProfileContent(user),
+                  deleteSuccess: () => const SizedBox.shrink(),
+                  error: (error) => _buildErrorState(
+                    error.message ?? 'Something went wrong',
                   ),
-                  const VerticalSpace(24),
-                  ProfileTabSelector(
-                    selectedTab: _selectedTab,
-                    onTabChanged: _onTabChanged,
-                  ),
-                  const VerticalSpace(20),
-                  _buildTasksHeader(),
-                  _buildTasksList(),
-                  const VerticalSpace(100),
-                ],
-              ),
+                );
+              },
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildProfileContent(UserModel user) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const VerticalSpace(16),
+          ProfileHeader(
+            name: user.name,
+            avatarUrl: user.avatar,
+            rating: user.rating ?? 0.0,
+            reviewCount: user.reviewCount ?? 0,
+          ),
+          const VerticalSpace(24),
+          ProfileStatsCard(
+            points: user.points ?? 0,
+            postedCount: user.postedCount ?? 0,
+            claimedCount: user.claimedCount ?? 0,
+            completedCount: user.completedCount ?? 0,
+          ),
+          const VerticalSpace(24),
+          ProfileTabSelector(
+            selectedTab: _selectedTab,
+            onTabChanged: _onTabChanged,
+          ),
+          const VerticalSpace(20),
+          _buildTasksHeader(),
+          _buildTasksList(),
+          const VerticalSpace(100),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildErrorState(String message) {
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.error_outline,
+              size: 64.sp,
+              color: MyColors.text.third,
+            ),
+            const VerticalSpace(16),
+            Text(
+              message,
+              textAlign: TextAlign.center,
+              style: MyTextStyles.body.body1.copyWith(
+                color: MyColors.text.secondary,
+              ),
+            ),
+            const VerticalSpace(24),
+            TextButton(
+              onPressed: () {
+                final userId = SessionManager.instance.currentUserId;
+                if (userId != null) {
+                  context.read<UserCubit>().getUser(userId);
+                }
+              },
+              child: Text(
+                'Retry',
+                style: MyTextStyles.button.primaryButton1.copyWith(
+                  color: MyColors.brand.purple,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

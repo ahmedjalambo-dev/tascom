@@ -20,12 +20,12 @@ class _UserService implements UserService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<UserModel> getUser(String id) async {
+  Future<UserResponse> getUser(String id) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<UserModel>(
+    final _options = _setStreamType<UserResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -36,9 +36,9 @@ class _UserService implements UserService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late UserModel _value;
+    late UserResponse _value;
     try {
-      _value = UserModel.fromJson(_result.data!);
+      _value = UserResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
@@ -66,7 +66,7 @@ class _UserService implements UserService {
   }
 
   @override
-  Future<UserModel> updateUser(
+  Future<UserResponse> updateUser(
     String id, {
     String? name,
     String? email,
@@ -118,7 +118,7 @@ class _UserService implements UserService {
         ),
       );
     }
-    final _options = _setStreamType<UserModel>(
+    final _options = _setStreamType<UserResponse>(
       Options(
             method: 'PATCH',
             headers: _headers,
@@ -134,9 +134,9 @@ class _UserService implements UserService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late UserModel _value;
+    late UserResponse _value;
     try {
-      _value = UserModel.fromJson(_result.data!);
+      _value = UserResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
