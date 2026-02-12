@@ -25,10 +25,7 @@ class WarningCard extends StatelessWidget {
         color: MyColors.states.error.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12.r),
         border: Border(
-          left: BorderSide(
-            color: MyColors.states.error,
-            width: 4.w,
-          ),
+          left: BorderSide(color: MyColors.states.error, width: 4.w),
         ),
       ),
       child: Column(
@@ -49,7 +46,7 @@ class WarningCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   title,
-                  style: MyTextStyles.body.body1.copyWith(
+                  style: MyTextStyles.button.secondaryButton2.copyWith(
                     color: MyColors.states.error,
                     fontWeight: FontWeight.w600,
                   ),
@@ -60,7 +57,7 @@ class WarningCard extends StatelessWidget {
           const VerticalSpace(8),
           Text(
             description,
-            style: MyTextStyles.body.body2.copyWith(
+            style: MyTextStyles.caption.captionNotes.copyWith(
               color: MyColors.states.error,
             ),
           ),

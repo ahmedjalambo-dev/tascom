@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tascom/core/constants/my_icons.dart';
@@ -6,6 +7,8 @@ import 'package:tascom/core/extentions/extentions.dart';
 import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
+import 'package:tascom/features/auth/logout/cubit/logout_cubit.dart';
+import 'package:tascom/features/auth/logout/cubit/logout_state.dart';
 import 'package:tascom/features/settings/logout/logout_confirmation_dialog.dart';
 import 'package:tascom/core/widgets/my_app_bar.dart';
 
@@ -14,9 +17,37 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: MyColors.background.primary,
-      body: Column(
+    return BlocListener<LogoutCubit, LogoutState>(
+      listener: (context, state) {
+        state.maybeWhen(
+          loading: () {
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (_) => const Center(child: CircularProgressIndicator()),
+            );
+          },
+          success: () {
+            context.pushNamedAndRemoveUntil(
+              MyRoutes.login,
+              predicate: (route) => false,
+            );
+          },
+          error: (error) {
+            Navigator.of(context).pop();
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(error.message ?? 'Logout failed'),
+                backgroundColor: MyColors.states.error,
+              ),
+            );
+          },
+          orElse: () {},
+        );
+      },
+      child: Scaffold(
+        backgroundColor: MyColors.background.primary,
+        body: Column(
         children: [
           _buildAppBar(context),
           Expanded(
@@ -79,8 +110,12 @@ class SettingsScreen extends StatelessWidget {
                 _SettingsMenuItem(
                   icon: MyIcons.logoutStroke,
                   label: 'Log Out',
-                  onTap: () {
-                    showLogoutConfirmationDialog(context);
+                  onTap: () async {
+                    final confirmed =
+                        await showLogoutConfirmationDialog(context);
+                    if (confirmed == true && context.mounted) {
+                      context.read<LogoutCubit>().logout();
+                    }
                   },
                   showDivider: false,
                 ),
@@ -88,6 +123,7 @@ class SettingsScreen extends StatelessWidget {
             ),
           ),
         ],
+      ),
       ),
     );
   }

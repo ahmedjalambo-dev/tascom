@@ -59,12 +59,12 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.background.primary,
-      body: Column(
-        children: [
-          _buildAppBar(),
-          Expanded(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.all(16.w),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            _buildAppBar(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -77,14 +77,14 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                   ),
                   const VerticalSpace(24),
                   _buildConsequencesList(),
-                  const VerticalSpace(32),
+                  const VerticalSpace(24),
                   _buildConfirmationSection(),
                 ],
               ),
             ),
-          ),
-          _buildDeleteButton(),
-        ],
+            _buildDeleteButton(),
+          ],
+        ),
       ),
     );
   }
@@ -99,20 +99,13 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
             MyIcons.arrowBack,
             width: 24.w,
             height: 24.h,
-            colorFilter: ColorFilter.mode(
-              MyColors.text.primary,
-              BlendMode.srcIn,
-            ),
+            colorFilter: ColorFilter.mode(MyColors.icons.icon, BlendMode.srcIn),
           ),
         ),
       ),
-      title: Center(
-        child: Text(
-          'Delete Account',
-          style: MyTextStyles.heading.h22.copyWith(
-            color: MyColors.text.primary,
-          ),
-        ),
+      title: Text(
+        'Delete Account',
+        style: MyTextStyles.heading.h32.copyWith(color: MyColors.text.primary),
       ),
     );
   }
@@ -123,14 +116,14 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
       children: [
         Text(
           'Delete Account',
-          style: MyTextStyles.heading.h21.copyWith(
+          style: MyTextStyles.heading.h32.copyWith(
             color: MyColors.text.primary,
           ),
         ),
         const VerticalSpace(8),
         Text(
           'Permanently remove your account and data from Tascom.',
-          style: MyTextStyles.body.body1.copyWith(
+          style: MyTextStyles.body.body2.copyWith(
             color: MyColors.text.secondary,
           ),
         ),
@@ -144,9 +137,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
         ConsequenceItem(
           text: 'Your public profile will be immediately deactivated.',
         ),
-        ConsequenceItem(
-          text: 'All your earned points will be lost.',
-        ),
+        ConsequenceItem(text: 'All your earned points will be lost.'),
         ConsequenceItem(
           text: 'Your active tasks will be canceled automatically.',
         ),
@@ -164,16 +155,12 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
       children: [
         Text(
           'To confirm, type "DELETE" below',
-          style: MyTextStyles.body.body1.copyWith(
+          style: MyTextStyles.heading.h32.copyWith(
             color: MyColors.text.primary,
-            fontWeight: FontWeight.w600,
           ),
         ),
         const VerticalSpace(12),
-        MyTextField(
-          controller: _confirmController,
-          hintText: 'DELETE',
-        ),
+        MyTextField(controller: _confirmController, hintText: 'DELETE'),
       ],
     );
   }

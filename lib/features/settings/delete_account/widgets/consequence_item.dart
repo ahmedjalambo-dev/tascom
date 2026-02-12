@@ -7,10 +7,7 @@ import 'package:tascom/core/themes/my_text_styles.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
 
 class ConsequenceItem extends StatelessWidget {
-  const ConsequenceItem({
-    super.key,
-    required this.text,
-  });
+  const ConsequenceItem({super.key, required this.text});
 
   final String text;
 
@@ -25,16 +22,13 @@ class ConsequenceItem extends StatelessWidget {
             MyIcons.checkboxSolid,
             width: 24.w,
             height: 24.w,
-            colorFilter: ColorFilter.mode(
-              MyColors.text.third,
-              BlendMode.srcIn,
-            ),
+            colorFilter: ColorFilter.mode(MyColors.text.third, BlendMode.srcIn),
           ),
           const HorizontalSpace(12),
           Expanded(
             child: Text(
               text,
-              style: MyTextStyles.body.body1.copyWith(
+              style: MyTextStyles.body.body2.copyWith(
                 color: MyColors.text.secondary,
               ),
             ),
