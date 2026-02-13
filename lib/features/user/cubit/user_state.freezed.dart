@@ -55,15 +55,14 @@ extension UserStatePatterns on UserState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Loading value)?  loading,TResult Function( _Loaded value)?  loaded,TResult Function( _UpdateSuccess value)?  updateSuccess,TResult Function( _DeleteSuccess value)?  deleteSuccess,TResult Function( _Error value)?  error,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Loading value)?  loading,TResult Function( _Loaded value)?  loaded,TResult Function( _UpdateSuccess value)?  updateSuccess,TResult Function( _Error value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case _Loading() when loading != null:
 return loading(_that);case _Loaded() when loaded != null:
 return loaded(_that);case _UpdateSuccess() when updateSuccess != null:
-return updateSuccess(_that);case _DeleteSuccess() when deleteSuccess != null:
-return deleteSuccess(_that);case _Error() when error != null:
+return updateSuccess(_that);case _Error() when error != null:
 return error(_that);case _:
   return orElse();
 
@@ -82,15 +81,14 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Loading value)  loading,required TResult Function( _Loaded value)  loaded,required TResult Function( _UpdateSuccess value)  updateSuccess,required TResult Function( _DeleteSuccess value)  deleteSuccess,required TResult Function( _Error value)  error,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Loading value)  loading,required TResult Function( _Loaded value)  loaded,required TResult Function( _UpdateSuccess value)  updateSuccess,required TResult Function( _Error value)  error,}){
 final _that = this;
 switch (_that) {
 case _Initial():
 return initial(_that);case _Loading():
 return loading(_that);case _Loaded():
 return loaded(_that);case _UpdateSuccess():
-return updateSuccess(_that);case _DeleteSuccess():
-return deleteSuccess(_that);case _Error():
+return updateSuccess(_that);case _Error():
 return error(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -108,15 +106,14 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Loading value)?  loading,TResult? Function( _Loaded value)?  loaded,TResult? Function( _UpdateSuccess value)?  updateSuccess,TResult? Function( _DeleteSuccess value)?  deleteSuccess,TResult? Function( _Error value)?  error,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Loading value)?  loading,TResult? Function( _Loaded value)?  loaded,TResult? Function( _UpdateSuccess value)?  updateSuccess,TResult? Function( _Error value)?  error,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case _Loading() when loading != null:
 return loading(_that);case _Loaded() when loaded != null:
 return loaded(_that);case _UpdateSuccess() when updateSuccess != null:
-return updateSuccess(_that);case _DeleteSuccess() when deleteSuccess != null:
-return deleteSuccess(_that);case _Error() when error != null:
+return updateSuccess(_that);case _Error() when error != null:
 return error(_that);case _:
   return null;
 
@@ -134,14 +131,13 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( UserModel user)?  loaded,TResult Function( UserModel user)?  updateSuccess,TResult Function()?  deleteSuccess,TResult Function( ApiErrorModel error)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( UserModel user)?  loaded,TResult Function( UserModel user)?  updateSuccess,TResult Function( ApiErrorModel error)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Loaded() when loaded != null:
 return loaded(_that.user);case _UpdateSuccess() when updateSuccess != null:
-return updateSuccess(_that.user);case _DeleteSuccess() when deleteSuccess != null:
-return deleteSuccess();case _Error() when error != null:
+return updateSuccess(_that.user);case _Error() when error != null:
 return error(_that.error);case _:
   return orElse();
 
@@ -160,14 +156,13 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( UserModel user)  loaded,required TResult Function( UserModel user)  updateSuccess,required TResult Function()  deleteSuccess,required TResult Function( ApiErrorModel error)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( UserModel user)  loaded,required TResult Function( UserModel user)  updateSuccess,required TResult Function( ApiErrorModel error)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
 return loading();case _Loaded():
 return loaded(_that.user);case _UpdateSuccess():
-return updateSuccess(_that.user);case _DeleteSuccess():
-return deleteSuccess();case _Error():
+return updateSuccess(_that.user);case _Error():
 return error(_that.error);case _:
   throw StateError('Unexpected subclass');
 
@@ -185,14 +180,13 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( UserModel user)?  loaded,TResult? Function( UserModel user)?  updateSuccess,TResult? Function()?  deleteSuccess,TResult? Function( ApiErrorModel error)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( UserModel user)?  loaded,TResult? Function( UserModel user)?  updateSuccess,TResult? Function( ApiErrorModel error)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Loaded() when loaded != null:
 return loaded(_that.user);case _UpdateSuccess() when updateSuccess != null:
-return updateSuccess(_that.user);case _DeleteSuccess() when deleteSuccess != null:
-return deleteSuccess();case _Error() when error != null:
+return updateSuccess(_that.user);case _Error() when error != null:
 return error(_that.error);case _:
   return null;
 
@@ -414,38 +408,6 @@ $UserModelCopyWith<$Res> get user {
   });
 }
 }
-
-/// @nodoc
-
-
-class _DeleteSuccess implements UserState {
-  const _DeleteSuccess();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeleteSuccess);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'UserState.deleteSuccess()';
-}
-
-
-}
-
-
-
 
 /// @nodoc
 

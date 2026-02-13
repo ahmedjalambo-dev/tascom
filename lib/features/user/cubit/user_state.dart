@@ -11,6 +11,5 @@ abstract class UserState with _$UserState {
   const factory UserState.loading() = _Loading;
   const factory UserState.loaded(UserModel user) = _Loaded;
   const factory UserState.updateSuccess(UserModel user) = _UpdateSuccess;
-  const factory UserState.deleteSuccess() = _DeleteSuccess;
   const factory UserState.error(ApiErrorModel error) = _Error;
 }

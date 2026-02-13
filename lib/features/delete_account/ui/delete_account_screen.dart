@@ -12,11 +12,11 @@ import 'package:tascom/core/widgets/my_app_bar.dart';
 import 'package:tascom/core/widgets/my_button.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/core/widgets/my_text_field.dart';
-import 'package:tascom/features/settings/delete_account/delete_account_confirmation_dialog.dart';
-import 'package:tascom/features/settings/delete_account/widgets/consequence_item.dart';
-import 'package:tascom/features/settings/delete_account/widgets/warning_card.dart';
-import 'package:tascom/features/user/cubit/user_cubit.dart';
-import 'package:tascom/features/user/cubit/user_state.dart';
+import 'package:tascom/features/delete_account/cubit/delete_account_cubit.dart';
+import 'package:tascom/features/delete_account/cubit/delete_account_state.dart';
+import 'package:tascom/features/delete_account/ui/delete_account_confirmation_dialog.dart';
+import 'package:tascom/features/delete_account/ui/widgets/consequence_item.dart';
+import 'package:tascom/features/delete_account/ui/widgets/warning_card.dart';
 
 class DeleteAccountScreen extends StatefulWidget {
   const DeleteAccountScreen({super.key});
@@ -56,14 +56,14 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
     if (result == true && mounted) {
       final userId = SessionManager.instance.currentUserId;
       if (userId != null) {
-        context.read<UserCubit>().deleteUser(userId);
+        context.read<DeleteAccountCubit>().deleteAccount(userId);
       }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<UserCubit, UserState>(
+    return BlocListener<DeleteAccountCubit, DeleteAccountState>(
       listener: (context, state) {
         state.maybeWhen(
           loading: () {
@@ -73,7 +73,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
               builder: (_) => const Center(child: CircularProgressIndicator()),
             );
           },
-          deleteSuccess: () async {
+          success: () async {
             await SessionManager.instance.clearSession();
             if (context.mounted) {
               context.pushNamedAndRemoveUntil(

@@ -15,9 +15,6 @@ abstract class UserService {
   @GET('${ApiConstants.users}/{id}')
   Future<UserResponse> getUser(@Path('id') String id);
 
-  @DELETE('${ApiConstants.users}/{id}')
-  Future<void> deleteUser(@Path('id') String id);
-
   @MultiPart()
   @PATCH('${ApiConstants.users}/{id}')
   Future<UserResponse> updateUser(

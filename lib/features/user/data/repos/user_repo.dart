@@ -43,12 +43,4 @@ class UserRepo {
     }
   }
 
-  Future<ApiResult<void>> deleteUser(String id) async {
-    try {
-      await _userService.deleteUser(id);
-      return const ApiResult.success(null);
-    } catch (error) {
-      return ApiResult.failure(ApiErrorHandler.handle(error));
-    }
-  }
 }
