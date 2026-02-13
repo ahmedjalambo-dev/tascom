@@ -38,9 +38,10 @@ class MyAppBar extends StatelessWidget {
       ),
 
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           if (leading != null) leading!,
-          if (title != null) Expanded(child: title!),
+          if (title != null) title!,
           const Spacer(),
           if (trailing != null) ...trailing!,
         ],
