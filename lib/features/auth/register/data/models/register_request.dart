@@ -10,6 +10,8 @@ abstract class RegisterRequest with _$RegisterRequest {
     required String email,
     required String phoneNumber,
     required String location,
+    required double latitude,
+    required double longitude,
     required String password,
   }) = _RegisterRequest;
 

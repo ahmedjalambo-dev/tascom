@@ -36,12 +36,19 @@ class RegisterCubit extends Cubit<RegisterState> {
     // 3. Fallback if still null
     location ??= '0.0,0.0';
 
+    // Parse latitude and longitude from location string
+    final parts = location.split(',');
+    final latitude = double.tryParse(parts[0]) ?? 0.0;
+    final longitude = double.tryParse(parts[1]) ?? 0.0;
+
     final result = await _registerRepo.register(
       RegisterRequest(
         name: name,
         email: email,
         phoneNumber: phoneNumber,
         location: location,
+        latitude: latitude,
+        longitude: longitude,
         password: password,
       ),
     );

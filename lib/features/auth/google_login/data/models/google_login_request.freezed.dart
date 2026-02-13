@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GoogleLoginRequest {
 
- String get idToken; String? get location;
+ String get idToken; String? get location; double? get latitude; double? get longitude;
 /// Create a copy of GoogleLoginRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $GoogleLoginRequestCopyWith<GoogleLoginRequest> get copyWith => _$GoogleLoginReq
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GoogleLoginRequest&&(identical(other.idToken, idToken) || other.idToken == idToken)&&(identical(other.location, location) || other.location == location));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GoogleLoginRequest&&(identical(other.idToken, idToken) || other.idToken == idToken)&&(identical(other.location, location) || other.location == location)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,idToken,location);
+int get hashCode => Object.hash(runtimeType,idToken,location,latitude,longitude);
 
 @override
 String toString() {
-  return 'GoogleLoginRequest(idToken: $idToken, location: $location)';
+  return 'GoogleLoginRequest(idToken: $idToken, location: $location, latitude: $latitude, longitude: $longitude)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $GoogleLoginRequestCopyWith<$Res>  {
   factory $GoogleLoginRequestCopyWith(GoogleLoginRequest value, $Res Function(GoogleLoginRequest) _then) = _$GoogleLoginRequestCopyWithImpl;
 @useResult
 $Res call({
- String idToken, String? location
+ String idToken, String? location, double? latitude, double? longitude
 });
 
 
@@ -65,11 +65,13 @@ class _$GoogleLoginRequestCopyWithImpl<$Res>
 
 /// Create a copy of GoogleLoginRequest
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? idToken = null,Object? location = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? idToken = null,Object? location = freezed,Object? latitude = freezed,Object? longitude = freezed,}) {
   return _then(_self.copyWith(
 idToken: null == idToken ? _self.idToken : idToken // ignore: cast_nullable_to_non_nullable
 as String,location: freezed == location ? _self.location : location // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,latitude: freezed == latitude ? _self.latitude : latitude // ignore: cast_nullable_to_non_nullable
+as double?,longitude: freezed == longitude ? _self.longitude : longitude // ignore: cast_nullable_to_non_nullable
+as double?,
   ));
 }
 
@@ -154,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String idToken,  String? location)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String idToken,  String? location,  double? latitude,  double? longitude)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _GoogleLoginRequest() when $default != null:
-return $default(_that.idToken,_that.location);case _:
+return $default(_that.idToken,_that.location,_that.latitude,_that.longitude);case _:
   return orElse();
 
 }
@@ -175,10 +177,10 @@ return $default(_that.idToken,_that.location);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String idToken,  String? location)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String idToken,  String? location,  double? latitude,  double? longitude)  $default,) {final _that = this;
 switch (_that) {
 case _GoogleLoginRequest():
-return $default(_that.idToken,_that.location);case _:
+return $default(_that.idToken,_that.location,_that.latitude,_that.longitude);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +197,10 @@ return $default(_that.idToken,_that.location);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String idToken,  String? location)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String idToken,  String? location,  double? latitude,  double? longitude)?  $default,) {final _that = this;
 switch (_that) {
 case _GoogleLoginRequest() when $default != null:
-return $default(_that.idToken,_that.location);case _:
+return $default(_that.idToken,_that.location,_that.latitude,_that.longitude);case _:
   return null;
 
 }
@@ -210,11 +212,13 @@ return $default(_that.idToken,_that.location);case _:
 @JsonSerializable()
 
 class _GoogleLoginRequest implements GoogleLoginRequest {
-  const _GoogleLoginRequest({required this.idToken, this.location});
+  const _GoogleLoginRequest({required this.idToken, this.location, this.latitude, this.longitude});
   factory _GoogleLoginRequest.fromJson(Map<String, dynamic> json) => _$GoogleLoginRequestFromJson(json);
 
 @override final  String idToken;
 @override final  String? location;
+@override final  double? latitude;
+@override final  double? longitude;
 
 /// Create a copy of GoogleLoginRequest
 /// with the given fields replaced by the non-null parameter values.
@@ -229,16 +233,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GoogleLoginRequest&&(identical(other.idToken, idToken) || other.idToken == idToken)&&(identical(other.location, location) || other.location == location));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GoogleLoginRequest&&(identical(other.idToken, idToken) || other.idToken == idToken)&&(identical(other.location, location) || other.location == location)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,idToken,location);
+int get hashCode => Object.hash(runtimeType,idToken,location,latitude,longitude);
 
 @override
 String toString() {
-  return 'GoogleLoginRequest(idToken: $idToken, location: $location)';
+  return 'GoogleLoginRequest(idToken: $idToken, location: $location, latitude: $latitude, longitude: $longitude)';
 }
 
 
@@ -249,7 +253,7 @@ abstract mixin class _$GoogleLoginRequestCopyWith<$Res> implements $GoogleLoginR
   factory _$GoogleLoginRequestCopyWith(_GoogleLoginRequest value, $Res Function(_GoogleLoginRequest) _then) = __$GoogleLoginRequestCopyWithImpl;
 @override @useResult
 $Res call({
- String idToken, String? location
+ String idToken, String? location, double? latitude, double? longitude
 });
 
 
@@ -266,11 +270,13 @@ class __$GoogleLoginRequestCopyWithImpl<$Res>
 
 /// Create a copy of GoogleLoginRequest
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? idToken = null,Object? location = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? idToken = null,Object? location = freezed,Object? latitude = freezed,Object? longitude = freezed,}) {
   return _then(_GoogleLoginRequest(
 idToken: null == idToken ? _self.idToken : idToken // ignore: cast_nullable_to_non_nullable
 as String,location: freezed == location ? _self.location : location // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,latitude: freezed == latitude ? _self.latitude : latitude // ignore: cast_nullable_to_non_nullable
+as double?,longitude: freezed == longitude ? _self.longitude : longitude // ignore: cast_nullable_to_non_nullable
+as double?,
   ));
 }
 

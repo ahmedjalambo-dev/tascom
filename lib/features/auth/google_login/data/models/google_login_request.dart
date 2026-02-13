@@ -8,6 +8,8 @@ abstract class GoogleLoginRequest with _$GoogleLoginRequest {
   const factory GoogleLoginRequest({
     required String idToken,
     String? location,
+    double? latitude,
+    double? longitude,
   }) = _GoogleLoginRequest;
 
   factory GoogleLoginRequest.fromJson(Map<String, dynamic> json) =>

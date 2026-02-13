@@ -1,5 +1,7 @@
 import 'package:geolocator/geolocator.dart';
 
+import 'package:tascom/core/storage/shared_pref_helper.dart';
+
 class LocationService {
   /// Fetches the current location as a "lat,long" string.
   /// Returns null if permission is denied or service is disabled.
@@ -42,7 +44,9 @@ class LocationService {
           timeLimit: Duration(seconds: 10),
         ),
       );
-      return '${position.latitude},${position.longitude}';
+      final location = '${position.latitude},${position.longitude}';
+      await SharedPrefHelper.setUserLocation(location);
+      return location;
     } catch (e) {
       return null;
     }

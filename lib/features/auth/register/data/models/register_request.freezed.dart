@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RegisterRequest {
 
- String get name; String get email; String get phoneNumber; String get location; String get password;
+ String get name; String get email; String get phoneNumber; String get location; double get latitude; double get longitude; String get password;
 /// Create a copy of RegisterRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $RegisterRequestCopyWith<RegisterRequest> get copyWith => _$RegisterRequestCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RegisterRequest&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.location, location) || other.location == location)&&(identical(other.password, password) || other.password == password));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RegisterRequest&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.location, location) || other.location == location)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.password, password) || other.password == password));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,email,phoneNumber,location,password);
+int get hashCode => Object.hash(runtimeType,name,email,phoneNumber,location,latitude,longitude,password);
 
 @override
 String toString() {
-  return 'RegisterRequest(name: $name, email: $email, phoneNumber: $phoneNumber, location: $location, password: $password)';
+  return 'RegisterRequest(name: $name, email: $email, phoneNumber: $phoneNumber, location: $location, latitude: $latitude, longitude: $longitude, password: $password)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $RegisterRequestCopyWith<$Res>  {
   factory $RegisterRequestCopyWith(RegisterRequest value, $Res Function(RegisterRequest) _then) = _$RegisterRequestCopyWithImpl;
 @useResult
 $Res call({
- String name, String email, String phoneNumber, String location, String password
+ String name, String email, String phoneNumber, String location, double latitude, double longitude, String password
 });
 
 
@@ -65,13 +65,15 @@ class _$RegisterRequestCopyWithImpl<$Res>
 
 /// Create a copy of RegisterRequest
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? email = null,Object? phoneNumber = null,Object? location = null,Object? password = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? email = null,Object? phoneNumber = null,Object? location = null,Object? latitude = null,Object? longitude = null,Object? password = null,}) {
   return _then(_self.copyWith(
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
 as String,location: null == location ? _self.location : location // ignore: cast_nullable_to_non_nullable
-as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as String,latitude: null == latitude ? _self.latitude : latitude // ignore: cast_nullable_to_non_nullable
+as double,longitude: null == longitude ? _self.longitude : longitude // ignore: cast_nullable_to_non_nullable
+as double,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -157,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  String email,  String phoneNumber,  String location,  String password)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  String email,  String phoneNumber,  String location,  double latitude,  double longitude,  String password)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RegisterRequest() when $default != null:
-return $default(_that.name,_that.email,_that.phoneNumber,_that.location,_that.password);case _:
+return $default(_that.name,_that.email,_that.phoneNumber,_that.location,_that.latitude,_that.longitude,_that.password);case _:
   return orElse();
 
 }
@@ -178,10 +180,10 @@ return $default(_that.name,_that.email,_that.phoneNumber,_that.location,_that.pa
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  String email,  String phoneNumber,  String location,  String password)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  String email,  String phoneNumber,  String location,  double latitude,  double longitude,  String password)  $default,) {final _that = this;
 switch (_that) {
 case _RegisterRequest():
-return $default(_that.name,_that.email,_that.phoneNumber,_that.location,_that.password);case _:
+return $default(_that.name,_that.email,_that.phoneNumber,_that.location,_that.latitude,_that.longitude,_that.password);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -198,10 +200,10 @@ return $default(_that.name,_that.email,_that.phoneNumber,_that.location,_that.pa
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  String email,  String phoneNumber,  String location,  String password)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  String email,  String phoneNumber,  String location,  double latitude,  double longitude,  String password)?  $default,) {final _that = this;
 switch (_that) {
 case _RegisterRequest() when $default != null:
-return $default(_that.name,_that.email,_that.phoneNumber,_that.location,_that.password);case _:
+return $default(_that.name,_that.email,_that.phoneNumber,_that.location,_that.latitude,_that.longitude,_that.password);case _:
   return null;
 
 }
@@ -213,13 +215,15 @@ return $default(_that.name,_that.email,_that.phoneNumber,_that.location,_that.pa
 @JsonSerializable()
 
 class _RegisterRequest implements RegisterRequest {
-  const _RegisterRequest({required this.name, required this.email, required this.phoneNumber, required this.location, required this.password});
+  const _RegisterRequest({required this.name, required this.email, required this.phoneNumber, required this.location, required this.latitude, required this.longitude, required this.password});
   factory _RegisterRequest.fromJson(Map<String, dynamic> json) => _$RegisterRequestFromJson(json);
 
 @override final  String name;
 @override final  String email;
 @override final  String phoneNumber;
 @override final  String location;
+@override final  double latitude;
+@override final  double longitude;
 @override final  String password;
 
 /// Create a copy of RegisterRequest
@@ -235,16 +239,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RegisterRequest&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.location, location) || other.location == location)&&(identical(other.password, password) || other.password == password));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RegisterRequest&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.location, location) || other.location == location)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.password, password) || other.password == password));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,email,phoneNumber,location,password);
+int get hashCode => Object.hash(runtimeType,name,email,phoneNumber,location,latitude,longitude,password);
 
 @override
 String toString() {
-  return 'RegisterRequest(name: $name, email: $email, phoneNumber: $phoneNumber, location: $location, password: $password)';
+  return 'RegisterRequest(name: $name, email: $email, phoneNumber: $phoneNumber, location: $location, latitude: $latitude, longitude: $longitude, password: $password)';
 }
 
 
@@ -255,7 +259,7 @@ abstract mixin class _$RegisterRequestCopyWith<$Res> implements $RegisterRequest
   factory _$RegisterRequestCopyWith(_RegisterRequest value, $Res Function(_RegisterRequest) _then) = __$RegisterRequestCopyWithImpl;
 @override @useResult
 $Res call({
- String name, String email, String phoneNumber, String location, String password
+ String name, String email, String phoneNumber, String location, double latitude, double longitude, String password
 });
 
 
@@ -272,13 +276,15 @@ class __$RegisterRequestCopyWithImpl<$Res>
 
 /// Create a copy of RegisterRequest
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? email = null,Object? phoneNumber = null,Object? location = null,Object? password = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? email = null,Object? phoneNumber = null,Object? location = null,Object? latitude = null,Object? longitude = null,Object? password = null,}) {
   return _then(_RegisterRequest(
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
 as String,location: null == location ? _self.location : location // ignore: cast_nullable_to_non_nullable
-as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as String,latitude: null == latitude ? _self.latitude : latitude // ignore: cast_nullable_to_non_nullable
+as double,longitude: null == longitude ? _self.longitude : longitude // ignore: cast_nullable_to_non_nullable
+as double,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
