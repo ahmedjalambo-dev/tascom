@@ -40,9 +40,9 @@ import '../../features/user/data/repos/user_repo.dart';
 import '../../features/user/data/services/user_service.dart';
 
 // Delete Account
-import '../../features/delete_account/cubit/delete_account_cubit.dart';
-import '../../features/delete_account/data/repos/delete_account_repo.dart';
-import '../../features/delete_account/data/services/delete_account_service.dart';
+import '../../features/settings/delete_account/cubit/delete_account_cubit.dart';
+import '../../features/settings/delete_account/data/repos/delete_account_repo.dart';
+import '../../features/settings/delete_account/data/services/delete_account_service.dart';
 
 final getIt = GetIt.instance;
 

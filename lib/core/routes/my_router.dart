@@ -18,7 +18,7 @@ import 'package:tascom/features/search/ui/search_screen.dart';
 import 'package:tascom/features/settings/settings_screen.dart';
 import 'package:tascom/features/settings/points_history/points_history_screen.dart';
 import 'package:tascom/features/settings/reports/reports_screen.dart';
-import 'package:tascom/features/delete_account/ui/delete_account_screen.dart';
+import 'package:tascom/features/settings/delete_account/ui/delete_account_screen.dart';
 import 'package:tascom/features/profile/profile_screen.dart';
 import 'package:tascom/my_root_screen.dart';
 
@@ -33,7 +33,7 @@ import 'package:tascom/features/auth/logout/cubit/logout_cubit.dart';
 import 'package:tascom/features/user/cubit/user_cubit.dart';
 
 // Delete Account Cubit
-import 'package:tascom/features/delete_account/cubit/delete_account_cubit.dart';
+import 'package:tascom/features/settings/delete_account/cubit/delete_account_cubit.dart';
 
 class MyRouter {
   Route? generateRoute(RouteSettings settings) {

@@ -12,11 +12,11 @@ import 'package:tascom/core/widgets/my_app_bar.dart';
 import 'package:tascom/core/widgets/my_button.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/core/widgets/my_text_field.dart';
-import 'package:tascom/features/delete_account/cubit/delete_account_cubit.dart';
-import 'package:tascom/features/delete_account/cubit/delete_account_state.dart';
-import 'package:tascom/features/delete_account/ui/delete_account_confirmation_dialog.dart';
-import 'package:tascom/features/delete_account/ui/widgets/consequence_item.dart';
-import 'package:tascom/features/delete_account/ui/widgets/warning_card.dart';
+import 'package:tascom/features/settings/delete_account/cubit/delete_account_cubit.dart';
+import 'package:tascom/features/settings/delete_account/cubit/delete_account_state.dart';
+import 'package:tascom/features/settings/delete_account/ui/delete_account_confirmation_dialog.dart';
+import 'package:tascom/features/settings/delete_account/ui/widgets/consequence_item.dart';
+import 'package:tascom/features/settings/delete_account/ui/widgets/warning_card.dart';
 
 class DeleteAccountScreen extends StatefulWidget {
   const DeleteAccountScreen({super.key});

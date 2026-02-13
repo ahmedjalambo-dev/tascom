@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../../../../core/networking/api_constants.dart';
+import '../../../../../core/networking/api_constants.dart';
 
 part 'delete_account_service.g.dart';
 

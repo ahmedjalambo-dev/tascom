@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/networking/api_result.dart';
+import '../../../../core/networking/api_result.dart';
 import '../data/repos/delete_account_repo.dart';
 import 'delete_account_state.dart';
 
