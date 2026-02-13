@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/networking/api_result.dart';
 import '../data/models/update_user_request.dart';
 import '../data/repos/user_repo.dart';
-import '../../../../core/networking/api_result.dart';
 import 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
@@ -32,14 +32,4 @@ class UserCubit extends Cubit<UserState> {
     );
   }
 
-  Future<void> deleteUser(String id) async {
-    emit(const UserState.loading());
-
-    final result = await _userRepo.deleteUser(id);
-
-    result.when(
-      success: (_) => emit(const UserState.deleteSuccess()),
-      failure: (error) => emit(UserState.error(error)),
-    );
-  }
 }

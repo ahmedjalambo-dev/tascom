@@ -56,10 +56,8 @@ class SettingsScreen extends StatelessWidget {
                 children: [
                   _SettingsMenuItem(
                     icon: MyIcons.userStroke,
-                    label: 'My Profile',
-                    onTap: () {
-                      context.pop();
-                    },
+                    label: 'Edit Profile',
+                    onTap: () {},
                   ),
                   _SettingsMenuItem(
                     icon: MyIcons.requestsStroke,

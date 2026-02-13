@@ -39,6 +39,11 @@ import '../../features/user/cubit/user_cubit.dart';
 import '../../features/user/data/repos/user_repo.dart';
 import '../../features/user/data/services/user_service.dart';
 
+// Delete Account
+import '../../features/delete_account/cubit/delete_account_cubit.dart';
+import '../../features/delete_account/data/repos/delete_account_repo.dart';
+import '../../features/delete_account/data/services/delete_account_service.dart';
+
 final getIt = GetIt.instance;
 
 Future<void> initDependencies() async {
@@ -108,4 +113,15 @@ Future<void> initDependencies() async {
   getIt.registerLazySingleton<UserService>(() => UserService(getIt<Dio>()));
   getIt.registerLazySingleton<UserRepo>(() => UserRepo(getIt<UserService>()));
   getIt.registerFactory<UserCubit>(() => UserCubit(getIt<UserRepo>()));
+
+  // ============ Delete Account ============
+  getIt.registerLazySingleton<DeleteAccountService>(
+    () => DeleteAccountService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<DeleteAccountRepo>(
+    () => DeleteAccountRepo(getIt<DeleteAccountService>()),
+  );
+  getIt.registerFactory<DeleteAccountCubit>(
+    () => DeleteAccountCubit(getIt<DeleteAccountRepo>()),
+  );
 }

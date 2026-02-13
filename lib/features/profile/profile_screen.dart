@@ -144,7 +144,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const Center(child: CircularProgressIndicator()),
                   loaded: (user) => _buildProfileContent(user),
                   updateSuccess: (user) => _buildProfileContent(user),
-                  deleteSuccess: () => const SizedBox.shrink(),
                   error: (error) =>
                       _buildErrorState(error.message ?? 'Something went wrong'),
                 );
