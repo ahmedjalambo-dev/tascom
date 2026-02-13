@@ -1,3 +1,4 @@
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
 import 'package:tascom/core/storage/shared_pref_helper.dart';
@@ -47,6 +48,20 @@ class LocationService {
       final location = '${position.latitude},${position.longitude}';
       await SharedPrefHelper.setUserLocation(location);
       return location;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// Reverse geocodes coordinates into a Placemark (country, city, etc.).
+  /// Returns null if geocoding fails.
+  static Future<Placemark?> getPlacemark(double latitude, double longitude) async {
+    try {
+      final placemarks = await placemarkFromCoordinates(latitude, longitude);
+      if (placemarks.isNotEmpty) {
+        return placemarks.first;
+      }
+      return null;
     } catch (e) {
       return null;
     }
