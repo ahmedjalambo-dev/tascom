@@ -16,6 +16,9 @@ class ApiConstants {
   // User endpoints
   static const String users = 'users';
 
+  // Task endpoints
+  static const String tasks = 'tasks';
+
   // Endpoints that don't require authentication
   static const List<String> publicEndpoints = [
     login,

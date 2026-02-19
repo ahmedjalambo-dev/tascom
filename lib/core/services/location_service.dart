@@ -55,7 +55,10 @@ class LocationService {
 
   /// Reverse geocodes coordinates into a Placemark (country, city, etc.).
   /// Returns null if geocoding fails.
-  static Future<Placemark?> getPlacemark(double latitude, double longitude) async {
+  static Future<Placemark?> getPlacemark(
+    double latitude,
+    double longitude,
+  ) async {
     try {
       final placemarks = await placemarkFromCoordinates(latitude, longitude);
       if (placemarks.isNotEmpty) {

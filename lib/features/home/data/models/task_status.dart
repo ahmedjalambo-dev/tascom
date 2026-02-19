@@ -1,7 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 
-enum TaskStatus { active, open, inProgress, completed, cancelled }
+enum TaskStatus {
+  active,
+  open,
+  inProgress,
+  completed,
+  cancelled;
+
+  static TaskStatus fromApiValue(String value) {
+    switch (value.toUpperCase()) {
+      case 'ACTIVE':
+        return TaskStatus.active;
+      case 'OPEN':
+        return TaskStatus.open;
+      case 'IN_PROGRESS':
+        return TaskStatus.inProgress;
+      case 'COMPLETED':
+        return TaskStatus.completed;
+      case 'CANCELLED':
+        return TaskStatus.cancelled;
+      default:
+        return TaskStatus.open;
+    }
+  }
+}
 
 extension TaskStatusExtension on TaskStatus {
   String get displayName {

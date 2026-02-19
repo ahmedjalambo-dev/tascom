@@ -9,7 +9,26 @@ enum TaskCategory {
   shopping,
   transportation,
   labor,
-  teaching,
+  teaching;
+
+  static TaskCategory fromApiValue(String value) {
+    switch (value) {
+      case 'HomeServices':
+        return TaskCategory.homeService;
+      case 'Repairs':
+        return TaskCategory.repairs;
+      case 'PetCare':
+        return TaskCategory.pet;
+      case 'Transportation':
+        return TaskCategory.transportation;
+      case 'Tutoring':
+        return TaskCategory.teaching;
+      case 'Errands':
+        return TaskCategory.shopping;
+      default:
+        return TaskCategory.homeService;
+    }
+  }
 }
 
 extension TaskCategoryExtension on TaskCategory {
