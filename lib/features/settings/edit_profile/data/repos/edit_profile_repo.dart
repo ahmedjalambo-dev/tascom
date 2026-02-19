@@ -1,19 +1,19 @@
 import 'dart:convert';
 
-import '../../../../core/networking/api_error_handler.dart';
-import '../../../../core/networking/api_result.dart';
+import '../../../../../core/networking/api_error_handler.dart';
+import '../../../../../core/networking/api_result.dart';
+import '../../../../user/data/models/user_model.dart';
 import '../models/update_user_request.dart';
-import '../models/user_model.dart';
-import '../services/user_service.dart';
+import '../services/edit_profile_service.dart';
 
-class UserRepo {
-  final UserService _userService;
+class EditProfileRepo {
+  final EditProfileService _editProfileService;
 
-  UserRepo(this._userService);
+  EditProfileRepo(this._editProfileService);
 
   Future<ApiResult<UserModel>> getUser(String id) async {
     try {
-      final response = await _userService.getUser(id);
+      final response = await _editProfileService.getUser(id);
       return ApiResult.success(response.data);
     } catch (error) {
       return ApiResult.failure(ApiErrorHandler.handle(error));
@@ -25,7 +25,7 @@ class UserRepo {
     UpdateUserRequest request,
   ) async {
     try {
-      final response = await _userService.updateUser(
+      final response = await _editProfileService.updateUser(
         id,
         name: request.name,
         email: request.email,

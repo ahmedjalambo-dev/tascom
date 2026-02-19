@@ -18,7 +18,7 @@ _UserModel _$UserModelFromJson(Map<String, dynamic> json) => _UserModel(
       ? null
       : DateTime.parse(json['DOB'] as String),
   gender: json['gender'] as String?,
-  avatar: json['avatar'] as String?,
+  avatar: _readAvatar(json, 'avatar') as String?,
   rating: (json['ratingAvg'] as num?)?.toDouble(),
   reviewCount: (json['reviewCount'] as num?)?.toInt(),
   points: (json['pointsBalance'] as num?)?.toInt(),

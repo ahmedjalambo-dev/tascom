@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'user_state.dart';
+part of 'edit_profile_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -12,7 +12,7 @@ part of 'user_state.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$UserState {
+mixin _$EditProfileState {
 
 
 
@@ -20,7 +20,7 @@ mixin _$UserState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is EditProfileState);
 }
 
 
@@ -29,20 +29,20 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'UserState()';
+  return 'EditProfileState()';
 }
 
 
 }
 
 /// @nodoc
-class $UserStateCopyWith<$Res>  {
-$UserStateCopyWith(UserState _, $Res Function(UserState) __);
+class $EditProfileStateCopyWith<$Res>  {
+$EditProfileStateCopyWith(EditProfileState _, $Res Function(EditProfileState) __);
 }
 
 
-/// Adds pattern-matching-related methods to [UserState].
-extension UserStatePatterns on UserState {
+/// Adds pattern-matching-related methods to [EditProfileState].
+extension EditProfileStatePatterns on EditProfileState {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -198,7 +198,7 @@ return error(_that.error);case _:
 /// @nodoc
 
 
-class _Initial implements UserState {
+class _Initial implements EditProfileState {
   const _Initial();
   
 
@@ -218,7 +218,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'UserState.initial()';
+  return 'EditProfileState.initial()';
 }
 
 
@@ -230,7 +230,7 @@ String toString() {
 /// @nodoc
 
 
-class _Loading implements UserState {
+class _Loading implements EditProfileState {
   const _Loading();
   
 
@@ -250,7 +250,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'UserState.loading()';
+  return 'EditProfileState.loading()';
 }
 
 
@@ -262,13 +262,13 @@ String toString() {
 /// @nodoc
 
 
-class _Loaded implements UserState {
+class _Loaded implements EditProfileState {
   const _Loaded(this.user);
   
 
  final  UserModel user;
 
-/// Create a copy of UserState
+/// Create a copy of EditProfileState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -287,14 +287,14 @@ int get hashCode => Object.hash(runtimeType,user);
 
 @override
 String toString() {
-  return 'UserState.loaded(user: $user)';
+  return 'EditProfileState.loaded(user: $user)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$LoadedCopyWith<$Res> implements $UserStateCopyWith<$Res> {
+abstract mixin class _$LoadedCopyWith<$Res> implements $EditProfileStateCopyWith<$Res> {
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) _then) = __$LoadedCopyWithImpl;
 @useResult
 $Res call({
@@ -313,7 +313,7 @@ class __$LoadedCopyWithImpl<$Res>
   final _Loaded _self;
   final $Res Function(_Loaded) _then;
 
-/// Create a copy of UserState
+/// Create a copy of EditProfileState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? user = null,}) {
   return _then(_Loaded(
@@ -322,7 +322,7 @@ as UserModel,
   ));
 }
 
-/// Create a copy of UserState
+/// Create a copy of EditProfileState
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -337,13 +337,13 @@ $UserModelCopyWith<$Res> get user {
 /// @nodoc
 
 
-class _UpdateSuccess implements UserState {
+class _UpdateSuccess implements EditProfileState {
   const _UpdateSuccess(this.user);
   
 
  final  UserModel user;
 
-/// Create a copy of UserState
+/// Create a copy of EditProfileState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -362,14 +362,14 @@ int get hashCode => Object.hash(runtimeType,user);
 
 @override
 String toString() {
-  return 'UserState.updateSuccess(user: $user)';
+  return 'EditProfileState.updateSuccess(user: $user)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$UpdateSuccessCopyWith<$Res> implements $UserStateCopyWith<$Res> {
+abstract mixin class _$UpdateSuccessCopyWith<$Res> implements $EditProfileStateCopyWith<$Res> {
   factory _$UpdateSuccessCopyWith(_UpdateSuccess value, $Res Function(_UpdateSuccess) _then) = __$UpdateSuccessCopyWithImpl;
 @useResult
 $Res call({
@@ -388,7 +388,7 @@ class __$UpdateSuccessCopyWithImpl<$Res>
   final _UpdateSuccess _self;
   final $Res Function(_UpdateSuccess) _then;
 
-/// Create a copy of UserState
+/// Create a copy of EditProfileState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? user = null,}) {
   return _then(_UpdateSuccess(
@@ -397,7 +397,7 @@ as UserModel,
   ));
 }
 
-/// Create a copy of UserState
+/// Create a copy of EditProfileState
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -412,13 +412,13 @@ $UserModelCopyWith<$Res> get user {
 /// @nodoc
 
 
-class _Error implements UserState {
+class _Error implements EditProfileState {
   const _Error(this.error);
   
 
  final  ApiErrorModel error;
 
-/// Create a copy of UserState
+/// Create a copy of EditProfileState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -437,14 +437,14 @@ int get hashCode => Object.hash(runtimeType,error);
 
 @override
 String toString() {
-  return 'UserState.error(error: $error)';
+  return 'EditProfileState.error(error: $error)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$ErrorCopyWith<$Res> implements $UserStateCopyWith<$Res> {
+abstract mixin class _$ErrorCopyWith<$Res> implements $EditProfileStateCopyWith<$Res> {
   factory _$ErrorCopyWith(_Error value, $Res Function(_Error) _then) = __$ErrorCopyWithImpl;
 @useResult
 $Res call({
@@ -463,7 +463,7 @@ class __$ErrorCopyWithImpl<$Res>
   final _Error _self;
   final $Res Function(_Error) _then;
 
-/// Create a copy of UserState
+/// Create a copy of EditProfileState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? error = null,}) {
   return _then(_Error(
@@ -472,7 +472,7 @@ as ApiErrorModel,
   ));
 }
 
-/// Create a copy of UserState
+/// Create a copy of EditProfileState
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')

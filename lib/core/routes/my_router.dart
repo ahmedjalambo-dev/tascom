@@ -19,6 +19,7 @@ import 'package:tascom/features/settings/settings_screen.dart';
 import 'package:tascom/features/settings/points_history/points_history_screen.dart';
 import 'package:tascom/features/settings/reports/reports_screen.dart';
 import 'package:tascom/features/settings/delete_account/ui/delete_account_screen.dart';
+import 'package:tascom/features/settings/edit_profile/ui/edit_profile_screen.dart';
 import 'package:tascom/features/profile/profile_screen.dart';
 import 'package:tascom/my_root_screen.dart';
 
@@ -29,8 +30,11 @@ import 'package:tascom/features/auth/forgot_password/cubit/forgot_password_cubit
 import 'package:tascom/features/auth/reset_password/cubit/reset_password_cubit.dart';
 import 'package:tascom/features/auth/logout/cubit/logout_cubit.dart';
 
-// User Cubit
-import 'package:tascom/features/user/cubit/user_cubit.dart';
+// Profile Cubit
+import 'package:tascom/features/profile/cubit/profile_cubit.dart';
+
+// Edit Profile Cubit
+import 'package:tascom/features/settings/edit_profile/cubit/edit_profile_cubit.dart';
 
 // Delete Account Cubit
 import 'package:tascom/features/settings/delete_account/cubit/delete_account_cubit.dart';
@@ -100,7 +104,7 @@ class MyRouter {
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (_) {
-              final cubit = getIt<UserCubit>();
+              final cubit = getIt<ProfileCubit>();
               final userId = SessionManager.instance.currentUserId;
               if (userId != null) {
                 cubit.getUser(userId);
@@ -132,6 +136,21 @@ class MyRouter {
           builder: (context) => BlocProvider(
             create: (_) => getIt<DeleteAccountCubit>(),
             child: const DeleteAccountScreen(),
+          ),
+        );
+
+      case MyRoutes.editProfile:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (_) {
+              final cubit = getIt<EditProfileCubit>();
+              final userId = SessionManager.instance.currentUserId;
+              if (userId != null) {
+                cubit.getUser(userId);
+              }
+              return cubit;
+            },
+            child: const EditProfileScreen(),
           ),
         );
     }

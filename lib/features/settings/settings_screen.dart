@@ -57,7 +57,9 @@ class SettingsScreen extends StatelessWidget {
                   _SettingsMenuItem(
                     icon: MyIcons.userStroke,
                     label: 'Edit Profile',
-                    onTap: () {},
+                    onTap: () {
+                      context.pushNamed(MyRoutes.editProfile);
+                    },
                   ),
                   _SettingsMenuItem(
                     icon: MyIcons.requestsStroke,

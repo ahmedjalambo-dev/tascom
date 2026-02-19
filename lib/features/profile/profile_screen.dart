@@ -17,8 +17,8 @@ import 'package:tascom/features/profile/widgets/profile_header.dart';
 import 'package:tascom/features/profile/widgets/profile_stats_card.dart';
 import 'package:tascom/features/profile/widgets/profile_tab_selector.dart';
 import 'package:tascom/features/profile/widgets/profile_task_card.dart';
-import 'package:tascom/features/user/cubit/user_cubit.dart';
-import 'package:tascom/features/user/cubit/user_state.dart';
+import 'package:tascom/features/profile/cubit/profile_cubit.dart';
+import 'package:tascom/features/profile/cubit/profile_state.dart';
 import 'package:tascom/features/user/data/models/user_model.dart';
 import 'package:tascom/core/storage/session_manager.dart';
 
@@ -136,14 +136,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           const ProfileAppBar(),
           Expanded(
-            child: BlocBuilder<UserCubit, UserState>(
+            child: BlocBuilder<ProfileCubit, ProfileState>(
               builder: (context, state) {
                 return state.when(
                   initial: () => const SizedBox.shrink(),
                   loading: () =>
                       const Center(child: CircularProgressIndicator()),
                   loaded: (user) => _buildProfileContent(user),
-                  updateSuccess: (user) => _buildProfileContent(user),
                   error: (error) =>
                       _buildErrorState(error.message ?? 'Something went wrong'),
                 );
@@ -208,7 +207,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onPressed: () {
                 final userId = SessionManager.instance.currentUserId;
                 if (userId != null) {
-                  context.read<UserCubit>().getUser(userId);
+                  context.read<ProfileCubit>().getUser(userId);
                 }
               },
               child: Text(
