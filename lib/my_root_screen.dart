@@ -9,7 +9,7 @@ import 'package:tascom/features/home/cubit/home_cubit.dart';
 import 'package:tascom/features/home/ui/home_screen.dart';
 import 'package:tascom/features/search/ui/search_screen.dart';
 import 'package:tascom/features/profile/profile_screen.dart';
-import 'package:tascom/features/user/cubit/user_cubit.dart';
+import 'package:tascom/features/profile/cubit/profile_cubit.dart';
 
 class MyRootScreen extends StatefulWidget {
   const MyRootScreen({super.key});
@@ -30,7 +30,7 @@ class _MyRootScreenState extends State<MyRootScreen> {
     const AiScreen(),
     BlocProvider(
       create: (_) {
-        final cubit = getIt<UserCubit>();
+        final cubit = getIt<ProfileCubit>();
         final userId = SessionManager.instance.currentUserId;
         if (userId != null) {
           cubit.getUser(userId);

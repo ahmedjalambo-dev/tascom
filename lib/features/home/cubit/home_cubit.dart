@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/networking/api_result.dart';
 import '../../../core/services/location_service.dart';
 import '../../user/data/models/user_model.dart';
-import '../../user/data/services/user_service.dart';
+import '../../profile/data/services/profile_service.dart';
 import '../data/models/all_tasks_response.dart';
 import '../data/repos/home_repo.dart';
 import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final HomeRepo _homeRepo;
-  final UserService _userService;
+  final ProfileService _userService;
 
   int _currentPage = 1;
   static const int _limit = 10;

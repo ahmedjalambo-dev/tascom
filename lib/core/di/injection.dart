@@ -34,10 +34,15 @@ import '../../features/auth/reset_password/cubit/reset_password_cubit.dart';
 import '../../features/auth/reset_password/data/repos/reset_password_repo.dart';
 import '../../features/auth/reset_password/data/services/reset_password_service.dart';
 
-// User
-import '../../features/user/cubit/user_cubit.dart';
-import '../../features/user/data/repos/user_repo.dart';
-import '../../features/user/data/services/user_service.dart';
+// Profile
+import '../../features/profile/cubit/profile_cubit.dart';
+import '../../features/profile/data/repos/profile_repo.dart';
+import '../../features/profile/data/services/profile_service.dart';
+
+// Edit Profile
+import '../../features/settings/edit_profile/cubit/edit_profile_cubit.dart';
+import '../../features/settings/edit_profile/data/repos/edit_profile_repo.dart';
+import '../../features/settings/edit_profile/data/services/edit_profile_service.dart';
 
 // Home
 import '../../features/home/cubit/home_cubit.dart';
@@ -114,16 +119,31 @@ Future<void> initDependencies() async {
     () => ResetPasswordCubit(getIt<ResetPasswordRepo>()),
   );
 
-  // ============ User ============
-  getIt.registerLazySingleton<UserService>(() => UserService(getIt<Dio>()));
-  getIt.registerLazySingleton<UserRepo>(() => UserRepo(getIt<UserService>()));
-  getIt.registerFactory<UserCubit>(() => UserCubit(getIt<UserRepo>()));
+  // ============ Profile ============
+  getIt.registerLazySingleton<ProfileService>(
+    () => ProfileService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<ProfileRepo>(
+    () => ProfileRepo(getIt<ProfileService>()),
+  );
+  getIt.registerFactory<ProfileCubit>(() => ProfileCubit(getIt<ProfileRepo>()));
+
+  // ============ Edit Profile ============
+  getIt.registerLazySingleton<EditProfileService>(
+    () => EditProfileService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<EditProfileRepo>(
+    () => EditProfileRepo(getIt<EditProfileService>()),
+  );
+  getIt.registerFactory<EditProfileCubit>(
+    () => EditProfileCubit(getIt<EditProfileRepo>()),
+  );
 
   // ============ Home - Get All Tasks ============
   getIt.registerLazySingleton<HomeService>(() => HomeService(getIt<Dio>()));
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt<HomeService>()));
   getIt.registerFactory<HomeCubit>(
-    () => HomeCubit(getIt<HomeRepo>(), getIt<UserService>()),
+    () => HomeCubit(getIt<HomeRepo>(), getIt<ProfileService>()),
   );
 
   // ============ Delete Account ============

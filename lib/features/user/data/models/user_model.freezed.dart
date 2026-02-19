@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserModel {
 
- String get id; String get name; String get email; String? get phoneNumber; String? get location; String? get about; String? get skills;@JsonKey(name: 'DOB') DateTime? get dateOfBirth; String? get gender; String? get avatar;@JsonKey(name: 'ratingAvg') double? get rating; int? get reviewCount;@JsonKey(name: 'pointsBalance') int? get points; int? get postedCount; int? get claimedCount; int? get completedCount;
+ String get id; String get name; String get email; String? get phoneNumber; String? get location; String? get about; String? get skills;@JsonKey(name: 'DOB') DateTime? get dateOfBirth; String? get gender;@JsonKey(readValue: _readAvatar) String? get avatar;@JsonKey(name: 'ratingAvg') double? get rating; int? get reviewCount;@JsonKey(name: 'pointsBalance') int? get points; int? get postedCount; int? get claimedCount; int? get completedCount;
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $UserModelCopyWith<$Res>  {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) _then) = _$UserModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, String email, String? phoneNumber, String? location, String? about, String? skills,@JsonKey(name: 'DOB') DateTime? dateOfBirth, String? gender, String? avatar,@JsonKey(name: 'ratingAvg') double? rating, int? reviewCount,@JsonKey(name: 'pointsBalance') int? points, int? postedCount, int? claimedCount, int? completedCount
+ String id, String name, String email, String? phoneNumber, String? location, String? about, String? skills,@JsonKey(name: 'DOB') DateTime? dateOfBirth, String? gender,@JsonKey(readValue: _readAvatar) String? avatar,@JsonKey(name: 'ratingAvg') double? rating, int? reviewCount,@JsonKey(name: 'pointsBalance') int? points, int? postedCount, int? claimedCount, int? completedCount
 });
 
 
@@ -168,7 +168,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String email,  String? phoneNumber,  String? location,  String? about,  String? skills, @JsonKey(name: 'DOB')  DateTime? dateOfBirth,  String? gender,  String? avatar, @JsonKey(name: 'ratingAvg')  double? rating,  int? reviewCount, @JsonKey(name: 'pointsBalance')  int? points,  int? postedCount,  int? claimedCount,  int? completedCount)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String email,  String? phoneNumber,  String? location,  String? about,  String? skills, @JsonKey(name: 'DOB')  DateTime? dateOfBirth,  String? gender, @JsonKey(readValue: _readAvatar)  String? avatar, @JsonKey(name: 'ratingAvg')  double? rating,  int? reviewCount, @JsonKey(name: 'pointsBalance')  int? points,  int? postedCount,  int? claimedCount,  int? completedCount)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserModel() when $default != null:
 return $default(_that.id,_that.name,_that.email,_that.phoneNumber,_that.location,_that.about,_that.skills,_that.dateOfBirth,_that.gender,_that.avatar,_that.rating,_that.reviewCount,_that.points,_that.postedCount,_that.claimedCount,_that.completedCount);case _:
@@ -189,7 +189,7 @@ return $default(_that.id,_that.name,_that.email,_that.phoneNumber,_that.location
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String email,  String? phoneNumber,  String? location,  String? about,  String? skills, @JsonKey(name: 'DOB')  DateTime? dateOfBirth,  String? gender,  String? avatar, @JsonKey(name: 'ratingAvg')  double? rating,  int? reviewCount, @JsonKey(name: 'pointsBalance')  int? points,  int? postedCount,  int? claimedCount,  int? completedCount)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String email,  String? phoneNumber,  String? location,  String? about,  String? skills, @JsonKey(name: 'DOB')  DateTime? dateOfBirth,  String? gender, @JsonKey(readValue: _readAvatar)  String? avatar, @JsonKey(name: 'ratingAvg')  double? rating,  int? reviewCount, @JsonKey(name: 'pointsBalance')  int? points,  int? postedCount,  int? claimedCount,  int? completedCount)  $default,) {final _that = this;
 switch (_that) {
 case _UserModel():
 return $default(_that.id,_that.name,_that.email,_that.phoneNumber,_that.location,_that.about,_that.skills,_that.dateOfBirth,_that.gender,_that.avatar,_that.rating,_that.reviewCount,_that.points,_that.postedCount,_that.claimedCount,_that.completedCount);case _:
@@ -209,7 +209,7 @@ return $default(_that.id,_that.name,_that.email,_that.phoneNumber,_that.location
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String email,  String? phoneNumber,  String? location,  String? about,  String? skills, @JsonKey(name: 'DOB')  DateTime? dateOfBirth,  String? gender,  String? avatar, @JsonKey(name: 'ratingAvg')  double? rating,  int? reviewCount, @JsonKey(name: 'pointsBalance')  int? points,  int? postedCount,  int? claimedCount,  int? completedCount)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String email,  String? phoneNumber,  String? location,  String? about,  String? skills, @JsonKey(name: 'DOB')  DateTime? dateOfBirth,  String? gender, @JsonKey(readValue: _readAvatar)  String? avatar, @JsonKey(name: 'ratingAvg')  double? rating,  int? reviewCount, @JsonKey(name: 'pointsBalance')  int? points,  int? postedCount,  int? claimedCount,  int? completedCount)?  $default,) {final _that = this;
 switch (_that) {
 case _UserModel() when $default != null:
 return $default(_that.id,_that.name,_that.email,_that.phoneNumber,_that.location,_that.about,_that.skills,_that.dateOfBirth,_that.gender,_that.avatar,_that.rating,_that.reviewCount,_that.points,_that.postedCount,_that.claimedCount,_that.completedCount);case _:
@@ -224,7 +224,7 @@ return $default(_that.id,_that.name,_that.email,_that.phoneNumber,_that.location
 @JsonSerializable()
 
 class _UserModel implements UserModel {
-  const _UserModel({required this.id, required this.name, required this.email, this.phoneNumber, this.location, this.about, this.skills, @JsonKey(name: 'DOB') this.dateOfBirth, this.gender, this.avatar, @JsonKey(name: 'ratingAvg') this.rating, this.reviewCount, @JsonKey(name: 'pointsBalance') this.points, this.postedCount, this.claimedCount, this.completedCount});
+  const _UserModel({required this.id, required this.name, required this.email, this.phoneNumber, this.location, this.about, this.skills, @JsonKey(name: 'DOB') this.dateOfBirth, this.gender, @JsonKey(readValue: _readAvatar) this.avatar, @JsonKey(name: 'ratingAvg') this.rating, this.reviewCount, @JsonKey(name: 'pointsBalance') this.points, this.postedCount, this.claimedCount, this.completedCount});
   factory _UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 
 @override final  String id;
@@ -236,7 +236,7 @@ class _UserModel implements UserModel {
 @override final  String? skills;
 @override@JsonKey(name: 'DOB') final  DateTime? dateOfBirth;
 @override final  String? gender;
-@override final  String? avatar;
+@override@JsonKey(readValue: _readAvatar) final  String? avatar;
 @override@JsonKey(name: 'ratingAvg') final  double? rating;
 @override final  int? reviewCount;
 @override@JsonKey(name: 'pointsBalance') final  int? points;
@@ -277,7 +277,7 @@ abstract mixin class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Re
   factory _$UserModelCopyWith(_UserModel value, $Res Function(_UserModel) _then) = __$UserModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, String email, String? phoneNumber, String? location, String? about, String? skills,@JsonKey(name: 'DOB') DateTime? dateOfBirth, String? gender, String? avatar,@JsonKey(name: 'ratingAvg') double? rating, int? reviewCount,@JsonKey(name: 'pointsBalance') int? points, int? postedCount, int? claimedCount, int? completedCount
+ String id, String name, String email, String? phoneNumber, String? location, String? about, String? skills,@JsonKey(name: 'DOB') DateTime? dateOfBirth, String? gender,@JsonKey(readValue: _readAvatar) String? avatar,@JsonKey(name: 'ratingAvg') double? rating, int? reviewCount,@JsonKey(name: 'pointsBalance') int? points, int? postedCount, int? claimedCount, int? completedCount
 });
 
 

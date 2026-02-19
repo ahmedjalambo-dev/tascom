@@ -3,14 +3,14 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../../../../core/networking/api_constants.dart';
-import '../models/user_response.dart';
+import '../../../../../core/networking/api_constants.dart';
+import '../../../../user/data/models/user_response.dart';
 
-part 'user_service.g.dart';
+part 'edit_profile_service.g.dart';
 
 @RestApi()
-abstract class UserService {
-  factory UserService(Dio dio) = _UserService;
+abstract class EditProfileService {
+  factory EditProfileService(Dio dio) = _EditProfileService;
 
   @GET('${ApiConstants.users}/{id}')
   Future<UserResponse> getUser(@Path('id') String id);
