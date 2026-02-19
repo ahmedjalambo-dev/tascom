@@ -1,7 +1,6 @@
 import 'package:intl/intl.dart';
 
-import 'package:tascom/features/user/data/models/user_model.dart'
-    as api_user;
+import 'package:tascom/features/user/data/models/user_model.dart' as api_user;
 import 'all_tasks_response.dart';
 import 'task_category.dart';
 import 'task_location.dart';

@@ -8,7 +8,7 @@ class DeleteAccountCubit extends Cubit<DeleteAccountState> {
   final DeleteAccountRepo _deleteAccountRepo;
 
   DeleteAccountCubit(this._deleteAccountRepo)
-      : super(const DeleteAccountState.initial());
+    : super(const DeleteAccountState.initial());
 
   Future<void> deleteAccount(String id) async {
     emit(const DeleteAccountState.loading());

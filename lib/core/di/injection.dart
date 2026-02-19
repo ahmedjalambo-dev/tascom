@@ -120,12 +120,8 @@ Future<void> initDependencies() async {
   getIt.registerFactory<UserCubit>(() => UserCubit(getIt<UserRepo>()));
 
   // ============ Home - Get All Tasks ============
-  getIt.registerLazySingleton<HomeService>(
-    () => HomeService(getIt<Dio>()),
-  );
-  getIt.registerLazySingleton<HomeRepo>(
-    () => HomeRepo(getIt<HomeService>()),
-  );
+  getIt.registerLazySingleton<HomeService>(() => HomeService(getIt<Dio>()));
+  getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt<HomeService>()));
   getIt.registerFactory<HomeCubit>(
     () => HomeCubit(getIt<HomeRepo>(), getIt<UserService>()),
   );

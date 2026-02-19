@@ -31,5 +31,4 @@ class UserCubit extends Cubit<UserState> {
       failure: (error) => emit(UserState.error(error)),
     );
   }
-
 }

@@ -19,25 +19,29 @@ class HomeCubit extends Cubit<HomeState> {
   final Map<String, String> _locationNamesCache = {};
 
   HomeCubit(this._homeRepo, this._userService)
-      : super(const HomeState.initial());
+    : super(const HomeState.initial());
 
   Future<void> getAllTasks() async {
     _currentPage = 1;
     _allTasks = [];
     emit(const HomeState.loading());
 
-    final result =
-        await _homeRepo.getAllTasks(page: _currentPage, limit: _limit);
+    final result = await _homeRepo.getAllTasks(
+      page: _currentPage,
+      limit: _limit,
+    );
 
     switch (result) {
       case Success(data: final response):
         _allTasks = List.from(response.data);
         await _fetchCreatorsAndLocations(response.data);
-        emit(HomeState.success(
-          response: response,
-          creators: Map.from(_creatorsCache),
-          locationNames: Map.from(_locationNamesCache),
-        ));
+        emit(
+          HomeState.success(
+            response: response,
+            creators: Map.from(_creatorsCache),
+            locationNames: Map.from(_locationNamesCache),
+          ),
+        );
       case Failure(error: final error):
         emit(HomeState.error(error));
     }
@@ -56,14 +60,18 @@ class HomeCubit extends Cubit<HomeState> {
 
       _currentPage++;
 
-      emit(HomeState.loadingMore(
-        currentData: currentResponse,
-        creators: currentCreators,
-        locationNames: currentLocationNames,
-      ));
+      emit(
+        HomeState.loadingMore(
+          currentData: currentResponse,
+          creators: currentCreators,
+          locationNames: currentLocationNames,
+        ),
+      );
 
-      final result =
-          await _homeRepo.getAllTasks(page: _currentPage, limit: _limit);
+      final result = await _homeRepo.getAllTasks(
+        page: _currentPage,
+        limit: _limit,
+      );
 
       switch (result) {
         case Success(data: final response):
@@ -76,27 +84,28 @@ class HomeCubit extends Cubit<HomeState> {
             meta: response.meta,
           );
 
-          emit(HomeState.success(
-            response: mergedResponse,
-            creators: Map.from(_creatorsCache),
-            locationNames: Map.from(_locationNamesCache),
-          ));
+          emit(
+            HomeState.success(
+              response: mergedResponse,
+              creators: Map.from(_creatorsCache),
+              locationNames: Map.from(_locationNamesCache),
+            ),
+          );
         case Failure():
           _currentPage--;
-          emit(HomeState.success(
-            response: currentResponse,
-            creators: currentCreators,
-            locationNames: currentLocationNames,
-          ));
+          emit(
+            HomeState.success(
+              response: currentResponse,
+              creators: currentCreators,
+              locationNames: currentLocationNames,
+            ),
+          );
       }
     }
   }
 
   Future<void> _fetchCreatorsAndLocations(List<TaskResponseData> tasks) async {
-    await Future.wait([
-      _fetchCreators(tasks),
-      _resolveLocations(tasks),
-    ]);
+    await Future.wait([_fetchCreators(tasks), _resolveLocations(tasks)]);
   }
 
   Future<void> _fetchCreators(List<TaskResponseData> tasks) async {
@@ -137,10 +146,8 @@ class HomeCubit extends Cubit<HomeState> {
           if (placemark != null) {
             final country = placemark.country ?? '';
             final city = placemark.locality ?? '';
-            final name =
-                [country, city].where((s) => s.isNotEmpty).join(', ');
-            _locationNamesCache[entry.key] =
-                name.isNotEmpty ? name : 'Unknown';
+            final name = [country, city].where((s) => s.isNotEmpty).join(', ');
+            _locationNamesCache[entry.key] = name.isNotEmpty ? name : 'Unknown';
           } else {
             _locationNamesCache[entry.key] = 'Unknown';
           }

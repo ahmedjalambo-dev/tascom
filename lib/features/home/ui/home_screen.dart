@@ -126,9 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildTaskList(state),
 
               // Bottom spacing
-              const SliverToBoxAdapter(
-                child: VerticalSpace(100),
-              ),
+              const SliverToBoxAdapter(child: VerticalSpace(100)),
             ],
           );
         },
@@ -149,10 +147,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       success: (response, creators, locationNames) {
         final tasks = response.data
-            .map((t) => t.toTaskModel(
-                  creators: creators,
-                  locationNames: locationNames,
-                ))
+            .map(
+              (t) => t.toTaskModel(
+                creators: creators,
+                locationNames: locationNames,
+              ),
+            )
             .toList();
 
         if (tasks.isEmpty) {
@@ -187,8 +187,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     arguments: taskModel,
                   );
                 },
-                onClaimTap:
-                    taskModel.isClaimed ? null : () => _handleClaimTask(index),
+                onClaimTap: taskModel.isClaimed
+                    ? null
+                    : () => _handleClaimTask(index),
               );
             },
           ),
@@ -196,10 +197,12 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       loadingMore: (currentData, creators, locationNames) {
         final tasks = currentData.data
-            .map((t) => t.toTaskModel(
-                  creators: creators,
-                  locationNames: locationNames,
-                ))
+            .map(
+              (t) => t.toTaskModel(
+                creators: creators,
+                locationNames: locationNames,
+              ),
+            )
             .toList();
 
         return SliverPadding(
@@ -226,8 +229,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     arguments: taskModel,
                   );
                 },
-                onClaimTap:
-                    taskModel.isClaimed ? null : () => _handleClaimTask(index),
+                onClaimTap: taskModel.isClaimed
+                    ? null
+                    : () => _handleClaimTask(index),
               );
             },
           ),
@@ -248,8 +252,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const VerticalSpace(16),
                 TextButton(
-                  onPressed: () =>
-                      context.read<HomeCubit>().getAllTasks(),
+                  onPressed: () => context.read<HomeCubit>().getAllTasks(),
                   child: const Text('Retry'),
                 ),
               ],
