@@ -4,8 +4,8 @@ import 'package:tascom/core/constants/my_images.dart';
 import 'package:tascom/core/extentions/extentions.dart';
 import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/themes/my_colors.dart';
-import 'package:tascom/features/registration/onboarding/widgets/my_progress_indicator.dart';
-import 'package:tascom/features/registration/onboarding/widgets/onboarding_page.dart';
+import 'package:tascom/features/onboarding/widgets/my_progress_indicator.dart';
+import 'package:tascom/features/onboarding/widgets/onboarding_page.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
