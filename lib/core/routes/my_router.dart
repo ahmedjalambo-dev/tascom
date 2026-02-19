@@ -6,7 +6,7 @@ import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/storage/session_manager.dart';
 import 'package:tascom/features/ai/ai_screen.dart';
 import 'package:tascom/features/home/data/models/task_model.dart';
-import 'package:tascom/features/home/ui/add_task_screen.dart';
+import 'package:tascom/features/add_task/ui/add_task_screen.dart';
 import 'package:tascom/features/home/ui/home_screen.dart';
 import 'package:tascom/features/home/ui/task_details_screen.dart';
 import 'package:tascom/features/registration/create_new_password/create_new_password_screen.dart';

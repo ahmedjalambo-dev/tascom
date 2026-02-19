@@ -5,6 +5,7 @@ import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/storage/session_manager.dart';
 import 'package:tascom/core/widgets/my_bottom_navigation_bar.dart';
 import 'package:tascom/features/ai/ai_screen.dart';
+import 'package:tascom/features/home/cubit/home_cubit.dart';
 import 'package:tascom/features/home/ui/home_screen.dart';
 import 'package:tascom/features/search/ui/search_screen.dart';
 import 'package:tascom/features/profile/profile_screen.dart';
@@ -21,7 +22,10 @@ class _MyRootScreenState extends State<MyRootScreen> {
   int _currentIndex = 0;
 
   late final List<Widget> _screens = [
-    const HomeScreen(),
+    BlocProvider(
+      create: (_) => getIt<HomeCubit>()..getAllTasks(),
+      child: const HomeScreen(),
+    ),
     const SearchScreen(),
     const AiScreen(),
     BlocProvider(
