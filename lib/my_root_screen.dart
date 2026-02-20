@@ -20,12 +20,10 @@ class MyRootScreen extends StatefulWidget {
 
 class _MyRootScreenState extends State<MyRootScreen> {
   int _currentIndex = 0;
+  late final HomeCubit _homeCubit = getIt<HomeCubit>()..getAllTasks();
 
   late final List<Widget> _screens = [
-    BlocProvider(
-      create: (_) => getIt<HomeCubit>()..getAllTasks(),
-      child: const HomeScreen(),
-    ),
+    BlocProvider.value(value: _homeCubit, child: const HomeScreen()),
     const SearchScreen(),
     const AiScreen(),
     BlocProvider(
@@ -47,8 +45,11 @@ class _MyRootScreenState extends State<MyRootScreen> {
     });
   }
 
-  void _onFabTapped() {
-    Navigator.of(context).pushNamed(MyRoutes.addTask);
+  Future<void> _onFabTapped() async {
+    final result = await Navigator.of(context).pushNamed(MyRoutes.addTask);
+    if (result == true) {
+      _homeCubit.getAllTasks();
+    }
   }
 
   @override

@@ -6,7 +6,8 @@ import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/storage/session_manager.dart';
 import 'package:tascom/features/ai/ai_screen.dart';
 import 'package:tascom/features/home/data/models/task_model.dart';
-import 'package:tascom/features/add_task/ui/add_task_screen.dart';
+import 'package:tascom/features/create_task/cubit/create_task_cubit.dart';
+import 'package:tascom/features/create_task/ui/create_task_screen.dart';
 import 'package:tascom/features/home/ui/home_screen.dart';
 import 'package:tascom/features/home/ui/task_details_screen.dart';
 import 'package:tascom/features/auth/reset_password/create_new_password_screen.dart';
@@ -86,7 +87,12 @@ class MyRouter {
         return MaterialPageRoute(builder: (context) => const HomeScreen());
 
       case MyRoutes.addTask:
-        return MaterialPageRoute(builder: (context) => const AddTaskScreen());
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (_) => getIt<CreateTaskCubit>(),
+            child: const CreateTaskScreen(),
+          ),
+        );
 
       case MyRoutes.taskDetails:
         final taskModel = settings.arguments as TaskModel;

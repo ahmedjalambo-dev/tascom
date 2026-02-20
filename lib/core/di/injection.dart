@@ -49,6 +49,11 @@ import '../../features/home/cubit/home_cubit.dart';
 import '../../features/home/data/repos/home_repo.dart';
 import '../../features/home/data/services/home_service.dart';
 
+// Create Task
+import '../../features/create_task/cubit/create_task_cubit.dart';
+import '../../features/create_task/data/repos/create_task_repo.dart';
+import '../../features/create_task/data/services/create_task_service.dart';
+
 // Delete Account
 import '../../features/settings/delete_account/cubit/delete_account_cubit.dart';
 import '../../features/settings/delete_account/data/repos/delete_account_repo.dart';
@@ -144,6 +149,17 @@ Future<void> initDependencies() async {
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt<HomeService>()));
   getIt.registerFactory<HomeCubit>(
     () => HomeCubit(getIt<HomeRepo>(), getIt<ProfileService>()),
+  );
+
+  // ============ Create Task ============
+  getIt.registerLazySingleton<CreateTaskService>(
+    () => CreateTaskService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<CreateTaskRepo>(
+    () => CreateTaskRepo(getIt<CreateTaskService>()),
+  );
+  getIt.registerFactory<CreateTaskCubit>(
+    () => CreateTaskCubit(getIt<CreateTaskRepo>()),
   );
 
   // ============ Delete Account ============

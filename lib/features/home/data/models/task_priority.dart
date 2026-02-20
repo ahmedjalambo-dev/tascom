@@ -22,6 +22,17 @@ enum TaskPriority {
 }
 
 extension TaskPriorityExtension on TaskPriority {
+  String get toApiValue {
+    switch (this) {
+      case TaskPriority.high:
+        return 'HIGH';
+      case TaskPriority.medium:
+        return 'MEDIUM';
+      case TaskPriority.low:
+        return 'LOW';
+    }
+  }
+
   String get displayName {
     switch (this) {
       case TaskPriority.high:

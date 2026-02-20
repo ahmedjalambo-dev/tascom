@@ -8,7 +8,6 @@ enum TaskCategory {
   pet,
   shopping,
   transportation,
-  labor,
   teaching;
 
   static TaskCategory fromApiValue(String value) {
@@ -32,6 +31,23 @@ enum TaskCategory {
 }
 
 extension TaskCategoryExtension on TaskCategory {
+  String get toApiValue {
+    switch (this) {
+      case TaskCategory.homeService:
+        return 'HomeServices';
+      case TaskCategory.repairs:
+        return 'Repairs';
+      case TaskCategory.pet:
+        return 'PetCare';
+      case TaskCategory.shopping:
+        return 'HomeServices';
+      case TaskCategory.transportation:
+        return 'Transportation';
+      case TaskCategory.teaching:
+        return 'Tutoring';
+    }
+  }
+
   String get displayName {
     switch (this) {
       case TaskCategory.homeService:
@@ -44,8 +60,6 @@ extension TaskCategoryExtension on TaskCategory {
         return 'Shopping';
       case TaskCategory.transportation:
         return 'Transportation';
-      case TaskCategory.labor:
-        return 'Labor';
       case TaskCategory.teaching:
         return 'Teaching';
     }
@@ -63,10 +77,25 @@ extension TaskCategoryExtension on TaskCategory {
         return MyIcons.cartSolid;
       case TaskCategory.transportation:
         return MyIcons.carSolid;
-      case TaskCategory.labor:
-        return MyIcons.miningSolid;
       case TaskCategory.teaching:
         return MyIcons.teachingSolid;
+    }
+  }
+
+  String get iconStroke {
+    switch (this) {
+      case TaskCategory.homeService:
+        return MyIcons.homeServiceStroke;
+      case TaskCategory.repairs:
+        return MyIcons.miningStroke;
+      case TaskCategory.pet:
+        return MyIcons.petStroke;
+      case TaskCategory.shopping:
+        return MyIcons.cartStroke;
+      case TaskCategory.transportation:
+        return MyIcons.carStroke;
+      case TaskCategory.teaching:
+        return MyIcons.teachingStroke;
     }
   }
 

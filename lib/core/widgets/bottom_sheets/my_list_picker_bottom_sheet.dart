@@ -53,7 +53,6 @@ class MyListPickerBottomSheet<T> extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(20.w),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
