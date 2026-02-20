@@ -50,7 +50,6 @@ class SkillsInputWidget extends StatelessWidget {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
       ),
       builder: (context) => Column(
-        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
@@ -62,22 +61,28 @@ class SkillsInputWidget extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 8.h),
-          ...availableSkills.map(
-            (skill) => ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  skill,
-                  style: MyTextStyles.body.body1.copyWith(
-                    color: MyColors.text.primary,
+          Flexible(
+            child: ListView.builder(
+              // shrinkWrap: true,
+              itemCount: availableSkills.length,
+              itemBuilder: (context, index) {
+                final skill = availableSkills[index];
+                return ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Text(
+                      skill,
+                      style: MyTextStyles.body.body1.copyWith(
+                        color: MyColors.text.primary,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-                onSkillAdded(skill);
+                  onTap: () {
+                    Navigator.pop(context);
+                    onSkillAdded(skill);
+                  },
+                );
               },
             ),
           ),
