@@ -25,29 +25,27 @@ class MyOutlinedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: height ?? 48.h,
-      child: OutlinedButton(
-        onPressed: onPressed,
-        style: OutlinedButton.styleFrom(
-          minimumSize: const Size.fromWidth(double.infinity),
-          side: BorderSide(
-            color: borderColor ?? MyColors.border.border,
-            width: 1.5,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius ?? 100.r),
-          ),
-          foregroundColor: textColor ?? MyColors.text.primary,
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size.fromHeight(height ?? 48),
+        side: BorderSide(
+          color: borderColor ?? MyColors.border.border,
+          width: 1.5,
         ),
-        child: Text(
-          text,
-          style:
-              textStyle ??
-              MyTextStyles.button.primaryButton1.copyWith(
-                color: textColor ?? MyColors.text.secondary,
-              ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 100.r),
         ),
+        foregroundColor: textColor ?? MyColors.text.primary,
+        backgroundColor: Colors.white,
+      ),
+      child: Text(
+        text,
+        style:
+            textStyle ??
+            MyTextStyles.button.primaryButton1.copyWith(
+              color: textColor ?? MyColors.text.secondary,
+            ),
       ),
     );
   }

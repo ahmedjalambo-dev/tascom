@@ -16,4 +16,5 @@ class MyRoutes {
   static const String reports = '/reports';
   static const String deleteAccount = '/delete_account';
   static const String editProfile = '/edit_profile';
+  static const String requests = '/requests';
 }

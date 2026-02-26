@@ -27,13 +27,13 @@ class MyButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(double.infinity, height ?? 48.h),
+        minimumSize: Size.fromHeight(height ?? 48),
         backgroundColor:
             backgroundColor ?? Theme.of(context).colorScheme.primary,
         foregroundColor:
             foregroundColor ?? Theme.of(context).colorScheme.onPrimary,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? 100.dg),
+          borderRadius: BorderRadius.circular(borderRadius ?? 100.r),
         ),
       ),
       child: Text(text, style: textStyle ?? MyTextStyles.button.primaryButton1),

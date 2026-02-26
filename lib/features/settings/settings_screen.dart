@@ -64,7 +64,9 @@ class SettingsScreen extends StatelessWidget {
                   _SettingsMenuItem(
                     icon: MyIcons.requestsStroke,
                     label: 'Requests',
-                    onTap: () {},
+                    onTap: () {
+                      context.pushNamed(MyRoutes.requests);
+                    },
                   ),
                   _SettingsMenuItem(
                     icon: MyIcons.saveStroke,
