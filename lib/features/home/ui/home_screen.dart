@@ -9,7 +9,10 @@ import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/features/home/cubit/home_cubit.dart';
 import 'package:tascom/features/home/cubit/home_state.dart';
 import 'package:tascom/features/home/data/filter_categories_data.dart';
+import 'package:tascom/features/home/data/models/all_tasks_response.dart';
 import 'package:tascom/features/home/data/models/task_response_mapper.dart';
+import 'package:tascom/features/user/data/models/user_model.dart';
+import 'package:tascom/core/storage/session_manager.dart';
 import 'package:tascom/features/home/ui/widgets/categoies/category_filter_list.dart';
 import 'package:tascom/features/home/ui/widgets/home_app_bar.dart';
 import 'package:tascom/features/home/ui/widgets/posts/posts_filter_dropdown.dart';
@@ -59,7 +62,17 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.background.primary,
-      body: BlocBuilder<HomeCubit, HomeState>(
+      body: BlocConsumer<HomeCubit, HomeState>(
+        listener: (context, state) {
+          if (state is HomeClaimError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.error.message ?? 'Failed to claim task'),
+                behavior: SnackBarBehavior.floating,
+              ),
+            );
+          }
+        },
         builder: (context, state) {
           return RefreshIndicator(
             onRefresh: () => context.read<HomeCubit>().getAllTasks(),
@@ -149,95 +162,33 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       success: (response, creators, locationNames) {
-        final tasks = response.data
-            .map(
-              (t) => t.toTaskModel(
-                creators: creators,
-                locationNames: locationNames,
-              ),
-            )
-            .toList();
-
-        if (tasks.isEmpty) {
-          return SliverToBoxAdapter(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(32),
-                child: Text(
-                  'No tasks available',
-                  style: MyTextStyles.body.body1.copyWith(
-                    color: MyColors.text.secondary,
-                  ),
-                ),
-              ),
-            ),
-          );
-        }
-
-        return SliverPadding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          sliver: SliverList.separated(
-            itemCount: tasks.length,
-            separatorBuilder: (context, index) => const VerticalSpace(16),
-            itemBuilder: (context, index) {
-              final taskModel = tasks[index];
-              return TaskCard(
-                taskModel: taskModel,
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    MyRoutes.taskDetails,
-                    arguments: taskModel,
-                  );
-                },
-                onClaimTap: taskModel.isClaimed
-                    ? null
-                    : () => _handleClaimTask(index),
-              );
-            },
-          ),
+        return _buildTaskSliver(
+          response: response,
+          creators: creators,
+          locationNames: locationNames,
         );
       },
       loadingMore: (currentData, creators, locationNames) {
-        final tasks = currentData.data
-            .map(
-              (t) => t.toTaskModel(
-                creators: creators,
-                locationNames: locationNames,
-              ),
-            )
-            .toList();
-
-        return SliverPadding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          sliver: SliverList.separated(
-            itemCount: tasks.length + 1,
-            separatorBuilder: (context, index) => const VerticalSpace(16),
-            itemBuilder: (context, index) {
-              if (index == tasks.length) {
-                return const Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              }
-              final taskModel = tasks[index];
-              return TaskCard(
-                taskModel: taskModel,
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    MyRoutes.taskDetails,
-                    arguments: taskModel,
-                  );
-                },
-                onClaimTap: taskModel.isClaimed
-                    ? null
-                    : () => _handleClaimTask(index),
-              );
-            },
-          ),
+        return _buildTaskSliver(
+          response: currentData,
+          creators: creators,
+          locationNames: locationNames,
+          showLoadingMore: true,
+        );
+      },
+      claimLoading: (taskId, currentData, creators, locationNames) {
+        return _buildTaskSliver(
+          response: currentData,
+          creators: creators,
+          locationNames: locationNames,
+          claimLoadingTaskId: taskId,
+        );
+      },
+      claimError: (error, currentData, creators, locationNames) {
+        return _buildTaskSliver(
+          response: currentData,
+          creators: creators,
+          locationNames: locationNames,
         );
       },
       error: (error) => SliverToBoxAdapter(
@@ -266,10 +217,80 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Future<void> _handleClaimTask(int index) async {
+  Widget _buildTaskSliver({
+    required AllTasksResponse response,
+    required Map<String, UserModel> creators,
+    required Map<String, String> locationNames,
+    bool showLoadingMore = false,
+    String? claimLoadingTaskId,
+  }) {
+    final currentUserId = SessionManager.instance.currentUserId;
+    final tasks = response.data
+        .map(
+          (t) => t.toTaskModel(
+            creators: creators,
+            locationNames: locationNames,
+            currentUserId: currentUserId,
+          ),
+        )
+        .toList();
+
+    if (tasks.isEmpty) {
+      return SliverToBoxAdapter(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(32),
+            child: Text(
+              'No tasks available',
+              style: MyTextStyles.body.body1.copyWith(
+                color: MyColors.text.secondary,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    final itemCount = showLoadingMore ? tasks.length + 1 : tasks.length;
+
+    return SliverPadding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      sliver: SliverList.separated(
+        itemCount: itemCount,
+        separatorBuilder: (context, index) => const VerticalSpace(16),
+        itemBuilder: (context, index) {
+          if (showLoadingMore && index == tasks.length) {
+            return const Center(
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+          final taskModel = tasks[index];
+          return TaskCard(
+            taskModel: taskModel,
+            isClaimLoading: claimLoadingTaskId == taskModel.id,
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                MyRoutes.taskDetails,
+                arguments: taskModel,
+              );
+            },
+            onClaimTap: taskModel.isClaimed
+                ? null
+                : () => _handleClaimTask(taskModel.id),
+          );
+        },
+      ),
+    );
+  }
+
+  Future<void> _handleClaimTask(String taskId) async {
     final confirmed = await showClaimConfirmationDialog(context);
-    if (confirmed == true) {
-      // TODO: Implement claim task API call
+    if (confirmed == true && mounted) {
+      context.read<HomeCubit>().claimTask(taskId);
     }
   }
 }

@@ -55,7 +55,7 @@ extension HomeStatePatterns on HomeState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( HomeInitial value)?  initial,TResult Function( HomeLoading value)?  loading,TResult Function( HomeSuccess value)?  success,TResult Function( HomeLoadingMore value)?  loadingMore,TResult Function( HomeError value)?  error,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( HomeInitial value)?  initial,TResult Function( HomeLoading value)?  loading,TResult Function( HomeSuccess value)?  success,TResult Function( HomeLoadingMore value)?  loadingMore,TResult Function( HomeError value)?  error,TResult Function( HomeClaimLoading value)?  claimLoading,TResult Function( HomeClaimError value)?  claimError,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case HomeInitial() when initial != null:
@@ -63,7 +63,9 @@ return initial(_that);case HomeLoading() when loading != null:
 return loading(_that);case HomeSuccess() when success != null:
 return success(_that);case HomeLoadingMore() when loadingMore != null:
 return loadingMore(_that);case HomeError() when error != null:
-return error(_that);case _:
+return error(_that);case HomeClaimLoading() when claimLoading != null:
+return claimLoading(_that);case HomeClaimError() when claimError != null:
+return claimError(_that);case _:
   return orElse();
 
 }
@@ -81,7 +83,7 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( HomeInitial value)  initial,required TResult Function( HomeLoading value)  loading,required TResult Function( HomeSuccess value)  success,required TResult Function( HomeLoadingMore value)  loadingMore,required TResult Function( HomeError value)  error,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( HomeInitial value)  initial,required TResult Function( HomeLoading value)  loading,required TResult Function( HomeSuccess value)  success,required TResult Function( HomeLoadingMore value)  loadingMore,required TResult Function( HomeError value)  error,required TResult Function( HomeClaimLoading value)  claimLoading,required TResult Function( HomeClaimError value)  claimError,}){
 final _that = this;
 switch (_that) {
 case HomeInitial():
@@ -89,7 +91,9 @@ return initial(_that);case HomeLoading():
 return loading(_that);case HomeSuccess():
 return success(_that);case HomeLoadingMore():
 return loadingMore(_that);case HomeError():
-return error(_that);case _:
+return error(_that);case HomeClaimLoading():
+return claimLoading(_that);case HomeClaimError():
+return claimError(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -106,7 +110,7 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( HomeInitial value)?  initial,TResult? Function( HomeLoading value)?  loading,TResult? Function( HomeSuccess value)?  success,TResult? Function( HomeLoadingMore value)?  loadingMore,TResult? Function( HomeError value)?  error,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( HomeInitial value)?  initial,TResult? Function( HomeLoading value)?  loading,TResult? Function( HomeSuccess value)?  success,TResult? Function( HomeLoadingMore value)?  loadingMore,TResult? Function( HomeError value)?  error,TResult? Function( HomeClaimLoading value)?  claimLoading,TResult? Function( HomeClaimError value)?  claimError,}){
 final _that = this;
 switch (_that) {
 case HomeInitial() when initial != null:
@@ -114,7 +118,9 @@ return initial(_that);case HomeLoading() when loading != null:
 return loading(_that);case HomeSuccess() when success != null:
 return success(_that);case HomeLoadingMore() when loadingMore != null:
 return loadingMore(_that);case HomeError() when error != null:
-return error(_that);case _:
+return error(_that);case HomeClaimLoading() when claimLoading != null:
+return claimLoading(_that);case HomeClaimError() when claimError != null:
+return claimError(_that);case _:
   return null;
 
 }
@@ -131,14 +137,16 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( AllTasksResponse response,  Map<String, UserModel> creators,  Map<String, String> locationNames)?  success,TResult Function( AllTasksResponse currentData,  Map<String, UserModel> creators,  Map<String, String> locationNames)?  loadingMore,TResult Function( ApiErrorModel error)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( AllTasksResponse response,  Map<String, UserModel> creators,  Map<String, String> locationNames)?  success,TResult Function( AllTasksResponse currentData,  Map<String, UserModel> creators,  Map<String, String> locationNames)?  loadingMore,TResult Function( ApiErrorModel error)?  error,TResult Function( String taskId,  AllTasksResponse currentData,  Map<String, UserModel> creators,  Map<String, String> locationNames)?  claimLoading,TResult Function( ApiErrorModel error,  AllTasksResponse currentData,  Map<String, UserModel> creators,  Map<String, String> locationNames)?  claimError,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case HomeInitial() when initial != null:
 return initial();case HomeLoading() when loading != null:
 return loading();case HomeSuccess() when success != null:
 return success(_that.response,_that.creators,_that.locationNames);case HomeLoadingMore() when loadingMore != null:
 return loadingMore(_that.currentData,_that.creators,_that.locationNames);case HomeError() when error != null:
-return error(_that.error);case _:
+return error(_that.error);case HomeClaimLoading() when claimLoading != null:
+return claimLoading(_that.taskId,_that.currentData,_that.creators,_that.locationNames);case HomeClaimError() when claimError != null:
+return claimError(_that.error,_that.currentData,_that.creators,_that.locationNames);case _:
   return orElse();
 
 }
@@ -156,14 +164,16 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( AllTasksResponse response,  Map<String, UserModel> creators,  Map<String, String> locationNames)  success,required TResult Function( AllTasksResponse currentData,  Map<String, UserModel> creators,  Map<String, String> locationNames)  loadingMore,required TResult Function( ApiErrorModel error)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( AllTasksResponse response,  Map<String, UserModel> creators,  Map<String, String> locationNames)  success,required TResult Function( AllTasksResponse currentData,  Map<String, UserModel> creators,  Map<String, String> locationNames)  loadingMore,required TResult Function( ApiErrorModel error)  error,required TResult Function( String taskId,  AllTasksResponse currentData,  Map<String, UserModel> creators,  Map<String, String> locationNames)  claimLoading,required TResult Function( ApiErrorModel error,  AllTasksResponse currentData,  Map<String, UserModel> creators,  Map<String, String> locationNames)  claimError,}) {final _that = this;
 switch (_that) {
 case HomeInitial():
 return initial();case HomeLoading():
 return loading();case HomeSuccess():
 return success(_that.response,_that.creators,_that.locationNames);case HomeLoadingMore():
 return loadingMore(_that.currentData,_that.creators,_that.locationNames);case HomeError():
-return error(_that.error);case _:
+return error(_that.error);case HomeClaimLoading():
+return claimLoading(_that.taskId,_that.currentData,_that.creators,_that.locationNames);case HomeClaimError():
+return claimError(_that.error,_that.currentData,_that.creators,_that.locationNames);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -180,14 +190,16 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( AllTasksResponse response,  Map<String, UserModel> creators,  Map<String, String> locationNames)?  success,TResult? Function( AllTasksResponse currentData,  Map<String, UserModel> creators,  Map<String, String> locationNames)?  loadingMore,TResult? Function( ApiErrorModel error)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( AllTasksResponse response,  Map<String, UserModel> creators,  Map<String, String> locationNames)?  success,TResult? Function( AllTasksResponse currentData,  Map<String, UserModel> creators,  Map<String, String> locationNames)?  loadingMore,TResult? Function( ApiErrorModel error)?  error,TResult? Function( String taskId,  AllTasksResponse currentData,  Map<String, UserModel> creators,  Map<String, String> locationNames)?  claimLoading,TResult? Function( ApiErrorModel error,  AllTasksResponse currentData,  Map<String, UserModel> creators,  Map<String, String> locationNames)?  claimError,}) {final _that = this;
 switch (_that) {
 case HomeInitial() when initial != null:
 return initial();case HomeLoading() when loading != null:
 return loading();case HomeSuccess() when success != null:
 return success(_that.response,_that.creators,_that.locationNames);case HomeLoadingMore() when loadingMore != null:
 return loadingMore(_that.currentData,_that.creators,_that.locationNames);case HomeError() when error != null:
-return error(_that.error);case _:
+return error(_that.error);case HomeClaimLoading() when claimLoading != null:
+return claimLoading(_that.taskId,_that.currentData,_that.creators,_that.locationNames);case HomeClaimError() when claimError != null:
+return claimError(_that.error,_that.currentData,_that.creators,_that.locationNames);case _:
   return null;
 
 }
@@ -512,6 +524,201 @@ $ApiErrorModelCopyWith<$Res> get error {
   
   return $ApiErrorModelCopyWith<$Res>(_self.error, (value) {
     return _then(_self.copyWith(error: value));
+  });
+}
+}
+
+/// @nodoc
+
+
+class HomeClaimLoading implements HomeState {
+  const HomeClaimLoading({required this.taskId, required this.currentData, required final  Map<String, UserModel> creators, required final  Map<String, String> locationNames}): _creators = creators,_locationNames = locationNames;
+  
+
+ final  String taskId;
+ final  AllTasksResponse currentData;
+ final  Map<String, UserModel> _creators;
+ Map<String, UserModel> get creators {
+  if (_creators is EqualUnmodifiableMapView) return _creators;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(_creators);
+}
+
+ final  Map<String, String> _locationNames;
+ Map<String, String> get locationNames {
+  if (_locationNames is EqualUnmodifiableMapView) return _locationNames;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(_locationNames);
+}
+
+
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$HomeClaimLoadingCopyWith<HomeClaimLoading> get copyWith => _$HomeClaimLoadingCopyWithImpl<HomeClaimLoading>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeClaimLoading&&(identical(other.taskId, taskId) || other.taskId == taskId)&&(identical(other.currentData, currentData) || other.currentData == currentData)&&const DeepCollectionEquality().equals(other._creators, _creators)&&const DeepCollectionEquality().equals(other._locationNames, _locationNames));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,taskId,currentData,const DeepCollectionEquality().hash(_creators),const DeepCollectionEquality().hash(_locationNames));
+
+@override
+String toString() {
+  return 'HomeState.claimLoading(taskId: $taskId, currentData: $currentData, creators: $creators, locationNames: $locationNames)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $HomeClaimLoadingCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
+  factory $HomeClaimLoadingCopyWith(HomeClaimLoading value, $Res Function(HomeClaimLoading) _then) = _$HomeClaimLoadingCopyWithImpl;
+@useResult
+$Res call({
+ String taskId, AllTasksResponse currentData, Map<String, UserModel> creators, Map<String, String> locationNames
+});
+
+
+$AllTasksResponseCopyWith<$Res> get currentData;
+
+}
+/// @nodoc
+class _$HomeClaimLoadingCopyWithImpl<$Res>
+    implements $HomeClaimLoadingCopyWith<$Res> {
+  _$HomeClaimLoadingCopyWithImpl(this._self, this._then);
+
+  final HomeClaimLoading _self;
+  final $Res Function(HomeClaimLoading) _then;
+
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? taskId = null,Object? currentData = null,Object? creators = null,Object? locationNames = null,}) {
+  return _then(HomeClaimLoading(
+taskId: null == taskId ? _self.taskId : taskId // ignore: cast_nullable_to_non_nullable
+as String,currentData: null == currentData ? _self.currentData : currentData // ignore: cast_nullable_to_non_nullable
+as AllTasksResponse,creators: null == creators ? _self._creators : creators // ignore: cast_nullable_to_non_nullable
+as Map<String, UserModel>,locationNames: null == locationNames ? _self._locationNames : locationNames // ignore: cast_nullable_to_non_nullable
+as Map<String, String>,
+  ));
+}
+
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AllTasksResponseCopyWith<$Res> get currentData {
+  
+  return $AllTasksResponseCopyWith<$Res>(_self.currentData, (value) {
+    return _then(_self.copyWith(currentData: value));
+  });
+}
+}
+
+/// @nodoc
+
+
+class HomeClaimError implements HomeState {
+  const HomeClaimError({required this.error, required this.currentData, required final  Map<String, UserModel> creators, required final  Map<String, String> locationNames}): _creators = creators,_locationNames = locationNames;
+  
+
+ final  ApiErrorModel error;
+ final  AllTasksResponse currentData;
+ final  Map<String, UserModel> _creators;
+ Map<String, UserModel> get creators {
+  if (_creators is EqualUnmodifiableMapView) return _creators;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(_creators);
+}
+
+ final  Map<String, String> _locationNames;
+ Map<String, String> get locationNames {
+  if (_locationNames is EqualUnmodifiableMapView) return _locationNames;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(_locationNames);
+}
+
+
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$HomeClaimErrorCopyWith<HomeClaimError> get copyWith => _$HomeClaimErrorCopyWithImpl<HomeClaimError>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeClaimError&&(identical(other.error, error) || other.error == error)&&(identical(other.currentData, currentData) || other.currentData == currentData)&&const DeepCollectionEquality().equals(other._creators, _creators)&&const DeepCollectionEquality().equals(other._locationNames, _locationNames));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,error,currentData,const DeepCollectionEquality().hash(_creators),const DeepCollectionEquality().hash(_locationNames));
+
+@override
+String toString() {
+  return 'HomeState.claimError(error: $error, currentData: $currentData, creators: $creators, locationNames: $locationNames)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $HomeClaimErrorCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
+  factory $HomeClaimErrorCopyWith(HomeClaimError value, $Res Function(HomeClaimError) _then) = _$HomeClaimErrorCopyWithImpl;
+@useResult
+$Res call({
+ ApiErrorModel error, AllTasksResponse currentData, Map<String, UserModel> creators, Map<String, String> locationNames
+});
+
+
+$ApiErrorModelCopyWith<$Res> get error;$AllTasksResponseCopyWith<$Res> get currentData;
+
+}
+/// @nodoc
+class _$HomeClaimErrorCopyWithImpl<$Res>
+    implements $HomeClaimErrorCopyWith<$Res> {
+  _$HomeClaimErrorCopyWithImpl(this._self, this._then);
+
+  final HomeClaimError _self;
+  final $Res Function(HomeClaimError) _then;
+
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? error = null,Object? currentData = null,Object? creators = null,Object? locationNames = null,}) {
+  return _then(HomeClaimError(
+error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as ApiErrorModel,currentData: null == currentData ? _self.currentData : currentData // ignore: cast_nullable_to_non_nullable
+as AllTasksResponse,creators: null == creators ? _self._creators : creators // ignore: cast_nullable_to_non_nullable
+as Map<String, UserModel>,locationNames: null == locationNames ? _self._locationNames : locationNames // ignore: cast_nullable_to_non_nullable
+as Map<String, String>,
+  ));
+}
+
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ApiErrorModelCopyWith<$Res> get error {
+  
+  return $ApiErrorModelCopyWith<$Res>(_self.error, (value) {
+    return _then(_self.copyWith(error: value));
+  });
+}/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AllTasksResponseCopyWith<$Res> get currentData {
+  
+  return $AllTasksResponseCopyWith<$Res>(_self.currentData, (value) {
+    return _then(_self.copyWith(currentData: value));
   });
 }
 }
