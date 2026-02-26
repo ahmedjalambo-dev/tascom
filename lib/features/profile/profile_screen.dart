@@ -118,6 +118,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _showSnackBar('Task marked as completed');
   }
 
+  Future<void> _onRefresh() async {
+    final userId = SessionManager.instance.currentUserId;
+    if (userId != null) {
+      await context.read<ProfileCubit>().getUser(userId);
+    }
+  }
+
   void _showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -155,8 +162,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildProfileContent(UserModel user) {
-    return SingleChildScrollView(
-      child: Column(
+    return RefreshIndicator(
+      onRefresh: _onRefresh,
+      child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child: Column(
         children: [
           const VerticalSpace(16),
           ProfileHeader(
@@ -183,41 +193,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
           const VerticalSpace(100),
         ],
       ),
+      ),
     );
   }
 
   Widget _buildErrorState(String message) {
-    return Center(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.error_outline, size: 64.sp, color: MyColors.text.third),
-            const VerticalSpace(16),
-            Text(
-              message,
-              textAlign: TextAlign.center,
-              style: MyTextStyles.body.body1.copyWith(
-                color: MyColors.text.secondary,
+    return RefreshIndicator(
+      onRefresh: _onRefresh,
+      child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child: SizedBox(
+          height: MediaQuery.sizeOf(context).height * 0.6,
+          child: Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.error_outline, size: 64.sp, color: MyColors.text.third),
+                  const VerticalSpace(16),
+                  Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    style: MyTextStyles.body.body1.copyWith(
+                      color: MyColors.text.secondary,
+                    ),
+                  ),
+                  const VerticalSpace(24),
+                  TextButton(
+                    onPressed: _onRefresh,
+                    child: Text(
+                      'Retry',
+                      style: MyTextStyles.button.primaryButton1.copyWith(
+                        color: MyColors.brand.purple,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            const VerticalSpace(24),
-            TextButton(
-              onPressed: () {
-                final userId = SessionManager.instance.currentUserId;
-                if (userId != null) {
-                  context.read<ProfileCubit>().getUser(userId);
-                }
-              },
-              child: Text(
-                'Retry',
-                style: MyTextStyles.button.primaryButton1.copyWith(
-                  color: MyColors.brand.purple,
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

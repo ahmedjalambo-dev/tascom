@@ -61,8 +61,10 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: MyColors.background.primary,
       body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
-          return CustomScrollView(
-            controller: _scrollController,
+          return RefreshIndicator(
+            onRefresh: () => context.read<HomeCubit>().getAllTasks(),
+            child: CustomScrollView(
+              controller: _scrollController,
             slivers: [
               SliverToBoxAdapter(
                 child: Column(
@@ -128,6 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
               // Bottom spacing
               const SliverToBoxAdapter(child: VerticalSpace(100)),
             ],
+          ),
           );
         },
       ),
