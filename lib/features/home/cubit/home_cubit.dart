@@ -188,6 +188,39 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
+  Future<void> cancelClaim({
+    required String claimId,
+    required String taskId,
+  }) async {
+    final currentState = state;
+    if (currentState is! HomeSuccess) return;
+
+    emit(
+      HomeState.cancelClaimLoading(
+        taskId: taskId,
+        currentData: currentState.response,
+        creators: currentState.creators,
+        locationNames: currentState.locationNames,
+      ),
+    );
+
+    final result = await _homeRepo.cancelClaim(claimId);
+
+    switch (result) {
+      case Success():
+        await getAllTasks();
+      case Failure(error: final error):
+        emit(
+          HomeState.cancelClaimError(
+            error: error,
+            currentData: currentState.response,
+            creators: currentState.creators,
+            locationNames: currentState.locationNames,
+          ),
+        );
+    }
+  }
+
   bool get hasMorePages {
     final currentState = state;
     if (currentState is HomeSuccess) {

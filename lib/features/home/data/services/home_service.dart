@@ -19,4 +19,7 @@ abstract class HomeService {
 
   @POST(ApiConstants.taskClaims)
   Future<ClaimTaskResponse> claimTask(@Body() Map<String, dynamic> body);
+
+  @PATCH('${ApiConstants.cancelTaskClaim}/{id}')
+  Future<void> cancelClaim(@Path('id') String claimId);
 }

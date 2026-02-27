@@ -31,4 +31,13 @@ class HomeRepo {
       return ApiResult.failure(ApiErrorHandler.handle(error));
     }
   }
+
+  Future<ApiResult<void>> cancelClaim(String claimId) async {
+    try {
+      await _homeService.cancelClaim(claimId);
+      return const ApiResult.success(null);
+    } catch (error) {
+      return ApiResult.failure(ApiErrorHandler.handle(error));
+    }
+  }
 }

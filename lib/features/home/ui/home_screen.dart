@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
+import 'package:tascom/core/widgets/dialogs/cancel_claim_confirmation_dialog.dart';
 import 'package:tascom/core/widgets/dialogs/claim_confirmation_dialog.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/features/home/cubit/home_cubit.dart';
@@ -68,6 +69,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(state.error.message ?? 'Failed to claim task'),
+                behavior: SnackBarBehavior.floating,
+              ),
+            );
+          } else if (state is HomeCancelClaimError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                    state.error.message ?? 'Failed to cancel claim'),
                 behavior: SnackBarBehavior.floating,
               ),
             );
@@ -191,6 +200,21 @@ class _HomeScreenState extends State<HomeScreen> {
           locationNames: locationNames,
         );
       },
+      cancelClaimLoading: (taskId, currentData, creators, locationNames) {
+        return _buildTaskSliver(
+          response: currentData,
+          creators: creators,
+          locationNames: locationNames,
+          claimLoadingTaskId: taskId,
+        );
+      },
+      cancelClaimError: (error, currentData, creators, locationNames) {
+        return _buildTaskSliver(
+          response: currentData,
+          creators: creators,
+          locationNames: locationNames,
+        );
+      },
       error: (error) => SliverToBoxAdapter(
         child: Center(
           child: Padding(
@@ -279,7 +303,10 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
             onClaimTap: taskModel.isClaimed
-                ? null
+                ? () => _handleCancelClaim(
+                      claimId: taskModel.currentUserClaimId!,
+                      taskId: taskModel.id,
+                    )
                 : () => _handleClaimTask(taskModel.id),
           );
         },
@@ -291,6 +318,19 @@ class _HomeScreenState extends State<HomeScreen> {
     final confirmed = await showClaimConfirmationDialog(context);
     if (confirmed == true && mounted) {
       context.read<HomeCubit>().claimTask(taskId);
+    }
+  }
+
+  Future<void> _handleCancelClaim({
+    required String claimId,
+    required String taskId,
+  }) async {
+    final confirmed = await showCancelClaimConfirmationDialog(context);
+    if (confirmed == true && mounted) {
+      context.read<HomeCubit>().cancelClaim(
+            claimId: claimId,
+            taskId: taskId,
+          );
     }
   }
 }
