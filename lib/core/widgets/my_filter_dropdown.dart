@@ -40,7 +40,7 @@ class _MyFilterDropdownState<T> extends State<MyFilterDropdown<T>> {
 
   String get _displayLabel {
     if (widget.selectedValue == null) {
-      return widget.allOptionLabel ?? 'Sort By';
+      return widget.allOptionLabel ?? '';
     }
     return widget.labelBuilder(widget.selectedValue as T);
   }

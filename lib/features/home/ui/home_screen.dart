@@ -20,7 +20,6 @@ import 'package:tascom/features/home/ui/widgets/home_app_bar.dart';
 import 'package:tascom/features/home/ui/widgets/posts/priority_filter_dropdown.dart';
 import 'package:tascom/features/home/data/models/task_priority.dart';
 import 'package:tascom/core/widgets/my_filter_dropdown.dart';
-import 'package:tascom/core/widgets/my_search_field.dart';
 import 'package:tascom/features/home/ui/widgets/posts/task_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,9 +30,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final FocusNode _searchFocusNode = FocusNode();
-  final TextEditingController _searchController = TextEditingController();
-  final TextEditingController _selectedItemController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
@@ -43,9 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    _searchFocusNode.dispose();
-    _searchController.dispose();
-    _selectedItemController.dispose();
     _scrollController.dispose();
     super.dispose();
   }
@@ -84,93 +77,80 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: BlocBuilder<GetTasksCubit, GetTasksState>(
           builder: (context, state) {
-            return RefreshIndicator(
-              onRefresh: () => context.read<GetTasksCubit>().getAllTasks(),
-              child: CustomScrollView(
-                controller: _scrollController,
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: Column(
-                      children: [
-                        const HomeAppBar(),
-                        const VerticalSpace(24),
-                        MySearchField(
-                          focusNode: _searchFocusNode,
-                          searchController: _searchController,
-                          selectedItem: _selectedItemController,
-                          onChanged: (value) {
-                            // Handle search text change
-                          },
-                          onSubmitted: (value) {
-                            // Handle search submission
-                          },
-                        ),
-                        const VerticalSpace(24),
+            return Column(
+              children: [
+                // Fixed header section
+                const HomeAppBar(),
+                const VerticalSpace(24),
 
-                        // Categories Filter
-                        CategoryFilterList(
-                          categories: filterCategories,
-                          selectedId: _getSelectedCategoryId(
-                            context.read<GetTasksCubit>().currentCategory,
-                          ),
-                          onCategoryTap: (category) {
-                            context.read<GetTasksCubit>().filterByCategory(
-                              category.apiCategory,
-                            );
-                          },
-                        ),
-                        const VerticalSpace(24),
+                // Categories Filter
+                CategoryFilterList(
+                  categories: filterCategories,
+                  selectedId: _getSelectedCategoryId(
+                    context.read<GetTasksCubit>().currentCategory,
+                  ),
+                  onCategoryTap: (category) {
+                    context.read<GetTasksCubit>().filterByCategory(
+                      category.apiCategory,
+                    );
+                  },
+                ),
+                const VerticalSpace(24),
 
-                        // Sort & Priority Filters
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.w),
-                          child: Row(
-                            children: [
-                              MyFilterDropdown<String>(
-                                items: const ['rating', 'distance', 'score'],
-                                selectedValue: context
-                                    .read<GetTasksCubit>()
-                                    .currentSortBy,
-                                // allOptionLabel: 'Sort By',
-                                
-                                labelBuilder: (item) =>
-                                    item[0].toUpperCase() + item.substring(1),
-                                onChanged: (value) {
-                                  context.read<GetTasksCubit>().setSortBy(
-                                    value,
-                                  );
-                                },
-                              ),
-                              const Spacer(),
-                              PriorityFilterDropdown(
-                                selectedPriorities: context
-                                    .read<GetTasksCubit>()
-                                    .selectedPriorities
-                                    .map(TaskPriority.fromApiValue)
-                                    .toList(),
-                                onChanged: (priorities) {
-                                  context.read<GetTasksCubit>().setPriorities(
-                                    priorities
-                                        .map((p) => p.toApiValue)
-                                        .toList(),
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                        const VerticalSpace(16),
+                // Sort & Priority Filters
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: Row(
+                    children: [
+                      Text('Sort by', style: MyTextStyles.label.label1),
+                      HorizontalSpace(4.w),
+                      MyFilterDropdown<String>(
+                        items: const ['rating', 'distance', 'score'],
+                        selectedValue: context
+                            .read<GetTasksCubit>()
+                            .currentSortBy,
+                        allOptionLabel: 'None',
+                        labelBuilder: (item) =>
+                            item[0].toUpperCase() + item.substring(1),
+                        onChanged: (value) {
+                          context.read<GetTasksCubit>().setSortBy(value);
+                        },
+                      ),
+                      const Spacer(),
+                      Text('Priority', style: MyTextStyles.label.label1),
+                      HorizontalSpace(4.w),
+                      PriorityFilterDropdown(
+                        selectedPriorities: context
+                            .read<GetTasksCubit>()
+                            .selectedPriorities
+                            .map(TaskPriority.fromApiValue)
+                            .toList(),
+                        onChanged: (priorities) {
+                          context.read<GetTasksCubit>().setPriorities(
+                            priorities.map((p) => p.toApiValue).toList(),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                const VerticalSpace(16),
+
+                // Scrollable task list
+                Expanded(
+                  child: RefreshIndicator(
+                    onRefresh: () =>
+                        context.read<GetTasksCubit>().getAllTasks(),
+                    child: CustomScrollView(
+                      controller: _scrollController,
+                      slivers: [
+                        _buildTaskList(state),
+                        const SliverToBoxAdapter(child: VerticalSpace(100)),
                       ],
                     ),
                   ),
-
-                  // Task Posts List
-                  _buildTaskList(state),
-
-                  // Bottom spacing
-                  const SliverToBoxAdapter(child: VerticalSpace(100)),
-                ],
-              ),
+                ),
+              ],
             );
           },
         ),
