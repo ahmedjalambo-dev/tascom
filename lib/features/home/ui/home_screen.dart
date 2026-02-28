@@ -83,79 +83,79 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         },
         child: BlocBuilder<HomeCubit, HomeState>(
-        builder: (context, state) {
-          return RefreshIndicator(
-            onRefresh: () => context.read<HomeCubit>().getAllTasks(),
-            child: CustomScrollView(
-              controller: _scrollController,
-            slivers: [
-              SliverToBoxAdapter(
-                child: Column(
-                  children: [
-                    const HomeAppBar(),
-                    const VerticalSpace(24),
-                    MySearchField(
-                      focusNode: _searchFocusNode,
-                      searchController: _searchController,
-                      selectedItem: _selectedItemController,
-                      onChanged: (value) {
-                        // Handle search text change
-                      },
-                      onSubmitted: (value) {
-                        // Handle search submission
-                      },
-                    ),
-                    const VerticalSpace(24),
+          builder: (context, state) {
+            return RefreshIndicator(
+              onRefresh: () => context.read<HomeCubit>().getAllTasks(),
+              child: CustomScrollView(
+                controller: _scrollController,
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: Column(
+                      children: [
+                        const HomeAppBar(),
+                        const VerticalSpace(24),
+                        MySearchField(
+                          focusNode: _searchFocusNode,
+                          searchController: _searchController,
+                          selectedItem: _selectedItemController,
+                          onChanged: (value) {
+                            // Handle search text change
+                          },
+                          onSubmitted: (value) {
+                            // Handle search submission
+                          },
+                        ),
+                        const VerticalSpace(24),
 
-                    // Categories Filter
-                    CategoryFilterList(
-                      categories: filterCategories,
-                      selectedId: _selectedCategoryId,
-                      onCategoryTap: (category) {
-                        setState(() => _selectedCategoryId = category.id);
-                      },
-                    ),
-                    const VerticalSpace(24),
+                        // Categories Filter
+                        CategoryFilterList(
+                          categories: filterCategories,
+                          selectedId: _selectedCategoryId,
+                          onCategoryTap: (category) {
+                            setState(() => _selectedCategoryId = category.id);
+                          },
+                        ),
+                        const VerticalSpace(24),
 
-                    // Posts Section Header
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      child: Row(
-                        children: [
-                          Text(
-                            'Posts',
-                            style: MyTextStyles.heading.h22.copyWith(
-                              color: MyColors.text.primary,
-                            ),
-                          ),
-                          const Spacer(),
-                          PostsFilterDropdown(
-                            items: const [
-                              'All',
-                              'Most Recent',
-                              'Top Commented',
+                        // Posts Section Header
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.w),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Posts',
+                                style: MyTextStyles.heading.h22.copyWith(
+                                  color: MyColors.text.primary,
+                                ),
+                              ),
+                              const Spacer(),
+                              PostsFilterDropdown(
+                                items: const [
+                                  'All',
+                                  'Most Recent',
+                                  'Top Commented',
+                                ],
+                                onChanged: (value) {
+                                  // Handle filter change
+                                },
+                              ),
                             ],
-                            onChanged: (value) {
-                              // Handle filter change
-                            },
                           ),
-                        ],
-                      ),
+                        ),
+                        const VerticalSpace(16),
+                      ],
                     ),
-                    const VerticalSpace(16),
-                  ],
-                ),
+                  ),
+
+                  // Task Posts List
+                  _buildTaskList(state),
+
+                  // Bottom spacing
+                  const SliverToBoxAdapter(child: VerticalSpace(100)),
+                ],
               ),
-
-              // Task Posts List
-              _buildTaskList(state),
-
-              // Bottom spacing
-              const SliverToBoxAdapter(child: VerticalSpace(100)),
-            ],
-          ),
-          );
-        },
+            );
+          },
         ),
       ),
     );
@@ -293,5 +293,4 @@ class _HomeScreenState extends State<HomeScreen> {
       context.read<ClaimTaskCubit>().claimTask(taskId);
     }
   }
-
 }

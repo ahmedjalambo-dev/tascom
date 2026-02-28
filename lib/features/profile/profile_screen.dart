@@ -167,32 +167,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
-        children: [
-          const VerticalSpace(16),
-          ProfileHeader(
-            name: user.name,
-            avatarUrl: user.avatar,
-            rating: user.rating ?? 0.0,
-            reviewCount: user.reviewCount ?? 0,
-          ),
-          const VerticalSpace(24),
-          ProfileStatsCard(
-            points: user.points ?? 0,
-            postedCount: user.postedCount ?? 0,
-            claimedCount: user.claimedCount ?? 0,
-            completedCount: user.completedCount ?? 0,
-          ),
-          const VerticalSpace(24),
-          ProfileTabSelector(
-            selectedTab: _selectedTab,
-            onTabChanged: _onTabChanged,
-          ),
-          const VerticalSpace(20),
-          _buildTasksHeader(),
-          _buildTasksList(),
-          const VerticalSpace(100),
-        ],
-      ),
+          children: [
+            const VerticalSpace(16),
+            ProfileHeader(
+              name: user.name,
+              avatarUrl: user.avatar,
+              rating: user.rating ?? 0.0,
+              reviewCount: user.reviewCount ?? 0,
+            ),
+            const VerticalSpace(24),
+            ProfileStatsCard(
+              points: user.points ?? 0,
+              postedCount: user.postedCount ?? 0,
+              claimedCount: user.claimedCount ?? 0,
+              completedCount: user.completedCount ?? 0,
+            ),
+            const VerticalSpace(24),
+            ProfileTabSelector(
+              selectedTab: _selectedTab,
+              onTabChanged: _onTabChanged,
+            ),
+            const VerticalSpace(20),
+            _buildTasksHeader(),
+            _buildTasksList(),
+            const VerticalSpace(100),
+          ],
+        ),
       ),
     );
   }
@@ -210,7 +210,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.error_outline, size: 64.sp, color: MyColors.text.third),
+                  Icon(
+                    Icons.error_outline,
+                    size: 64.sp,
+                    color: MyColors.text.third,
+                  ),
                   const VerticalSpace(16),
                   Text(
                     message,

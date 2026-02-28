@@ -9,8 +9,7 @@ part 'claim_task_state.freezed.dart';
 abstract class ClaimTaskState with _$ClaimTaskState {
   const factory ClaimTaskState.initial() = _Initial;
   const factory ClaimTaskState.loading({required String taskId}) = _Loading;
-  const factory ClaimTaskState.success({
-    required ClaimTaskResponse response,
-  }) = _Success;
+  const factory ClaimTaskState.success({required ClaimTaskResponse response}) =
+      _Success;
   const factory ClaimTaskState.error(ApiErrorModel error) = _Error;
 }

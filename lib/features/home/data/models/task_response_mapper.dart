@@ -43,8 +43,11 @@ extension TaskResponseMapper on TaskResponseData {
       metrics: TaskMetrics(points: pointsOffered ?? 0, distance: 0),
       likeCount: numOfLikes ?? 0,
       commentCount: 0,
-      isClaimed: currentUserId != null &&
-          claims.any((c) => c.claimantId == currentUserId && c.status == 'PENDING'),
+      isClaimed:
+          currentUserId != null &&
+          claims.any(
+            (c) => c.claimantId == currentUserId && c.status == 'PENDING',
+          ),
     );
   }
 

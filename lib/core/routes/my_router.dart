@@ -139,9 +139,7 @@ class MyRouter {
         return MaterialPageRoute(builder: (context) => const ReportsScreen());
 
       case MyRoutes.requests:
-        return MaterialPageRoute(
-          builder: (context) => const RequestsScreen(),
-        );
+        return MaterialPageRoute(builder: (context) => const RequestsScreen());
 
       case MyRoutes.deleteAccount:
         return MaterialPageRoute(

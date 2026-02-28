@@ -10,9 +10,7 @@ class ClaimTaskRepo {
 
   Future<ApiResult<ClaimTaskResponse>> claimTask(String taskId) async {
     try {
-      final response = await _service.claimTask({
-        'taskId': int.parse(taskId),
-      });
+      final response = await _service.claimTask({'taskId': int.parse(taskId)});
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(ApiErrorHandler.handle(error));
