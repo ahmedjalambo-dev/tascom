@@ -4,15 +4,16 @@ import 'package:retrofit/retrofit.dart';
 import '../../../../core/networking/api_constants.dart';
 import '../models/all_tasks_response.dart';
 
-part 'home_service.g.dart';
+part 'get_tasks_service.g.dart';
 
 @RestApi()
-abstract class HomeService {
-  factory HomeService(Dio dio) = _HomeService;
+abstract class GetTasksService {
+  factory GetTasksService(Dio dio) = _GetTasksService;
 
   @GET(ApiConstants.tasks)
   Future<AllTasksResponse> getAllTasks(
     @Query('page') int page,
-    @Query('limit') int limit,
-  );
+    @Query('limit') int limit, {
+    @Query('category') String? category,
+  });
 }

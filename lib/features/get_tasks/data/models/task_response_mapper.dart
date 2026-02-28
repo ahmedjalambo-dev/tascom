@@ -1,14 +1,14 @@
 import 'package:intl/intl.dart';
 
 import 'package:tascom/features/user/data/models/user_model.dart' as api_user;
+import 'package:tascom/features/home/data/models/task_category.dart';
+import 'package:tascom/features/home/data/models/task_location.dart';
+import 'package:tascom/features/home/data/models/task_metrics.dart';
+import 'package:tascom/features/home/data/models/task_model.dart';
+import 'package:tascom/features/home/data/models/task_priority.dart';
+import 'package:tascom/features/home/data/models/task_status.dart';
+import 'package:tascom/features/home/data/models/user_model.dart';
 import 'all_tasks_response.dart';
-import 'task_category.dart';
-import 'task_location.dart';
-import 'task_metrics.dart';
-import 'task_model.dart';
-import 'task_priority.dart';
-import 'task_status.dart';
-import 'user_model.dart';
 
 extension TaskResponseMapper on TaskResponseData {
   TaskModel toTaskModel({

@@ -6,7 +6,7 @@ import 'package:tascom/core/storage/session_manager.dart';
 import 'package:tascom/core/widgets/my_bottom_navigation_bar.dart';
 import 'package:tascom/features/ai/ai_screen.dart';
 import 'package:tascom/features/claim_task/cubit/claim_task_cubit.dart';
-import 'package:tascom/features/home/cubit/home_cubit.dart';
+import 'package:tascom/features/get_tasks/cubit/get_tasks_cubit.dart';
 import 'package:tascom/features/home/ui/home_screen.dart';
 import 'package:tascom/features/search/ui/search_screen.dart';
 import 'package:tascom/features/profile/profile_screen.dart';
@@ -21,7 +21,7 @@ class MyRootScreen extends StatefulWidget {
 
 class _MyRootScreenState extends State<MyRootScreen> {
   int _currentIndex = 0;
-  late final HomeCubit _homeCubit = getIt<HomeCubit>()..getAllTasks();
+  late final GetTasksCubit _homeCubit = getIt<GetTasksCubit>()..getAllTasks();
 
   late final List<Widget> _screens = [
     MultiBlocProvider(

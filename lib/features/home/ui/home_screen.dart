@@ -8,11 +8,11 @@ import 'package:tascom/core/widgets/dialogs/claim_confirmation_dialog.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/features/claim_task/cubit/claim_task_cubit.dart';
 import 'package:tascom/features/claim_task/cubit/claim_task_state.dart';
-import 'package:tascom/features/home/cubit/home_cubit.dart';
-import 'package:tascom/features/home/cubit/home_state.dart';
+import 'package:tascom/features/get_tasks/cubit/get_tasks_cubit.dart';
+import 'package:tascom/features/get_tasks/cubit/get_tasks_state.dart';
+import 'package:tascom/features/get_tasks/data/models/all_tasks_response.dart';
+import 'package:tascom/features/get_tasks/data/models/task_response_mapper.dart';
 import 'package:tascom/features/home/data/filter_categories_data.dart';
-import 'package:tascom/features/home/data/models/all_tasks_response.dart';
-import 'package:tascom/features/home/data/models/task_response_mapper.dart';
 import 'package:tascom/features/user/data/models/user_model.dart';
 import 'package:tascom/core/storage/session_manager.dart';
 import 'package:tascom/features/home/ui/widgets/categoies/category_filter_list.dart';
@@ -33,8 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _selectedItemController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  String _selectedCategoryId = 'all';
-
   @override
   void initState() {
     super.initState();
@@ -53,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void _onScroll() {
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent - 200) {
-      final cubit = context.read<HomeCubit>();
+      final cubit = context.read<GetTasksCubit>();
       if (cubit.hasMorePages) {
         cubit.loadMore();
       }
@@ -70,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
             initial: () {},
             loading: (_) {},
             success: (_) {
-              context.read<HomeCubit>().getAllTasks();
+              context.read<GetTasksCubit>().getAllTasks();
             },
             error: (error) {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -82,10 +80,10 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           );
         },
-        child: BlocBuilder<HomeCubit, HomeState>(
+        child: BlocBuilder<GetTasksCubit, GetTasksState>(
           builder: (context, state) {
             return RefreshIndicator(
-              onRefresh: () => context.read<HomeCubit>().getAllTasks(),
+              onRefresh: () => context.read<GetTasksCubit>().getAllTasks(),
               child: CustomScrollView(
                 controller: _scrollController,
                 slivers: [
@@ -110,9 +108,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         // Categories Filter
                         CategoryFilterList(
                           categories: filterCategories,
-                          selectedId: _selectedCategoryId,
+                          selectedId: _getSelectedCategoryId(
+                            context.read<GetTasksCubit>().currentCategory,
+                          ),
                           onCategoryTap: (category) {
-                            setState(() => _selectedCategoryId = category.id);
+                            context.read<GetTasksCubit>().filterByCategory(
+                              category.apiCategory,
+                            );
                           },
                         ),
                         const VerticalSpace(24),
@@ -161,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildTaskList(HomeState state) {
+  Widget _buildTaskList(GetTasksState state) {
     return state.when(
       initial: () => const SliverToBoxAdapter(child: SizedBox.shrink()),
       loading: () => const SliverToBoxAdapter(
@@ -202,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const VerticalSpace(16),
                 TextButton(
-                  onPressed: () => context.read<HomeCubit>().getAllTasks(),
+                  onPressed: () => context.read<GetTasksCubit>().getAllTasks(),
                   child: const Text('Retry'),
                 ),
               ],
@@ -285,6 +287,14 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
     );
+  }
+
+  String _getSelectedCategoryId(String? apiCategory) {
+    if (apiCategory == null) return 'all';
+    final match = filterCategories
+        .where((c) => c.apiCategory == apiCategory)
+        .firstOrNull;
+    return match?.id ?? 'all';
   }
 
   Future<void> _handleClaimTask(String taskId) async {

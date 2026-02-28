@@ -40,7 +40,7 @@ extension TaskCategoryExtension on TaskCategory {
       case TaskCategory.pet:
         return 'PetCare';
       case TaskCategory.shopping:
-        return 'HomeServices';
+        return 'Errands';
       case TaskCategory.transportation:
         return 'Transportation';
       case TaskCategory.teaching:

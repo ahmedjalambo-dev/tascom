@@ -5,30 +5,35 @@ import '../../../core/services/location_service.dart';
 import '../../user/data/models/user_model.dart';
 import '../../profile/data/services/profile_service.dart';
 import '../data/models/all_tasks_response.dart';
-import '../data/repos/home_repo.dart';
-import 'home_state.dart';
+import '../data/repos/get_tasks_repo.dart';
+import 'get_tasks_state.dart';
 
-class HomeCubit extends Cubit<HomeState> {
-  final HomeRepo _homeRepo;
+class GetTasksCubit extends Cubit<GetTasksState> {
+  final GetTasksRepo _repo;
   final ProfileService _userService;
 
   int _currentPage = 1;
   static const int _limit = 10;
+  String? _currentCategory;
   List<TaskResponseData> _allTasks = [];
   final Map<String, UserModel> _creatorsCache = {};
   final Map<String, String> _locationNamesCache = {};
 
-  HomeCubit(this._homeRepo, this._userService)
-    : super(const HomeState.initial());
+  String? get currentCategory => _currentCategory;
 
-  Future<void> getAllTasks() async {
+  GetTasksCubit(this._repo, this._userService)
+    : super(const GetTasksState.initial());
+
+  Future<void> getAllTasks({String? category}) async {
     _currentPage = 1;
     _allTasks = [];
-    emit(const HomeState.loading());
+    if (category != null) _currentCategory = category;
+    emit(const GetTasksState.loading());
 
-    final result = await _homeRepo.getAllTasks(
+    final result = await _repo.getAllTasks(
       page: _currentPage,
       limit: _limit,
+      category: _currentCategory,
     );
 
     switch (result) {
@@ -36,20 +41,20 @@ class HomeCubit extends Cubit<HomeState> {
         _allTasks = List.from(response.data);
         await _fetchCreatorsAndLocations(response.data);
         emit(
-          HomeState.success(
+          GetTasksState.success(
             response: response,
             creators: Map.from(_creatorsCache),
             locationNames: Map.from(_locationNamesCache),
           ),
         );
       case Failure(error: final error):
-        emit(HomeState.error(error));
+        emit(GetTasksState.error(error));
     }
   }
 
   Future<void> loadMore() async {
     final currentState = state;
-    if (currentState is! HomeSuccess) return;
+    if (currentState is! GetTasksSuccess) return;
 
     final currentResponse = currentState.response;
     final currentCreators = currentState.creators;
@@ -61,16 +66,17 @@ class HomeCubit extends Cubit<HomeState> {
       _currentPage++;
 
       emit(
-        HomeState.loadingMore(
+        GetTasksState.loadingMore(
           currentData: currentResponse,
           creators: currentCreators,
           locationNames: currentLocationNames,
         ),
       );
 
-      final result = await _homeRepo.getAllTasks(
+      final result = await _repo.getAllTasks(
         page: _currentPage,
         limit: _limit,
+        category: _currentCategory,
       );
 
       switch (result) {
@@ -85,7 +91,7 @@ class HomeCubit extends Cubit<HomeState> {
           );
 
           emit(
-            HomeState.success(
+            GetTasksState.success(
               response: mergedResponse,
               creators: Map.from(_creatorsCache),
               locationNames: Map.from(_locationNamesCache),
@@ -94,7 +100,7 @@ class HomeCubit extends Cubit<HomeState> {
         case Failure():
           _currentPage--;
           emit(
-            HomeState.success(
+            GetTasksState.success(
               response: currentResponse,
               creators: currentCreators,
               locationNames: currentLocationNames,
@@ -158,9 +164,14 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
+  Future<void> filterByCategory(String? category) async {
+    _currentCategory = category;
+    await getAllTasks();
+  }
+
   bool get hasMorePages {
     final currentState = state;
-    if (currentState is HomeSuccess) {
+    if (currentState is GetTasksSuccess) {
       return _currentPage < currentState.response.meta.totalPages;
     }
     return false;

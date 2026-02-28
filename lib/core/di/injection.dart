@@ -44,10 +44,10 @@ import '../../features/settings/edit_profile/cubit/edit_profile_cubit.dart';
 import '../../features/settings/edit_profile/data/repos/edit_profile_repo.dart';
 import '../../features/settings/edit_profile/data/services/edit_profile_service.dart';
 
-// Home
-import '../../features/home/cubit/home_cubit.dart';
-import '../../features/home/data/repos/home_repo.dart';
-import '../../features/home/data/services/home_service.dart';
+// Get Tasks
+import '../../features/get_tasks/cubit/get_tasks_cubit.dart';
+import '../../features/get_tasks/data/repos/get_tasks_repo.dart';
+import '../../features/get_tasks/data/services/get_tasks_service.dart';
 
 // Claim Task
 import '../../features/claim_task/cubit/claim_task_cubit.dart';
@@ -149,11 +149,15 @@ Future<void> initDependencies() async {
     () => EditProfileCubit(getIt<EditProfileRepo>()),
   );
 
-  // ============ Home - Get All Tasks ============
-  getIt.registerLazySingleton<HomeService>(() => HomeService(getIt<Dio>()));
-  getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt<HomeService>()));
-  getIt.registerFactory<HomeCubit>(
-    () => HomeCubit(getIt<HomeRepo>(), getIt<ProfileService>()),
+  // ============ Get Tasks ============
+  getIt.registerLazySingleton<GetTasksService>(
+    () => GetTasksService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<GetTasksRepo>(
+    () => GetTasksRepo(getIt<GetTasksService>()),
+  );
+  getIt.registerFactory<GetTasksCubit>(
+    () => GetTasksCubit(getIt<GetTasksRepo>(), getIt<ProfileService>()),
   );
 
   // ============ Claim Task ============

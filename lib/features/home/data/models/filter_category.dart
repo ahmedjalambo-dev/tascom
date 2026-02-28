@@ -4,6 +4,7 @@ class FilterCategory {
   final String selctedIcon;
   final String unSelctedIcon;
   final bool isViewAll;
+  final String? apiCategory;
 
   const FilterCategory({
     required this.id,
@@ -11,5 +12,6 @@ class FilterCategory {
     required this.selctedIcon,
     required this.unSelctedIcon,
     this.isViewAll = false,
+    this.apiCategory,
   });
 }

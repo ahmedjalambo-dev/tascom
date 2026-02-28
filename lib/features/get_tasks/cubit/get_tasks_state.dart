@@ -4,25 +4,25 @@ import '../../../core/networking/api_error_model.dart';
 import '../../user/data/models/user_model.dart';
 import '../data/models/all_tasks_response.dart';
 
-part 'home_state.freezed.dart';
+part 'get_tasks_state.freezed.dart';
 
 @freezed
-abstract class HomeState with _$HomeState {
-  const factory HomeState.initial() = HomeInitial;
+abstract class GetTasksState with _$GetTasksState {
+  const factory GetTasksState.initial() = GetTasksInitial;
 
-  const factory HomeState.loading() = HomeLoading;
+  const factory GetTasksState.loading() = GetTasksLoading;
 
-  const factory HomeState.success({
+  const factory GetTasksState.success({
     required AllTasksResponse response,
     required Map<String, UserModel> creators,
     required Map<String, String> locationNames,
-  }) = HomeSuccess;
+  }) = GetTasksSuccess;
 
-  const factory HomeState.loadingMore({
+  const factory GetTasksState.loadingMore({
     required AllTasksResponse currentData,
     required Map<String, UserModel> creators,
     required Map<String, String> locationNames,
-  }) = HomeLoadingMore;
+  }) = GetTasksLoadingMore;
 
-  const factory HomeState.error(ApiErrorModel error) = HomeError;
+  const factory GetTasksState.error(ApiErrorModel error) = GetTasksError;
 }
