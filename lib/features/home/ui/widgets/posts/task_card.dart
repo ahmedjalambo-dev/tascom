@@ -17,6 +17,7 @@ class TaskCard extends StatelessWidget {
   final VoidCallback? onCommentTap;
   final VoidCallback? onShareTap;
   final VoidCallback? onClaimTap;
+  final bool isClaimLoading;
 
   const TaskCard({
     super.key,
@@ -26,6 +27,7 @@ class TaskCard extends StatelessWidget {
     this.onCommentTap,
     this.onShareTap,
     this.onClaimTap,
+    this.isClaimLoading = false,
   });
 
   @override
@@ -95,6 +97,7 @@ class TaskCard extends StatelessWidget {
                 likeCount: taskModel.likeCount,
                 commentCount: taskModel.commentCount,
                 isClaimed: taskModel.isClaimed,
+                isClaimLoading: isClaimLoading,
                 onLikeTap: onLikeTap,
                 onCommentTap: onCommentTap,
                 onShareTap: onShareTap,

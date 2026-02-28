@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:tascom/features/claim_task/data/models/claim_task_response.dart';
+
 part 'all_tasks_response.freezed.dart';
 part 'all_tasks_response.g.dart';
 
@@ -34,6 +36,7 @@ abstract class TaskResponseData with _$TaskResponseData {
     required String createdAt,
     String? updatedAt,
     bool? isDeleted,
+    @Default([]) List<ClaimTaskData> claims,
   }) = _TaskResponseData;
 
   factory TaskResponseData.fromJson(Map<String, dynamic> json) =>

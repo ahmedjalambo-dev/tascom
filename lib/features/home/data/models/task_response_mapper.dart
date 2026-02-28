@@ -14,6 +14,7 @@ extension TaskResponseMapper on TaskResponseData {
   TaskModel toTaskModel({
     required Map<String, api_user.UserModel> creators,
     required Map<String, String> locationNames,
+    String? currentUserId,
   }) {
     final creator = creators[creatorId];
     final locationKey = '$latitude,$longitude';
@@ -42,7 +43,11 @@ extension TaskResponseMapper on TaskResponseData {
       metrics: TaskMetrics(points: pointsOffered ?? 0, distance: 0),
       likeCount: numOfLikes ?? 0,
       commentCount: 0,
-      isClaimed: false,
+      isClaimed:
+          currentUserId != null &&
+          claims.any(
+            (c) => c.claimantId == currentUserId && c.status == 'PENDING',
+          ),
     );
   }
 

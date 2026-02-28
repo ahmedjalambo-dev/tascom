@@ -20,8 +20,7 @@ class RequestsScreen extends StatefulWidget {
 }
 
 class _RequestsScreenState extends State<RequestsScreen> {
-  List<TaskClaimGroupModel> _taskClaimGroups =
-      RequestsMockData.taskClaimGroups;
+  List<TaskClaimGroupModel> _taskClaimGroups = RequestsMockData.taskClaimGroups;
 
   int get _totalPendingCount =>
       RequestsMockData.totalPendingCount(_taskClaimGroups);
@@ -124,8 +123,10 @@ class _RequestsScreenState extends State<RequestsScreen> {
           ...group.claimers.map(
             (claimer) => ClaimerCard(
               claimer: claimer,
-              onAccept: () => _handleAccept(group.taskId, claimer.id, claimer.name),
-              onIgnore: () => _handleIgnore(group.taskId, claimer.id, claimer.name),
+              onAccept: () =>
+                  _handleAccept(group.taskId, claimer.id, claimer.name),
+              onIgnore: () =>
+                  _handleIgnore(group.taskId, claimer.id, claimer.name),
             ),
           ),
         ],

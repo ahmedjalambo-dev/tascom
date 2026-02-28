@@ -49,6 +49,11 @@ import '../../features/home/cubit/home_cubit.dart';
 import '../../features/home/data/repos/home_repo.dart';
 import '../../features/home/data/services/home_service.dart';
 
+// Claim Task
+import '../../features/claim_task/cubit/claim_task_cubit.dart';
+import '../../features/claim_task/data/repos/claim_task_repo.dart';
+import '../../features/claim_task/data/services/claim_task_service.dart';
+
 // Create Task
 import '../../features/create_task/cubit/create_task_cubit.dart';
 import '../../features/create_task/data/repos/create_task_repo.dart';
@@ -149,6 +154,17 @@ Future<void> initDependencies() async {
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt<HomeService>()));
   getIt.registerFactory<HomeCubit>(
     () => HomeCubit(getIt<HomeRepo>(), getIt<ProfileService>()),
+  );
+
+  // ============ Claim Task ============
+  getIt.registerLazySingleton<ClaimTaskService>(
+    () => ClaimTaskService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<ClaimTaskRepo>(
+    () => ClaimTaskRepo(getIt<ClaimTaskService>()),
+  );
+  getIt.registerFactory<ClaimTaskCubit>(
+    () => ClaimTaskCubit(getIt<ClaimTaskRepo>()),
   );
 
   // ============ Create Task ============

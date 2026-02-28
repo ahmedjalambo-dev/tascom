@@ -5,6 +5,7 @@ import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/storage/session_manager.dart';
 import 'package:tascom/core/widgets/my_bottom_navigation_bar.dart';
 import 'package:tascom/features/ai/ai_screen.dart';
+import 'package:tascom/features/claim_task/cubit/claim_task_cubit.dart';
 import 'package:tascom/features/home/cubit/home_cubit.dart';
 import 'package:tascom/features/home/ui/home_screen.dart';
 import 'package:tascom/features/search/ui/search_screen.dart';
@@ -23,7 +24,13 @@ class _MyRootScreenState extends State<MyRootScreen> {
   late final HomeCubit _homeCubit = getIt<HomeCubit>()..getAllTasks();
 
   late final List<Widget> _screens = [
-    BlocProvider.value(value: _homeCubit, child: const HomeScreen()),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider.value(value: _homeCubit),
+        BlocProvider(create: (_) => getIt<ClaimTaskCubit>()),
+      ],
+      child: const HomeScreen(),
+    ),
     const SearchScreen(),
     const AiScreen(),
     BlocProvider(
