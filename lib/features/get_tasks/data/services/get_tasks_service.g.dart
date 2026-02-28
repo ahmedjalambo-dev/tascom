@@ -24,12 +24,16 @@ class _GetTasksService implements GetTasksService {
     int page,
     int limit, {
     String? category,
+    String? sortBy,
+    String? priorities,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'limit': limit,
       r'category': category,
+      r'sortBy': sortBy,
+      r'priorities': priorities,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};

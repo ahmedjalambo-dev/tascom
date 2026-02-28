@@ -40,7 +40,7 @@ class _MyFilterDropdownState<T> extends State<MyFilterDropdown<T>> {
 
   String get _displayLabel {
     if (widget.selectedValue == null) {
-      return widget.allOptionLabel ?? '';
+      return widget.allOptionLabel ?? 'Sort By';
     }
     return widget.labelBuilder(widget.selectedValue as T);
   }
@@ -60,6 +60,7 @@ class _MyFilterDropdownState<T> extends State<MyFilterDropdown<T>> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius),
       ),
+      borderRadius: BorderRadius.circular(borderRadius),
       color: MyColors.background.primary,
       itemBuilder: (context) => _buildMenuItems(),
       child: Container(

@@ -17,7 +17,9 @@ import 'package:tascom/features/user/data/models/user_model.dart';
 import 'package:tascom/core/storage/session_manager.dart';
 import 'package:tascom/features/home/ui/widgets/categoies/category_filter_list.dart';
 import 'package:tascom/features/home/ui/widgets/home_app_bar.dart';
-import 'package:tascom/features/home/ui/widgets/posts/posts_filter_dropdown.dart';
+import 'package:tascom/features/home/ui/widgets/posts/priority_filter_dropdown.dart';
+import 'package:tascom/features/home/data/models/task_priority.dart';
+import 'package:tascom/core/widgets/my_filter_dropdown.dart';
 import 'package:tascom/core/widgets/my_search_field.dart';
 import 'package:tascom/features/home/ui/widgets/posts/task_card.dart';
 
@@ -119,26 +121,39 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const VerticalSpace(24),
 
-                        // Posts Section Header
+                        // Sort & Priority Filters
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 16.w),
                           child: Row(
                             children: [
-                              Text(
-                                'Posts',
-                                style: MyTextStyles.heading.h22.copyWith(
-                                  color: MyColors.text.primary,
-                                ),
+                              MyFilterDropdown<String>(
+                                items: const ['rating', 'distance', 'score'],
+                                selectedValue: context
+                                    .read<GetTasksCubit>()
+                                    .currentSortBy,
+                                // allOptionLabel: 'Sort By',
+                                
+                                labelBuilder: (item) =>
+                                    item[0].toUpperCase() + item.substring(1),
+                                onChanged: (value) {
+                                  context.read<GetTasksCubit>().setSortBy(
+                                    value,
+                                  );
+                                },
                               ),
                               const Spacer(),
-                              PostsFilterDropdown(
-                                items: const [
-                                  'All',
-                                  'Most Recent',
-                                  'Top Commented',
-                                ],
-                                onChanged: (value) {
-                                  // Handle filter change
+                              PriorityFilterDropdown(
+                                selectedPriorities: context
+                                    .read<GetTasksCubit>()
+                                    .selectedPriorities
+                                    .map(TaskPriority.fromApiValue)
+                                    .toList(),
+                                onChanged: (priorities) {
+                                  context.read<GetTasksCubit>().setPriorities(
+                                    priorities
+                                        .map((p) => p.toApiValue)
+                                        .toList(),
+                                  );
                                 },
                               ),
                             ],

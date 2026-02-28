@@ -15,11 +15,15 @@ class GetTasksCubit extends Cubit<GetTasksState> {
   int _currentPage = 1;
   static const int _limit = 10;
   String? _currentCategory;
+  String? _currentSortBy;
+  final List<String> _selectedPriorities = [];
   List<TaskResponseData> _allTasks = [];
   final Map<String, UserModel> _creatorsCache = {};
   final Map<String, String> _locationNamesCache = {};
 
   String? get currentCategory => _currentCategory;
+  String? get currentSortBy => _currentSortBy;
+  List<String> get selectedPriorities => _selectedPriorities;
 
   GetTasksCubit(this._repo, this._userService)
     : super(const GetTasksState.initial());
@@ -30,10 +34,16 @@ class GetTasksCubit extends Cubit<GetTasksState> {
     if (category != null) _currentCategory = category;
     emit(const GetTasksState.loading());
 
+    final prioritiesParam = _selectedPriorities.isNotEmpty
+        ? _selectedPriorities.join(',')
+        : null;
+
     final result = await _repo.getAllTasks(
       page: _currentPage,
       limit: _limit,
       category: _currentCategory,
+      sortBy: _currentSortBy,
+      priorities: prioritiesParam,
     );
 
     switch (result) {
@@ -73,10 +83,16 @@ class GetTasksCubit extends Cubit<GetTasksState> {
         ),
       );
 
+      final prioritiesParam = _selectedPriorities.isNotEmpty
+          ? _selectedPriorities.join(',')
+          : null;
+
       final result = await _repo.getAllTasks(
         page: _currentPage,
         limit: _limit,
         category: _currentCategory,
+        sortBy: _currentSortBy,
+        priorities: prioritiesParam,
       );
 
       switch (result) {
@@ -166,6 +182,18 @@ class GetTasksCubit extends Cubit<GetTasksState> {
 
   Future<void> filterByCategory(String? category) async {
     _currentCategory = category;
+    await getAllTasks();
+  }
+
+  Future<void> setSortBy(String? sortBy) async {
+    _currentSortBy = sortBy;
+    await getAllTasks();
+  }
+
+  Future<void> setPriorities(List<String> priorities) async {
+    _selectedPriorities
+      ..clear()
+      ..addAll(priorities);
     await getAllTasks();
   }
 

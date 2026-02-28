@@ -15,5 +15,7 @@ abstract class GetTasksService {
     @Query('page') int page,
     @Query('limit') int limit, {
     @Query('category') String? category,
+    @Query('sortBy') String? sortBy,
+    @Query('priorities') String? priorities,
   });
 }

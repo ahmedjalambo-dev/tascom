@@ -12,12 +12,16 @@ class GetTasksRepo {
     int page = 1,
     int limit = 10,
     String? category,
+    String? sortBy,
+    String? priorities,
   }) async {
     try {
       final response = await _service.getAllTasks(
         page,
         limit,
         category: category,
+        sortBy: sortBy,
+        priorities: priorities,
       );
       return ApiResult.success(response);
     } catch (error) {
