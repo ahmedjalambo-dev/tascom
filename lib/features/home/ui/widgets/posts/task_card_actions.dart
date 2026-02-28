@@ -106,15 +106,15 @@ class TaskCardActions extends StatelessWidget {
 
         // Claim Task Button
         ElevatedButton(
-          onPressed: isClaimLoading ? null : onClaimTap,
+          onPressed: (isClaimed || isClaimLoading) ? null : onClaimTap,
           style: ElevatedButton.styleFrom(
             backgroundColor: isClaimed
-                ? MyColors.states.error
+                ? MyColors.status.active
                 : MyColors.brand.purple,
             foregroundColor: MyColors.text.white,
-            disabledBackgroundColor: isClaimed
-                ? MyColors.states.error
-                : MyColors.brand.purple,
+            disabledBackgroundColor: isClaimLoading
+                ? MyColors.brand.purple
+                : MyColors.status.active,
             disabledForegroundColor: MyColors.text.white,
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
             shape: RoundedRectangleBorder(
@@ -132,7 +132,7 @@ class TaskCardActions extends StatelessWidget {
                   ),
                 )
               : Text(
-                  isClaimed ? 'Cancel Claim' : 'Claim Task',
+                  isClaimed ? 'Task Claimed' : 'Claim Task',
                   style: MyTextStyles.button.smallButtons.copyWith(
                     color: MyColors.text.white,
                   ),

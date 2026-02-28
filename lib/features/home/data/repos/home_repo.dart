@@ -1,7 +1,6 @@
 import '../../../../core/networking/api_error_handler.dart';
 import '../../../../core/networking/api_result.dart';
 import '../models/all_tasks_response.dart';
-import '../models/claim_task_response.dart';
 import '../services/home_service.dart';
 
 class HomeRepo {
@@ -16,26 +15,6 @@ class HomeRepo {
     try {
       final response = await _homeService.getAllTasks(page, limit);
       return ApiResult.success(response);
-    } catch (error) {
-      return ApiResult.failure(ApiErrorHandler.handle(error));
-    }
-  }
-
-  Future<ApiResult<ClaimTaskResponse>> claimTask(String taskId) async {
-    try {
-      final response = await _homeService.claimTask({
-        'taskId': int.parse(taskId),
-      });
-      return ApiResult.success(response);
-    } catch (error) {
-      return ApiResult.failure(ApiErrorHandler.handle(error));
-    }
-  }
-
-  Future<ApiResult<void>> cancelClaim(String claimId) async {
-    try {
-      await _homeService.cancelClaim(claimId);
-      return const ApiResult.success(null);
     } catch (error) {
       return ApiResult.failure(ApiErrorHandler.handle(error));
     }

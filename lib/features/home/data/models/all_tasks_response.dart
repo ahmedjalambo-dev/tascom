@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'claim_task_response.dart';
+import 'package:tascom/features/claim_task/data/models/claim_task_response.dart';
 
 part 'all_tasks_response.freezed.dart';
 part 'all_tasks_response.g.dart';

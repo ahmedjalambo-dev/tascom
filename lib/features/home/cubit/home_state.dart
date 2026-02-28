@@ -25,32 +25,4 @@ abstract class HomeState with _$HomeState {
   }) = HomeLoadingMore;
 
   const factory HomeState.error(ApiErrorModel error) = HomeError;
-
-  const factory HomeState.claimLoading({
-    required String taskId,
-    required AllTasksResponse currentData,
-    required Map<String, UserModel> creators,
-    required Map<String, String> locationNames,
-  }) = HomeClaimLoading;
-
-  const factory HomeState.claimError({
-    required ApiErrorModel error,
-    required AllTasksResponse currentData,
-    required Map<String, UserModel> creators,
-    required Map<String, String> locationNames,
-  }) = HomeClaimError;
-
-  const factory HomeState.cancelClaimLoading({
-    required String taskId,
-    required AllTasksResponse currentData,
-    required Map<String, UserModel> creators,
-    required Map<String, String> locationNames,
-  }) = HomeCancelClaimLoading;
-
-  const factory HomeState.cancelClaimError({
-    required ApiErrorModel error,
-    required AllTasksResponse currentData,
-    required Map<String, UserModel> creators,
-    required Map<String, String> locationNames,
-  }) = HomeCancelClaimError;
 }

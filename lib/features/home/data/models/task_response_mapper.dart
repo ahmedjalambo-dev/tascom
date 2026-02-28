@@ -2,7 +2,6 @@ import 'package:intl/intl.dart';
 
 import 'package:tascom/features/user/data/models/user_model.dart' as api_user;
 import 'all_tasks_response.dart';
-import 'claim_task_response.dart';
 import 'task_category.dart';
 import 'task_location.dart';
 import 'task_metrics.dart';
@@ -20,13 +19,6 @@ extension TaskResponseMapper on TaskResponseData {
     final creator = creators[creatorId];
     final locationKey = '$latitude,$longitude';
     final cityName = locationNames[locationKey] ?? 'Unknown';
-
-    final ClaimTaskData? userClaim = currentUserId != null
-        ? claims.cast<ClaimTaskData?>().firstWhere(
-              (c) => c!.claimantId == currentUserId,
-              orElse: () => null,
-            )
-        : null;
 
     return TaskModel(
       id: id,
@@ -51,8 +43,8 @@ extension TaskResponseMapper on TaskResponseData {
       metrics: TaskMetrics(points: pointsOffered ?? 0, distance: 0),
       likeCount: numOfLikes ?? 0,
       commentCount: 0,
-      isClaimed: userClaim != null,
-      currentUserClaimId: userClaim?.id,
+      isClaimed: currentUserId != null &&
+          claims.any((c) => c.claimantId == currentUserId && c.status == 'PENDING'),
     );
   }
 

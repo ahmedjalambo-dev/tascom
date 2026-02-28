@@ -4,9 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
-import 'package:tascom/core/widgets/dialogs/cancel_claim_confirmation_dialog.dart';
 import 'package:tascom/core/widgets/dialogs/claim_confirmation_dialog.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
+import 'package:tascom/features/claim_task/cubit/claim_task_cubit.dart';
+import 'package:tascom/features/claim_task/cubit/claim_task_state.dart';
 import 'package:tascom/features/home/cubit/home_cubit.dart';
 import 'package:tascom/features/home/cubit/home_state.dart';
 import 'package:tascom/features/home/data/filter_categories_data.dart';
@@ -63,25 +64,25 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.background.primary,
-      body: BlocConsumer<HomeCubit, HomeState>(
-        listener: (context, state) {
-          if (state is HomeClaimError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.error.message ?? 'Failed to claim task'),
-                behavior: SnackBarBehavior.floating,
-              ),
-            );
-          } else if (state is HomeCancelClaimError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                    state.error.message ?? 'Failed to cancel claim'),
-                behavior: SnackBarBehavior.floating,
-              ),
-            );
-          }
+      body: BlocListener<ClaimTaskCubit, ClaimTaskState>(
+        listener: (context, claimState) {
+          claimState.when(
+            initial: () {},
+            loading: (_) {},
+            success: (_) {
+              context.read<HomeCubit>().getAllTasks();
+            },
+            error: (error) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(error.message ?? 'Failed to claim task'),
+                  behavior: SnackBarBehavior.floating,
+                ),
+              );
+            },
+          );
         },
+        child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           return RefreshIndicator(
             onRefresh: () => context.read<HomeCubit>().getAllTasks(),
@@ -155,6 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           );
         },
+        ),
       ),
     );
   }
@@ -183,36 +185,6 @@ class _HomeScreenState extends State<HomeScreen> {
           creators: creators,
           locationNames: locationNames,
           showLoadingMore: true,
-        );
-      },
-      claimLoading: (taskId, currentData, creators, locationNames) {
-        return _buildTaskSliver(
-          response: currentData,
-          creators: creators,
-          locationNames: locationNames,
-          claimLoadingTaskId: taskId,
-        );
-      },
-      claimError: (error, currentData, creators, locationNames) {
-        return _buildTaskSliver(
-          response: currentData,
-          creators: creators,
-          locationNames: locationNames,
-        );
-      },
-      cancelClaimLoading: (taskId, currentData, creators, locationNames) {
-        return _buildTaskSliver(
-          response: currentData,
-          creators: creators,
-          locationNames: locationNames,
-          claimLoadingTaskId: taskId,
-        );
-      },
-      cancelClaimError: (error, currentData, creators, locationNames) {
-        return _buildTaskSliver(
-          response: currentData,
-          creators: creators,
-          locationNames: locationNames,
         );
       },
       error: (error) => SliverToBoxAdapter(
@@ -246,7 +218,6 @@ class _HomeScreenState extends State<HomeScreen> {
     required Map<String, UserModel> creators,
     required Map<String, String> locationNames,
     bool showLoadingMore = false,
-    String? claimLoadingTaskId,
   }) {
     final currentUserId = SessionManager.instance.currentUserId;
     final tasks = response.data
@@ -292,9 +263,14 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }
           final taskModel = tasks[index];
+          final claimState = context.watch<ClaimTaskCubit>().state;
+          final isClaimLoading = claimState.maybeWhen(
+            loading: (taskId) => taskId == taskModel.id,
+            orElse: () => false,
+          );
           return TaskCard(
             taskModel: taskModel,
-            isClaimLoading: claimLoadingTaskId == taskModel.id,
+            isClaimLoading: isClaimLoading,
             onTap: () {
               Navigator.pushNamed(
                 context,
@@ -303,10 +279,7 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
             onClaimTap: taskModel.isClaimed
-                ? () => _handleCancelClaim(
-                      claimId: taskModel.currentUserClaimId!,
-                      taskId: taskModel.id,
-                    )
+                ? null
                 : () => _handleClaimTask(taskModel.id),
           );
         },
@@ -317,20 +290,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _handleClaimTask(String taskId) async {
     final confirmed = await showClaimConfirmationDialog(context);
     if (confirmed == true && mounted) {
-      context.read<HomeCubit>().claimTask(taskId);
+      context.read<ClaimTaskCubit>().claimTask(taskId);
     }
   }
 
-  Future<void> _handleCancelClaim({
-    required String claimId,
-    required String taskId,
-  }) async {
-    final confirmed = await showCancelClaimConfirmationDialog(context);
-    if (confirmed == true && mounted) {
-      context.read<HomeCubit>().cancelClaim(
-            claimId: claimId,
-            taskId: taskId,
-          );
-    }
-  }
 }
