@@ -40,7 +40,7 @@ class _PriorityFilterDropdownState extends State<PriorityFilterDropdown> {
   }
 
   String get _displayLabel {
-    if (_selected.isEmpty) return 'Priority';
+    if (_selected.isEmpty) return 'None';
     if (_selected.length == 1) return _selected.first.displayName;
     return '${_selected.length} selected';
   }

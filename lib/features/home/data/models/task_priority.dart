@@ -36,11 +36,11 @@ extension TaskPriorityExtension on TaskPriority {
   String get displayName {
     switch (this) {
       case TaskPriority.high:
-        return 'High Priority';
+        return 'High';
       case TaskPriority.medium:
-        return 'Medium Priority';
+        return 'Medium';
       case TaskPriority.low:
-        return 'Low Priority';
+        return 'Low';
     }
   }
 
