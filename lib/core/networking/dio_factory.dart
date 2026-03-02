@@ -60,7 +60,7 @@ class _AuthInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     // Handle 401 Unauthorized - token expired
     if (err.response?.statusCode == 401) {
-      // TODO: Implement token refresh logic if needed
+      // Implement token refresh logic if needed
       // For now, the session manager will handle logout
     }
 

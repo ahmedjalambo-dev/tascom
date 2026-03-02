@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onChanged: (priorities) {
                           context.read<GetTasksCubit>().setPriorities(
                             priorities.map((p) => p.toApiValue).toList(),
-                          ); 
+                          );
                         },
                       ),
                     ],
