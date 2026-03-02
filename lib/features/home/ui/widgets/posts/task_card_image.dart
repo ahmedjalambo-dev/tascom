@@ -11,11 +11,30 @@ class TaskCardImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(12.r),
-      child: Image.asset(
+      child: Image.network(
         imageUrl,
         width: double.infinity,
         height: 180.h,
         fit: BoxFit.cover,
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return Container(
+            width: double.infinity,
+            height: 180.h,
+            decoration: BoxDecoration(
+              color: MyColors.background.secondary,
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Center(
+              child: CircularProgressIndicator(
+                value: loadingProgress.expectedTotalBytes != null
+                    ? loadingProgress.cumulativeBytesLoaded /
+                        loadingProgress.expectedTotalBytes!
+                    : null,
+              ),
+            ),
+          );
+        },
         errorBuilder: (context, error, stackTrace) {
           return Container(
             width: double.infinity,

@@ -21,7 +21,7 @@ class TaskCardHeader extends StatelessWidget {
           radius: 20.r,
           backgroundColor: MyColors.background.secondary,
           backgroundImage: taskModel.author.avatar != null
-              ? AssetImage(taskModel.author.avatar!)
+              ? NetworkImage(taskModel.author.avatar!)
               : null,
           child: taskModel.author.avatar == null
               ? Text(
