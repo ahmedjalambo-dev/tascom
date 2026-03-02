@@ -7,11 +7,13 @@ class SearchFilterResult {
   final TaskPriority? priority;
   final RangeValues pointsRange;
   final RangeValues locationRange;
+  final RangeValues? ratingRange;
 
   const SearchFilterResult({
     required this.categories,
     this.priority,
     required this.pointsRange,
     required this.locationRange,
+    this.ratingRange,
   });
 }

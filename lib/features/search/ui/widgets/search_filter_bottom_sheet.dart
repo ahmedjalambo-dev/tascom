@@ -46,6 +46,7 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
   late TaskPriority? _selectedPriority;
   late RangeValues _pointsRange;
   late RangeValues _locationRange;
+  late RangeValues _ratingRange;
 
   @override
   void initState() {
@@ -55,6 +56,7 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
     _selectedPriority = f?.priority;
     _pointsRange = f?.pointsRange ?? const RangeValues(0, 200);
     _locationRange = f?.locationRange ?? const RangeValues(300, 2000);
+    _ratingRange = f?.ratingRange ?? const RangeValues(1, 5);
   }
 
   void _apply() {
@@ -65,6 +67,7 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
         priority: _selectedPriority,
         pointsRange: _pointsRange,
         locationRange: _locationRange,
+        ratingRange: _ratingRange,
       ),
     );
   }
@@ -75,6 +78,7 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
       _selectedPriority = null;
       _pointsRange = const RangeValues(0, 200);
       _locationRange = const RangeValues(300, 2000);
+      _ratingRange = const RangeValues(1, 5);
     });
   }
 
@@ -142,6 +146,18 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
                   setState(() => _locationRange = values);
                 },
                 formatLabel: (v) => '${v.toInt()}m',
+              ),
+              const VerticalSpace(24),
+              const MyLabel('Rating'),
+              const VerticalSpace(12),
+              FilterRangeSliderSection(
+                min: 1,
+                max: 5,
+                values: _ratingRange,
+                onChanged: (values) {
+                  setState(() => _ratingRange = values);
+                },
+                formatLabel: (v) => v.toStringAsFixed(1),
               ),
               const VerticalSpace(24),
               MyButton(text: 'Apply', onPressed: _apply),

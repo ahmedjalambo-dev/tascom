@@ -4,10 +4,10 @@ import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
 
 class QuickFilterChips extends StatelessWidget {
-  final Set<String> selectedFilters;
+  final String? selectedFilter;
   final ValueChanged<String> onFilterTap;
 
-  static const List<String> _filters = [
+  static const List<String> filters = [
     'Near me',
     'Available today',
     'Top rated',
@@ -16,7 +16,7 @@ class QuickFilterChips extends StatelessWidget {
 
   const QuickFilterChips({
     super.key,
-    required this.selectedFilters,
+    required this.selectedFilter,
     required this.onFilterTap,
   });
 
@@ -27,11 +27,11 @@ class QuickFilterChips extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: 16.w),
-        itemCount: _filters.length,
+        itemCount: filters.length,
         separatorBuilder: (context, index) => SizedBox(width: 8.w),
         itemBuilder: (context, index) {
-          final filter = _filters[index];
-          final isSelected = selectedFilters.contains(filter);
+          final filter = filters[index];
+          final isSelected = filter == selectedFilter;
           return _QuickFilterChip(
             label: filter,
             isSelected: isSelected,

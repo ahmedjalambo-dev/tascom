@@ -64,6 +64,11 @@ import '../../features/settings/delete_account/cubit/delete_account_cubit.dart';
 import '../../features/settings/delete_account/data/repos/delete_account_repo.dart';
 import '../../features/settings/delete_account/data/services/delete_account_service.dart';
 
+// Search
+import '../../features/search/cubit/search_cubit.dart';
+import '../../features/search/data/repos/search_repo.dart';
+import '../../features/search/data/services/search_service.dart';
+
 final getIt = GetIt.instance;
 
 Future<void> initDependencies() async {
@@ -192,4 +197,11 @@ Future<void> initDependencies() async {
   getIt.registerFactory<DeleteAccountCubit>(
     () => DeleteAccountCubit(getIt<DeleteAccountRepo>()),
   );
+
+  // ============ Search ============
+  getIt.registerLazySingleton<SearchService>(() => SearchService(getIt<Dio>()));
+  getIt.registerLazySingleton<SearchRepo>(
+    () => SearchRepo(getIt<SearchService>()),
+  );
+  getIt.registerFactory<SearchCubit>(() => SearchCubit(getIt<SearchRepo>()));
 }
