@@ -31,6 +31,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
+  bool _showHeaders = true;
+  double _lastScrollOffset = 0.0;
+
   @override
   void initState() {
     super.initState();
@@ -44,6 +47,27 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _onScroll() {
+    final currentOffset = _scrollController.offset;
+    final delta = currentOffset - _lastScrollOffset;
+
+    // Show headers when at the top
+    if (currentOffset <= 0) {
+      if (!_showHeaders) {
+        setState(() => _showHeaders = true);
+      }
+    }
+    // Hide headers when scrolling down
+    else if (delta > 5 && _showHeaders) {
+      setState(() => _showHeaders = false);
+    }
+    // Show headers when scrolling up
+    else if (delta < -5 && !_showHeaders) {
+      setState(() => _showHeaders = true);
+    }
+
+    _lastScrollOffset = currentOffset;
+
+    // Pagination logic
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent - 200) {
       final cubit = context.read<GetTasksCubit>();
@@ -79,62 +103,86 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (context, state) {
             return Column(
               children: [
-                // Fixed header section
-                const HomeAppBar(),
-                const VerticalSpace(24),
-
-                // Categories Filter
-                CategoryFilterList(
-                  categories: filterCategories,
-                  selectedId: _getSelectedCategoryId(
-                    context.read<GetTasksCubit>().currentCategory,
-                  ),
-                  onCategoryTap: (category) {
-                    context.read<GetTasksCubit>().filterByCategory(
-                      category.apiCategory,
-                    );
-                  },
+                // Fixed header section with animation
+                AnimatedSlide(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  offset: _showHeaders ? Offset.zero : const Offset(0, -1),
+                  child: const HomeAppBar(),
                 ),
-                const VerticalSpace(24),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  height: _showHeaders ? 12.h : 0,
+                ),
 
-                // Sort & Priority Filters
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: Row(
-                    children: [
-                      Text('Sort by', style: MyTextStyles.label.label1),
-                      HorizontalSpace(4.w),
-                      MyFilterDropdown<String>(
-                        items: const ['rating', 'distance', 'score'],
-                        selectedValue: context
-                            .read<GetTasksCubit>()
-                            .currentSortBy,
-                        allOptionLabel: 'None',
-                        labelBuilder: (item) =>
-                            item[0].toUpperCase() + item.substring(1),
-                        onChanged: (value) {
-                          context.read<GetTasksCubit>().setSortBy(value);
-                        },
-                      ),
-                      const Spacer(),
-                      Text('Priority', style: MyTextStyles.label.label1),
-                      HorizontalSpace(4.w),
-                      PriorityFilterDropdown(
-                        selectedPriorities: context
-                            .read<GetTasksCubit>()
-                            .selectedPriorities
-                            .map(TaskPriority.fromApiValue)
-                            .toList(),
-                        onChanged: (priorities) {
-                          context.read<GetTasksCubit>().setPriorities(
-                            priorities.map((p) => p.toApiValue).toList(),
-                          );
-                        },
-                      ),
-                    ],
+                // Categories Filter with animation
+                AnimatedSlide(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  offset: _showHeaders ? Offset.zero : const Offset(0, -1),
+                  child: CategoryFilterList(
+                    categories: filterCategories,
+                    selectedId: _getSelectedCategoryId(
+                      context.read<GetTasksCubit>().currentCategory,
+                    ),
+                    onCategoryTap: (category) {
+                      context.read<GetTasksCubit>().filterByCategory(
+                        category.apiCategory,
+                      );
+                    },
                   ),
                 ),
-                const VerticalSpace(16),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  height: _showHeaders ? 12.h : 0,
+                ),
+
+                // Sort & Priority Filters with animation
+                AnimatedSlide(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  offset: _showHeaders ? Offset.zero : const Offset(0, -1),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: Row(
+                      children: [
+                        Text('Sort by', style: MyTextStyles.label.label1),
+                        HorizontalSpace(4.w),
+                        MyFilterDropdown<String>(
+                          items: const ['rating', 'distance', 'score'],
+                          selectedValue: context
+                              .read<GetTasksCubit>()
+                              .currentSortBy,
+                          allOptionLabel: 'None',
+                          labelBuilder: (item) =>
+                              item[0].toUpperCase() + item.substring(1),
+                          onChanged: (value) {
+                            context.read<GetTasksCubit>().setSortBy(value);
+                          },
+                        ),
+                        const Spacer(),
+                        Text('Priority', style: MyTextStyles.label.label1),
+                        HorizontalSpace(4.w),
+                        PriorityFilterDropdown(
+                          selectedPriorities: context
+                              .read<GetTasksCubit>()
+                              .selectedPriorities
+                              .map(TaskPriority.fromApiValue)
+                              .toList(),
+                          onChanged: (priorities) {
+                            context.read<GetTasksCubit>().setPriorities(
+                              priorities.map((p) => p.toApiValue).toList(),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  height: _showHeaders ? 12.h : 0,
+                ),
 
                 // Scrollable task list
                 Expanded(
