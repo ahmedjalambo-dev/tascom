@@ -254,6 +254,17 @@ class SearchCubit extends Cubit<SearchState> {
     emit(state);
   }
 
+  void resetToInitial() {
+    _currentPage = 1;
+    _allTasks = [];
+    _allPeople = [];
+    _query = null;
+    _mode = null;
+    _filter = null;
+    _searchType = 'tasks';
+    emit(const SearchState.initial());
+  }
+
   bool get hasMorePages {
     final currentState = state;
     if (currentState is SearchTasksSuccess) {

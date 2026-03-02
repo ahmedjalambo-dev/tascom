@@ -47,8 +47,7 @@ class SearchRepo {
         page: page,
         limit: limit,
       );
-      final response =
-          SearchResponse.fromJson(json as Map<String, dynamic>);
+      final response = SearchResponse.fromJson(json as Map<String, dynamic>);
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(ApiErrorHandler.handle(error));
