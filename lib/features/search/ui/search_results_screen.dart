@@ -205,10 +205,8 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
         return PeopleCard(
           person: person,
           resolvedLocation: cubit.resolvedLocations[person.id],
-          onTap: () => context.pushNamed(
-            MyRoutes.helperDetails,
-            arguments: person.id,
-          ),
+          onTap: () =>
+              context.pushNamed(MyRoutes.helperDetails, arguments: person.id),
         );
       },
     );
@@ -244,10 +242,8 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
         return PeopleCard(
           person: item,
           resolvedLocation: cubit.resolvedLocations[item.id],
-          onTap: () => context.pushNamed(
-            MyRoutes.helperDetails,
-            arguments: item.id,
-          ),
+          onTap: () =>
+              context.pushNamed(MyRoutes.helperDetails, arguments: item.id),
         );
       },
     );

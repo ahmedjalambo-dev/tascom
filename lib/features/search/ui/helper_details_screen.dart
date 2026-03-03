@@ -111,9 +111,7 @@ class _HelperDetailsScreenState extends State<HelperDetailsScreen> {
           );
         },
       ),
-      trailing: [
-        Icon(Icons.more_vert, size: 24.w, color: MyColors.icons.icon),
-      ],
+      trailing: [Icon(Icons.more_vert, size: 24.w, color: MyColors.icons.icon)],
     );
   }
 
@@ -148,8 +146,9 @@ class _HelperDetailsScreenState extends State<HelperDetailsScreen> {
             CircleAvatar(
               radius: 50.r,
               backgroundColor: MyColors.brand.purple.withValues(alpha: 0.1),
-              backgroundImage:
-                  user.avatar != null ? NetworkImage(user.avatar!) : null,
+              backgroundImage: user.avatar != null
+                  ? NetworkImage(user.avatar!)
+                  : null,
               child: user.avatar == null
                   ? Text(
                       user.name.isNotEmpty ? user.name[0].toUpperCase() : '?',
@@ -165,8 +164,10 @@ class _HelperDetailsScreenState extends State<HelperDetailsScreen> {
                 child: Padding(
                   padding: EdgeInsets.only(right: 16.w),
                   child: Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 10.w,
+                      vertical: 10.h,
+                    ),
                     decoration: BoxDecoration(
                       color: MyColors.brand.purple,
                       borderRadius: BorderRadius.circular(50.r),
@@ -198,11 +199,7 @@ class _HelperDetailsScreenState extends State<HelperDetailsScreen> {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                Icons.location_on,
-                size: 16.w,
-                color: MyColors.brand.purple,
-              ),
+              Icon(Icons.location_on, size: 16.w, color: MyColors.brand.purple),
               SizedBox(width: 4.w),
               Text(
                 _resolvedLocation!,
@@ -360,8 +357,10 @@ class _HelperDetailsScreenState extends State<HelperDetailsScreen> {
             children: skillList
                 .map(
                   (skill) => Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 12.w,
+                      vertical: 6.h,
+                    ),
                     decoration: BoxDecoration(
                       color: MyColors.brand.purple.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(12.r),

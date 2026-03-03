@@ -24,40 +24,40 @@ class PeopleCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
-      padding: EdgeInsets.all(16.w),
-      decoration: BoxDecoration(
-        color: MyColors.background.primary,
-        borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: MyColors.border.postBorder, width: 1),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildAvatar(),
-              const HorizontalSpace(12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildNameAndRating(),
-                    const VerticalSpace(4),
-                    _buildLocation(),
-                  ],
+        margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
+        padding: EdgeInsets.all(16.w),
+        decoration: BoxDecoration(
+          color: MyColors.background.primary,
+          borderRadius: BorderRadius.circular(16.r),
+          border: Border.all(color: MyColors.border.postBorder, width: 1),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildAvatar(),
+                const HorizontalSpace(12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildNameAndRating(),
+                      const VerticalSpace(4),
+                      _buildLocation(),
+                    ],
+                  ),
                 ),
-              ),
-              _buildMessageButton(),
+                _buildMessageButton(),
+              ],
+            ),
+            if (person.skills != null && person.skills!.isNotEmpty) ...[
+              const VerticalSpace(12),
+              _buildSkills(),
             ],
-          ),
-          if (person.skills != null && person.skills!.isNotEmpty) ...[
-            const VerticalSpace(12),
-            _buildSkills(),
           ],
-        ],
-      ),
+        ),
       ),
     );
   }
