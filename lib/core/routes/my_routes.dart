@@ -17,4 +17,5 @@ class MyRoutes {
   static const String deleteAccount = '/delete_account';
   static const String editProfile = '/edit_profile';
   static const String requests = '/requests';
+  static const String helperDetails = '/helper_details';
 }
