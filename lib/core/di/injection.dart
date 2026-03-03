@@ -74,6 +74,11 @@ import '../../features/get_comments/cubit/get_comments_cubit.dart';
 import '../../features/get_comments/data/repos/get_comments_repo.dart';
 import '../../features/get_comments/data/services/get_comments_service.dart';
 
+// Create Comment
+import '../../features/create_comment/cubit/create_comment_cubit.dart';
+import '../../features/create_comment/data/repos/create_comment_repo.dart';
+import '../../features/create_comment/data/services/create_comment_service.dart';
+
 final getIt = GetIt.instance;
 
 Future<void> initDependencies() async {
@@ -219,5 +224,16 @@ Future<void> initDependencies() async {
   );
   getIt.registerFactory<GetCommentsCubit>(
     () => GetCommentsCubit(getIt<GetCommentsRepo>()),
+  );
+
+  // ============ Create Comment ============
+  getIt.registerLazySingleton<CreateCommentService>(
+    () => CreateCommentService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<CreateCommentRepo>(
+    () => CreateCommentRepo(getIt<CreateCommentService>()),
+  );
+  getIt.registerFactory<CreateCommentCubit>(
+    () => CreateCommentCubit(getIt<CreateCommentRepo>()),
   );
 }

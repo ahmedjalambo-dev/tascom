@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/networking/api_result.dart';
 
+import '../data/models/comment_response.dart';
 import '../data/repos/get_comments_repo.dart';
 import 'get_comments_state.dart';
 
@@ -20,5 +21,24 @@ class GetCommentsCubit extends Cubit<GetCommentsState> {
       case Failure(error: final error):
         emit(GetCommentsState.error(error.message ?? 'Unknown error occurred'));
     }
+  }
+
+  void addComment(CommentModel comment, {String? parentId}) {
+    state.maybeWhen(
+      success: (comments) {
+        if (parentId != null) {
+          final updated = comments.map((c) {
+            if (c.id == parentId) {
+              return c.copyWith(replies: [...c.replies, comment]);
+            }
+            return c;
+          }).toList();
+          emit(GetCommentsState.success(updated));
+        } else {
+          emit(GetCommentsState.success([...comments, comment]));
+        }
+      },
+      orElse: () {},
+    );
   }
 }

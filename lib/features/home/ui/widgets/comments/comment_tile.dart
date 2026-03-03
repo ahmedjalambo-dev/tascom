@@ -122,15 +122,6 @@ class CommentTile extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    SvgPicture.asset(
-                      MyIcons.sendStroke,
-                      width: 20.w,
-                      height: 20.h,
-                      colorFilter: ColorFilter.mode(
-                        MyColors.text.secondary,
-                        BlendMode.srcIn,
-                      ),
-                    ),
                   ],
                 ),
               ],
