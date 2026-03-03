@@ -45,9 +45,10 @@ class RecentSearchesSection extends StatelessWidget {
             ],
           ),
         ),
-        const VerticalSpace(8),
+        VerticalSpace(12.h),
         ListView.builder(
           shrinkWrap: true,
+          padding: EdgeInsets.zero,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: recentSearches.length,
           itemBuilder: (context, index) {
