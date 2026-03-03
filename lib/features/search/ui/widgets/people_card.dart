@@ -154,7 +154,10 @@ class PeopleCard extends StatelessWidget {
           MyIcons.sendSolid,
           width: 16.w,
           height: 16.h,
-          color: MyColors.background.primary,
+          colorFilter: ColorFilter.mode(
+            MyColors.background.primary,
+            BlendMode.srcIn,
+          ),
         ),
       ),
     );
