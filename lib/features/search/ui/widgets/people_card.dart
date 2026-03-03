@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:tascom/core/constants/my_icons.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
@@ -7,8 +9,9 @@ import 'package:tascom/features/search/data/models/search_person_data.dart';
 
 class PeopleCard extends StatelessWidget {
   final SearchPersonData person;
+  final String? resolvedLocation;
 
-  const PeopleCard({super.key, required this.person});
+  const PeopleCard({super.key, required this.person, this.resolvedLocation});
 
   @override
   Widget build(BuildContext context) {
@@ -20,27 +23,31 @@ class PeopleCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16.r),
         border: Border.all(color: MyColors.border.postBorder, width: 1),
       ),
-      child: Row(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildAvatar(),
-          const HorizontalSpace(12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildNameAndRating(),
-                if (person.location != null && person.location!.isNotEmpty) ...[
-                  const VerticalSpace(4),
-                  _buildLocation(),
-                ],
-                if (person.skills != null && person.skills!.isNotEmpty) ...[
-                  const VerticalSpace(8),
-                  _buildSkills(),
-                ],
-              ],
-            ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildAvatar(),
+              const HorizontalSpace(12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildNameAndRating(),
+                    const VerticalSpace(4),
+                    _buildLocation(),
+                  ],
+                ),
+              ),
+              _buildMessageButton(),
+            ],
           ),
+          if (person.skills != null && person.skills!.isNotEmpty) ...[
+            const VerticalSpace(12),
+            _buildSkills(),
+          ],
         ],
       ),
     );
@@ -48,7 +55,7 @@ class PeopleCard extends StatelessWidget {
 
   Widget _buildAvatar() {
     return CircleAvatar(
-      radius: 24.r,
+      radius: 30.r,
       backgroundColor: MyColors.brand.purple.withValues(alpha: 0.1),
       backgroundImage: person.avatar != null
           ? NetworkImage(person.avatar!)
@@ -77,7 +84,7 @@ class PeopleCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        if (person.ratingAvg != null) ...[
+        if (person.ratingAvg != null && person.ratingAvg! > 0) ...[
           Icon(Icons.star_rounded, color: MyColors.icons.star, size: 16.w),
           SizedBox(width: 2.w),
           Text(
@@ -92,19 +99,37 @@ class PeopleCard extends StatelessWidget {
   }
 
   Widget _buildLocation() {
+    final displayLocation = resolvedLocation;
+    final distanceText = person.distance > 0
+        ? '${person.distance.toStringAsFixed(1)} km'
+        : null;
+
+    if ((displayLocation == null || displayLocation.isEmpty) &&
+        distanceText == null) {
+      return const SizedBox.shrink();
+    }
+
+    final parts = <String>[];
+    if (displayLocation != null && displayLocation.isNotEmpty) {
+      parts.add(displayLocation);
+    }
+    if (distanceText != null) {
+      parts.add(distanceText);
+    }
+
     return Row(
       children: [
         Icon(
           Icons.location_on_outlined,
           size: 14.w,
-          color: MyColors.text.third,
+          color: MyColors.brand.purple,
         ),
         SizedBox(width: 4.w),
         Expanded(
           child: Text(
-            person.location!,
+            parts.join(' \u2022 '),
             style: MyTextStyles.label.label2.copyWith(
-              color: MyColors.text.third,
+              color: MyColors.brand.purple,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -114,10 +139,31 @@ class PeopleCard extends StatelessWidget {
     );
   }
 
+  Widget _buildMessageButton() {
+    return GestureDetector(
+      onTap: () {
+        // Placeholder for future chat/message navigation
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+        decoration: BoxDecoration(
+          color: MyColors.brand.purple,
+          borderRadius: BorderRadius.circular(50.r),
+        ),
+        child: SvgPicture.asset(
+          MyIcons.sendSolid,
+          width: 16.w,
+          height: 16.h,
+          color: MyColors.background.primary,
+        ),
+      ),
+    );
+  }
+
   Widget _buildSkills() {
     final skillList = person.skills!
         .split(',')
-        .map((s) => s.trim())
+        .map((s) => s.trim().replaceAll(RegExp(r'[\[\]"]'), '').trim())
         .where((s) => s.isNotEmpty)
         .toList();
     return Wrap(

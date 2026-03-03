@@ -14,7 +14,7 @@ _SearchPersonData _$SearchPersonDataFromJson(Map<String, dynamic> json) =>
       ratingAvg: (json['ratingAvg'] as num?)?.toDouble(),
       skills: json['skills'] as String?,
       avatar: json['avatar'] as String?,
-      email: json['email'] as String?,
+      distance: (json['distance'] as num?)?.toDouble() ?? 0,
     );
 
 Map<String, dynamic> _$SearchPersonDataToJson(_SearchPersonData instance) =>
@@ -25,5 +25,5 @@ Map<String, dynamic> _$SearchPersonDataToJson(_SearchPersonData instance) =>
       'ratingAvg': instance.ratingAvg,
       'skills': instance.skills,
       'avatar': instance.avatar,
-      'email': instance.email,
+      'distance': instance.distance,
     };

@@ -1,9 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/networking/api_error_model.dart';
-import '../../get_tasks/data/models/all_tasks_response.dart';
 import '../data/models/search_meta.dart';
 import '../data/models/search_person_data.dart';
+import '../data/models/search_task_data.dart';
 
 part 'search_state.freezed.dart';
 
@@ -14,7 +14,7 @@ abstract class SearchState with _$SearchState {
   const factory SearchState.loading() = SearchLoading;
 
   const factory SearchState.tasksSuccess({
-    required List<TaskResponseData> tasks,
+    required List<SearchTaskData> tasks,
     required SearchMeta meta,
   }) = SearchTasksSuccess;
 

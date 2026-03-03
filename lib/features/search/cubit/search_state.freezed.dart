@@ -137,7 +137,7 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<TaskResponseData> tasks,  SearchMeta meta)?  tasksSuccess,TResult Function( List<SearchPersonData> people,  SearchMeta meta)?  peopleSuccess,TResult Function( List<dynamic> currentItems,  SearchMeta meta)?  loadingMore,TResult Function()?  empty,TResult Function( ApiErrorModel error)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<SearchTaskData> tasks,  SearchMeta meta)?  tasksSuccess,TResult Function( List<SearchPersonData> people,  SearchMeta meta)?  peopleSuccess,TResult Function( List<dynamic> currentItems,  SearchMeta meta)?  loadingMore,TResult Function()?  empty,TResult Function( ApiErrorModel error)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case SearchInitial() when initial != null:
 return initial();case SearchLoading() when loading != null:
@@ -164,7 +164,7 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<TaskResponseData> tasks,  SearchMeta meta)  tasksSuccess,required TResult Function( List<SearchPersonData> people,  SearchMeta meta)  peopleSuccess,required TResult Function( List<dynamic> currentItems,  SearchMeta meta)  loadingMore,required TResult Function()  empty,required TResult Function( ApiErrorModel error)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<SearchTaskData> tasks,  SearchMeta meta)  tasksSuccess,required TResult Function( List<SearchPersonData> people,  SearchMeta meta)  peopleSuccess,required TResult Function( List<dynamic> currentItems,  SearchMeta meta)  loadingMore,required TResult Function()  empty,required TResult Function( ApiErrorModel error)  error,}) {final _that = this;
 switch (_that) {
 case SearchInitial():
 return initial();case SearchLoading():
@@ -190,7 +190,7 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<TaskResponseData> tasks,  SearchMeta meta)?  tasksSuccess,TResult? Function( List<SearchPersonData> people,  SearchMeta meta)?  peopleSuccess,TResult? Function( List<dynamic> currentItems,  SearchMeta meta)?  loadingMore,TResult? Function()?  empty,TResult? Function( ApiErrorModel error)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<SearchTaskData> tasks,  SearchMeta meta)?  tasksSuccess,TResult? Function( List<SearchPersonData> people,  SearchMeta meta)?  peopleSuccess,TResult? Function( List<dynamic> currentItems,  SearchMeta meta)?  loadingMore,TResult? Function()?  empty,TResult? Function( ApiErrorModel error)?  error,}) {final _that = this;
 switch (_that) {
 case SearchInitial() when initial != null:
 return initial();case SearchLoading() when loading != null:
@@ -275,11 +275,11 @@ String toString() {
 
 
 class SearchTasksSuccess implements SearchState {
-  const SearchTasksSuccess({required final  List<TaskResponseData> tasks, required this.meta}): _tasks = tasks;
+  const SearchTasksSuccess({required final  List<SearchTaskData> tasks, required this.meta}): _tasks = tasks;
   
 
- final  List<TaskResponseData> _tasks;
- List<TaskResponseData> get tasks {
+ final  List<SearchTaskData> _tasks;
+ List<SearchTaskData> get tasks {
   if (_tasks is EqualUnmodifiableListView) return _tasks;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_tasks);
@@ -317,7 +317,7 @@ abstract mixin class $SearchTasksSuccessCopyWith<$Res> implements $SearchStateCo
   factory $SearchTasksSuccessCopyWith(SearchTasksSuccess value, $Res Function(SearchTasksSuccess) _then) = _$SearchTasksSuccessCopyWithImpl;
 @useResult
 $Res call({
- List<TaskResponseData> tasks, SearchMeta meta
+ List<SearchTaskData> tasks, SearchMeta meta
 });
 
 
@@ -337,7 +337,7 @@ class _$SearchTasksSuccessCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? tasks = null,Object? meta = null,}) {
   return _then(SearchTasksSuccess(
 tasks: null == tasks ? _self._tasks : tasks // ignore: cast_nullable_to_non_nullable
-as List<TaskResponseData>,meta: null == meta ? _self.meta : meta // ignore: cast_nullable_to_non_nullable
+as List<SearchTaskData>,meta: null == meta ? _self.meta : meta // ignore: cast_nullable_to_non_nullable
 as SearchMeta,
   ));
 }

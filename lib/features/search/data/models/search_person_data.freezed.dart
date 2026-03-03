@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SearchPersonData {
 
- String get id; String get name; String? get location;@JsonKey(name: 'ratingAvg') double? get ratingAvg; String? get skills; String? get avatar; String? get email;
+ String get id; String get name; String? get location;@JsonKey(name: 'ratingAvg') double? get ratingAvg; String? get skills; String? get avatar; double get distance;
 /// Create a copy of SearchPersonData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $SearchPersonDataCopyWith<SearchPersonData> get copyWith => _$SearchPersonDataCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchPersonData&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.location, location) || other.location == location)&&(identical(other.ratingAvg, ratingAvg) || other.ratingAvg == ratingAvg)&&(identical(other.skills, skills) || other.skills == skills)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.email, email) || other.email == email));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchPersonData&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.location, location) || other.location == location)&&(identical(other.ratingAvg, ratingAvg) || other.ratingAvg == ratingAvg)&&(identical(other.skills, skills) || other.skills == skills)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.distance, distance) || other.distance == distance));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,location,ratingAvg,skills,avatar,email);
+int get hashCode => Object.hash(runtimeType,id,name,location,ratingAvg,skills,avatar,distance);
 
 @override
 String toString() {
-  return 'SearchPersonData(id: $id, name: $name, location: $location, ratingAvg: $ratingAvg, skills: $skills, avatar: $avatar, email: $email)';
+  return 'SearchPersonData(id: $id, name: $name, location: $location, ratingAvg: $ratingAvg, skills: $skills, avatar: $avatar, distance: $distance)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $SearchPersonDataCopyWith<$Res>  {
   factory $SearchPersonDataCopyWith(SearchPersonData value, $Res Function(SearchPersonData) _then) = _$SearchPersonDataCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, String? location,@JsonKey(name: 'ratingAvg') double? ratingAvg, String? skills, String? avatar, String? email
+ String id, String name, String? location,@JsonKey(name: 'ratingAvg') double? ratingAvg, String? skills, String? avatar, double distance
 });
 
 
@@ -65,7 +65,7 @@ class _$SearchPersonDataCopyWithImpl<$Res>
 
 /// Create a copy of SearchPersonData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? location = freezed,Object? ratingAvg = freezed,Object? skills = freezed,Object? avatar = freezed,Object? email = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? location = freezed,Object? ratingAvg = freezed,Object? skills = freezed,Object? avatar = freezed,Object? distance = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -73,8 +73,8 @@ as String,location: freezed == location ? _self.location : location // ignore: c
 as String?,ratingAvg: freezed == ratingAvg ? _self.ratingAvg : ratingAvg // ignore: cast_nullable_to_non_nullable
 as double?,skills: freezed == skills ? _self.skills : skills // ignore: cast_nullable_to_non_nullable
 as String?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
-as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,distance: null == distance ? _self.distance : distance // ignore: cast_nullable_to_non_nullable
+as double,
   ));
 }
 
@@ -159,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String? location, @JsonKey(name: 'ratingAvg')  double? ratingAvg,  String? skills,  String? avatar,  String? email)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String? location, @JsonKey(name: 'ratingAvg')  double? ratingAvg,  String? skills,  String? avatar,  double distance)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SearchPersonData() when $default != null:
-return $default(_that.id,_that.name,_that.location,_that.ratingAvg,_that.skills,_that.avatar,_that.email);case _:
+return $default(_that.id,_that.name,_that.location,_that.ratingAvg,_that.skills,_that.avatar,_that.distance);case _:
   return orElse();
 
 }
@@ -180,10 +180,10 @@ return $default(_that.id,_that.name,_that.location,_that.ratingAvg,_that.skills,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String? location, @JsonKey(name: 'ratingAvg')  double? ratingAvg,  String? skills,  String? avatar,  String? email)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String? location, @JsonKey(name: 'ratingAvg')  double? ratingAvg,  String? skills,  String? avatar,  double distance)  $default,) {final _that = this;
 switch (_that) {
 case _SearchPersonData():
-return $default(_that.id,_that.name,_that.location,_that.ratingAvg,_that.skills,_that.avatar,_that.email);case _:
+return $default(_that.id,_that.name,_that.location,_that.ratingAvg,_that.skills,_that.avatar,_that.distance);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,10 +200,10 @@ return $default(_that.id,_that.name,_that.location,_that.ratingAvg,_that.skills,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String? location, @JsonKey(name: 'ratingAvg')  double? ratingAvg,  String? skills,  String? avatar,  String? email)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String? location, @JsonKey(name: 'ratingAvg')  double? ratingAvg,  String? skills,  String? avatar,  double distance)?  $default,) {final _that = this;
 switch (_that) {
 case _SearchPersonData() when $default != null:
-return $default(_that.id,_that.name,_that.location,_that.ratingAvg,_that.skills,_that.avatar,_that.email);case _:
+return $default(_that.id,_that.name,_that.location,_that.ratingAvg,_that.skills,_that.avatar,_that.distance);case _:
   return null;
 
 }
@@ -215,7 +215,7 @@ return $default(_that.id,_that.name,_that.location,_that.ratingAvg,_that.skills,
 @JsonSerializable()
 
 class _SearchPersonData implements SearchPersonData {
-  const _SearchPersonData({required this.id, required this.name, this.location, @JsonKey(name: 'ratingAvg') this.ratingAvg, this.skills, this.avatar, this.email});
+  const _SearchPersonData({required this.id, required this.name, this.location, @JsonKey(name: 'ratingAvg') this.ratingAvg, this.skills, this.avatar, this.distance = 0});
   factory _SearchPersonData.fromJson(Map<String, dynamic> json) => _$SearchPersonDataFromJson(json);
 
 @override final  String id;
@@ -224,7 +224,7 @@ class _SearchPersonData implements SearchPersonData {
 @override@JsonKey(name: 'ratingAvg') final  double? ratingAvg;
 @override final  String? skills;
 @override final  String? avatar;
-@override final  String? email;
+@override@JsonKey() final  double distance;
 
 /// Create a copy of SearchPersonData
 /// with the given fields replaced by the non-null parameter values.
@@ -239,16 +239,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchPersonData&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.location, location) || other.location == location)&&(identical(other.ratingAvg, ratingAvg) || other.ratingAvg == ratingAvg)&&(identical(other.skills, skills) || other.skills == skills)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.email, email) || other.email == email));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchPersonData&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.location, location) || other.location == location)&&(identical(other.ratingAvg, ratingAvg) || other.ratingAvg == ratingAvg)&&(identical(other.skills, skills) || other.skills == skills)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.distance, distance) || other.distance == distance));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,location,ratingAvg,skills,avatar,email);
+int get hashCode => Object.hash(runtimeType,id,name,location,ratingAvg,skills,avatar,distance);
 
 @override
 String toString() {
-  return 'SearchPersonData(id: $id, name: $name, location: $location, ratingAvg: $ratingAvg, skills: $skills, avatar: $avatar, email: $email)';
+  return 'SearchPersonData(id: $id, name: $name, location: $location, ratingAvg: $ratingAvg, skills: $skills, avatar: $avatar, distance: $distance)';
 }
 
 
@@ -259,7 +259,7 @@ abstract mixin class _$SearchPersonDataCopyWith<$Res> implements $SearchPersonDa
   factory _$SearchPersonDataCopyWith(_SearchPersonData value, $Res Function(_SearchPersonData) _then) = __$SearchPersonDataCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, String? location,@JsonKey(name: 'ratingAvg') double? ratingAvg, String? skills, String? avatar, String? email
+ String id, String name, String? location,@JsonKey(name: 'ratingAvg') double? ratingAvg, String? skills, String? avatar, double distance
 });
 
 
@@ -276,7 +276,7 @@ class __$SearchPersonDataCopyWithImpl<$Res>
 
 /// Create a copy of SearchPersonData
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? location = freezed,Object? ratingAvg = freezed,Object? skills = freezed,Object? avatar = freezed,Object? email = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? location = freezed,Object? ratingAvg = freezed,Object? skills = freezed,Object? avatar = freezed,Object? distance = null,}) {
   return _then(_SearchPersonData(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -284,8 +284,8 @@ as String,location: freezed == location ? _self.location : location // ignore: c
 as String?,ratingAvg: freezed == ratingAvg ? _self.ratingAvg : ratingAvg // ignore: cast_nullable_to_non_nullable
 as double?,skills: freezed == skills ? _self.skills : skills // ignore: cast_nullable_to_non_nullable
 as String?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
-as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,distance: null == distance ? _self.distance : distance // ignore: cast_nullable_to_non_nullable
+as double,
   ));
 }
 

@@ -1,7 +1,6 @@
-import 'package:tascom/features/get_tasks/data/models/all_tasks_response.dart';
-
 import 'search_meta.dart';
 import 'search_person_data.dart';
+import 'search_task_data.dart';
 
 sealed class SearchResponse {
   final SearchMeta meta;
@@ -14,7 +13,7 @@ sealed class SearchResponse {
 
     if (type == 'tasks') {
       final tasks = dataList
-          .map((e) => TaskResponseData.fromJson(e as Map<String, dynamic>))
+          .map((e) => SearchTaskData.fromJson(e as Map<String, dynamic>))
           .toList();
       return SearchTasksResponse(tasks: tasks, meta: meta);
     } else {
@@ -27,7 +26,7 @@ sealed class SearchResponse {
 }
 
 class SearchTasksResponse extends SearchResponse {
-  final List<TaskResponseData> tasks;
+  final List<SearchTaskData> tasks;
   const SearchTasksResponse({required this.tasks, required super.meta});
 }
 

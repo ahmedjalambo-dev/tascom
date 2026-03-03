@@ -74,7 +74,8 @@ abstract class MyIcons {
   static const String forwardStroke = '$_basePath/forward_stroke.svg'; // share
 
   // comments
-  static const String sendStroke = '$_basePath/send_stroke.svg';
+  static const String sendStroke = '$_basePath/sent_stroke.svg';
+  static const String sendSolid = '$_basePath/sent_solid.svg';
 
   static const String arrowBack = '$_basePath/arrow_back.svg';
 

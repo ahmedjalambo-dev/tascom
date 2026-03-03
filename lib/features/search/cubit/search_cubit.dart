@@ -1,13 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/networking/api_result.dart';
+import '../../../core/services/location_service.dart';
 import '../../../core/storage/shared_pref_helper.dart';
-import '../../get_tasks/data/models/all_tasks_response.dart';
 import '../../home/data/models/task_category.dart';
 import '../../home/data/models/task_priority.dart';
 import '../data/models/search_meta.dart';
 import '../data/models/search_person_data.dart';
 import '../data/models/search_response.dart';
+import '../data/models/search_task_data.dart';
 import '../data/repos/search_repo.dart';
 import '../data/search_filter_result.dart';
 import 'search_state.dart';
@@ -18,8 +19,9 @@ class SearchCubit extends Cubit<SearchState> {
   int _currentPage = 1;
   static const int _limit = 10;
 
-  List<TaskResponseData> _allTasks = [];
+  List<SearchTaskData> _allTasks = [];
   List<SearchPersonData> _allPeople = [];
+  Map<String, String> _resolvedLocations = {};
 
   String _searchType = 'tasks';
   String? _query;
@@ -32,6 +34,7 @@ class SearchCubit extends Cubit<SearchState> {
   String? get activeMode => _mode;
   List<String> get recentSearches => _recentSearches;
   SearchFilterResult? get currentFilter => _filter;
+  Map<String, String> get resolvedLocations => _resolvedLocations;
 
   SearchCubit(this._repo) : super(const SearchState.initial()) {
     _loadRecentSearches();
@@ -80,6 +83,7 @@ class SearchCubit extends Cubit<SearchState> {
     _currentPage = 1;
     _allTasks = [];
     _allPeople = [];
+    _resolvedLocations = {};
     emit(const SearchState.loading());
     await _executeSearch();
   }
@@ -174,6 +178,7 @@ class SearchCubit extends Cubit<SearchState> {
                 meta: response.meta,
               ),
             );
+            _resolveLocations(_allPeople);
           }
         }
       case Failure(error: final error):
@@ -206,6 +211,39 @@ class SearchCubit extends Cubit<SearchState> {
           }
         }
         emit(SearchState.error(error));
+    }
+  }
+
+  Future<void> _resolveLocations(List<SearchPersonData> people) async {
+    for (final person in people) {
+      if (person.location != null &&
+          !_resolvedLocations.containsKey(person.id)) {
+        final parts = person.location!.split(',');
+        if (parts.length == 2) {
+          final lat = double.tryParse(parts[0].trim());
+          final lng = double.tryParse(parts[1].trim());
+          if (lat != null && lng != null) {
+            final placemark = await LocationService.getPlacemark(lat, lng);
+            if (placemark != null) {
+              final locationParts = <String>[];
+              if (placemark.country != null && placemark.country!.isNotEmpty) {
+                locationParts.add(placemark.country!);
+              }
+              if (placemark.locality != null &&
+                  placemark.locality!.isNotEmpty) {
+                locationParts.add(placemark.locality!);
+              }
+              if (locationParts.isNotEmpty) {
+                _resolvedLocations[person.id] = locationParts.join(', ');
+              }
+            }
+          }
+        }
+      }
+    }
+    if (state is SearchPeopleSuccess) {
+      final s = state as SearchPeopleSuccess;
+      emit(SearchState.peopleSuccess(people: s.people, meta: s.meta));
     }
   }
 
@@ -258,6 +296,7 @@ class SearchCubit extends Cubit<SearchState> {
     _currentPage = 1;
     _allTasks = [];
     _allPeople = [];
+    _resolvedLocations = {};
     _query = null;
     _mode = null;
     _filter = null;

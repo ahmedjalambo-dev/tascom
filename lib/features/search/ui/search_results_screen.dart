@@ -10,10 +10,12 @@ import 'package:tascom/core/widgets/my_search_field.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/features/search/cubit/search_cubit.dart';
 import 'package:tascom/features/search/cubit/search_state.dart';
+import 'package:tascom/features/home/ui/widgets/posts/task_card.dart';
+import 'package:tascom/features/search/data/models/search_task_data.dart';
+import 'package:tascom/features/search/data/models/search_task_mapper.dart';
 import 'package:tascom/features/search/ui/widgets/people_card.dart';
 import 'package:tascom/features/search/ui/widgets/quick_filter_chips.dart';
 import 'package:tascom/features/search/ui/widgets/search_filter_bottom_sheet.dart';
-import 'package:tascom/features/search/ui/widgets/search_task_card.dart';
 
 class SearchResultsScreen extends StatefulWidget {
   final String initialQuery;
@@ -176,18 +178,27 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
       padding: EdgeInsets.only(top: 8.h, bottom: 100.h),
       itemCount: state.tasks.length,
       itemBuilder: (context, index) {
-        return SearchTaskCard(task: state.tasks[index]);
+        final taskModel = state.tasks[index].toTaskModel();
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
+          child: TaskCard(taskModel: taskModel, showActions: false),
+        );
       },
     );
   }
 
   Widget _buildPeopleResults(SearchPeopleSuccess state) {
+    final cubit = context.read<SearchCubit>();
     return ListView.builder(
       controller: _scrollController,
       padding: EdgeInsets.only(top: 8.h, bottom: 100.h),
       itemCount: state.people.length,
       itemBuilder: (context, index) {
-        return PeopleCard(person: state.people[index]);
+        final person = state.people[index];
+        return PeopleCard(
+          person: person,
+          resolvedLocation: cubit.resolvedLocations[person.id],
+        );
       },
     );
   }
@@ -209,9 +220,16 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
         }
         final item = state.currentItems[index];
         if (isTaskSearch) {
-          return SearchTaskCard(task: item);
+          final taskModel = (item as SearchTaskData).toTaskModel();
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
+            child: TaskCard(taskModel: taskModel, showActions: false),
+          );
         }
-        return PeopleCard(person: item);
+        return PeopleCard(
+          person: item,
+          resolvedLocation: cubit.resolvedLocations[item.id],
+        );
       },
     );
   }

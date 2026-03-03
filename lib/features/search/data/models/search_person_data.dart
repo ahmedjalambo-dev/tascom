@@ -12,7 +12,7 @@ abstract class SearchPersonData with _$SearchPersonData {
     @JsonKey(name: 'ratingAvg') double? ratingAvg,
     String? skills,
     String? avatar,
-    String? email,
+    @Default(0) double distance,
   }) = _SearchPersonData;
 
   factory SearchPersonData.fromJson(Map<String, dynamic> json) =>
