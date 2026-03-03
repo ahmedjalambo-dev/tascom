@@ -17,6 +17,8 @@ import 'package:tascom/features/search/ui/widgets/search_task_card.dart';
 import 'package:tascom/features/search/ui/widgets/quick_filter_chips.dart';
 import 'package:tascom/features/home/ui/task_details_screen.dart';
 import 'package:tascom/features/search/ui/widgets/search_filter_bottom_sheet.dart';
+import 'package:tascom/core/extentions/extentions.dart';
+import 'package:tascom/core/routes/my_routes.dart';
 
 class SearchResultsScreen extends StatefulWidget {
   final String initialQuery;
@@ -203,6 +205,10 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
         return PeopleCard(
           person: person,
           resolvedLocation: cubit.resolvedLocations[person.id],
+          onTap: () => context.pushNamed(
+            MyRoutes.helperDetails,
+            arguments: person.id,
+          ),
         );
       },
     );
@@ -238,6 +244,10 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
         return PeopleCard(
           person: item,
           resolvedLocation: cubit.resolvedLocations[item.id],
+          onTap: () => context.pushNamed(
+            MyRoutes.helperDetails,
+            arguments: item.id,
+          ),
         );
       },
     );

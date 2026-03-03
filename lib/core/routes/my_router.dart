@@ -16,6 +16,7 @@ import 'package:tascom/features/auth/login/ui/login_screen.dart';
 import 'package:tascom/features/onboarding/onboarding_screen.dart';
 import 'package:tascom/features/auth/register/ui/register_screen.dart';
 import 'package:tascom/features/search/ui/search_screen.dart';
+import 'package:tascom/features/search/ui/helper_details_screen.dart';
 import 'package:tascom/features/settings/settings_screen.dart';
 import 'package:tascom/features/settings/points_history/points_history_screen.dart';
 import 'package:tascom/features/settings/reports/reports_screen.dart';
@@ -146,6 +147,15 @@ class MyRouter {
           builder: (context) => BlocProvider(
             create: (_) => getIt<DeleteAccountCubit>(),
             child: const DeleteAccountScreen(),
+          ),
+        );
+
+      case MyRoutes.helperDetails:
+        final userId = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (_) => getIt<ProfileCubit>()..getUser(userId),
+            child: HelperDetailsScreen(userId: userId),
           ),
         );
 

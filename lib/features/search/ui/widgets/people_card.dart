@@ -10,12 +10,20 @@ import 'package:tascom/features/search/data/models/search_person_data.dart';
 class PeopleCard extends StatelessWidget {
   final SearchPersonData person;
   final String? resolvedLocation;
+  final VoidCallback? onTap;
 
-  const PeopleCard({super.key, required this.person, this.resolvedLocation});
+  const PeopleCard({
+    super.key,
+    required this.person,
+    this.resolvedLocation,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
@@ -49,6 +57,7 @@ class PeopleCard extends StatelessWidget {
             _buildSkills(),
           ],
         ],
+      ),
       ),
     );
   }
