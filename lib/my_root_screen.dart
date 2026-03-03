@@ -8,6 +8,7 @@ import 'package:tascom/features/ai/ai_screen.dart';
 import 'package:tascom/features/claim_task/cubit/claim_task_cubit.dart';
 import 'package:tascom/features/get_tasks/cubit/get_tasks_cubit.dart';
 import 'package:tascom/features/home/ui/home_screen.dart';
+import 'package:tascom/features/search/cubit/search_cubit.dart';
 import 'package:tascom/features/search/ui/search_screen.dart';
 import 'package:tascom/features/profile/profile_screen.dart';
 import 'package:tascom/features/profile/cubit/profile_cubit.dart';
@@ -31,7 +32,10 @@ class _MyRootScreenState extends State<MyRootScreen> {
       ],
       child: const HomeScreen(),
     ),
-    const SearchScreen(),
+    BlocProvider(
+      create: (_) => getIt<SearchCubit>(),
+      child: const SearchScreen(),
+    ),
     const AiScreen(),
     BlocProvider(
       create: (_) {

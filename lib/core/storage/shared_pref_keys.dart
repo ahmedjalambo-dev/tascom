@@ -15,4 +15,5 @@ class SharedPrefKeys {
   static const String languageCode = 'language_code';
   static const String themeMode = 'theme_mode';
   static const String userLocation = 'user_location';
+  static const String recentSearches = 'recent_searches';
 }

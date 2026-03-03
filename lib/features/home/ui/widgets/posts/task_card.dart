@@ -18,6 +18,7 @@ class TaskCard extends StatelessWidget {
   final VoidCallback? onShareTap;
   final VoidCallback? onClaimTap;
   final bool isClaimLoading;
+  final bool showActions;
 
   const TaskCard({
     super.key,
@@ -28,6 +29,7 @@ class TaskCard extends StatelessWidget {
     this.onShareTap,
     this.onClaimTap,
     this.isClaimLoading = false,
+    this.showActions = true,
   });
 
   @override
@@ -90,19 +92,21 @@ class TaskCard extends StatelessWidget {
                 TaskCardImage(imageUrl: taskModel.imageUrl!),
               ],
 
-              const VerticalSpace(12),
+              if (showActions) ...[
+                const VerticalSpace(12),
 
-              // Actions: Like, Comment, Share, Claim Button
-              TaskCardActions(
-                likeCount: taskModel.likeCount,
-                commentCount: taskModel.commentCount,
-                isClaimed: taskModel.isClaimed,
-                isClaimLoading: isClaimLoading,
-                onLikeTap: onLikeTap,
-                onCommentTap: onCommentTap,
-                onShareTap: onShareTap,
-                onClaimTap: onClaimTap,
-              ),
+                // Actions: Like, Comment, Share, Claim Button
+                TaskCardActions(
+                  likeCount: taskModel.likeCount,
+                  commentCount: taskModel.commentCount,
+                  isClaimed: taskModel.isClaimed,
+                  isClaimLoading: isClaimLoading,
+                  onLikeTap: onLikeTap,
+                  onCommentTap: onCommentTap,
+                  onShareTap: onShareTap,
+                  onClaimTap: onClaimTap,
+                ),
+              ],
             ],
           ),
         ),

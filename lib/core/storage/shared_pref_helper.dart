@@ -110,6 +110,16 @@ class SharedPrefHelper {
     await _prefs.setString(SharedPrefKeys.languageCode, code);
   }
 
+  // ============ Recent Searches ============
+
+  static List<String> getRecentSearches() {
+    return _prefs.getStringList(SharedPrefKeys.recentSearches) ?? [];
+  }
+
+  static Future<void> setRecentSearches(List<String> searches) async {
+    await _prefs.setStringList(SharedPrefKeys.recentSearches, searches);
+  }
+
   // ============ Clear All ============
 
   /// Clear all stored data (logout)
