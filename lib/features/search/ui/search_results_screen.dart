@@ -10,11 +10,12 @@ import 'package:tascom/core/widgets/my_search_field.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/features/search/cubit/search_cubit.dart';
 import 'package:tascom/features/search/cubit/search_state.dart';
-import 'package:tascom/features/home/ui/widgets/posts/task_card.dart';
 import 'package:tascom/features/search/data/models/search_task_data.dart';
 import 'package:tascom/features/search/data/models/search_task_mapper.dart';
 import 'package:tascom/features/search/ui/widgets/people_card.dart';
+import 'package:tascom/features/search/ui/widgets/search_task_card.dart';
 import 'package:tascom/features/search/ui/widgets/quick_filter_chips.dart';
+import 'package:tascom/features/home/ui/task_details_screen.dart';
 import 'package:tascom/features/search/ui/widgets/search_filter_bottom_sheet.dart';
 
 class SearchResultsScreen extends StatefulWidget {
@@ -179,9 +180,13 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
       itemCount: state.tasks.length,
       itemBuilder: (context, index) {
         final taskModel = state.tasks[index].toTaskModel();
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
-          child: TaskCard(taskModel: taskModel, showActions: false),
+        return SearchTaskCard(
+          taskModel: taskModel,
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => TaskDetailsScreen(taskModel: taskModel),
+            ),
+          ),
         );
       },
     );
@@ -221,9 +226,13 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
         final item = state.currentItems[index];
         if (isTaskSearch) {
           final taskModel = (item as SearchTaskData).toTaskModel();
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
-            child: TaskCard(taskModel: taskModel, showActions: false),
+          return SearchTaskCard(
+            taskModel: taskModel,
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => TaskDetailsScreen(taskModel: taskModel),
+              ),
+            ),
           );
         }
         return PeopleCard(
