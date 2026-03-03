@@ -20,6 +20,9 @@ class ApiConstants {
   static const String tasks = 'tasks';
   static const String createTask = 'tasks/Create-Task';
 
+  // Comments endpoints
+  static const String commentsTask = 'comments/task';
+
   // Search endpoint
   static const String search = 'search';
 

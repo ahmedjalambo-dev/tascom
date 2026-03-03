@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/widgets/dialogs/claim_confirmation_dialog.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
-import 'package:tascom/features/home/data/comments_mock_data.dart';
 import 'package:tascom/features/home/data/models/task_model.dart';
 import 'package:tascom/features/home/ui/widgets/comments/comments_section.dart';
 import 'package:tascom/features/home/ui/widgets/posts/task_card.dart';
@@ -55,7 +54,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                   ),
                   const VerticalSpace(24),
                   CommentsSection(
-                    comments: mockComments,
+                    taskId: int.tryParse(_taskModel.id) ?? 0,
                     totalCount: _taskModel.commentCount,
                   ),
                   const VerticalSpace(32),

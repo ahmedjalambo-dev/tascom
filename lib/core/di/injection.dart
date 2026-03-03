@@ -69,6 +69,11 @@ import '../../features/search/cubit/search_cubit.dart';
 import '../../features/search/data/repos/search_repo.dart';
 import '../../features/search/data/services/search_service.dart';
 
+// Get Comments
+import '../../features/get_comments/cubit/get_comments_cubit.dart';
+import '../../features/get_comments/data/repos/get_comments_repo.dart';
+import '../../features/get_comments/data/services/get_comments_service.dart';
+
 final getIt = GetIt.instance;
 
 Future<void> initDependencies() async {
@@ -204,4 +209,15 @@ Future<void> initDependencies() async {
     () => SearchRepo(getIt<SearchService>()),
   );
   getIt.registerFactory<SearchCubit>(() => SearchCubit(getIt<SearchRepo>()));
+
+  // ============ Get Comments ============
+  getIt.registerLazySingleton<GetCommentsService>(
+    () => GetCommentsService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<GetCommentsRepo>(
+    () => GetCommentsRepo(getIt<GetCommentsService>()),
+  );
+  getIt.registerFactory<GetCommentsCubit>(
+    () => GetCommentsCubit(getIt<GetCommentsRepo>()),
+  );
 }
