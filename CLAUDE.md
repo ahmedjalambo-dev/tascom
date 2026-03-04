@@ -47,7 +47,21 @@ feature_name/
 
 **Data flow**: UI → Cubit → Repo → Retrofit Service → Dio → API
 
-**Note**: Home, search, and profile screens still use StatefulWidget with mock data. BLoC/Cubit migration for those features is pending.
+**Note**: `home/` and `onboarding/` still use StatefulWidget with mock data (Cubit migration pending). `ai/`, `chat/`, and `map/` are placeholder features with no implementation yet.
+
+## Feature Modules
+
+All feature modules live under `lib/features/`, grouped by domain:
+
+| Domain | Modules |
+|--------|---------|
+| **Auth** | `login`, `register`, `google_login`, `logout`, `forgot_password`, `reset_password` |
+| **Tasks** | `get_tasks`, `create_task`, `claim_task`, `save_task` (data layer only, no Cubit) |
+| **Comments** | `get_comments`, `create_comment`, `delete_comment` |
+| **User/Profile** | `user` (models only), `profile`, `search` |
+| **Settings** | `edit_profile`, `delete_account`, `logout`, `points_history`, `reports`, `requests` |
+| **Placeholders** | `ai`, `chat`, `map` (no implementation) |
+| **Legacy** | `home`, `onboarding` (StatefulWidget, no Cubit) |
 
 ## State Management (Cubit + Freezed)
 
@@ -63,7 +77,13 @@ abstract class FeatureState with _$FeatureState {
 }
 ```
 
-Active Cubits: `LoginCubit`, `RegisterCubit`, `GoogleLoginCubit`, `LogoutCubit`, `ForgotPasswordCubit`, `ResetPasswordCubit`, `UserCubit`, `DeleteAccountCubit`.
+Active Cubits:
+- **Auth (6)**: `LoginCubit`, `RegisterCubit`, `GoogleLoginCubit`, `LogoutCubit`, `ForgotPasswordCubit`, `ResetPasswordCubit`
+- **Tasks (3)**: `GetTasksCubit`, `CreateTaskCubit`, `ClaimTaskCubit`
+- **Comments (3)**: `GetCommentsCubit`, `CreateCommentCubit`, `DeleteCommentCubit`
+- **User/Profile (5)**: `UserCubit`, `ProfileCubit`, `SearchCubit`, `EditProfileCubit`, `DeleteAccountCubit`
+
+Pagination-capable Cubits (e.g., `GetTasksCubit`) add a `.loadingMore()` state variant and expose `loadMore()` / `hasMorePages`. Internal state (`_currentPage`, `_limit`, `_allTasks`) is managed inside the Cubit.
 
 ## Networking
 
@@ -110,6 +130,9 @@ GetIt service locator configured in `core/di/injection.dart`:
 - Form validation: `Validator` class from `core/helpers/validator.dart`
 - Enums: Domain enums (TaskPriority, TaskStatus, TaskCategory) expose `displayName`, `backgroundColor`, `textColor`, `icon` via extensions
 - Data models: Freezed + json_serializable for API models; manual classes with `copyWith()` for mock/UI models (home feature)
+- **Pagination pattern**: Add `.loadingMore()` state + `loadMore()`/`hasMorePages` to paginated Cubits; cache accumulated results internally
+- **Reset pattern**: Mutation Cubits (`CreateCommentCubit`, `DeleteCommentCubit`) expose `reset()` to return to `.initial()` after an operation completes
+- **Multi-mode Cubit**: `SearchCubit` handles two result types with separate success states (`.tasksSuccess()`, `.peopleSuccess()`); persists recent searches via `SharedPrefHelper`
 
 ## CI/CD
 
@@ -133,3 +156,7 @@ These misspellings exist in the codebase and should be matched when referencing 
 - `core/extentions/` (not "extensions")
 - `home/ui/widgets/categoies/` (not "categories")
 - API endpoint `auth/forgot-passward` (backend typo, preserved in `ApiConstants`)
+
+
+## Important Note
+After major changes, please update this file (CLAUDE.md). Keep this file up-to-date with the project's status.
