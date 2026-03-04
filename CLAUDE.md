@@ -47,7 +47,7 @@ feature_name/
 
 **Data flow**: UI → Cubit → Repo → Retrofit Service → Dio → API
 
-**Note**: `home/` and `onboarding/` still use StatefulWidget with mock data (Cubit migration pending). `ai/`, `chat/`, and `map/` are placeholder features with no implementation yet.
+**Note**: `home/` and `onboarding/` still use StatefulWidget with mock data (Cubit migration pending). `ai/`, `chat/`, and `map/` are placeholder features with no implementation yet. `profile/` now uses real API data for tasks via `GetMyTasksCubit` and `GetMyClaimsCubit`.
 
 ## Feature Modules
 
@@ -56,7 +56,7 @@ All feature modules live under `lib/features/`, grouped by domain:
 | Domain | Modules |
 |--------|---------|
 | **Auth** | `login`, `register`, `google_login`, `logout`, `forgot_password`, `reset_password` |
-| **Tasks** | `get_tasks`, `create_task`, `claim_task`, `save_task` (data layer only, no Cubit) |
+| **Tasks** | `get_tasks`, `create_task`, `claim_task`, `save_task` (data layer only, no Cubit), `get_my_tasks`, `get_my_claims` |
 | **Comments** | `get_comments`, `create_comment`, `delete_comment` |
 | **User/Profile** | `user` (models only), `profile`, `search` |
 | **Settings** | `edit_profile`, `delete_account`, `logout`, `points_history`, `reports`, `requests` |
@@ -79,7 +79,7 @@ abstract class FeatureState with _$FeatureState {
 
 Active Cubits:
 - **Auth (6)**: `LoginCubit`, `RegisterCubit`, `GoogleLoginCubit`, `LogoutCubit`, `ForgotPasswordCubit`, `ResetPasswordCubit`
-- **Tasks (3)**: `GetTasksCubit`, `CreateTaskCubit`, `ClaimTaskCubit`
+- **Tasks (5)**: `GetTasksCubit`, `CreateTaskCubit`, `ClaimTaskCubit`, `GetMyTasksCubit`, `GetMyClaimsCubit`
 - **Comments (3)**: `GetCommentsCubit`, `CreateCommentCubit`, `DeleteCommentCubit`
 - **User/Profile (5)**: `UserCubit`, `ProfileCubit`, `SearchCubit`, `EditProfileCubit`, `DeleteAccountCubit`
 

@@ -36,6 +36,10 @@ import 'package:tascom/features/auth/logout/cubit/logout_cubit.dart';
 // Profile Cubit
 import 'package:tascom/features/profile/cubit/profile_cubit.dart';
 
+// Get My Tasks & Claims Cubits
+import 'package:tascom/features/get_my_tasks/cubit/get_my_tasks_cubit.dart';
+import 'package:tascom/features/get_my_claims/cubit/get_my_claims_cubit.dart';
+
 // Edit Profile Cubit
 import 'package:tascom/features/settings/edit_profile/cubit/edit_profile_cubit.dart';
 
@@ -110,15 +114,25 @@ class MyRouter {
 
       case MyRoutes.profile:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (_) {
-              final cubit = getIt<ProfileCubit>();
-              final userId = SessionManager.instance.currentUserId;
-              if (userId != null) {
-                cubit.getUser(userId);
-              }
-              return cubit;
-            },
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) {
+                  final cubit = getIt<ProfileCubit>();
+                  final userId = SessionManager.instance.currentUserId;
+                  if (userId != null) {
+                    cubit.getUser(userId);
+                  }
+                  return cubit;
+                },
+              ),
+              BlocProvider(
+                create: (_) => getIt<GetMyTasksCubit>()..getMyTasks(),
+              ),
+              BlocProvider(
+                create: (_) => getIt<GetMyClaimsCubit>()..getMyClaims(),
+              ),
+            ],
             child: const ProfileScreen(),
           ),
         );

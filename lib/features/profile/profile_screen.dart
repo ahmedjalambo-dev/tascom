@@ -12,7 +12,10 @@ import 'package:tascom/core/widgets/my_filter_dropdown.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/features/home/data/models/task_model.dart';
 import 'package:tascom/features/home/data/models/task_status.dart';
-import 'package:tascom/features/profile/data/profile_mock_data.dart';
+import 'package:tascom/features/get_my_tasks/cubit/get_my_tasks_cubit.dart';
+import 'package:tascom/features/get_my_tasks/cubit/get_my_tasks_state.dart';
+import 'package:tascom/features/get_my_claims/cubit/get_my_claims_cubit.dart';
+import 'package:tascom/features/get_my_claims/cubit/get_my_claims_state.dart';
 import 'package:tascom/features/profile/widgets/profile_header.dart';
 import 'package:tascom/features/profile/widgets/profile_stats_card.dart';
 import 'package:tascom/features/profile/widgets/profile_tab_selector.dart';
@@ -33,26 +36,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   ProfileTab _selectedTab = ProfileTab.posted;
   TaskStatus? _selectedStatusFilter;
 
-  late List<TaskModel> _postedTasks;
-  late List<TaskModel> _claimedTasks;
-
-  @override
-  void initState() {
-    super.initState();
-    _postedTasks = List.from(postedTasksMockData);
-    _claimedTasks = List.from(claimedTasksMockData);
-  }
-
-  List<TaskModel> get _currentTasks {
-    final tasks = _selectedTab == ProfileTab.posted
-        ? _postedTasks
-        : _claimedTasks;
-    if (_selectedStatusFilter == null) {
-      return tasks;
-    }
-    return tasks.where((task) => task.status == _selectedStatusFilter).toList();
-  }
-
   void _onTabChanged(ProfileTab tab) {
     setState(() {
       _selectedTab = tab;
@@ -67,9 +50,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _onRemoveTask(TaskModel task) {
-    setState(() {
-      _postedTasks.removeWhere((t) => t.id == task.id);
-    });
     _showSnackBar('Task removed successfully');
   }
 
@@ -78,50 +58,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _onCancelTask(TaskModel task) {
-    setState(() {
-      final index = _selectedTab == ProfileTab.posted
-          ? _postedTasks.indexWhere((t) => t.id == task.id)
-          : _claimedTasks.indexWhere((t) => t.id == task.id);
-
-      if (index != -1) {
-        final updatedTask = task.copyWith(
-          status: TaskStatus.cancelled,
-          cancelledAt: DateTime.now(),
-        );
-
-        if (_selectedTab == ProfileTab.posted) {
-          _postedTasks[index] = updatedTask;
-        } else {
-          _claimedTasks[index] = updatedTask;
-        }
-      }
-    });
     _showSnackBar('Task cancelled');
   }
 
   void _onMarkAsDone(TaskModel task) {
-    setState(() {
-      final index = _selectedTab == ProfileTab.posted
-          ? _postedTasks.indexWhere((t) => t.id == task.id)
-          : _claimedTasks.indexWhere((t) => t.id == task.id);
-
-      if (index != -1) {
-        final updatedTask = task.copyWith(status: TaskStatus.completed);
-
-        if (_selectedTab == ProfileTab.posted) {
-          _postedTasks[index] = updatedTask;
-        } else {
-          _claimedTasks[index] = updatedTask;
-        }
-      }
-    });
     _showSnackBar('Task marked as completed');
   }
 
   Future<void> _onRefresh() async {
     final userId = SessionManager.instance.currentUserId;
     if (userId != null) {
-      await context.read<ProfileCubit>().getUser(userId);
+      await Future.wait([
+        context.read<ProfileCubit>().getUser(userId),
+        context.read<GetMyTasksCubit>().getMyTasks(),
+        context.read<GetMyClaimsCubit>().getMyClaims(),
+      ]);
     }
   }
 
@@ -133,6 +84,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         duration: const Duration(seconds: 2),
       ),
     );
+  }
+
+  List<TaskModel> _filterTasks(List<TaskModel> tasks) {
+    if (_selectedStatusFilter == null) return tasks;
+    return tasks.where((t) => t.status == _selectedStatusFilter).toList();
   }
 
   @override
@@ -267,11 +223,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildTasksList() {
-    final tasks = _currentTasks;
-
-    if (tasks.isEmpty) {
-      return _buildEmptyState();
+    if (_selectedTab == ProfileTab.posted) {
+      return BlocBuilder<GetMyTasksCubit, GetMyTasksState>(
+        builder: (context, state) {
+          return state.when(
+            initial: () => const SizedBox.shrink(),
+            loading: () => Padding(
+              padding: EdgeInsets.symmetric(vertical: 48.h),
+              child: const Center(child: CircularProgressIndicator()),
+            ),
+            success: (tasks) => _buildTaskItems(_filterTasks(tasks)),
+            error: (error) => _buildTasksError(
+              error.message ?? 'Failed to load tasks',
+            ),
+          );
+        },
+      );
+    } else {
+      return BlocBuilder<GetMyClaimsCubit, GetMyClaimsState>(
+        builder: (context, state) {
+          return state.when(
+            initial: () => const SizedBox.shrink(),
+            loading: () => Padding(
+              padding: EdgeInsets.symmetric(vertical: 48.h),
+              child: const Center(child: CircularProgressIndicator()),
+            ),
+            success: (tasks) => _buildTaskItems(_filterTasks(tasks)),
+            error: (error) => _buildTasksError(
+              error.message ?? 'Failed to load claims',
+            ),
+          );
+        },
+      );
     }
+  }
+
+  Widget _buildTaskItems(List<TaskModel> tasks) {
+    if (tasks.isEmpty) return _buildEmptyState();
 
     return ListView.builder(
       shrinkWrap: true,
@@ -288,6 +276,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
           onMarkAsDone: () => _onMarkAsDone(task),
         );
       },
+    );
+  }
+
+  Widget _buildTasksError(String message) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 48.h),
+      child: Center(
+        child: Text(
+          message,
+          style: MyTextStyles.body.body1.copyWith(
+            color: MyColors.text.secondary,
+          ),
+        ),
+      ),
     );
   }
 

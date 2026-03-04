@@ -84,6 +84,16 @@ import '../../features/delete_comment/cubit/delete_comment_cubit.dart';
 import '../../features/delete_comment/data/repos/delete_comment_repo.dart';
 import '../../features/delete_comment/data/services/delete_comment_service.dart';
 
+// Get My Tasks
+import '../../features/get_my_tasks/cubit/get_my_tasks_cubit.dart';
+import '../../features/get_my_tasks/data/repos/get_my_tasks_repo.dart';
+import '../../features/get_my_tasks/data/services/get_my_tasks_service.dart';
+
+// Get My Claims
+import '../../features/get_my_claims/cubit/get_my_claims_cubit.dart';
+import '../../features/get_my_claims/data/repos/get_my_claims_repo.dart';
+import '../../features/get_my_claims/data/services/get_my_claims_service.dart';
+
 final getIt = GetIt.instance;
 
 Future<void> initDependencies() async {
@@ -251,5 +261,27 @@ Future<void> initDependencies() async {
   );
   getIt.registerFactory<DeleteCommentCubit>(
     () => DeleteCommentCubit(getIt<DeleteCommentRepo>()),
+  );
+
+  // ============ Get My Tasks ============
+  getIt.registerLazySingleton<GetMyTasksService>(
+    () => GetMyTasksService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<GetMyTasksRepo>(
+    () => GetMyTasksRepo(getIt<GetMyTasksService>()),
+  );
+  getIt.registerFactory<GetMyTasksCubit>(
+    () => GetMyTasksCubit(getIt<GetMyTasksRepo>()),
+  );
+
+  // ============ Get My Claims ============
+  getIt.registerLazySingleton<GetMyClaimsService>(
+    () => GetMyClaimsService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<GetMyClaimsRepo>(
+    () => GetMyClaimsRepo(getIt<GetMyClaimsService>()),
+  );
+  getIt.registerFactory<GetMyClaimsCubit>(
+    () => GetMyClaimsCubit(getIt<GetMyClaimsRepo>(), getIt<ProfileService>()),
   );
 }

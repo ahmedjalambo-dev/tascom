@@ -29,6 +29,8 @@ class ApiConstants {
 
   // Task Claims endpoints
   static const String taskClaims = 'task-claims';
+  static const String myTasks = 'task-claims/my-tasks';
+  static const String myClaims = 'task-claims/me';
 
   // Endpoints that don't require authentication
   static const List<String> publicEndpoints = [

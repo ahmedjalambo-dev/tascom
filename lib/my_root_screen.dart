@@ -12,6 +12,8 @@ import 'package:tascom/features/search/cubit/search_cubit.dart';
 import 'package:tascom/features/search/ui/search_screen.dart';
 import 'package:tascom/features/profile/profile_screen.dart';
 import 'package:tascom/features/profile/cubit/profile_cubit.dart';
+import 'package:tascom/features/get_my_tasks/cubit/get_my_tasks_cubit.dart';
+import 'package:tascom/features/get_my_claims/cubit/get_my_claims_cubit.dart';
 
 class MyRootScreen extends StatefulWidget {
   const MyRootScreen({super.key});
@@ -37,15 +39,25 @@ class _MyRootScreenState extends State<MyRootScreen> {
       child: const SearchScreen(),
     ),
     const AiScreen(),
-    BlocProvider(
-      create: (_) {
-        final cubit = getIt<ProfileCubit>();
-        final userId = SessionManager.instance.currentUserId;
-        if (userId != null) {
-          cubit.getUser(userId);
-        }
-        return cubit;
-      },
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) {
+            final cubit = getIt<ProfileCubit>();
+            final userId = SessionManager.instance.currentUserId;
+            if (userId != null) {
+              cubit.getUser(userId);
+            }
+            return cubit;
+          },
+        ),
+        BlocProvider(
+          create: (_) => getIt<GetMyTasksCubit>()..getMyTasks(),
+        ),
+        BlocProvider(
+          create: (_) => getIt<GetMyClaimsCubit>()..getMyClaims(),
+        ),
+      ],
       child: const ProfileScreen(),
     ),
   ];
