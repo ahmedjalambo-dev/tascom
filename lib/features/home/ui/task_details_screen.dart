@@ -6,6 +6,8 @@ import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/widgets/dialogs/claim_confirmation_dialog.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/core/storage/shared_pref_helper.dart';
+import 'package:tascom/features/claim_task/cubit/claim_task_cubit.dart';
+import 'package:tascom/features/claim_task/cubit/claim_task_state.dart';
 import 'package:tascom/features/create_comment/cubit/create_comment_cubit.dart';
 import 'package:tascom/features/create_comment/cubit/create_comment_state.dart';
 import 'package:tascom/features/create_comment/data/models/create_comment_request.dart';
@@ -46,13 +48,32 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
     super.dispose();
   }
 
-  Future<void> _handleClaimTask() async {
+  Future<void> _handleClaimTask(BuildContext context) async {
     final confirmed = await showClaimConfirmationDialog(context);
-    if (confirmed == true) {
-      setState(() {
-        _taskModel = _taskModel.copyWith(isClaimed: true);
-      });
+    if (confirmed == true && mounted) {
+      if (context.mounted) {
+        context.read<ClaimTaskCubit>().claimTask(_taskModel.id);
+      }
     }
+  }
+
+  void _handleClaimTaskState(BuildContext context, ClaimTaskState state) {
+    state.maybeWhen(
+      success: (_) {
+        setState(() {
+          _taskModel = _taskModel.copyWith(isClaimed: true);
+        });
+      },
+      error: (error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(error.message ?? 'Failed to claim task'),
+            backgroundColor: MyColors.status.cancelled,
+          ),
+        );
+      },
+      orElse: () {},
+    );
   }
 
   void _handleReplyTap(String commentId, String userName) {
@@ -167,6 +188,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
         ),
         BlocProvider(create: (_) => getIt<CreateCommentCubit>()),
         BlocProvider(create: (_) => getIt<DeleteCommentCubit>()),
+        BlocProvider(create: (_) => getIt<ClaimTaskCubit>()),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -175,6 +197,9 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
           ),
           BlocListener<DeleteCommentCubit, DeleteCommentState>(
             listener: _handleDeleteCommentState,
+          ),
+          BlocListener<ClaimTaskCubit, ClaimTaskState>(
+            listener: _handleClaimTaskState,
           ),
         ],
         child: Scaffold(
@@ -191,11 +216,13 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                         child: Column(
                           children: [
                             const VerticalSpace(16),
-                            TaskCard(
-                              taskModel: _taskModel,
-                              onClaimTap: _taskModel.isClaimed
-                                  ? null
-                                  : _handleClaimTask,
+                            Builder(
+                              builder: (context) => TaskCard(
+                                taskModel: _taskModel,
+                                onClaimTap: _taskModel.isClaimed
+                                    ? null
+                                    : () => _handleClaimTask(context),
+                              ),
                             ),
                             const VerticalSpace(24),
                             Builder(

@@ -132,7 +132,7 @@ class TaskCardActions extends StatelessWidget {
                   ),
                 )
               : Text(
-                  isClaimed ? 'Pending' : 'Claim Now',
+                  isClaimed ? 'Claimed' : 'Claim',
                   style: MyTextStyles.button.smallButtons.copyWith(
                     color: MyColors.text.white,
                   ),
