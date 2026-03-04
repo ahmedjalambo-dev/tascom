@@ -16,7 +16,7 @@ void main() async {
   // Initialize session manager
   await SessionManager.instance.initialize();
 
-  // Trigger location fetch (fire and forget)
+  // Trigger location fetch (fire and forget)`
   LocationService.getCurrentLocation();
 
   // Initialize dependency injection

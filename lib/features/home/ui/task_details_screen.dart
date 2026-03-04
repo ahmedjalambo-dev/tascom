@@ -10,6 +10,8 @@ import 'package:tascom/features/create_comment/cubit/create_comment_cubit.dart';
 import 'package:tascom/features/create_comment/cubit/create_comment_state.dart';
 import 'package:tascom/features/create_comment/data/models/create_comment_request.dart';
 import 'package:tascom/features/create_comment/ui/comment_input_bar.dart';
+import 'package:tascom/features/delete_comment/cubit/delete_comment_cubit.dart';
+import 'package:tascom/features/delete_comment/cubit/delete_comment_state.dart';
 import 'package:tascom/features/get_comments/cubit/get_comments_cubit.dart';
 import 'package:tascom/features/get_comments/data/models/comment_response.dart';
 import 'package:tascom/features/home/data/models/task_model.dart';
@@ -123,6 +125,37 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
     );
   }
 
+  void _handleDeleteCommentState(
+    BuildContext context,
+    DeleteCommentState state,
+  ) {
+    state.maybeWhen(
+      success: (commentId) {
+        context.read<GetCommentsCubit>().removeComment(commentId);
+        context.read<DeleteCommentCubit>().reset();
+
+        setState(() {
+          _taskModel = _taskModel.copyWith(
+            commentCount: (_taskModel.commentCount - 1).clamp(
+              0,
+              _taskModel.commentCount,
+            ),
+          );
+        });
+      },
+      error: (error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(error.message ?? 'Failed to delete comment'),
+            backgroundColor: MyColors.status.cancelled,
+          ),
+        );
+        context.read<DeleteCommentCubit>().reset();
+      },
+      orElse: () {},
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final taskId = int.tryParse(_taskModel.id) ?? 0;
@@ -133,9 +166,17 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
           create: (_) => getIt<GetCommentsCubit>()..emitGetTaskComments(taskId),
         ),
         BlocProvider(create: (_) => getIt<CreateCommentCubit>()),
+        BlocProvider(create: (_) => getIt<DeleteCommentCubit>()),
       ],
-      child: BlocListener<CreateCommentCubit, CreateCommentState>(
-        listener: _handleCreateCommentState,
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<CreateCommentCubit, CreateCommentState>(
+            listener: _handleCreateCommentState,
+          ),
+          BlocListener<DeleteCommentCubit, DeleteCommentState>(
+            listener: _handleDeleteCommentState,
+          ),
+        ],
         child: Scaffold(
           backgroundColor: MyColors.background.primary,
           body: Column(
@@ -157,10 +198,20 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                                   : _handleClaimTask,
                             ),
                             const VerticalSpace(24),
-                            CommentsSection(
-                              taskId: taskId,
-                              totalCount: _taskModel.commentCount,
-                              onReplyTap: _handleReplyTap,
+                            Builder(
+                              builder: (context) => CommentsSection(
+                                taskId: taskId,
+                                totalCount: _taskModel.commentCount,
+                                onReplyTap: _handleReplyTap,
+                                onDeleteTap: (commentId) {
+                                  final id = int.tryParse(commentId);
+                                  if (id != null) {
+                                    context
+                                        .read<DeleteCommentCubit>()
+                                        .deleteComment(id);
+                                  }
+                                },
+                              ),
                             ),
                             const VerticalSpace(32),
                           ],

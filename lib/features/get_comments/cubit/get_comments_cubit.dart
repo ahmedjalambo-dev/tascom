@@ -23,6 +23,23 @@ class GetCommentsCubit extends Cubit<GetCommentsState> {
     }
   }
 
+  void removeComment(String commentId) {
+    state.maybeWhen(
+      success: (comments) {
+        final updated = comments
+            .where((c) => c.id != commentId)
+            .map(
+              (c) => c.copyWith(
+                replies: c.replies.where((r) => r.id != commentId).toList(),
+              ),
+            )
+            .toList();
+        emit(GetCommentsState.success(updated));
+      },
+      orElse: () {},
+    );
+  }
+
   void addComment(CommentModel comment, {String? parentId}) {
     state.maybeWhen(
       success: (comments) {

@@ -9,6 +9,7 @@ import 'package:tascom/features/home/data/models/comment.dart';
 import 'package:tascom/features/home/ui/widgets/comments/comment_tile.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tascom/core/storage/shared_pref_helper.dart';
 import '../../../../get_comments/cubit/get_comments_cubit.dart';
 import '../../../../get_comments/cubit/get_comments_state.dart';
 import '../../../../get_comments/data/models/comment_response.dart';
@@ -18,6 +19,7 @@ class CommentsSection extends StatelessWidget {
   final int totalCount;
   final VoidCallback? onFilterTap;
   final void Function(String commentId, String userName)? onReplyTap;
+  final void Function(String commentId)? onDeleteTap;
 
   const CommentsSection({
     super.key,
@@ -25,6 +27,7 @@ class CommentsSection extends StatelessWidget {
     required this.totalCount,
     this.onFilterTap,
     this.onReplyTap,
+    this.onDeleteTap,
   });
 
   @override
@@ -100,6 +103,9 @@ class CommentsSection extends StatelessWidget {
                             models[index].id ?? '',
                             comment.userName,
                           ),
+                          onDeleteTap: comment.isAuthor
+                              ? () => onDeleteTap?.call(comment.id)
+                              : null,
                         ),
                         if (comment.replies.isNotEmpty) ...[
                           const VerticalSpace(16),
@@ -118,6 +124,9 @@ class CommentsSection extends StatelessWidget {
                                   models[index].id ?? '',
                                   reply.userName,
                                 ),
+                                onDeleteTap: reply.isAuthor
+                                    ? () => onDeleteTap?.call(reply.id)
+                                    : null,
                               ),
                             );
                           }),
@@ -136,6 +145,7 @@ class CommentsSection extends StatelessWidget {
   }
 
   List<Comment> _mapModelsToComments(List<CommentModel> models) {
+    final currentUserId = SharedPrefHelper.getUserId();
     return models.map((model) {
       return Comment(
         id: model.id ?? '',
@@ -143,6 +153,7 @@ class CommentsSection extends StatelessWidget {
         userAvatar: model.user?.avatar,
         createdAt: DateTime.tryParse(model.createdAt ?? '') ?? DateTime.now(),
         content: model.content ?? '',
+        isAuthor: model.user?.id == currentUserId,
         replies: _mapModelsToComments(model.replies),
       );
     }).toList();

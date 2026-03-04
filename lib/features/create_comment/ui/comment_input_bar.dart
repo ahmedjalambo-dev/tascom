@@ -67,7 +67,7 @@ class CommentInputBar extends StatelessWidget {
                           ),
                         )
                       : SvgPicture.asset(
-                          MyIcons.sendSolid,
+                        MyIcons.sendSolid,
                           width: 24.w,
                           height: 24.h,
                           colorFilter: ColorFilter.mode(

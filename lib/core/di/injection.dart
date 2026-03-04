@@ -79,6 +79,11 @@ import '../../features/create_comment/cubit/create_comment_cubit.dart';
 import '../../features/create_comment/data/repos/create_comment_repo.dart';
 import '../../features/create_comment/data/services/create_comment_service.dart';
 
+// Delete Comment
+import '../../features/delete_comment/cubit/delete_comment_cubit.dart';
+import '../../features/delete_comment/data/repos/delete_comment_repo.dart';
+import '../../features/delete_comment/data/services/delete_comment_service.dart';
+
 final getIt = GetIt.instance;
 
 Future<void> initDependencies() async {
@@ -235,5 +240,16 @@ Future<void> initDependencies() async {
   );
   getIt.registerFactory<CreateCommentCubit>(
     () => CreateCommentCubit(getIt<CreateCommentRepo>()),
+  );
+
+  // ============ Delete Comment ============
+  getIt.registerLazySingleton<DeleteCommentService>(
+    () => DeleteCommentService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<DeleteCommentRepo>(
+    () => DeleteCommentRepo(getIt<DeleteCommentService>()),
+  );
+  getIt.registerFactory<DeleteCommentCubit>(
+    () => DeleteCommentCubit(getIt<DeleteCommentRepo>()),
   );
 }
