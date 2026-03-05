@@ -37,8 +37,11 @@ class _MyRootScreenState extends State<MyRootScreen> {
       create: (_) => getIt<SearchCubit>(),
       child: const SearchScreen(),
     ),
-    BlocProvider(
-      create: (_) => getIt<MapCubit>()..getMapTasks(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => getIt<MapCubit>()..getMapTasks()),
+        BlocProvider(create: (_) => getIt<ClaimTaskCubit>()),
+      ],
       child: const MapScreen(),
     ),
     BlocProvider(
