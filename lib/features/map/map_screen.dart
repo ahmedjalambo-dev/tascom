@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class AiScreen extends StatelessWidget {
-  const AiScreen({super.key});
+class MapScreen extends StatelessWidget {
+  const MapScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Text(
-          'AI Screen',
+          'Map Screen',
           style: Theme.of(context).textTheme.headlineMedium,
         ),
       ),

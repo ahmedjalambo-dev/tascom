@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tascom/core/di/injection.dart';
 import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/storage/session_manager.dart';
-import 'package:tascom/features/ai/ai_screen.dart';
+import 'package:tascom/features/map/map_screen.dart';
 import 'package:tascom/features/home/data/models/task_model.dart';
 import 'package:tascom/features/create_task/cubit/create_task_cubit.dart';
 import 'package:tascom/features/create_task/ui/create_task_screen.dart';
@@ -106,7 +106,7 @@ class MyRouter {
         return MaterialPageRoute(builder: (context) => const SearchScreen());
 
       case MyRoutes.ai:
-        return MaterialPageRoute(builder: (context) => const AiScreen());
+        return MaterialPageRoute(builder: (context) => const MapScreen());
 
       case MyRoutes.profile:
         return MaterialPageRoute(

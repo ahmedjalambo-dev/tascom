@@ -4,7 +4,7 @@ import 'package:tascom/core/di/injection.dart';
 import 'package:tascom/core/routes/my_routes.dart';
 import 'package:tascom/core/storage/session_manager.dart';
 import 'package:tascom/core/widgets/my_bottom_navigation_bar.dart';
-import 'package:tascom/features/ai/ai_screen.dart';
+import 'package:tascom/features/map/map_screen.dart';
 import 'package:tascom/features/claim_task/cubit/claim_task_cubit.dart';
 import 'package:tascom/features/get_tasks/cubit/get_tasks_cubit.dart';
 import 'package:tascom/features/home/ui/home_screen.dart';
@@ -36,7 +36,7 @@ class _MyRootScreenState extends State<MyRootScreen> {
       create: (_) => getIt<SearchCubit>(),
       child: const SearchScreen(),
     ),
-    const AiScreen(),
+    const MapScreen(),
     BlocProvider(
       create: (_) {
         final cubit = getIt<ProfileCubit>();
