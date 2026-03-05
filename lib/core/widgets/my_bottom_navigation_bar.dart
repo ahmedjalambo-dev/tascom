@@ -88,8 +88,8 @@ class MyBottomNavigationBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             _NavBarItem(
-                              iconPath: MyIcons.aiStroke,
-                              activeIconPath: MyIcons.aiSolid,
+                              iconPath: MyIcons.map,
+                              activeIconPath: MyIcons.map,
                               isActive: currentIndex == 2,
                               onTap: () => onTap(2),
                             ),

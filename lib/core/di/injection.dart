@@ -84,6 +84,11 @@ import '../../features/delete_comment/cubit/delete_comment_cubit.dart';
 import '../../features/delete_comment/data/repos/delete_comment_repo.dart';
 import '../../features/delete_comment/data/services/delete_comment_service.dart';
 
+// Map
+import '../../features/map/cubit/map_cubit.dart';
+import '../../features/map/data/repos/map_repo.dart';
+import '../../features/map/data/services/map_service.dart';
+
 final getIt = GetIt.instance;
 
 Future<void> initDependencies() async {
@@ -252,4 +257,9 @@ Future<void> initDependencies() async {
   getIt.registerFactory<DeleteCommentCubit>(
     () => DeleteCommentCubit(getIt<DeleteCommentRepo>()),
   );
+
+  // ============ Map ============
+  getIt.registerLazySingleton<MapService>(() => MapService(getIt<Dio>()));
+  getIt.registerLazySingleton<MapRepo>(() => MapRepo(getIt<MapService>()));
+  getIt.registerFactory<MapCubit>(() => MapCubit(getIt<MapRepo>()));
 }
