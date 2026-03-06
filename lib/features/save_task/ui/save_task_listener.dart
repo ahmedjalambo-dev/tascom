@@ -10,29 +10,29 @@ class SaveTaskListener extends BlocListener<SaveTaskCubit, SaveTaskState> {
     void Function(SaveTaskData data)? onSuccess,
     required super.child,
   }) : super(
-          listener: (context, state) {
-            state.maybeWhen(
-              success: (data) {
-                onSuccess?.call(data);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      data.isSaved == true ? 'Task saved' : 'Task unsaved',
-                    ),
-                    behavior: SnackBarBehavior.floating,
-                  ),
-                );
-              },
-              error: (error) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(error.message ?? 'Failed to save task'),
-                    behavior: SnackBarBehavior.floating,
-                  ),
-                );
-              },
-              orElse: () {},
-            );
-          },
-        );
+         listener: (context, state) {
+           state.maybeWhen(
+             success: (data) {
+               onSuccess?.call(data);
+               ScaffoldMessenger.of(context).showSnackBar(
+                 SnackBar(
+                   content: Text(
+                     data.isSaved == true ? 'Task saved' : 'Task unsaved',
+                   ),
+                   behavior: SnackBarBehavior.floating,
+                 ),
+               );
+             },
+             error: (error) {
+               ScaffoldMessenger.of(context).showSnackBar(
+                 SnackBar(
+                   content: Text(error.message ?? 'Failed to save task'),
+                   behavior: SnackBarBehavior.floating,
+                 ),
+               );
+             },
+             orElse: () {},
+           );
+         },
+       );
 }

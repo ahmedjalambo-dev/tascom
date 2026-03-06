@@ -5,10 +5,8 @@ part 'like_task_response.g.dart';
 
 @freezed
 abstract class LikeTaskResponse with _$LikeTaskResponse {
-  const factory LikeTaskResponse({
-    bool? success,
-    LikeTaskData? data,
-  }) = _LikeTaskResponse;
+  const factory LikeTaskResponse({bool? success, LikeTaskData? data}) =
+      _LikeTaskResponse;
 
   factory LikeTaskResponse.fromJson(Map<String, dynamic> json) =>
       _$LikeTaskResponseFromJson(json);

@@ -21,8 +21,9 @@ class SavedTaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageUrl =
-        task.assets.isNotEmpty ? task.assets[0]['url'] as String? : null;
+    final imageUrl = task.assets.isNotEmpty
+        ? task.assets[0]['url'] as String?
+        : null;
     final points = task.pointsOffered ?? 0;
 
     return GestureDetector(
@@ -141,11 +142,7 @@ class SavedTaskCard extends StatelessWidget {
       width: double.infinity,
       height: 120.h,
       color: MyColors.background.secondary,
-      child: Icon(
-        Icons.image_outlined,
-        size: 36.w,
-        color: MyColors.text.third,
-      ),
+      child: Icon(Icons.image_outlined, size: 36.w, color: MyColors.text.third),
     );
   }
 }

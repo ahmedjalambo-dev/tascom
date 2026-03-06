@@ -102,9 +102,9 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
       final id = int.tryParse(_editingCommentId!);
       if (id != null) {
         context.read<EditCommentCubit>().editComment(
-              id,
-              EditCommentRequest(content: content),
-            );
+          id,
+          EditCommentRequest(content: content),
+        );
       }
       return;
     }
@@ -161,16 +161,13 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
     );
   }
 
-  void _handleEditCommentState(
-    BuildContext context,
-    EditCommentState state,
-  ) {
+  void _handleEditCommentState(BuildContext context, EditCommentState state) {
     state.maybeWhen(
       success: (commentModel) {
         context.read<GetCommentsCubit>().updateComment(
-              commentModel.id ?? _editingCommentId ?? '',
-              commentModel.content ?? '',
-            );
+          commentModel.id ?? _editingCommentId ?? '',
+          commentModel.content ?? '',
+        );
 
         _commentController.clear();
         _cancelEdit();
@@ -258,12 +255,10 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
           ),
           LikeTaskListener(
             onSuccess: (data) {
-              final currentUserId =
-                  SessionManager.instance.currentUserId;
+              final currentUserId = SessionManager.instance.currentUserId;
               final isLiked = data.likes.any(
                 (like) =>
-                    like.userId == currentUserId &&
-                    like.likeStatus == true,
+                    like.userId == currentUserId && like.likeStatus == true,
               );
               setState(() {
                 _taskModel = _taskModel.copyWith(

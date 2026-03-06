@@ -16,7 +16,7 @@ class SavedTasksCubit extends Cubit<SavedTasksState> {
   final Map<String, String> _locationNamesCache = {};
 
   SavedTasksCubit(this._repo, this._userService)
-      : super(const SavedTasksState.initial());
+    : super(const SavedTasksState.initial());
 
   Future<void> getSavedTasks() async {
     emit(const SavedTasksState.loading());
@@ -26,11 +26,13 @@ class SavedTasksCubit extends Cubit<SavedTasksState> {
     switch (result) {
       case Success(data: final response):
         await _fetchCreatorsAndLocations(response.data);
-        emit(SavedTasksState.success(
-          tasks: response.data,
-          creators: Map.from(_creatorsCache),
-          locationNames: Map.from(_locationNamesCache),
-        ));
+        emit(
+          SavedTasksState.success(
+            tasks: response.data,
+            creators: Map.from(_creatorsCache),
+            locationNames: Map.from(_locationNamesCache),
+          ),
+        );
       case Failure(error: final error):
         emit(SavedTasksState.error(error));
     }
@@ -40,18 +42,19 @@ class SavedTasksCubit extends Cubit<SavedTasksState> {
     state.maybeWhen(
       success: (tasks, creators, locationNames) {
         final updated = tasks.where((t) => t.id != taskId).toList();
-        emit(SavedTasksState.success(
-          tasks: updated,
-          creators: creators,
-          locationNames: locationNames,
-        ));
+        emit(
+          SavedTasksState.success(
+            tasks: updated,
+            creators: creators,
+            locationNames: locationNames,
+          ),
+        );
       },
       orElse: () {},
     );
   }
 
-  Future<void> _fetchCreatorsAndLocations(
-      List<TaskResponseData> tasks) async {
+  Future<void> _fetchCreatorsAndLocations(List<TaskResponseData> tasks) async {
     await Future.wait([_fetchCreators(tasks), _resolveLocations(tasks)]);
   }
 
@@ -91,10 +94,8 @@ class SavedTasksCubit extends Cubit<SavedTasksState> {
           if (placemark != null) {
             final country = placemark.country ?? '';
             final city = placemark.locality ?? '';
-            final name =
-                [country, city].where((s) => s.isNotEmpty).join(', ');
-            _locationNamesCache[entry.key] =
-                name.isNotEmpty ? name : entry.key;
+            final name = [country, city].where((s) => s.isNotEmpty).join(', ');
+            _locationNamesCache[entry.key] = name.isNotEmpty ? name : entry.key;
           } else {
             _locationNamesCache[entry.key] = entry.key;
           }

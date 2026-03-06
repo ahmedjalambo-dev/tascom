@@ -11,11 +11,7 @@ class TaskCardHeader extends StatelessWidget {
   final TaskModel taskModel;
   final VoidCallback? onSaveTap;
 
-  const TaskCardHeader({
-    super.key,
-    required this.taskModel,
-    this.onSaveTap,
-  });
+  const TaskCardHeader({super.key, required this.taskModel, this.onSaveTap});
 
   @override
   Widget build(BuildContext context) {

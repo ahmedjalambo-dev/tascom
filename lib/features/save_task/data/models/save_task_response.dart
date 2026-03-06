@@ -5,10 +5,8 @@ part 'save_task_response.g.dart';
 
 @freezed
 abstract class SaveTaskResponse with _$SaveTaskResponse {
-  const factory SaveTaskResponse({
-    bool? success,
-    SaveTaskData? data,
-  }) = _SaveTaskResponse;
+  const factory SaveTaskResponse({bool? success, SaveTaskData? data}) =
+      _SaveTaskResponse;
 
   factory SaveTaskResponse.fromJson(Map<String, dynamic> json) =>
       _$SaveTaskResponseFromJson(json);

@@ -10,21 +10,21 @@ class LikeTaskListener extends BlocListener<LikeTaskCubit, LikeTaskState> {
     void Function(LikeTaskData data)? onSuccess,
     required super.child,
   }) : super(
-          listener: (context, state) {
-            state.maybeWhen(
-              success: (data) {
-                onSuccess?.call(data);
-              },
-              error: (error) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(error.message ?? 'Failed to like task'),
-                    behavior: SnackBarBehavior.floating,
-                  ),
-                );
-              },
-              orElse: () {},
-            );
-          },
-        );
+         listener: (context, state) {
+           state.maybeWhen(
+             success: (data) {
+               onSuccess?.call(data);
+             },
+             error: (error) {
+               ScaffoldMessenger.of(context).showSnackBar(
+                 SnackBar(
+                   content: Text(error.message ?? 'Failed to like task'),
+                   behavior: SnackBarBehavior.floating,
+                 ),
+               );
+             },
+             orElse: () {},
+           );
+         },
+       );
 }

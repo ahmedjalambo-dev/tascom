@@ -38,9 +38,8 @@ class SavedTasksScreen extends StatelessWidget {
                 builder: (context, state) {
                   return state.when(
                     initial: () => const SizedBox.shrink(),
-                    loading: () => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()),
                     success: (tasks, creators, locationNames) {
                       if (tasks.isEmpty) {
                         return Center(
@@ -57,8 +56,7 @@ class SavedTasksScreen extends StatelessWidget {
                           horizontal: 16.w,
                           vertical: 12.h,
                         ),
-                        gridDelegate:
-                            SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 12.w,
                           mainAxisSpacing: 12.h,
@@ -84,9 +82,7 @@ class SavedTasksScreen extends StatelessWidget {
                               );
                             },
                             onUnsaveTap: () {
-                              context
-                                  .read<SaveTaskCubit>()
-                                  .saveTask(task.id);
+                              context.read<SaveTaskCubit>().saveTask(task.id);
                             },
                           );
                         },

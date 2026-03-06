@@ -57,8 +57,8 @@ class CommentInputBar extends StatelessWidget {
                     hintText: isEditing
                         ? 'Edit your comment...'
                         : replyingToName != null
-                            ? 'Write a reply...'
-                            : 'Write a comment...',
+                        ? 'Write a reply...'
+                        : 'Write a comment...',
                   ),
                 ),
                 SizedBox(width: 8.w),

@@ -117,12 +117,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           LikeTaskListener(
             onSuccess: (data) {
-              final currentUserId =
-                  SessionManager.instance.currentUserId;
+              final currentUserId = SessionManager.instance.currentUserId;
               final isLiked = data.likes.any(
                 (like) =>
-                    like.userId == currentUserId &&
-                    like.likeStatus == true,
+                    like.userId == currentUserId && like.likeStatus == true,
               );
               context.read<GetTasksCubit>().toggleLiked(
                 data.id ?? '',

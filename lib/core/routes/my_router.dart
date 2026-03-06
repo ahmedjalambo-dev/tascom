@@ -172,7 +172,9 @@ class MyRouter {
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider(create: (_) => getIt<SavedTasksCubit>()..getSavedTasks()),
+              BlocProvider(
+                create: (_) => getIt<SavedTasksCubit>()..getSavedTasks(),
+              ),
               BlocProvider(create: (_) => getIt<SaveTaskCubit>()),
             ],
             child: const SavedTasksScreen(),
