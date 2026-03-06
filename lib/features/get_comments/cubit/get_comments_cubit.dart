@@ -40,6 +40,28 @@ class GetCommentsCubit extends Cubit<GetCommentsState> {
     );
   }
 
+  void updateComment(String commentId, String newContent) {
+    state.maybeWhen(
+      success: (comments) {
+        final updated = comments.map((c) {
+          if (c.id == commentId) {
+            return c.copyWith(content: newContent);
+          }
+          return c.copyWith(
+            replies: c.replies.map((r) {
+              if (r.id == commentId) {
+                return r.copyWith(content: newContent);
+              }
+              return r;
+            }).toList(),
+          );
+        }).toList();
+        emit(GetCommentsState.success(updated));
+      },
+      orElse: () {},
+    );
+  }
+
   void addComment(CommentModel comment, {String? parentId}) {
     state.maybeWhen(
       success: (comments) {

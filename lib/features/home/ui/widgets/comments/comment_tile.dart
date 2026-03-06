@@ -12,6 +12,7 @@ class CommentTile extends StatelessWidget {
   final bool isNested;
   final VoidCallback? onReplyTap;
   final VoidCallback? onDeleteTap;
+  final VoidCallback? onEditTap;
 
   const CommentTile({
     super.key,
@@ -19,6 +20,7 @@ class CommentTile extends StatelessWidget {
     this.isNested = false,
     this.onReplyTap,
     this.onDeleteTap,
+    this.onEditTap,
   });
 
   void _showOptionsBottomSheet(BuildContext context) {
@@ -34,6 +36,24 @@ class CommentTile extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              if (onEditTap != null)
+                ListTile(
+                  leading: Icon(
+                    Icons.edit_outlined,
+                    size: 22.w,
+                    color: MyColors.text.primary,
+                  ),
+                  title: Text(
+                    'Edit',
+                    style: MyTextStyles.body.body1.copyWith(
+                      color: MyColors.text.primary,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    onEditTap!();
+                  },
+                ),
               if (onDeleteTap != null)
                 ListTile(
                   leading: SvgPicture.asset(
@@ -122,7 +142,7 @@ class CommentTile extends StatelessWidget {
                       ),
                     ),
                     GestureDetector(
-                      onTap: onDeleteTap != null
+                      onTap: (onDeleteTap != null || onEditTap != null)
                           ? () => _showOptionsBottomSheet(context)
                           : null,
                       child: SvgPicture.asset(
