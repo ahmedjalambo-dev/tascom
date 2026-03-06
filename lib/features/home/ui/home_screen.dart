@@ -326,6 +326,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onClaimTap: taskModel.isClaimed
                 ? null
                 : () => _handleClaimTask(taskModel.id),
+            maxLines: 4,
           );
         },
       ),

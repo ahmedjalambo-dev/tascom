@@ -196,6 +196,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                               onClaimTap: _taskModel.isClaimed
                                   ? null
                                   : _handleClaimTask,
+                              maxLines: 10,
                             ),
                             const VerticalSpace(24),
                             Builder(

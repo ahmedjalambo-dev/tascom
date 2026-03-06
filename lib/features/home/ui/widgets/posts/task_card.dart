@@ -18,6 +18,7 @@ class TaskCard extends StatelessWidget {
   final VoidCallback? onShareTap;
   final VoidCallback? onClaimTap;
   final bool isClaimLoading;
+  final int? maxLines;
 
   const TaskCard({
     super.key,
@@ -28,6 +29,7 @@ class TaskCard extends StatelessWidget {
     this.onShareTap,
     this.onClaimTap,
     this.isClaimLoading = false,
+    this.maxLines,
   });
 
   @override
@@ -65,7 +67,7 @@ class TaskCard extends StatelessWidget {
                 style: MyTextStyles.body.body2.copyWith(
                   color: MyColors.text.secondary,
                 ),
-                maxLines: 4,
+                maxLines: maxLines,
                 overflow: TextOverflow.ellipsis,
               ),
               const VerticalSpace(12),
