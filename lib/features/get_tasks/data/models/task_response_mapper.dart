@@ -41,6 +41,7 @@ extension TaskResponseMapper on TaskResponseData {
       ),
       duration: _formatDeadline(deadline),
       metrics: TaskMetrics(points: pointsOffered ?? 0, distance: 0),
+      imageUrl: assets.isNotEmpty ? assets[0]['url'] as String? : null,
       likeCount: numOfLikes ?? 0,
       commentCount: 0,
       isClaimed:

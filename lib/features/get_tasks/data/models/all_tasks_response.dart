@@ -37,6 +37,7 @@ abstract class TaskResponseData with _$TaskResponseData {
     String? updatedAt,
     bool? isDeleted,
     @Default([]) List<ClaimTaskData> claims,
+    @Default([]) List<dynamic> assets,
   }) = _TaskResponseData;
 
   factory TaskResponseData.fromJson(Map<String, dynamic> json) =>

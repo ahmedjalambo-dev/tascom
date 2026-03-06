@@ -45,6 +45,7 @@ _TaskResponseData _$TaskResponseDataFromJson(Map<String, dynamic> json) =>
               ?.map((e) => ClaimTaskData.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      assets: json['assets'] as List<dynamic>? ?? const [],
     );
 
 Map<String, dynamic> _$TaskResponseDataToJson(_TaskResponseData instance) =>
@@ -66,6 +67,7 @@ Map<String, dynamic> _$TaskResponseDataToJson(_TaskResponseData instance) =>
       'updatedAt': instance.updatedAt,
       'isDeleted': instance.isDeleted,
       'claims': instance.claims,
+      'assets': instance.assets,
     };
 
 _PaginationMeta _$PaginationMetaFromJson(Map<String, dynamic> json) =>
