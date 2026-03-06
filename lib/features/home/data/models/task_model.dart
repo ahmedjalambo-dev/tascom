@@ -24,6 +24,7 @@ class TaskModel {
   final List<Comment> comments;
   final String? imageUrl;
   final bool isClaimed;
+  final bool isSaved;
   final UserModel? helper;
   final DateTime? cancelledAt;
 
@@ -44,6 +45,7 @@ class TaskModel {
     this.comments = const [],
     this.imageUrl,
     this.isClaimed = false,
+    this.isSaved = false,
     this.helper,
     this.cancelledAt,
   });
@@ -67,6 +69,7 @@ class TaskModel {
     List<Comment>? comments,
     String? imageUrl,
     bool? isClaimed,
+    bool? isSaved,
     UserModel? helper,
     DateTime? cancelledAt,
   }) {
@@ -87,6 +90,7 @@ class TaskModel {
       comments: comments ?? this.comments,
       imageUrl: imageUrl ?? this.imageUrl,
       isClaimed: isClaimed ?? this.isClaimed,
+      isSaved: isSaved ?? this.isSaved,
       helper: helper ?? this.helper,
       cancelledAt: cancelledAt ?? this.cancelledAt,
     );

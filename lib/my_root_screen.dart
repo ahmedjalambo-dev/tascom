@@ -8,6 +8,7 @@ import 'package:tascom/features/map/ui/map_screen.dart';
 import 'package:tascom/features/map/cubit/map_cubit.dart';
 import 'package:tascom/features/claim_task/cubit/claim_task_cubit.dart';
 import 'package:tascom/features/get_tasks/cubit/get_tasks_cubit.dart';
+import 'package:tascom/features/save_task/cubit/save_task_cubit.dart';
 import 'package:tascom/features/home/ui/home_screen.dart';
 import 'package:tascom/features/search/cubit/search_cubit.dart';
 import 'package:tascom/features/search/ui/search_screen.dart';
@@ -30,6 +31,7 @@ class _MyRootScreenState extends State<MyRootScreen> {
       providers: [
         BlocProvider.value(value: _homeCubit),
         BlocProvider(create: (_) => getIt<ClaimTaskCubit>()),
+        BlocProvider(create: (_) => getIt<SaveTaskCubit>()),
       ],
       child: const HomeScreen(),
     ),

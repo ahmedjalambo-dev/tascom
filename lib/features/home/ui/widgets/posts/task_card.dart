@@ -17,6 +17,7 @@ class TaskCard extends StatelessWidget {
   final VoidCallback? onCommentTap;
   final VoidCallback? onShareTap;
   final VoidCallback? onClaimTap;
+  final VoidCallback? onSaveTap;
   final bool isClaimLoading;
   final int? maxLines;
 
@@ -28,6 +29,7 @@ class TaskCard extends StatelessWidget {
     this.onCommentTap,
     this.onShareTap,
     this.onClaimTap,
+    this.onSaveTap,
     this.isClaimLoading = false,
     this.maxLines,
   });
@@ -48,7 +50,7 @@ class TaskCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Header: Avatar, Name, Rating, Bookmark, Menu
-              TaskCardHeader(taskModel: taskModel),
+              TaskCardHeader(taskModel: taskModel, onSaveTap: onSaveTap),
               const VerticalSpace(12),
 
               // Title

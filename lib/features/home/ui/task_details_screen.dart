@@ -12,8 +12,13 @@ import 'package:tascom/features/create_comment/data/models/create_comment_reques
 import 'package:tascom/features/create_comment/ui/comment_input_bar.dart';
 import 'package:tascom/features/delete_comment/cubit/delete_comment_cubit.dart';
 import 'package:tascom/features/delete_comment/cubit/delete_comment_state.dart';
+import 'package:tascom/features/edit_comment/cubit/edit_comment_cubit.dart';
+import 'package:tascom/features/edit_comment/cubit/edit_comment_state.dart';
+import 'package:tascom/features/edit_comment/data/models/edit_comment_request.dart';
 import 'package:tascom/features/get_comments/cubit/get_comments_cubit.dart';
 import 'package:tascom/features/get_comments/data/models/comment_response.dart';
+import 'package:tascom/features/save_task/cubit/save_task_cubit.dart';
+import 'package:tascom/features/save_task/ui/save_task_listener.dart';
 import 'package:tascom/features/home/data/models/task_model.dart';
 import 'package:tascom/features/home/ui/widgets/comments/comments_section.dart';
 import 'package:tascom/features/home/ui/widgets/posts/task_card.dart';
@@ -33,6 +38,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
   final TextEditingController _commentController = TextEditingController();
   String? _replyingToCommentId;
   String? _replyingToName;
+  String? _editingCommentId;
 
   @override
   void initState() {
@@ -69,9 +75,36 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
     });
   }
 
+  void _handleEditTap(String commentId, String content) {
+    setState(() {
+      _editingCommentId = commentId;
+      _replyingToCommentId = null;
+      _replyingToName = null;
+    });
+    _commentController.text = content;
+  }
+
+  void _cancelEdit() {
+    setState(() {
+      _editingCommentId = null;
+    });
+    _commentController.clear();
+  }
+
   void _sendComment(BuildContext context, int taskId) {
     final content = _commentController.text.trim();
     if (content.isEmpty) return;
+
+    if (_editingCommentId != null) {
+      final id = int.tryParse(_editingCommentId!);
+      if (id != null) {
+        context.read<EditCommentCubit>().editComment(
+              id,
+              EditCommentRequest(content: content),
+            );
+      }
+      return;
+    }
 
     final request = CreateCommentRequest(
       taskId: taskId,
@@ -125,6 +158,34 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
     );
   }
 
+  void _handleEditCommentState(
+    BuildContext context,
+    EditCommentState state,
+  ) {
+    state.maybeWhen(
+      success: (commentModel) {
+        context.read<GetCommentsCubit>().updateComment(
+              commentModel.id ?? _editingCommentId ?? '',
+              commentModel.content ?? '',
+            );
+
+        _commentController.clear();
+        _cancelEdit();
+        context.read<EditCommentCubit>().reset();
+      },
+      error: (error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(error.message ?? 'Failed to edit comment'),
+            backgroundColor: MyColors.status.cancelled,
+          ),
+        );
+        context.read<EditCommentCubit>().reset();
+      },
+      orElse: () {},
+    );
+  }
+
   void _handleDeleteCommentState(
     BuildContext context,
     DeleteCommentState state,
@@ -167,6 +228,8 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
         ),
         BlocProvider(create: (_) => getIt<CreateCommentCubit>()),
         BlocProvider(create: (_) => getIt<DeleteCommentCubit>()),
+        BlocProvider(create: (_) => getIt<EditCommentCubit>()),
+        BlocProvider(create: (_) => getIt<SaveTaskCubit>()),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -175,6 +238,19 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
           ),
           BlocListener<DeleteCommentCubit, DeleteCommentState>(
             listener: _handleDeleteCommentState,
+          ),
+          BlocListener<EditCommentCubit, EditCommentState>(
+            listener: _handleEditCommentState,
+          ),
+          SaveTaskListener(
+            onSuccess: (data) {
+              setState(() {
+                _taskModel = _taskModel.copyWith(
+                  isSaved: data.isSaved ?? false,
+                );
+              });
+            },
+            child: const SizedBox.shrink(),
           ),
         ],
         child: Scaffold(
@@ -191,12 +267,17 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                         child: Column(
                           children: [
                             const VerticalSpace(16),
-                            TaskCard(
-                              taskModel: _taskModel,
-                              onClaimTap: _taskModel.isClaimed
-                                  ? null
-                                  : _handleClaimTask,
-                              maxLines: 10,
+                            Builder(
+                              builder: (context) => TaskCard(
+                                taskModel: _taskModel,
+                                onClaimTap: _taskModel.isClaimed
+                                    ? null
+                                    : _handleClaimTask,
+                                onSaveTap: () => context
+                                    .read<SaveTaskCubit>()
+                                    .saveTask(_taskModel.id),
+                                maxLines: 10,
+                              ),
                             ),
                             const VerticalSpace(24),
                             Builder(
@@ -212,6 +293,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                                         .deleteComment(id);
                                   }
                                 },
+                                onEditTap: _handleEditTap,
                               ),
                             ),
                             const VerticalSpace(32),
@@ -224,15 +306,21 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
               ),
               Builder(
                 builder: (context) {
-                  final isLoading = context
+                  final isCreateLoading = context
                       .watch<CreateCommentCubit>()
+                      .state
+                      .maybeWhen(loading: () => true, orElse: () => false);
+                  final isEditLoading = context
+                      .watch<EditCommentCubit>()
                       .state
                       .maybeWhen(loading: () => true, orElse: () => false);
                   return CommentInputBar(
                     controller: _commentController,
-                    isLoading: isLoading,
+                    isLoading: isCreateLoading || isEditLoading,
                     replyingToName: _replyingToName,
                     onCancelReply: _cancelReply,
+                    isEditing: _editingCommentId != null,
+                    onCancelEdit: _cancelEdit,
                     onSend: () => _sendComment(context, taskId),
                   );
                 },

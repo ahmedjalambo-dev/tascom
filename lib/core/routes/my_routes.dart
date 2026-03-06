@@ -18,4 +18,5 @@ class MyRoutes {
   static const String editProfile = '/edit_profile';
   static const String requests = '/requests';
   static const String helperDetails = '/helper_details';
+  static const String savedTasks = '/saved_tasks';
 }

@@ -9,8 +9,13 @@ import 'package:tascom/features/home/data/models/task_model.dart';
 
 class TaskCardHeader extends StatelessWidget {
   final TaskModel taskModel;
+  final VoidCallback? onSaveTap;
 
-  const TaskCardHeader({super.key, required this.taskModel});
+  const TaskCardHeader({
+    super.key,
+    required this.taskModel,
+    this.onSaveTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -80,11 +85,9 @@ class TaskCardHeader extends StatelessWidget {
 
         // Bookmark Icon
         GestureDetector(
-          onTap: () {
-            // Handle bookmark
-          },
+          onTap: onSaveTap,
           child: SvgPicture.asset(
-            MyIcons.saveStroke,
+            taskModel.isSaved ? MyIcons.saveSolid : MyIcons.saveStroke,
             width: 24.w,
             height: 24.w,
             colorFilter: ColorFilter.mode(

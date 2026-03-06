@@ -13,6 +13,8 @@ class CommentInputBar extends StatelessWidget {
   final bool isLoading;
   final String? replyingToName;
   final VoidCallback? onCancelReply;
+  final bool isEditing;
+  final VoidCallback? onCancelEdit;
 
   const CommentInputBar({
     super.key,
@@ -21,6 +23,8 @@ class CommentInputBar extends StatelessWidget {
     this.isLoading = false,
     this.replyingToName,
     this.onCancelReply,
+    this.isEditing = false,
+    this.onCancelEdit,
   });
 
   @override
@@ -43,15 +47,18 @@ class CommentInputBar extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (replyingToName != null) _buildReplyIndicator(),
+            if (isEditing) _buildEditIndicator(),
+            if (replyingToName != null && !isEditing) _buildReplyIndicator(),
             Row(
               children: [
                 Expanded(
                   child: MyTextField(
                     controller: controller,
-                    hintText: replyingToName != null
-                        ? 'Write a reply...'
-                        : 'Write a comment...',
+                    hintText: isEditing
+                        ? 'Edit your comment...'
+                        : replyingToName != null
+                            ? 'Write a reply...'
+                            : 'Write a comment...',
                   ),
                 ),
                 SizedBox(width: 8.w),
@@ -80,6 +87,33 @@ class CommentInputBar extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildEditIndicator() {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 8.h),
+      child: Row(
+        children: [
+          Icon(Icons.edit_outlined, size: 16.w, color: MyColors.text.secondary),
+          SizedBox(width: 4.w),
+          Text(
+            'Editing comment',
+            style: MyTextStyles.caption.captionNotes.copyWith(
+              color: MyColors.text.secondary,
+            ),
+          ),
+          const Spacer(),
+          GestureDetector(
+            onTap: onCancelEdit,
+            child: Icon(
+              Icons.close,
+              size: 16.w,
+              color: MyColors.text.secondary,
+            ),
+          ),
+        ],
       ),
     );
   }

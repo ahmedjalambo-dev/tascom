@@ -49,6 +49,7 @@ extension TaskResponseMapper on TaskResponseData {
           claims.any(
             (c) => c.claimantId == currentUserId && c.status == 'PENDING',
           ),
+      isSaved: saved ?? false,
     );
   }
 

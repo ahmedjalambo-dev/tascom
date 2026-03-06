@@ -20,6 +20,8 @@ class ApiConstants {
   static const String tasks = 'tasks';
   static const String tasksMap = 'tasks/map';
   static const String createTask = 'tasks/Create-Task';
+  static const String saveTask = 'tasks/save';
+  static const String getSavedTasks = 'tasks/get_saved';
 
   // Comments endpoints
   static const String comments = 'comments';

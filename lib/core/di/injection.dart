@@ -84,6 +84,21 @@ import '../../features/delete_comment/cubit/delete_comment_cubit.dart';
 import '../../features/delete_comment/data/repos/delete_comment_repo.dart';
 import '../../features/delete_comment/data/services/delete_comment_service.dart';
 
+// Edit Comment
+import '../../features/edit_comment/cubit/edit_comment_cubit.dart';
+import '../../features/edit_comment/data/repos/edit_comment_repo.dart';
+import '../../features/edit_comment/data/services/edit_comment_service.dart';
+
+// Save Task
+import '../../features/save_task/cubit/save_task_cubit.dart';
+import '../../features/save_task/data/repos/save_task_repo.dart';
+import '../../features/save_task/data/services/save_task_service.dart';
+
+// Saved Tasks
+import '../../features/settings/save_tasks/cubit/saved_tasks_cubit.dart';
+import '../../features/settings/save_tasks/data/repos/saved_tasks_repo.dart';
+import '../../features/settings/save_tasks/data/services/saved_tasks_service.dart';
+
 // Map
 import '../../features/map/cubit/map_cubit.dart';
 import '../../features/map/data/repos/map_repo.dart';
@@ -256,6 +271,39 @@ Future<void> initDependencies() async {
   );
   getIt.registerFactory<DeleteCommentCubit>(
     () => DeleteCommentCubit(getIt<DeleteCommentRepo>()),
+  );
+
+  // ============ Edit Comment ============
+  getIt.registerLazySingleton<EditCommentService>(
+    () => EditCommentService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<EditCommentRepo>(
+    () => EditCommentRepo(getIt<EditCommentService>()),
+  );
+  getIt.registerFactory<EditCommentCubit>(
+    () => EditCommentCubit(getIt<EditCommentRepo>()),
+  );
+
+  // ============ Save Task ============
+  getIt.registerLazySingleton<SaveTaskService>(
+    () => SaveTaskService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<SaveTaskRepo>(
+    () => SaveTaskRepo(getIt<SaveTaskService>()),
+  );
+  getIt.registerFactory<SaveTaskCubit>(
+    () => SaveTaskCubit(getIt<SaveTaskRepo>()),
+  );
+
+  // ============ Saved Tasks ============
+  getIt.registerLazySingleton<SavedTasksService>(
+    () => SavedTasksService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<SavedTasksRepo>(
+    () => SavedTasksRepo(getIt<SavedTasksService>()),
+  );
+  getIt.registerFactory<SavedTasksCubit>(
+    () => SavedTasksCubit(getIt<SavedTasksRepo>(), getIt<ProfileService>()),
   );
 
   // ============ Map ============

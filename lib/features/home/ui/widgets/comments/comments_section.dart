@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tascom/core/constants/my_icons.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
@@ -20,6 +18,7 @@ class CommentsSection extends StatelessWidget {
   final VoidCallback? onFilterTap;
   final void Function(String commentId, String userName)? onReplyTap;
   final void Function(String commentId)? onDeleteTap;
+  final void Function(String commentId, String content)? onEditTap;
 
   const CommentsSection({
     super.key,
@@ -28,6 +27,7 @@ class CommentsSection extends StatelessWidget {
     this.onFilterTap,
     this.onReplyTap,
     this.onDeleteTap,
+    this.onEditTap,
   });
 
   @override
@@ -35,49 +35,12 @@ class CommentsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              'Comments ($totalCount)',
-              style: MyTextStyles.heading.h22.copyWith(
-                color: MyColors.text.primary,
-              ),
-            ),
-            const Spacer(),
-            GestureDetector(
-              onTap: onFilterTap,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-                decoration: BoxDecoration(
-                  border: Border.all(color: MyColors.border.border),
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'All',
-                      style: MyTextStyles.body.body2.copyWith(
-                        color: MyColors.text.primary,
-                      ),
-                    ),
-                    const HorizontalSpace(4),
-                    SvgPicture.asset(
-                      MyIcons.arrowDown,
-                      width: 16.w,
-                      height: 16.h,
-                      colorFilter: ColorFilter.mode(
-                        MyColors.icons.icon,
-                        BlendMode.srcIn,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+        Text(
+          'Comments ($totalCount)',
+          style: MyTextStyles.heading.h22.copyWith(
+            color: MyColors.text.primary,
+          ),
         ),
-        const VerticalSpace(16),
         BlocBuilder<GetCommentsCubit, GetCommentsState>(
           builder: (context, state) {
             return state.maybeWhen(
@@ -106,6 +69,10 @@ class CommentsSection extends StatelessWidget {
                           onDeleteTap: comment.isAuthor
                               ? () => onDeleteTap?.call(comment.id)
                               : null,
+                          onEditTap: comment.isAuthor
+                              ? () =>
+                                    onEditTap?.call(comment.id, comment.content)
+                              : null,
                         ),
                         if (comment.replies.isNotEmpty) ...[
                           const VerticalSpace(16),
@@ -126,6 +93,12 @@ class CommentsSection extends StatelessWidget {
                                 ),
                                 onDeleteTap: reply.isAuthor
                                     ? () => onDeleteTap?.call(reply.id)
+                                    : null,
+                                onEditTap: reply.isAuthor
+                                    ? () => onEditTap?.call(
+                                        reply.id,
+                                        reply.content,
+                                      )
                                     : null,
                               ),
                             );
