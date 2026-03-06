@@ -67,9 +67,10 @@ class LocationService {
 
     final placemark = await getPlacemark(latitude, longitude);
     if (placemark != null) {
-      final display = [placemark.country ?? '', placemark.locality ?? '']
-          .where((s) => s.isNotEmpty)
-          .join(', ');
+      final display = [
+        placemark.country ?? '',
+        placemark.locality ?? '',
+      ].where((s) => s.isNotEmpty).join(', ');
       if (display.isNotEmpty) return display;
     }
     return '$latitude, $longitude';

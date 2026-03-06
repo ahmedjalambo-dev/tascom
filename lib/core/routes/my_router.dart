@@ -95,8 +95,7 @@ class MyRouter {
             providers: [
               BlocProvider(create: (_) => getIt<CreateTaskCubit>()),
               BlocProvider(
-                create: (_) => getIt<ProfileCubit>()
-                  ..getUser(userId ?? ''),
+                create: (_) => getIt<ProfileCubit>()..getUser(userId ?? ''),
               ),
             ],
             child: const CreateTaskScreen(),
