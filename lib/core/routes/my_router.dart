@@ -89,9 +89,15 @@ class MyRouter {
         return MaterialPageRoute(builder: (context) => const HomeScreen());
 
       case MyRoutes.addTask:
+        final userId = SessionManager.instance.currentUserId;
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (_) => getIt<CreateTaskCubit>(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (_) => getIt<CreateTaskCubit>()),
+              BlocProvider(
+                create: (_) => getIt<ProfileCubit>()..getUser(userId ?? ''),
+              ),
+            ],
             child: const CreateTaskScreen(),
           ),
         );

@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:tascom/core/constants/my_icons.dart';
 import 'package:tascom/core/extentions/extentions.dart';
 import 'package:tascom/core/services/location_service.dart';
@@ -14,19 +13,24 @@ import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
 import 'package:tascom/core/widgets/bottom_sheets/my_list_picker_bottom_sheet.dart';
 import 'package:tascom/core/widgets/my_app_bar.dart';
-import 'package:tascom/core/widgets/my_button.dart';
 import 'package:tascom/core/widgets/my_image_picker.dart';
-import 'package:tascom/core/widgets/my_info_box.dart';
-import 'package:tascom/core/widgets/my_label.dart';
-import 'package:tascom/core/widgets/my_selector.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
-import 'package:tascom/core/widgets/my_text_field.dart';
 import 'package:tascom/core/widgets/my_user_profile_row.dart';
 import 'package:tascom/features/create_task/cubit/create_task_cubit.dart';
 import 'package:tascom/features/create_task/cubit/create_task_state.dart';
 import 'package:tascom/features/create_task/data/models/create_task_request.dart';
+import 'package:tascom/features/create_task/ui/widgets/task_category_selector.dart';
+import 'package:tascom/features/create_task/ui/widgets/task_deadline_selector.dart';
+import 'package:tascom/features/create_task/ui/widgets/task_description_field.dart';
+import 'package:tascom/features/create_task/ui/widgets/task_info_box.dart';
+import 'package:tascom/features/create_task/ui/widgets/task_location_selector.dart';
+import 'package:tascom/features/create_task/ui/widgets/task_priority_selector.dart';
+import 'package:tascom/features/create_task/ui/widgets/task_submit_button.dart';
+import 'package:tascom/features/create_task/ui/widgets/task_title_field.dart';
 import 'package:tascom/features/home/data/models/task_category.dart';
 import 'package:tascom/features/home/data/models/task_priority.dart';
+import 'package:tascom/features/profile/cubit/profile_cubit.dart';
+import 'package:tascom/features/profile/cubit/profile_state.dart';
 
 class CreateTaskScreen extends StatefulWidget {
   const CreateTaskScreen({super.key});
@@ -49,6 +53,20 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
   double? _latitude;
   double? _longitude;
   String? _locationDisplayName;
+
+  String _userLocationDisplay = 'No location';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserLocation();
+  }
+
+  Future<void> _loadUserLocation() async {
+    final display = await LocationService.getStoredLocationDisplayName();
+    if (!mounted) return;
+    setState(() => _userLocationDisplay = display);
+  }
 
   @override
   void dispose() {
@@ -221,176 +239,102 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
         );
       },
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              MyAppBar(
-                leading: IconButton(
-                  onPressed: () => context.pop(),
-                  icon: SvgPicture.asset(
-                    MyIcons.cancelStroke,
-                    width: 24.w,
-                    height: 24.h,
-                    colorFilter: ColorFilter.mode(
-                      MyColors.text.primary,
-                      BlendMode.srcIn,
+        body: Column(
+          children: [
+            MyAppBar(
+              leading: IconButton(
+                onPressed: () => context.pop(),
+                icon: SvgPicture.asset(
+                  MyIcons.cancelStroke,
+                  width: 24.w,
+                  height: 24.h,
+                  colorFilter: ColorFilter.mode(
+                    MyColors.text.primary,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ),
+              title: Text(
+                'New Task',
+                style: MyTextStyles.heading.h22.copyWith(
+                  color: MyColors.text.primary,
+                ),
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const VerticalSpace(16),
+                        BlocBuilder<ProfileCubit, ProfileState>(
+                          builder: (context, profileState) {
+                            final user = profileState.maybeWhen(
+                              loaded: (user) => user,
+                              orElse: () => null,
+                            );
+                            return MyUserProfileRow(
+                              name:
+                                  user?.name ??
+                                  SharedPrefHelper.getUserName() ??
+                                  'User',
+                              subtitle: _userLocationDisplay,
+                              avatarUrl: user?.avatar,
+                            );
+                          },
+                        ),
+                        const VerticalSpace(24),
+                        TaskTitleField(controller: _titleController),
+                        const VerticalSpace(20),
+                        TaskDescriptionField(
+                          controller: _descriptionController,
+                        ),
+                        const VerticalSpace(16),
+                        MyImagePicker(
+                          selectedImage: _selectedImage,
+                          onPickImage: _pickImage,
+                          onRemoveImage: () =>
+                              setState(() => _selectedImage = null),
+                        ),
+                        const VerticalSpace(24),
+                        TaskLocationSelector(
+                          isLoading: _isLoadingLocation,
+                          displayName: _locationDisplayName,
+                          onTap: () {
+                            if (!_isLoadingLocation) _detectLocation();
+                          },
+                        ),
+                        const VerticalSpace(20),
+                        TaskCategorySelector(
+                          selectedCategory: _selectedCategory,
+                          onTap: _showCategoryPicker,
+                        ),
+                        const VerticalSpace(20),
+                        TaskPrioritySelector(
+                          selectedPriority: _selectedPriority,
+                          onTap: _showPriorityPicker,
+                        ),
+                        const VerticalSpace(20),
+                        TaskDeadlineSelector(
+                          selectedDeadline: _selectedDeadline,
+                          onTap: _selectDate,
+                        ),
+                        const VerticalSpace(24),
+                        const TaskInfoBox(),
+                        const VerticalSpace(24),
+                        TaskSubmitButton(onPressed: _submitForm),
+                        const VerticalSpace(32),
+                      ],
                     ),
                   ),
                 ),
-                title: Text(
-                  'New Post',
-                  style: MyTextStyles.heading.h22.copyWith(
-                    color: MyColors.text.primary,
-                  ),
-                ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const VerticalSpace(16),
-                      MyUserProfileRow(
-                        name: SharedPrefHelper.getUserName() ?? 'User',
-                        subtitle:
-                            SharedPrefHelper.getUserLocation() ?? 'No location',
-                      ),
-                      const VerticalSpace(24),
-
-                      const MyLabel('Task Title'),
-                      const VerticalSpace(8),
-                      MyTextField(
-                        controller: _titleController,
-                        hintText: 'e.g. I need help in ...',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Title is required';
-                          }
-                          if (value.length < 5) {
-                            return 'Title must be at least 5 characters';
-                          }
-                          return null;
-                        },
-                      ),
-                      const VerticalSpace(20),
-
-                      const MyLabel('Description'),
-                      const VerticalSpace(8),
-                      MyTextField(
-                        controller: _descriptionController,
-                        hintText: 'Describe your task and find helpers!',
-                        maxLines: 5,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Description is required';
-                          }
-                          if (value.length < 10) {
-                            return 'Description must be at least 10 characters';
-                          }
-                          return null;
-                        },
-                      ),
-                      const VerticalSpace(16),
-
-                      MyImagePicker(
-                        selectedImage: _selectedImage,
-                        onPickImage: _pickImage,
-                        onRemoveImage: () =>
-                            setState(() => _selectedImage = null),
-                      ),
-                      const VerticalSpace(24),
-
-                      const MyLabel('Location (Optional)'),
-                      const VerticalSpace(8),
-                      MySelector(
-                        icon: MyIcons.locationStroke,
-                        label: _isLoadingLocation
-                            ? 'Detecting...'
-                            : _locationDisplayName ?? 'Detect My Location',
-                        isPlaceholder: _locationDisplayName == null,
-                        onTap: () {
-                          if (!_isLoadingLocation) _detectLocation();
-                        },
-                      ),
-                      const VerticalSpace(20),
-
-                      const MyLabel('Category'),
-                      const VerticalSpace(8),
-                      MySelector(
-                        icon:
-                            _selectedCategory?.icon ?? MyIcons.dashboardStroke,
-                        label:
-                            _selectedCategory?.displayName ?? 'Select Category',
-                        isPlaceholder: _selectedCategory == null,
-                        onTap: _showCategoryPicker,
-                      ),
-                      const VerticalSpace(20),
-
-                      const MyLabel('Priority'),
-                      const VerticalSpace(8),
-                      MySelector(
-                        icon: _selectedPriority?.icon ?? MyIcons.priorityStroke,
-                        label:
-                            _selectedPriority?.displayName ?? 'Select Priority',
-                        isPlaceholder: _selectedPriority == null,
-                        onTap: _showPriorityPicker,
-                      ),
-                      const VerticalSpace(20),
-
-                      const MyLabel('Deadline (Optional)'),
-                      const VerticalSpace(8),
-                      MySelector(
-                        icon: MyIcons.calenderStroke,
-                        label: _selectedDeadline != null
-                            ? DateFormat(
-                                'dd/MM/yyyy',
-                              ).format(_selectedDeadline!)
-                            : '00/00/0000',
-                        isPlaceholder: _selectedDeadline == null,
-                        onTap: _selectDate,
-                        showDropdownIcon: false,
-                      ),
-                      const VerticalSpace(24),
-
-                      const MyInfoBox(
-                        title: 'Important Instructions Before Posting',
-                        items: [
-                          MyInfoBoxItem(
-                            prefix: 'Points: ',
-                            highlighted: '5 points',
-                            suffix:
-                                ' will be deducted once the task is completed, based on the task details',
-                          ),
-                          MyInfoBoxItem(
-                            prefix: 'Accurate Information: ',
-                            suffix:
-                                'Make sure all details (category, priority, and location) are correct to avoid confusion and attract the right helper',
-                          ),
-                        ],
-                      ),
-                      const VerticalSpace(24),
-
-                      BlocBuilder<CreateTaskCubit, CreateTaskState>(
-                        builder: (context, state) {
-                          final isLoading = state.maybeWhen(
-                            loading: () => true,
-                            orElse: () => false,
-                          );
-                          return MyButton(
-                            text: isLoading ? 'Posting...' : 'Post',
-                            onPressed: isLoading ? null : _submitForm,
-                          );
-                        },
-                      ),
-                      const VerticalSpace(32),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

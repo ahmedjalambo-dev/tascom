@@ -46,6 +46,7 @@ class SessionManager {
     required String userId,
     String? email,
     String? name,
+    String? avatar,
   }) async {
     await SharedPrefHelper.setAccessToken(accessToken);
     await SharedPrefHelper.setRefreshToken(refreshToken);
@@ -56,6 +57,9 @@ class SessionManager {
     }
     if (name != null) {
       await SharedPrefHelper.setUserName(name);
+    }
+    if (avatar != null) {
+      await SharedPrefHelper.setUserAvatar(avatar);
     }
 
     _currentUserId = userId;

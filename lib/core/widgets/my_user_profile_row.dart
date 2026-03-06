@@ -25,13 +25,15 @@ class MyUserProfileRow extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: avatarRadius ?? 24.r,
-          backgroundColor: MyColors.border.border,
+          backgroundColor: MyColors.background.cardHover,
           backgroundImage: avatarUrl != null ? NetworkImage(avatarUrl!) : null,
           child: avatarUrl == null
-              ? Icon(
-                  Icons.person,
-                  size: (avatarRadius ?? 24.r) * 1.2,
-                  color: MyColors.text.secondary,
+              ? Text(
+                  name.isNotEmpty ? name[0].toUpperCase() : '?',
+                  style: MyTextStyles.body.body1.copyWith(
+                    color: MyColors.brand.purple,
+                    fontWeight: FontWeight.w600,
+                  ),
                 )
               : null,
         ),
