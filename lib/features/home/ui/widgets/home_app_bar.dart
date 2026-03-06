@@ -16,18 +16,18 @@ class HomeAppBar extends StatefulWidget {
 }
 
 class _HomeAppBarState extends State<HomeAppBar> {
-  String _locationText = 'Loading...';
+  String _userLocationDisplay = 'No location';
 
   @override
   void initState() {
     super.initState();
-    _loadLocation();
+    _loadUserLocation();
   }
 
-  Future<void> _loadLocation() async {
+  Future<void> _loadUserLocation() async {
     final display = await LocationService.getStoredLocationDisplayName();
     if (!mounted) return;
-    setState(() => _locationText = display);
+    setState(() => _userLocationDisplay = display);
   }
 
   @override
@@ -53,7 +53,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                 ),
               ),
               Text(
-                _locationText,
+                _userLocationDisplay,
                 style: MyTextStyles.button.secondaryButton2.copyWith(
                   color: MyColors.text.primary,
                 ),
