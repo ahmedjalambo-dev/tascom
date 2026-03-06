@@ -18,7 +18,7 @@ extension TaskResponseMapper on TaskResponseData {
   }) {
     final creator = creators[creatorId];
     final locationKey = '$latitude,$longitude';
-    final cityName = locationNames[locationKey] ?? 'Unknown';
+    final cityName = locationNames[locationKey] ?? '$latitude, $longitude';
 
     return TaskModel(
       id: id,

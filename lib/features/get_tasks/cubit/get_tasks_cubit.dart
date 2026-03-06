@@ -169,12 +169,12 @@ class GetTasksCubit extends Cubit<GetTasksState> {
             final country = placemark.country ?? '';
             final city = placemark.locality ?? '';
             final name = [country, city].where((s) => s.isNotEmpty).join(', ');
-            _locationNamesCache[entry.key] = name.isNotEmpty ? name : 'Unknown';
+            _locationNamesCache[entry.key] = name.isNotEmpty ? name : entry.key;
           } else {
-            _locationNamesCache[entry.key] = 'Unknown';
+            _locationNamesCache[entry.key] = entry.key;
           }
         } catch (_) {
-          _locationNamesCache[entry.key] = 'Unknown';
+          _locationNamesCache[entry.key] = entry.key;
         }
       }),
     );

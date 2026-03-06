@@ -118,4 +118,7 @@ abstract class MyIcons {
   // filter
   static const String filterStroke = '$_basePath/filter_stroke.svg';
   static const String filterSolid = '$_basePath/filter_solid.svg';
+
+  // map
+  static const String map = '$_basePath/maps.svg';
 }

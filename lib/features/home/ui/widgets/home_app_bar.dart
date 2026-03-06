@@ -28,7 +28,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
   Future<void> _loadLocation() async {
     final location = SharedPrefHelper.getUserLocation();
     if (location == null || !location.contains(',')) {
-      if (mounted) setState(() => _locationText = 'Unknown');
+      if (mounted) setState(() => _locationText = 'No location');
       return;
     }
 
@@ -37,7 +37,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
     final longitude = double.tryParse(parts[1]);
 
     if (latitude == null || longitude == null) {
-      if (mounted) setState(() => _locationText = 'Unknown');
+      if (mounted) setState(() => _locationText = 'No location');
       return;
     }
 
@@ -50,10 +50,10 @@ class _HomeAppBarState extends State<HomeAppBar> {
       final city = placemark.locality ?? '';
       setState(() {
         _locationText = [country, city].where((s) => s.isNotEmpty).join(', ');
-        if (_locationText.isEmpty) _locationText = 'Unknown';
+        if (_locationText.isEmpty) _locationText = '$latitude, $longitude';
       });
     } else {
-      setState(() => _locationText = 'Unknown');
+      setState(() => _locationText = '$latitude, $longitude');
     }
   }
 

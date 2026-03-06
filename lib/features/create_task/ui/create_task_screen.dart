@@ -255,7 +255,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                       MyUserProfileRow(
                         name: SharedPrefHelper.getUserName() ?? 'User',
                         subtitle:
-                            SharedPrefHelper.getUserLocation() ?? 'Unknown',
+                            SharedPrefHelper.getUserLocation() ?? 'No location',
                       ),
                       const VerticalSpace(24),
 
