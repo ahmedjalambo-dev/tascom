@@ -59,10 +59,8 @@ abstract class MapTaskData with _$MapTaskData {
 
 @freezed
 abstract class MapTaskCreator with _$MapTaskCreator {
-  const factory MapTaskCreator({
-    required String id,
-    required String name,
-  }) = _MapTaskCreator;
+  const factory MapTaskCreator({required String id, required String name}) =
+      _MapTaskCreator;
 
   factory MapTaskCreator.fromJson(Map<String, dynamic> json) =>
       _$MapTaskCreatorFromJson(json);

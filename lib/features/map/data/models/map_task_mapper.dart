@@ -30,10 +30,7 @@ extension MapTaskMapper on MapTaskData {
         longitude: longitude,
       ),
       duration: _formatRemaining(),
-      metrics: TaskMetrics(
-        points: pointsOffered ?? 0,
-        distance: distance,
-      ),
+      metrics: TaskMetrics(points: pointsOffered ?? 0, distance: distance),
       likeCount: numOfLikes ?? 0,
       commentCount: 0,
     );
