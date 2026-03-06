@@ -26,7 +26,7 @@ extension SearchTaskMapper on SearchTaskData {
       priority: TaskPriority.fromApiValue(priority),
       status: TaskStatus.fromApiValue(status),
       location: TaskLocation(
-        name: locationName ?? 'Unknown',
+        name: locationName ?? '$latitude, $longitude',
         latitude: latitude,
         longitude: longitude,
       ),
