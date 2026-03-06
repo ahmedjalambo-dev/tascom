@@ -94,6 +94,11 @@ import '../../features/save_task/cubit/save_task_cubit.dart';
 import '../../features/save_task/data/repos/save_task_repo.dart';
 import '../../features/save_task/data/services/save_task_service.dart';
 
+// Like Task
+import '../../features/like_task/cubit/like_task_cubit.dart';
+import '../../features/like_task/data/repos/like_task_repo.dart';
+import '../../features/like_task/data/services/like_task_service.dart';
+
 // Saved Tasks
 import '../../features/settings/save_tasks/cubit/saved_tasks_cubit.dart';
 import '../../features/settings/save_tasks/data/repos/saved_tasks_repo.dart';
@@ -293,6 +298,17 @@ Future<void> initDependencies() async {
   );
   getIt.registerFactory<SaveTaskCubit>(
     () => SaveTaskCubit(getIt<SaveTaskRepo>()),
+  );
+
+  // ============ Like Task ============
+  getIt.registerLazySingleton<LikeTaskService>(
+    () => LikeTaskService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<LikeTaskRepo>(
+    () => LikeTaskRepo(getIt<LikeTaskService>()),
+  );
+  getIt.registerFactory<LikeTaskCubit>(
+    () => LikeTaskCubit(getIt<LikeTaskRepo>()),
   );
 
   // ============ Saved Tasks ============

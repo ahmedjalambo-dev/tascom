@@ -32,6 +32,7 @@ abstract class TaskResponseData with _$TaskResponseData {
     required String priority,
     required String category,
     bool? saved,
+    bool? liked,
     int? numOfLikes,
     required String createdAt,
     String? updatedAt,

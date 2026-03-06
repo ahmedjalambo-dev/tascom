@@ -19,6 +19,9 @@ import 'package:tascom/features/get_comments/cubit/get_comments_cubit.dart';
 import 'package:tascom/features/get_comments/data/models/comment_response.dart';
 import 'package:tascom/features/save_task/cubit/save_task_cubit.dart';
 import 'package:tascom/features/save_task/ui/save_task_listener.dart';
+import 'package:tascom/features/like_task/cubit/like_task_cubit.dart';
+import 'package:tascom/features/like_task/ui/like_task_listener.dart';
+import 'package:tascom/core/storage/session_manager.dart';
 import 'package:tascom/features/home/data/models/task_model.dart';
 import 'package:tascom/features/home/ui/widgets/comments/comments_section.dart';
 import 'package:tascom/features/home/ui/widgets/posts/task_card.dart';
@@ -230,6 +233,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
         BlocProvider(create: (_) => getIt<DeleteCommentCubit>()),
         BlocProvider(create: (_) => getIt<EditCommentCubit>()),
         BlocProvider(create: (_) => getIt<SaveTaskCubit>()),
+        BlocProvider(create: (_) => getIt<LikeTaskCubit>()),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -247,6 +251,24 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
               setState(() {
                 _taskModel = _taskModel.copyWith(
                   isSaved: data.isSaved ?? false,
+                );
+              });
+            },
+            child: const SizedBox.shrink(),
+          ),
+          LikeTaskListener(
+            onSuccess: (data) {
+              final currentUserId =
+                  SessionManager.instance.currentUserId;
+              final isLiked = data.likes.any(
+                (like) =>
+                    like.userId == currentUserId &&
+                    like.likeStatus == true,
+              );
+              setState(() {
+                _taskModel = _taskModel.copyWith(
+                  isLiked: isLiked,
+                  likeCount: data.numOfLikes ?? _taskModel.likeCount,
                 );
               });
             },
@@ -273,6 +295,9 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                                 onClaimTap: _taskModel.isClaimed
                                     ? null
                                     : _handleClaimTask,
+                                onLikeTap: () => context
+                                    .read<LikeTaskCubit>()
+                                    .likeTask(_taskModel.id),
                                 onSaveTap: () => context
                                     .read<SaveTaskCubit>()
                                     .saveTask(_taskModel.id),

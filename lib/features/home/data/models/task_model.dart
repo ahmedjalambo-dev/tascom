@@ -23,6 +23,7 @@ class TaskModel {
   final int commentCount;
   final List<Comment> comments;
   final String? imageUrl;
+  final bool isLiked;
   final bool isClaimed;
   final bool isSaved;
   final UserModel? helper;
@@ -44,6 +45,7 @@ class TaskModel {
     required this.commentCount,
     this.comments = const [],
     this.imageUrl,
+    this.isLiked = false,
     this.isClaimed = false,
     this.isSaved = false,
     this.helper,
@@ -68,6 +70,7 @@ class TaskModel {
     int? commentCount,
     List<Comment>? comments,
     String? imageUrl,
+    bool? isLiked,
     bool? isClaimed,
     bool? isSaved,
     UserModel? helper,
@@ -89,6 +92,7 @@ class TaskModel {
       commentCount: commentCount ?? this.commentCount,
       comments: comments ?? this.comments,
       imageUrl: imageUrl ?? this.imageUrl,
+      isLiked: isLiked ?? this.isLiked,
       isClaimed: isClaimed ?? this.isClaimed,
       isSaved: isSaved ?? this.isSaved,
       helper: helper ?? this.helper,

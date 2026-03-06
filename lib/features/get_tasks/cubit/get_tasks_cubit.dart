@@ -229,6 +229,42 @@ class GetTasksCubit extends Cubit<GetTasksState> {
     );
   }
 
+  void toggleLiked(String taskId, bool isLiked, int numOfLikes) {
+    final currentState = state;
+    AllTasksResponse? currentResponse;
+    Map<String, UserModel>? creators;
+    Map<String, String>? locationNames;
+
+    if (currentState is GetTasksSuccess) {
+      currentResponse = currentState.response;
+      creators = currentState.creators;
+      locationNames = currentState.locationNames;
+    } else if (currentState is GetTasksLoadingMore) {
+      currentResponse = currentState.currentData;
+      creators = currentState.creators;
+      locationNames = currentState.locationNames;
+    }
+
+    if (currentResponse == null) return;
+
+    final updatedTasks = currentResponse.data
+        .map(
+          (t) => t.id == taskId
+              ? t.copyWith(liked: isLiked, numOfLikes: numOfLikes)
+              : t,
+        )
+        .toList();
+    _allTasks = updatedTasks;
+
+    emit(
+      GetTasksState.success(
+        response: currentResponse.copyWith(data: updatedTasks),
+        creators: creators!,
+        locationNames: locationNames!,
+      ),
+    );
+  }
+
   bool get hasMorePages {
     final currentState = state;
     if (currentState is GetTasksSuccess) {
