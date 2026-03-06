@@ -43,11 +43,14 @@ class TaskCardHeader extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Text(
-                    taskModel.author.name,
-                    style: MyTextStyles.body.body2.copyWith(
-                      color: MyColors.text.primary,
-                      fontWeight: FontWeight.w500,
+                  Flexible(
+                    child: Text(
+                      taskModel.author.name,
+                      overflow: TextOverflow.ellipsis,
+                      style: MyTextStyles.body.body2.copyWith(
+                        color: MyColors.text.primary,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   const HorizontalSpace(8),
@@ -79,6 +82,7 @@ class TaskCardHeader extends StatelessWidget {
           ),
         ),
 
+        const HorizontalSpace(8),
         // Bookmark Icon
         GestureDetector(
           onTap: onSaveTap,
