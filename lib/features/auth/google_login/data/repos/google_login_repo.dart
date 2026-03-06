@@ -24,6 +24,7 @@ class GoogleLoginRepo {
         userId: response.data.user.id,
         email: response.data.user.email,
         name: response.data.user.name,
+        avatar: response.data.user.avatar,
       );
 
       return ApiResult.success(response);

@@ -53,6 +53,28 @@ class LocationService {
     }
   }
 
+  /// Resolves the stored user location (lat,lng) into a display name
+  /// like "Country, City". Returns "No location" if unavailable.
+  static Future<String> getStoredLocationDisplayName() async {
+    final location = SharedPrefHelper.getUserLocation();
+    if (location == null || !location.contains(',')) return 'No location';
+
+    final parts = location.split(',');
+    final latitude = double.tryParse(parts[0]);
+    final longitude = double.tryParse(parts[1]);
+
+    if (latitude == null || longitude == null) return 'No location';
+
+    final placemark = await getPlacemark(latitude, longitude);
+    if (placemark != null) {
+      final display = [placemark.country ?? '', placemark.locality ?? '']
+          .where((s) => s.isNotEmpty)
+          .join(', ');
+      if (display.isNotEmpty) return display;
+    }
+    return '$latitude, $longitude';
+  }
+
   /// Reverse geocodes coordinates into a Placemark (country, city, etc.).
   /// Returns null if geocoding fails.
   static Future<Placemark?> getPlacemark(
