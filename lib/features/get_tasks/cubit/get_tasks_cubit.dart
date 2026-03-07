@@ -216,7 +216,7 @@ class GetTasksCubit extends Cubit<GetTasksState> {
     if (currentResponse == null) return;
 
     final updatedTasks = currentResponse.data
-        .map((t) => t.id == taskId ? t.copyWith(saved: isSaved) : t)
+        .map((t) => t.id == taskId ? t.copyWith(isSaved: isSaved) : t)
         .toList();
     _allTasks = updatedTasks;
 
@@ -250,7 +250,7 @@ class GetTasksCubit extends Cubit<GetTasksState> {
     final updatedTasks = currentResponse.data
         .map(
           (t) => t.id == taskId
-              ? t.copyWith(liked: isLiked, numOfLikes: numOfLikes)
+              ? t.copyWith(isLiked: isLiked, numOfLikes: numOfLikes)
               : t,
         )
         .toList();

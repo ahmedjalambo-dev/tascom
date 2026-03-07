@@ -308,7 +308,7 @@ $PaginationMetaCopyWith<$Res> get meta {
 /// @nodoc
 mixin _$TaskResponseData {
 
- String get id; String get creatorId; String get title; String get description; double? get latitude; double? get longitude; String? get deadline; int? get pointsOffered; String get status; String get priority; String get category; bool? get saved; bool? get liked; int? get numOfLikes; String get createdAt; String? get updatedAt; bool? get isDeleted; List<ClaimTaskData> get claims; List<dynamic> get assets;
+ String get id; String get creatorId; String get title; String get description; double? get latitude; double? get longitude; String? get deadline; int? get pointsOffered; String get status; String get priority; String get category; bool? get isSaved; bool? get isLiked; int? get numOfLikes; String get createdAt; String? get updatedAt; bool? get isDeleted; List<ClaimTaskData> get claims; List<dynamic> get assets;
 /// Create a copy of TaskResponseData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -321,16 +321,16 @@ $TaskResponseDataCopyWith<TaskResponseData> get copyWith => _$TaskResponseDataCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskResponseData&&(identical(other.id, id) || other.id == id)&&(identical(other.creatorId, creatorId) || other.creatorId == creatorId)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.deadline, deadline) || other.deadline == deadline)&&(identical(other.pointsOffered, pointsOffered) || other.pointsOffered == pointsOffered)&&(identical(other.status, status) || other.status == status)&&(identical(other.priority, priority) || other.priority == priority)&&(identical(other.category, category) || other.category == category)&&(identical(other.saved, saved) || other.saved == saved)&&(identical(other.liked, liked) || other.liked == liked)&&(identical(other.numOfLikes, numOfLikes) || other.numOfLikes == numOfLikes)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&const DeepCollectionEquality().equals(other.claims, claims)&&const DeepCollectionEquality().equals(other.assets, assets));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskResponseData&&(identical(other.id, id) || other.id == id)&&(identical(other.creatorId, creatorId) || other.creatorId == creatorId)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.deadline, deadline) || other.deadline == deadline)&&(identical(other.pointsOffered, pointsOffered) || other.pointsOffered == pointsOffered)&&(identical(other.status, status) || other.status == status)&&(identical(other.priority, priority) || other.priority == priority)&&(identical(other.category, category) || other.category == category)&&(identical(other.isSaved, isSaved) || other.isSaved == isSaved)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked)&&(identical(other.numOfLikes, numOfLikes) || other.numOfLikes == numOfLikes)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&const DeepCollectionEquality().equals(other.claims, claims)&&const DeepCollectionEquality().equals(other.assets, assets));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,id,creatorId,title,description,latitude,longitude,deadline,pointsOffered,status,priority,category,saved,liked,numOfLikes,createdAt,updatedAt,isDeleted,const DeepCollectionEquality().hash(claims),const DeepCollectionEquality().hash(assets)]);
+int get hashCode => Object.hashAll([runtimeType,id,creatorId,title,description,latitude,longitude,deadline,pointsOffered,status,priority,category,isSaved,isLiked,numOfLikes,createdAt,updatedAt,isDeleted,const DeepCollectionEquality().hash(claims),const DeepCollectionEquality().hash(assets)]);
 
 @override
 String toString() {
-  return 'TaskResponseData(id: $id, creatorId: $creatorId, title: $title, description: $description, latitude: $latitude, longitude: $longitude, deadline: $deadline, pointsOffered: $pointsOffered, status: $status, priority: $priority, category: $category, saved: $saved, liked: $liked, numOfLikes: $numOfLikes, createdAt: $createdAt, updatedAt: $updatedAt, isDeleted: $isDeleted, claims: $claims, assets: $assets)';
+  return 'TaskResponseData(id: $id, creatorId: $creatorId, title: $title, description: $description, latitude: $latitude, longitude: $longitude, deadline: $deadline, pointsOffered: $pointsOffered, status: $status, priority: $priority, category: $category, isSaved: $isSaved, isLiked: $isLiked, numOfLikes: $numOfLikes, createdAt: $createdAt, updatedAt: $updatedAt, isDeleted: $isDeleted, claims: $claims, assets: $assets)';
 }
 
 
@@ -341,7 +341,7 @@ abstract mixin class $TaskResponseDataCopyWith<$Res>  {
   factory $TaskResponseDataCopyWith(TaskResponseData value, $Res Function(TaskResponseData) _then) = _$TaskResponseDataCopyWithImpl;
 @useResult
 $Res call({
- String id, String creatorId, String title, String description, double? latitude, double? longitude, String? deadline, int? pointsOffered, String status, String priority, String category, bool? saved, bool? liked, int? numOfLikes, String createdAt, String? updatedAt, bool? isDeleted, List<ClaimTaskData> claims, List<dynamic> assets
+ String id, String creatorId, String title, String description, double? latitude, double? longitude, String? deadline, int? pointsOffered, String status, String priority, String category, bool? isSaved, bool? isLiked, int? numOfLikes, String createdAt, String? updatedAt, bool? isDeleted, List<ClaimTaskData> claims, List<dynamic> assets
 });
 
 
@@ -358,7 +358,7 @@ class _$TaskResponseDataCopyWithImpl<$Res>
 
 /// Create a copy of TaskResponseData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? creatorId = null,Object? title = null,Object? description = null,Object? latitude = freezed,Object? longitude = freezed,Object? deadline = freezed,Object? pointsOffered = freezed,Object? status = null,Object? priority = null,Object? category = null,Object? saved = freezed,Object? liked = freezed,Object? numOfLikes = freezed,Object? createdAt = null,Object? updatedAt = freezed,Object? isDeleted = freezed,Object? claims = null,Object? assets = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? creatorId = null,Object? title = null,Object? description = null,Object? latitude = freezed,Object? longitude = freezed,Object? deadline = freezed,Object? pointsOffered = freezed,Object? status = null,Object? priority = null,Object? category = null,Object? isSaved = freezed,Object? isLiked = freezed,Object? numOfLikes = freezed,Object? createdAt = null,Object? updatedAt = freezed,Object? isDeleted = freezed,Object? claims = null,Object? assets = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,creatorId: null == creatorId ? _self.creatorId : creatorId // ignore: cast_nullable_to_non_nullable
@@ -371,8 +371,8 @@ as String?,pointsOffered: freezed == pointsOffered ? _self.pointsOffered : point
 as int?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,priority: null == priority ? _self.priority : priority // ignore: cast_nullable_to_non_nullable
 as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
-as String,saved: freezed == saved ? _self.saved : saved // ignore: cast_nullable_to_non_nullable
-as bool?,liked: freezed == liked ? _self.liked : liked // ignore: cast_nullable_to_non_nullable
+as String,isSaved: freezed == isSaved ? _self.isSaved : isSaved // ignore: cast_nullable_to_non_nullable
+as bool?,isLiked: freezed == isLiked ? _self.isLiked : isLiked // ignore: cast_nullable_to_non_nullable
 as bool?,numOfLikes: freezed == numOfLikes ? _self.numOfLikes : numOfLikes // ignore: cast_nullable_to_non_nullable
 as int?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as String,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -464,10 +464,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String creatorId,  String title,  String description,  double? latitude,  double? longitude,  String? deadline,  int? pointsOffered,  String status,  String priority,  String category,  bool? saved,  bool? liked,  int? numOfLikes,  String createdAt,  String? updatedAt,  bool? isDeleted,  List<ClaimTaskData> claims,  List<dynamic> assets)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String creatorId,  String title,  String description,  double? latitude,  double? longitude,  String? deadline,  int? pointsOffered,  String status,  String priority,  String category,  bool? isSaved,  bool? isLiked,  int? numOfLikes,  String createdAt,  String? updatedAt,  bool? isDeleted,  List<ClaimTaskData> claims,  List<dynamic> assets)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TaskResponseData() when $default != null:
-return $default(_that.id,_that.creatorId,_that.title,_that.description,_that.latitude,_that.longitude,_that.deadline,_that.pointsOffered,_that.status,_that.priority,_that.category,_that.saved,_that.liked,_that.numOfLikes,_that.createdAt,_that.updatedAt,_that.isDeleted,_that.claims,_that.assets);case _:
+return $default(_that.id,_that.creatorId,_that.title,_that.description,_that.latitude,_that.longitude,_that.deadline,_that.pointsOffered,_that.status,_that.priority,_that.category,_that.isSaved,_that.isLiked,_that.numOfLikes,_that.createdAt,_that.updatedAt,_that.isDeleted,_that.claims,_that.assets);case _:
   return orElse();
 
 }
@@ -485,10 +485,10 @@ return $default(_that.id,_that.creatorId,_that.title,_that.description,_that.lat
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String creatorId,  String title,  String description,  double? latitude,  double? longitude,  String? deadline,  int? pointsOffered,  String status,  String priority,  String category,  bool? saved,  bool? liked,  int? numOfLikes,  String createdAt,  String? updatedAt,  bool? isDeleted,  List<ClaimTaskData> claims,  List<dynamic> assets)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String creatorId,  String title,  String description,  double? latitude,  double? longitude,  String? deadline,  int? pointsOffered,  String status,  String priority,  String category,  bool? isSaved,  bool? isLiked,  int? numOfLikes,  String createdAt,  String? updatedAt,  bool? isDeleted,  List<ClaimTaskData> claims,  List<dynamic> assets)  $default,) {final _that = this;
 switch (_that) {
 case _TaskResponseData():
-return $default(_that.id,_that.creatorId,_that.title,_that.description,_that.latitude,_that.longitude,_that.deadline,_that.pointsOffered,_that.status,_that.priority,_that.category,_that.saved,_that.liked,_that.numOfLikes,_that.createdAt,_that.updatedAt,_that.isDeleted,_that.claims,_that.assets);case _:
+return $default(_that.id,_that.creatorId,_that.title,_that.description,_that.latitude,_that.longitude,_that.deadline,_that.pointsOffered,_that.status,_that.priority,_that.category,_that.isSaved,_that.isLiked,_that.numOfLikes,_that.createdAt,_that.updatedAt,_that.isDeleted,_that.claims,_that.assets);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -505,10 +505,10 @@ return $default(_that.id,_that.creatorId,_that.title,_that.description,_that.lat
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String creatorId,  String title,  String description,  double? latitude,  double? longitude,  String? deadline,  int? pointsOffered,  String status,  String priority,  String category,  bool? saved,  bool? liked,  int? numOfLikes,  String createdAt,  String? updatedAt,  bool? isDeleted,  List<ClaimTaskData> claims,  List<dynamic> assets)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String creatorId,  String title,  String description,  double? latitude,  double? longitude,  String? deadline,  int? pointsOffered,  String status,  String priority,  String category,  bool? isSaved,  bool? isLiked,  int? numOfLikes,  String createdAt,  String? updatedAt,  bool? isDeleted,  List<ClaimTaskData> claims,  List<dynamic> assets)?  $default,) {final _that = this;
 switch (_that) {
 case _TaskResponseData() when $default != null:
-return $default(_that.id,_that.creatorId,_that.title,_that.description,_that.latitude,_that.longitude,_that.deadline,_that.pointsOffered,_that.status,_that.priority,_that.category,_that.saved,_that.liked,_that.numOfLikes,_that.createdAt,_that.updatedAt,_that.isDeleted,_that.claims,_that.assets);case _:
+return $default(_that.id,_that.creatorId,_that.title,_that.description,_that.latitude,_that.longitude,_that.deadline,_that.pointsOffered,_that.status,_that.priority,_that.category,_that.isSaved,_that.isLiked,_that.numOfLikes,_that.createdAt,_that.updatedAt,_that.isDeleted,_that.claims,_that.assets);case _:
   return null;
 
 }
@@ -520,7 +520,7 @@ return $default(_that.id,_that.creatorId,_that.title,_that.description,_that.lat
 @JsonSerializable()
 
 class _TaskResponseData implements TaskResponseData {
-  const _TaskResponseData({required this.id, required this.creatorId, required this.title, required this.description, this.latitude, this.longitude, this.deadline, this.pointsOffered, required this.status, required this.priority, required this.category, this.saved, this.liked, this.numOfLikes, required this.createdAt, this.updatedAt, this.isDeleted, final  List<ClaimTaskData> claims = const [], final  List<dynamic> assets = const []}): _claims = claims,_assets = assets;
+  const _TaskResponseData({required this.id, required this.creatorId, required this.title, required this.description, this.latitude, this.longitude, this.deadline, this.pointsOffered, required this.status, required this.priority, required this.category, this.isSaved, this.isLiked, this.numOfLikes, required this.createdAt, this.updatedAt, this.isDeleted, final  List<ClaimTaskData> claims = const [], final  List<dynamic> assets = const []}): _claims = claims,_assets = assets;
   factory _TaskResponseData.fromJson(Map<String, dynamic> json) => _$TaskResponseDataFromJson(json);
 
 @override final  String id;
@@ -534,8 +534,8 @@ class _TaskResponseData implements TaskResponseData {
 @override final  String status;
 @override final  String priority;
 @override final  String category;
-@override final  bool? saved;
-@override final  bool? liked;
+@override final  bool? isSaved;
+@override final  bool? isLiked;
 @override final  int? numOfLikes;
 @override final  String createdAt;
 @override final  String? updatedAt;
@@ -568,16 +568,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TaskResponseData&&(identical(other.id, id) || other.id == id)&&(identical(other.creatorId, creatorId) || other.creatorId == creatorId)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.deadline, deadline) || other.deadline == deadline)&&(identical(other.pointsOffered, pointsOffered) || other.pointsOffered == pointsOffered)&&(identical(other.status, status) || other.status == status)&&(identical(other.priority, priority) || other.priority == priority)&&(identical(other.category, category) || other.category == category)&&(identical(other.saved, saved) || other.saved == saved)&&(identical(other.liked, liked) || other.liked == liked)&&(identical(other.numOfLikes, numOfLikes) || other.numOfLikes == numOfLikes)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&const DeepCollectionEquality().equals(other._claims, _claims)&&const DeepCollectionEquality().equals(other._assets, _assets));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TaskResponseData&&(identical(other.id, id) || other.id == id)&&(identical(other.creatorId, creatorId) || other.creatorId == creatorId)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.deadline, deadline) || other.deadline == deadline)&&(identical(other.pointsOffered, pointsOffered) || other.pointsOffered == pointsOffered)&&(identical(other.status, status) || other.status == status)&&(identical(other.priority, priority) || other.priority == priority)&&(identical(other.category, category) || other.category == category)&&(identical(other.isSaved, isSaved) || other.isSaved == isSaved)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked)&&(identical(other.numOfLikes, numOfLikes) || other.numOfLikes == numOfLikes)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&const DeepCollectionEquality().equals(other._claims, _claims)&&const DeepCollectionEquality().equals(other._assets, _assets));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,id,creatorId,title,description,latitude,longitude,deadline,pointsOffered,status,priority,category,saved,liked,numOfLikes,createdAt,updatedAt,isDeleted,const DeepCollectionEquality().hash(_claims),const DeepCollectionEquality().hash(_assets)]);
+int get hashCode => Object.hashAll([runtimeType,id,creatorId,title,description,latitude,longitude,deadline,pointsOffered,status,priority,category,isSaved,isLiked,numOfLikes,createdAt,updatedAt,isDeleted,const DeepCollectionEquality().hash(_claims),const DeepCollectionEquality().hash(_assets)]);
 
 @override
 String toString() {
-  return 'TaskResponseData(id: $id, creatorId: $creatorId, title: $title, description: $description, latitude: $latitude, longitude: $longitude, deadline: $deadline, pointsOffered: $pointsOffered, status: $status, priority: $priority, category: $category, saved: $saved, liked: $liked, numOfLikes: $numOfLikes, createdAt: $createdAt, updatedAt: $updatedAt, isDeleted: $isDeleted, claims: $claims, assets: $assets)';
+  return 'TaskResponseData(id: $id, creatorId: $creatorId, title: $title, description: $description, latitude: $latitude, longitude: $longitude, deadline: $deadline, pointsOffered: $pointsOffered, status: $status, priority: $priority, category: $category, isSaved: $isSaved, isLiked: $isLiked, numOfLikes: $numOfLikes, createdAt: $createdAt, updatedAt: $updatedAt, isDeleted: $isDeleted, claims: $claims, assets: $assets)';
 }
 
 
@@ -588,7 +588,7 @@ abstract mixin class _$TaskResponseDataCopyWith<$Res> implements $TaskResponseDa
   factory _$TaskResponseDataCopyWith(_TaskResponseData value, $Res Function(_TaskResponseData) _then) = __$TaskResponseDataCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String creatorId, String title, String description, double? latitude, double? longitude, String? deadline, int? pointsOffered, String status, String priority, String category, bool? saved, bool? liked, int? numOfLikes, String createdAt, String? updatedAt, bool? isDeleted, List<ClaimTaskData> claims, List<dynamic> assets
+ String id, String creatorId, String title, String description, double? latitude, double? longitude, String? deadline, int? pointsOffered, String status, String priority, String category, bool? isSaved, bool? isLiked, int? numOfLikes, String createdAt, String? updatedAt, bool? isDeleted, List<ClaimTaskData> claims, List<dynamic> assets
 });
 
 
@@ -605,7 +605,7 @@ class __$TaskResponseDataCopyWithImpl<$Res>
 
 /// Create a copy of TaskResponseData
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? creatorId = null,Object? title = null,Object? description = null,Object? latitude = freezed,Object? longitude = freezed,Object? deadline = freezed,Object? pointsOffered = freezed,Object? status = null,Object? priority = null,Object? category = null,Object? saved = freezed,Object? liked = freezed,Object? numOfLikes = freezed,Object? createdAt = null,Object? updatedAt = freezed,Object? isDeleted = freezed,Object? claims = null,Object? assets = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? creatorId = null,Object? title = null,Object? description = null,Object? latitude = freezed,Object? longitude = freezed,Object? deadline = freezed,Object? pointsOffered = freezed,Object? status = null,Object? priority = null,Object? category = null,Object? isSaved = freezed,Object? isLiked = freezed,Object? numOfLikes = freezed,Object? createdAt = null,Object? updatedAt = freezed,Object? isDeleted = freezed,Object? claims = null,Object? assets = null,}) {
   return _then(_TaskResponseData(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,creatorId: null == creatorId ? _self.creatorId : creatorId // ignore: cast_nullable_to_non_nullable
@@ -618,8 +618,8 @@ as String?,pointsOffered: freezed == pointsOffered ? _self.pointsOffered : point
 as int?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,priority: null == priority ? _self.priority : priority // ignore: cast_nullable_to_non_nullable
 as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
-as String,saved: freezed == saved ? _self.saved : saved // ignore: cast_nullable_to_non_nullable
-as bool?,liked: freezed == liked ? _self.liked : liked // ignore: cast_nullable_to_non_nullable
+as String,isSaved: freezed == isSaved ? _self.isSaved : isSaved // ignore: cast_nullable_to_non_nullable
+as bool?,isLiked: freezed == isLiked ? _self.isLiked : isLiked // ignore: cast_nullable_to_non_nullable
 as bool?,numOfLikes: freezed == numOfLikes ? _self.numOfLikes : numOfLikes // ignore: cast_nullable_to_non_nullable
 as int?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as String,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
