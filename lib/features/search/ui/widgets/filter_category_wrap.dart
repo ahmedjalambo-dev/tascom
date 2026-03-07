@@ -14,7 +14,7 @@ class FilterCategoryWrap extends StatelessWidget {
     TaskCategory.pet,
     TaskCategory.repairs,
     TaskCategory.tutoring,
-    TaskCategory.shopping,
+    TaskCategory.errands,
     TaskCategory.transportation,
     TaskCategory.homeService,
   ];
@@ -23,7 +23,7 @@ class FilterCategoryWrap extends StatelessWidget {
     TaskCategory.pet: 'Pet Care',
     TaskCategory.repairs: 'Repairs',
     TaskCategory.tutoring: 'Tutoring',
-    TaskCategory.shopping: 'Errands',
+    TaskCategory.errands: 'Errands',
     TaskCategory.transportation: 'Transportation',
     TaskCategory.homeService: 'Home services',
   };

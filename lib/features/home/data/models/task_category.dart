@@ -6,7 +6,7 @@ enum TaskCategory {
   homeService,
   repairs,
   pet,
-  shopping,
+  errands,
   transportation,
   tutoring;
 
@@ -23,7 +23,7 @@ enum TaskCategory {
       case 'Tutoring':
         return TaskCategory.tutoring;
       case 'Errands':
-        return TaskCategory.shopping;
+        return TaskCategory.errands;
       default:
         return TaskCategory.homeService;
     }
@@ -39,7 +39,7 @@ extension TaskCategoryExtension on TaskCategory {
         return 'Repairs';
       case TaskCategory.pet:
         return 'PetCare';
-      case TaskCategory.shopping:
+      case TaskCategory.errands:
         return 'Errands';
       case TaskCategory.transportation:
         return 'Transportation';
@@ -56,8 +56,8 @@ extension TaskCategoryExtension on TaskCategory {
         return 'Repairs';
       case TaskCategory.pet:
         return 'Pet Care';
-      case TaskCategory.shopping:
-        return 'Shopping';
+      case TaskCategory.errands:
+        return 'Errands';
       case TaskCategory.transportation:
         return 'Transportation';
       case TaskCategory.tutoring:
@@ -73,7 +73,7 @@ extension TaskCategoryExtension on TaskCategory {
         return MyIcons.miningSolid;
       case TaskCategory.pet:
         return MyIcons.petSolid;
-      case TaskCategory.shopping:
+      case TaskCategory.errands:
         return MyIcons.cartSolid;
       case TaskCategory.transportation:
         return MyIcons.carSolid;
@@ -90,7 +90,7 @@ extension TaskCategoryExtension on TaskCategory {
         return MyIcons.miningStroke;
       case TaskCategory.pet:
         return MyIcons.petStroke;
-      case TaskCategory.shopping:
+      case TaskCategory.errands:
         return MyIcons.cartStroke;
       case TaskCategory.transportation:
         return MyIcons.carStroke;
