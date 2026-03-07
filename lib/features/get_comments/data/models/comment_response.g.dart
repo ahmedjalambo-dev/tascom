@@ -56,7 +56,7 @@ _CommentUserModel _$CommentUserModelFromJson(Map<String, dynamic> json) =>
     _CommentUserModel(
       id: json['id'] as String?,
       name: json['name'] as String?,
-      avatar: json['avatar'] as String?,
+      avatar: _readCommentUserAvatar(json, 'avatar') as String?,
     );
 
 Map<String, dynamic> _$CommentUserModelToJson(_CommentUserModel instance) =>

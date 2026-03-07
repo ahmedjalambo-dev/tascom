@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(flutter analyze:*)",
-      "Bash(ls -la \"c:\\\\flutter_apps\\\\tascom\\\\lib\\\\features\\\\registration\"\" 2>/dev/null || echo \"Directory not found \")"
+      "Bash(ls -la \"c:\\\\flutter_apps\\\\tascom\\\\lib\\\\features\\\\registration\"\" 2>/dev/null || echo \"Directory not found \")",
+      "Bash(dart run build_runner build --delete-conflicting-outputs)"
     ]
   }
 }

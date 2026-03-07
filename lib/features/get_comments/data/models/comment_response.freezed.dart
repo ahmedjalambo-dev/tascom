@@ -609,7 +609,7 @@ $CommentUserModelCopyWith<$Res>? get user {
 /// @nodoc
 mixin _$CommentUserModel {
 
- String? get id; String? get name; String? get avatar;
+ String? get id; String? get name;@JsonKey(readValue: _readCommentUserAvatar) String? get avatar;
 /// Create a copy of CommentUserModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -642,7 +642,7 @@ abstract mixin class $CommentUserModelCopyWith<$Res>  {
   factory $CommentUserModelCopyWith(CommentUserModel value, $Res Function(CommentUserModel) _then) = _$CommentUserModelCopyWithImpl;
 @useResult
 $Res call({
- String? id, String? name, String? avatar
+ String? id, String? name,@JsonKey(readValue: _readCommentUserAvatar) String? avatar
 });
 
 
@@ -749,7 +749,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id,  String? name,  String? avatar)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id,  String? name, @JsonKey(readValue: _readCommentUserAvatar)  String? avatar)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CommentUserModel() when $default != null:
 return $default(_that.id,_that.name,_that.avatar);case _:
@@ -770,7 +770,7 @@ return $default(_that.id,_that.name,_that.avatar);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id,  String? name,  String? avatar)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id,  String? name, @JsonKey(readValue: _readCommentUserAvatar)  String? avatar)  $default,) {final _that = this;
 switch (_that) {
 case _CommentUserModel():
 return $default(_that.id,_that.name,_that.avatar);case _:
@@ -790,7 +790,7 @@ return $default(_that.id,_that.name,_that.avatar);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id,  String? name,  String? avatar)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id,  String? name, @JsonKey(readValue: _readCommentUserAvatar)  String? avatar)?  $default,) {final _that = this;
 switch (_that) {
 case _CommentUserModel() when $default != null:
 return $default(_that.id,_that.name,_that.avatar);case _:
@@ -805,12 +805,12 @@ return $default(_that.id,_that.name,_that.avatar);case _:
 @JsonSerializable()
 
 class _CommentUserModel implements CommentUserModel {
-  const _CommentUserModel({this.id, this.name, this.avatar});
+  const _CommentUserModel({this.id, this.name, @JsonKey(readValue: _readCommentUserAvatar) this.avatar});
   factory _CommentUserModel.fromJson(Map<String, dynamic> json) => _$CommentUserModelFromJson(json);
 
 @override final  String? id;
 @override final  String? name;
-@override final  String? avatar;
+@override@JsonKey(readValue: _readCommentUserAvatar) final  String? avatar;
 
 /// Create a copy of CommentUserModel
 /// with the given fields replaced by the non-null parameter values.
@@ -845,7 +845,7 @@ abstract mixin class _$CommentUserModelCopyWith<$Res> implements $CommentUserMod
   factory _$CommentUserModelCopyWith(_CommentUserModel value, $Res Function(_CommentUserModel) _then) = __$CommentUserModelCopyWithImpl;
 @override @useResult
 $Res call({
- String? id, String? name, String? avatar
+ String? id, String? name,@JsonKey(readValue: _readCommentUserAvatar) String? avatar
 });
 
 
