@@ -303,7 +303,6 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                             Builder(
                               builder: (context) => CommentsSection(
                                 taskId: taskId,
-                                totalCount: _taskModel.commentCount,
                                 onReplyTap: _handleReplyTap,
                                 onDeleteTap: (commentId) {
                                   final id = int.tryParse(commentId);

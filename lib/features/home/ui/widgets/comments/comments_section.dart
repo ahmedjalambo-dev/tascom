@@ -14,7 +14,6 @@ import '../../../../get_comments/data/models/comment_response.dart';
 
 class CommentsSection extends StatelessWidget {
   final int taskId;
-  final int totalCount;
   final VoidCallback? onFilterTap;
   final void Function(String commentId, String userName)? onReplyTap;
   final void Function(String commentId)? onDeleteTap;
@@ -23,7 +22,7 @@ class CommentsSection extends StatelessWidget {
   const CommentsSection({
     super.key,
     required this.taskId,
-    required this.totalCount,
+
     this.onFilterTap,
     this.onReplyTap,
     this.onDeleteTap,
@@ -36,7 +35,7 @@ class CommentsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Comments ($totalCount)',
+          'Comments',
           style: MyTextStyles.heading.h22.copyWith(
             color: MyColors.text.primary,
           ),

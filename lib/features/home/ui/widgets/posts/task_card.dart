@@ -99,7 +99,7 @@ class TaskCard extends StatelessWidget {
               // Actions: Like, Comment, Share, Claim Button
               TaskCardActions(
                 likeCount: taskModel.likeCount,
-                commentCount: taskModel.commentCount,
+
                 isLiked: taskModel.isLiked,
                 isClaimed: taskModel.isClaimed,
                 isClaimLoading: isClaimLoading,

@@ -8,7 +8,6 @@ import 'package:tascom/core/widgets/my_spacing.dart';
 
 class TaskCardActions extends StatelessWidget {
   final int likeCount;
-  final int commentCount;
   final bool isLiked;
   final bool isClaimed;
   final bool isClaimLoading;
@@ -20,7 +19,7 @@ class TaskCardActions extends StatelessWidget {
   const TaskCardActions({
     super.key,
     required this.likeCount,
-    required this.commentCount,
+
     this.isLiked = false,
     this.isClaimed = false,
     this.isClaimLoading = false,
@@ -74,13 +73,6 @@ class TaskCardActions extends StatelessWidget {
                 colorFilter: ColorFilter.mode(
                   MyColors.text.secondary,
                   BlendMode.srcIn,
-                ),
-              ),
-              const HorizontalSpace(4),
-              Text(
-                commentCount.toString(),
-                style: MyTextStyles.label.label1.copyWith(
-                  color: MyColors.text.secondary,
                 ),
               ),
             ],
