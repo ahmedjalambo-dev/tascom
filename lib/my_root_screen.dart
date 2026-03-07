@@ -27,39 +27,51 @@ class _MyRootScreenState extends State<MyRootScreen> {
   int _currentIndex = 0;
   late final GetTasksCubit _homeCubit = getIt<GetTasksCubit>()..getAllTasks();
 
-  late final List<Widget> _screens = [
-    MultiBlocProvider(
-      providers: [
-        BlocProvider.value(value: _homeCubit),
-        BlocProvider(create: (_) => getIt<ClaimTaskCubit>()),
-        BlocProvider(create: (_) => getIt<SaveTaskCubit>()),
-        BlocProvider(create: (_) => getIt<LikeTaskCubit>()),
-      ],
-      child: const HomeScreen(),
-    ),
-    BlocProvider(
-      create: (_) => getIt<SearchCubit>(),
-      child: const SearchScreen(),
-    ),
-    MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => getIt<MapCubit>()..getMapTasks()),
-        BlocProvider(create: (_) => getIt<ClaimTaskCubit>()),
-      ],
-      child: const MapScreen(),
-    ),
-    BlocProvider(
-      create: (_) {
-        final cubit = getIt<ProfileCubit>();
-        final userId = SessionManager.instance.currentUserId;
-        if (userId != null) {
-          cubit.getUser(userId);
-        }
-        return cubit;
-      },
-      child: const ProfileScreen(),
-    ),
-  ];
+  final Map<int, Widget> _screenCache = {};
+
+  Widget _getScreen(int index) {
+    return _screenCache.putIfAbsent(index, () {
+      switch (index) {
+        case 0:
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider.value(value: _homeCubit),
+              BlocProvider(create: (_) => getIt<ClaimTaskCubit>()),
+              BlocProvider(create: (_) => getIt<SaveTaskCubit>()),
+              BlocProvider(create: (_) => getIt<LikeTaskCubit>()),
+            ],
+            child: const HomeScreen(),
+          );
+        case 1:
+          return BlocProvider(
+            create: (_) => getIt<SearchCubit>(),
+            child: const SearchScreen(),
+          );
+        case 2:
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (_) => getIt<MapCubit>()..getMapTasks()),
+              BlocProvider(create: (_) => getIt<ClaimTaskCubit>()),
+            ],
+            child: const MapScreen(),
+          );
+        case 3:
+          return BlocProvider(
+            create: (_) {
+              final cubit = getIt<ProfileCubit>();
+              final userId = SessionManager.instance.currentUserId;
+              if (userId != null) {
+                cubit.getUser(userId);
+              }
+              return cubit;
+            },
+            child: const ProfileScreen(),
+          );
+        default:
+          return const SizedBox.shrink();
+      }
+    });
+  }
 
   void _onTabTapped(int index) {
     setState(() {
@@ -78,7 +90,16 @@ class _MyRootScreenState extends State<MyRootScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: IndexedStack(index: _currentIndex, children: _screens),
+      body: Stack(
+        children: [
+          for (int i = 0; i < 4; i++)
+            if (i == _currentIndex || _screenCache.containsKey(i))
+              Offstage(
+                offstage: _currentIndex != i,
+                child: _getScreen(i),
+              ),
+        ],
+      ),
       bottomNavigationBar: MyBottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
