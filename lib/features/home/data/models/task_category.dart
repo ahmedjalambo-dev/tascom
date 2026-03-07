@@ -6,9 +6,9 @@ enum TaskCategory {
   homeService,
   repairs,
   pet,
-  shopping,
+  errands,
   transportation,
-  teaching;
+  tutoring;
 
   static TaskCategory fromApiValue(String value) {
     switch (value) {
@@ -21,9 +21,9 @@ enum TaskCategory {
       case 'Transportation':
         return TaskCategory.transportation;
       case 'Tutoring':
-        return TaskCategory.teaching;
+        return TaskCategory.tutoring;
       case 'Errands':
-        return TaskCategory.shopping;
+        return TaskCategory.errands;
       default:
         return TaskCategory.homeService;
     }
@@ -39,11 +39,11 @@ extension TaskCategoryExtension on TaskCategory {
         return 'Repairs';
       case TaskCategory.pet:
         return 'PetCare';
-      case TaskCategory.shopping:
+      case TaskCategory.errands:
         return 'Errands';
       case TaskCategory.transportation:
         return 'Transportation';
-      case TaskCategory.teaching:
+      case TaskCategory.tutoring:
         return 'Tutoring';
     }
   }
@@ -56,12 +56,12 @@ extension TaskCategoryExtension on TaskCategory {
         return 'Repairs';
       case TaskCategory.pet:
         return 'Pet Care';
-      case TaskCategory.shopping:
-        return 'Shopping';
+      case TaskCategory.errands:
+        return 'Errands';
       case TaskCategory.transportation:
         return 'Transportation';
-      case TaskCategory.teaching:
-        return 'Teaching';
+      case TaskCategory.tutoring:
+        return 'Tutoring';
     }
   }
 
@@ -73,11 +73,11 @@ extension TaskCategoryExtension on TaskCategory {
         return MyIcons.miningSolid;
       case TaskCategory.pet:
         return MyIcons.petSolid;
-      case TaskCategory.shopping:
+      case TaskCategory.errands:
         return MyIcons.cartSolid;
       case TaskCategory.transportation:
         return MyIcons.carSolid;
-      case TaskCategory.teaching:
+      case TaskCategory.tutoring:
         return MyIcons.teachingSolid;
     }
   }
@@ -90,11 +90,11 @@ extension TaskCategoryExtension on TaskCategory {
         return MyIcons.miningStroke;
       case TaskCategory.pet:
         return MyIcons.petStroke;
-      case TaskCategory.shopping:
+      case TaskCategory.errands:
         return MyIcons.cartStroke;
       case TaskCategory.transportation:
         return MyIcons.carStroke;
-      case TaskCategory.teaching:
+      case TaskCategory.tutoring:
         return MyIcons.teachingStroke;
     }
   }

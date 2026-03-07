@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tascom/core/constants/my_icons.dart';
 import 'package:tascom/core/services/location_service.dart';
-import 'package:tascom/core/storage/shared_pref_helper.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
 import 'package:tascom/core/widgets/my_app_bar.dart';
@@ -17,44 +16,18 @@ class HomeAppBar extends StatefulWidget {
 }
 
 class _HomeAppBarState extends State<HomeAppBar> {
-  String _locationText = 'Loading...';
+  String _userLocationDisplay = 'No location';
 
   @override
   void initState() {
     super.initState();
-    _loadLocation();
+    _loadUserLocation();
   }
 
-  Future<void> _loadLocation() async {
-    final location = SharedPrefHelper.getUserLocation();
-    if (location == null || !location.contains(',')) {
-      if (mounted) setState(() => _locationText = 'Unknown');
-      return;
-    }
-
-    final parts = location.split(',');
-    final latitude = double.tryParse(parts[0]);
-    final longitude = double.tryParse(parts[1]);
-
-    if (latitude == null || longitude == null) {
-      if (mounted) setState(() => _locationText = 'Unknown');
-      return;
-    }
-
-    final placemark = await LocationService.getPlacemark(latitude, longitude);
-
+  Future<void> _loadUserLocation() async {
+    final display = await LocationService.getStoredLocationDisplayName();
     if (!mounted) return;
-
-    if (placemark != null) {
-      final country = placemark.country ?? '';
-      final city = placemark.locality ?? '';
-      setState(() {
-        _locationText = [country, city].where((s) => s.isNotEmpty).join(', ');
-        if (_locationText.isEmpty) _locationText = 'Unknown';
-      });
-    } else {
-      setState(() => _locationText = 'Unknown');
-    }
+    setState(() => _userLocationDisplay = display);
   }
 
   @override
@@ -80,7 +53,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                 ),
               ),
               Text(
-                _locationText,
+                _userLocationDisplay,
                 style: MyTextStyles.button.secondaryButton2.copyWith(
                   color: MyColors.text.primary,
                 ),

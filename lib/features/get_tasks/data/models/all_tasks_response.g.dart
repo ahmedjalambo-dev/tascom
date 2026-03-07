@@ -35,7 +35,8 @@ _TaskResponseData _$TaskResponseDataFromJson(Map<String, dynamic> json) =>
       status: json['status'] as String,
       priority: json['priority'] as String,
       category: json['category'] as String,
-      saved: json['saved'] as bool?,
+      isSaved: json['isSaved'] as bool?,
+      isLiked: json['isLiked'] as bool?,
       numOfLikes: (json['numOfLikes'] as num?)?.toInt(),
       createdAt: json['createdAt'] as String,
       updatedAt: json['updatedAt'] as String?,
@@ -45,6 +46,7 @@ _TaskResponseData _$TaskResponseDataFromJson(Map<String, dynamic> json) =>
               ?.map((e) => ClaimTaskData.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      assets: json['assets'] as List<dynamic>? ?? const [],
     );
 
 Map<String, dynamic> _$TaskResponseDataToJson(_TaskResponseData instance) =>
@@ -60,12 +62,14 @@ Map<String, dynamic> _$TaskResponseDataToJson(_TaskResponseData instance) =>
       'status': instance.status,
       'priority': instance.priority,
       'category': instance.category,
-      'saved': instance.saved,
+      'isSaved': instance.isSaved,
+      'isLiked': instance.isLiked,
       'numOfLikes': instance.numOfLikes,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
       'isDeleted': instance.isDeleted,
       'claims': instance.claims,
+      'assets': instance.assets,
     };
 
 _PaginationMeta _$PaginationMetaFromJson(Map<String, dynamic> json) =>

@@ -10,45 +10,54 @@ import 'package:tascom/features/search/data/models/search_person_data.dart';
 class PeopleCard extends StatelessWidget {
   final SearchPersonData person;
   final String? resolvedLocation;
+  final VoidCallback? onTap;
 
-  const PeopleCard({super.key, required this.person, this.resolvedLocation});
+  const PeopleCard({
+    super.key,
+    required this.person,
+    this.resolvedLocation,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
-      padding: EdgeInsets.all(16.w),
-      decoration: BoxDecoration(
-        color: MyColors.background.primary,
-        borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: MyColors.border.postBorder, width: 1),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildAvatar(),
-              const HorizontalSpace(12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildNameAndRating(),
-                    const VerticalSpace(4),
-                    _buildLocation(),
-                  ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
+        padding: EdgeInsets.all(16.w),
+        decoration: BoxDecoration(
+          color: MyColors.background.primary,
+          borderRadius: BorderRadius.circular(16.r),
+          border: Border.all(color: MyColors.border.postBorder, width: 1),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildAvatar(),
+                const HorizontalSpace(12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildNameAndRating(),
+                      const VerticalSpace(4),
+                      _buildLocation(),
+                    ],
+                  ),
                 ),
-              ),
-              _buildMessageButton(),
+                _buildMessageButton(),
+              ],
+            ),
+            if (person.skills != null && person.skills!.isNotEmpty) ...[
+              const VerticalSpace(12),
+              _buildSkills(),
             ],
-          ),
-          if (person.skills != null && person.skills!.isNotEmpty) ...[
-            const VerticalSpace(12),
-            _buildSkills(),
           ],
-        ],
+        ),
       ),
     );
   }

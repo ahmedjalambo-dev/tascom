@@ -78,6 +78,16 @@ class SharedPrefHelper {
     return _prefs.getString(SharedPrefKeys.userName);
   }
 
+  /// Save user avatar URL
+  static Future<void> setUserAvatar(String avatar) async {
+    await _prefs.setString(SharedPrefKeys.userAvatar, avatar);
+  }
+
+  /// Get user avatar URL
+  static String? getUserAvatar() {
+    return _prefs.getString(SharedPrefKeys.userAvatar);
+  }
+
   /// Save user location
   static Future<void> setUserLocation(String location) async {
     await _prefs.setString(SharedPrefKeys.userLocation, location);
@@ -135,5 +145,6 @@ class SharedPrefHelper {
     await _prefs.remove(SharedPrefKeys.userEmail);
     await _prefs.remove(SharedPrefKeys.userName);
     await _prefs.remove(SharedPrefKeys.userLocation);
+    await _prefs.remove(SharedPrefKeys.userAvatar);
   }
 }

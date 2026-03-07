@@ -11,13 +11,77 @@ class CommentTile extends StatelessWidget {
   final Comment comment;
   final bool isNested;
   final VoidCallback? onReplyTap;
+  final VoidCallback? onDeleteTap;
+  final VoidCallback? onEditTap;
 
   const CommentTile({
     super.key,
     required this.comment,
     this.isNested = false,
     this.onReplyTap,
+    this.onDeleteTap,
+    this.onEditTap,
   });
+
+  void _showOptionsBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: MyColors.background.primary,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+      ),
+      builder: (context) => SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.h),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (onEditTap != null)
+                ListTile(
+                  leading: Icon(
+                    Icons.edit_outlined,
+                    size: 22.w,
+                    color: MyColors.text.primary,
+                  ),
+                  title: Text(
+                    'Edit',
+                    style: MyTextStyles.body.body1.copyWith(
+                      color: MyColors.text.primary,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    onEditTap!();
+                  },
+                ),
+              if (onDeleteTap != null)
+                ListTile(
+                  leading: SvgPicture.asset(
+                    MyIcons.trashStroke,
+                    width: 22.w,
+                    height: 22.h,
+                    colorFilter: ColorFilter.mode(
+                      MyColors.status.cancelled,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  title: Text(
+                    'Delete',
+                    style: MyTextStyles.body.body1.copyWith(
+                      color: MyColors.status.cancelled,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    onDeleteTap!();
+                  },
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,13 +141,18 @@ class CommentTile extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SvgPicture.asset(
-                      MyIcons.moreVertical,
-                      width: 20.w,
-                      height: 20.h,
-                      colorFilter: ColorFilter.mode(
-                        MyColors.icons.icon,
-                        BlendMode.srcIn,
+                    GestureDetector(
+                      onTap: (onDeleteTap != null || onEditTap != null)
+                          ? () => _showOptionsBottomSheet(context)
+                          : null,
+                      child: SvgPicture.asset(
+                        MyIcons.moreVertical,
+                        width: 20.w,
+                        height: 20.h,
+                        colorFilter: ColorFilter.mode(
+                          MyColors.icons.icon,
+                          BlendMode.srcIn,
+                        ),
                       ),
                     ),
                   ],
@@ -122,15 +191,6 @@ class CommentTile extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    SvgPicture.asset(
-                      MyIcons.sendStroke,
-                      width: 20.w,
-                      height: 20.h,
-                      colorFilter: ColorFilter.mode(
-                        MyColors.text.secondary,
-                        BlendMode.srcIn,
-                      ),
-                    ),
                   ],
                 ),
               ],

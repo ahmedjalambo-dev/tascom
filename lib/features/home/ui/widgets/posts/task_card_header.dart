@@ -9,8 +9,9 @@ import 'package:tascom/features/home/data/models/task_model.dart';
 
 class TaskCardHeader extends StatelessWidget {
   final TaskModel taskModel;
+  final VoidCallback? onSaveTap;
 
-  const TaskCardHeader({super.key, required this.taskModel});
+  const TaskCardHeader({super.key, required this.taskModel, this.onSaveTap});
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +43,14 @@ class TaskCardHeader extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Text(
-                    taskModel.author.name,
-                    style: MyTextStyles.body.body2.copyWith(
-                      color: MyColors.text.primary,
-                      fontWeight: FontWeight.w500,
+                  Flexible(
+                    child: Text(
+                      taskModel.author.name,
+                      overflow: TextOverflow.ellipsis,
+                      style: MyTextStyles.body.body2.copyWith(
+                        color: MyColors.text.primary,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   const HorizontalSpace(8),
@@ -78,13 +82,12 @@ class TaskCardHeader extends StatelessWidget {
           ),
         ),
 
+        const HorizontalSpace(8),
         // Bookmark Icon
         GestureDetector(
-          onTap: () {
-            // Handle bookmark
-          },
+          onTap: onSaveTap,
           child: SvgPicture.asset(
-            MyIcons.saveStroke,
+            taskModel.isSaved ? MyIcons.saveSolid : MyIcons.saveStroke,
             width: 24.w,
             height: 24.w,
             colorFilter: ColorFilter.mode(

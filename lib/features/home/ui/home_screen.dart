@@ -8,6 +8,10 @@ import 'package:tascom/core/widgets/dialogs/claim_confirmation_dialog.dart';
 import 'package:tascom/core/widgets/my_spacing.dart';
 import 'package:tascom/features/claim_task/cubit/claim_task_cubit.dart';
 import 'package:tascom/features/claim_task/cubit/claim_task_state.dart';
+import 'package:tascom/features/save_task/cubit/save_task_cubit.dart';
+import 'package:tascom/features/save_task/ui/save_task_listener.dart';
+import 'package:tascom/features/like_task/cubit/like_task_cubit.dart';
+import 'package:tascom/features/like_task/ui/like_task_listener.dart';
 import 'package:tascom/features/get_tasks/cubit/get_tasks_cubit.dart';
 import 'package:tascom/features/get_tasks/cubit/get_tasks_state.dart';
 import 'package:tascom/features/get_tasks/data/models/all_tasks_response.dart';
@@ -81,24 +85,52 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.background.primary,
-      body: BlocListener<ClaimTaskCubit, ClaimTaskState>(
-        listener: (context, claimState) {
-          claimState.when(
-            initial: () {},
-            loading: (_) {},
-            success: (_) {
-              context.read<GetTasksCubit>().getAllTasks();
-            },
-            error: (error) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(error.message ?? 'Failed to claim task'),
-                  behavior: SnackBarBehavior.floating,
-                ),
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<ClaimTaskCubit, ClaimTaskState>(
+            listener: (context, claimState) {
+              claimState.when(
+                initial: () {},
+                loading: (_) {},
+                success: (_) {
+                  context.read<GetTasksCubit>().getAllTasks();
+                },
+                error: (error) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(error.message ?? 'Failed to claim task'),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                },
               );
             },
-          );
-        },
+          ),
+          SaveTaskListener(
+            onSuccess: (data) {
+              context.read<GetTasksCubit>().toggleSaved(
+                data.taskId ?? '',
+                data.isSaved ?? false,
+              );
+            },
+            child: const SizedBox.shrink(),
+          ),
+          LikeTaskListener(
+            onSuccess: (data) {
+              final currentUserId = SessionManager.instance.currentUserId;
+              final isLiked = data.likes.any(
+                (like) =>
+                    like.userId == currentUserId && like.likeStatus == true,
+              );
+              context.read<GetTasksCubit>().toggleLiked(
+                data.id ?? '',
+                isLiked,
+                data.numOfLikes ?? 0,
+              );
+            },
+            child: const SizedBox.shrink(),
+          ),
+        ],
         child: BlocBuilder<GetTasksCubit, GetTasksState>(
           builder: (context, state) {
             return Column(
@@ -326,6 +358,13 @@ class _HomeScreenState extends State<HomeScreen> {
             onClaimTap: taskModel.isClaimed
                 ? null
                 : () => _handleClaimTask(taskModel.id),
+            onLikeTap: () {
+              context.read<LikeTaskCubit>().likeTask(taskModel.id);
+            },
+            onSaveTap: () {
+              context.read<SaveTaskCubit>().saveTask(taskModel.id);
+            },
+            maxLines: 4,
           );
         },
       ),

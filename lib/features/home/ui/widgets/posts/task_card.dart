@@ -17,8 +17,9 @@ class TaskCard extends StatelessWidget {
   final VoidCallback? onCommentTap;
   final VoidCallback? onShareTap;
   final VoidCallback? onClaimTap;
+  final VoidCallback? onSaveTap;
   final bool isClaimLoading;
-  final bool showActions;
+  final int? maxLines;
 
   const TaskCard({
     super.key,
@@ -28,8 +29,9 @@ class TaskCard extends StatelessWidget {
     this.onCommentTap,
     this.onShareTap,
     this.onClaimTap,
+    this.onSaveTap,
     this.isClaimLoading = false,
-    this.showActions = true,
+    this.maxLines,
   });
 
   @override
@@ -48,7 +50,7 @@ class TaskCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Header: Avatar, Name, Rating, Bookmark, Menu
-              TaskCardHeader(taskModel: taskModel),
+              TaskCardHeader(taskModel: taskModel, onSaveTap: onSaveTap),
               const VerticalSpace(12),
 
               // Title
@@ -67,7 +69,7 @@ class TaskCard extends StatelessWidget {
                 style: MyTextStyles.body.body2.copyWith(
                   color: MyColors.text.secondary,
                 ),
-                maxLines: 4,
+                maxLines: maxLines,
                 overflow: TextOverflow.ellipsis,
               ),
               const VerticalSpace(12),
@@ -92,21 +94,20 @@ class TaskCard extends StatelessWidget {
                 TaskCardImage(imageUrl: taskModel.imageUrl!),
               ],
 
-              if (showActions) ...[
-                const VerticalSpace(12),
+              const VerticalSpace(12),
 
-                // Actions: Like, Comment, Share, Claim Button
-                TaskCardActions(
-                  likeCount: taskModel.likeCount,
-                  commentCount: taskModel.commentCount,
-                  isClaimed: taskModel.isClaimed,
-                  isClaimLoading: isClaimLoading,
-                  onLikeTap: onLikeTap,
-                  onCommentTap: onCommentTap,
-                  onShareTap: onShareTap,
-                  onClaimTap: onClaimTap,
-                ),
-              ],
+              // Actions: Like, Comment, Share, Claim Button
+              TaskCardActions(
+                likeCount: taskModel.likeCount,
+
+                isLiked: taskModel.isLiked,
+                isClaimed: taskModel.isClaimed,
+                isClaimLoading: isClaimLoading,
+                onLikeTap: onLikeTap,
+                onCommentTap: onCommentTap,
+                onShareTap: onShareTap,
+                onClaimTap: onClaimTap,
+              ),
             ],
           ),
         ),

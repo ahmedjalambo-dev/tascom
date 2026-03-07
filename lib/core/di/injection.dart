@@ -69,6 +69,51 @@ import '../../features/search/cubit/search_cubit.dart';
 import '../../features/search/data/repos/search_repo.dart';
 import '../../features/search/data/services/search_service.dart';
 
+// Get Comments
+import '../../features/get_comments/cubit/get_comments_cubit.dart';
+import '../../features/get_comments/data/repos/get_comments_repo.dart';
+import '../../features/get_comments/data/services/get_comments_service.dart';
+
+// Create Comment
+import '../../features/create_comment/cubit/create_comment_cubit.dart';
+import '../../features/create_comment/data/repos/create_comment_repo.dart';
+import '../../features/create_comment/data/services/create_comment_service.dart';
+
+// Delete Comment
+import '../../features/delete_comment/cubit/delete_comment_cubit.dart';
+import '../../features/delete_comment/data/repos/delete_comment_repo.dart';
+import '../../features/delete_comment/data/services/delete_comment_service.dart';
+
+// Edit Comment
+import '../../features/edit_comment/cubit/edit_comment_cubit.dart';
+import '../../features/edit_comment/data/repos/edit_comment_repo.dart';
+import '../../features/edit_comment/data/services/edit_comment_service.dart';
+
+// Save Task
+import '../../features/save_task/cubit/save_task_cubit.dart';
+import '../../features/save_task/data/repos/save_task_repo.dart';
+import '../../features/save_task/data/services/save_task_service.dart';
+
+// Like Task
+import '../../features/like_task/cubit/like_task_cubit.dart';
+import '../../features/like_task/data/repos/like_task_repo.dart';
+import '../../features/like_task/data/services/like_task_service.dart';
+
+// Saved Tasks
+import '../../features/settings/save_tasks/cubit/saved_tasks_cubit.dart';
+import '../../features/settings/save_tasks/data/repos/saved_tasks_repo.dart';
+import '../../features/settings/save_tasks/data/services/saved_tasks_service.dart';
+
+// Get Task
+import '../../features/get_task/cubit/get_task_cubit.dart';
+import '../../features/get_task/data/repos/get_task_repo.dart';
+import '../../features/get_task/data/services/get_task_service.dart';
+
+// Map
+import '../../features/map/cubit/map_cubit.dart';
+import '../../features/map/data/repos/map_repo.dart';
+import '../../features/map/data/services/map_service.dart';
+
 final getIt = GetIt.instance;
 
 Future<void> initDependencies() async {
@@ -204,4 +249,97 @@ Future<void> initDependencies() async {
     () => SearchRepo(getIt<SearchService>()),
   );
   getIt.registerFactory<SearchCubit>(() => SearchCubit(getIt<SearchRepo>()));
+
+  // ============ Get Comments ============
+  getIt.registerLazySingleton<GetCommentsService>(
+    () => GetCommentsService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<GetCommentsRepo>(
+    () => GetCommentsRepo(getIt<GetCommentsService>()),
+  );
+  getIt.registerFactory<GetCommentsCubit>(
+    () => GetCommentsCubit(getIt<GetCommentsRepo>()),
+  );
+
+  // ============ Create Comment ============
+  getIt.registerLazySingleton<CreateCommentService>(
+    () => CreateCommentService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<CreateCommentRepo>(
+    () => CreateCommentRepo(getIt<CreateCommentService>()),
+  );
+  getIt.registerFactory<CreateCommentCubit>(
+    () => CreateCommentCubit(getIt<CreateCommentRepo>()),
+  );
+
+  // ============ Delete Comment ============
+  getIt.registerLazySingleton<DeleteCommentService>(
+    () => DeleteCommentService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<DeleteCommentRepo>(
+    () => DeleteCommentRepo(getIt<DeleteCommentService>()),
+  );
+  getIt.registerFactory<DeleteCommentCubit>(
+    () => DeleteCommentCubit(getIt<DeleteCommentRepo>()),
+  );
+
+  // ============ Edit Comment ============
+  getIt.registerLazySingleton<EditCommentService>(
+    () => EditCommentService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<EditCommentRepo>(
+    () => EditCommentRepo(getIt<EditCommentService>()),
+  );
+  getIt.registerFactory<EditCommentCubit>(
+    () => EditCommentCubit(getIt<EditCommentRepo>()),
+  );
+
+  // ============ Save Task ============
+  getIt.registerLazySingleton<SaveTaskService>(
+    () => SaveTaskService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<SaveTaskRepo>(
+    () => SaveTaskRepo(getIt<SaveTaskService>()),
+  );
+  getIt.registerFactory<SaveTaskCubit>(
+    () => SaveTaskCubit(getIt<SaveTaskRepo>()),
+  );
+
+  // ============ Like Task ============
+  getIt.registerLazySingleton<LikeTaskService>(
+    () => LikeTaskService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<LikeTaskRepo>(
+    () => LikeTaskRepo(getIt<LikeTaskService>()),
+  );
+  getIt.registerFactory<LikeTaskCubit>(
+    () => LikeTaskCubit(getIt<LikeTaskRepo>()),
+  );
+
+  // ============ Saved Tasks ============
+  getIt.registerLazySingleton<SavedTasksService>(
+    () => SavedTasksService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<SavedTasksRepo>(
+    () => SavedTasksRepo(getIt<SavedTasksService>()),
+  );
+  getIt.registerFactory<SavedTasksCubit>(
+    () => SavedTasksCubit(getIt<SavedTasksRepo>(), getIt<ProfileService>()),
+  );
+
+  // ============ Get Task ============
+  getIt.registerLazySingleton<GetTaskService>(
+    () => GetTaskService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<GetTaskRepo>(
+    () => GetTaskRepo(getIt<GetTaskService>()),
+  );
+  getIt.registerFactory<GetTaskCubit>(
+    () => GetTaskCubit(getIt<GetTaskRepo>()),
+  );
+
+  // ============ Map ============
+  getIt.registerLazySingleton<MapService>(() => MapService(getIt<Dio>()));
+  getIt.registerLazySingleton<MapRepo>(() => MapRepo(getIt<MapService>()));
+  getIt.registerFactory<MapCubit>(() => MapCubit(getIt<MapRepo>()));
 }

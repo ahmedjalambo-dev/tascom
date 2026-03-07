@@ -71,7 +71,9 @@ class SettingsScreen extends StatelessWidget {
                   _SettingsMenuItem(
                     icon: MyIcons.saveStroke,
                     label: 'Saved Tasks',
-                    onTap: () {},
+                    onTap: () {
+                      context.pushNamed(MyRoutes.savedTasks);
+                    },
                   ),
                   _SettingsMenuItem(
                     icon: MyIcons.pointsStroke,

@@ -54,6 +54,7 @@ abstract class MyIcons {
   // task items
   static const String starSolid = '$_basePath/star_solid.svg';
   static const String saveStroke = '$_basePath/save_stroke.svg';
+  static const String saveSolid = '$_basePath/save_solid.svg';
   static const String deleteStroke = '$_basePath/delete_stroke.svg';
   static const String moreVertical = '$_basePath/more_vertical.svg';
 
@@ -118,4 +119,7 @@ abstract class MyIcons {
   // filter
   static const String filterStroke = '$_basePath/filter_stroke.svg';
   static const String filterSolid = '$_basePath/filter_solid.svg';
+
+  // map
+  static const String map = '$_basePath/maps.svg';
 }

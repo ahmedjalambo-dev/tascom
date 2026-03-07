@@ -18,7 +18,7 @@ extension TaskResponseMapper on TaskResponseData {
   }) {
     final creator = creators[creatorId];
     final locationKey = '$latitude,$longitude';
-    final cityName = locationNames[locationKey] ?? 'Unknown';
+    final cityName = locationNames[locationKey] ?? '$latitude, $longitude';
 
     return TaskModel(
       id: id,
@@ -41,6 +41,7 @@ extension TaskResponseMapper on TaskResponseData {
       ),
       duration: _formatDeadline(deadline),
       metrics: TaskMetrics(points: pointsOffered ?? 0, distance: 0),
+      imageUrl: assets.isNotEmpty ? assets[0]['url'] as String? : null,
       likeCount: numOfLikes ?? 0,
       commentCount: 0,
       isClaimed:
@@ -48,6 +49,8 @@ extension TaskResponseMapper on TaskResponseData {
           claims.any(
             (c) => c.claimantId == currentUserId && c.status == 'PENDING',
           ),
+      isLiked: isLiked ?? false,
+      isSaved: isSaved ?? false,
     );
   }
 

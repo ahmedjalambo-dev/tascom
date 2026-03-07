@@ -31,12 +31,14 @@ abstract class TaskResponseData with _$TaskResponseData {
     required String status,
     required String priority,
     required String category,
-    bool? saved,
+    bool? isSaved,
+    bool? isLiked,
     int? numOfLikes,
     required String createdAt,
     String? updatedAt,
     bool? isDeleted,
     @Default([]) List<ClaimTaskData> claims,
+    @Default([]) List<dynamic> assets,
   }) = _TaskResponseData;
 
   factory TaskResponseData.fromJson(Map<String, dynamic> json) =>
