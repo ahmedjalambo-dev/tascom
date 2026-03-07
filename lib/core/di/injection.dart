@@ -104,6 +104,11 @@ import '../../features/settings/save_tasks/cubit/saved_tasks_cubit.dart';
 import '../../features/settings/save_tasks/data/repos/saved_tasks_repo.dart';
 import '../../features/settings/save_tasks/data/services/saved_tasks_service.dart';
 
+// Get Task
+import '../../features/get_task/cubit/get_task_cubit.dart';
+import '../../features/get_task/data/repos/get_task_repo.dart';
+import '../../features/get_task/data/services/get_task_service.dart';
+
 // Map
 import '../../features/map/cubit/map_cubit.dart';
 import '../../features/map/data/repos/map_repo.dart';
@@ -320,6 +325,17 @@ Future<void> initDependencies() async {
   );
   getIt.registerFactory<SavedTasksCubit>(
     () => SavedTasksCubit(getIt<SavedTasksRepo>(), getIt<ProfileService>()),
+  );
+
+  // ============ Get Task ============
+  getIt.registerLazySingleton<GetTaskService>(
+    () => GetTaskService(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<GetTaskRepo>(
+    () => GetTaskRepo(getIt<GetTaskService>()),
+  );
+  getIt.registerFactory<GetTaskCubit>(
+    () => GetTaskCubit(getIt<GetTaskRepo>()),
   );
 
   // ============ Map ============

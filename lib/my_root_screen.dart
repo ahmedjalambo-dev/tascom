@@ -6,6 +6,7 @@ import 'package:tascom/core/storage/session_manager.dart';
 import 'package:tascom/core/widgets/my_bottom_navigation_bar.dart';
 import 'package:tascom/features/map/ui/map_screen.dart';
 import 'package:tascom/features/map/cubit/map_cubit.dart';
+import 'package:tascom/features/get_task/cubit/get_task_cubit.dart';
 import 'package:tascom/features/claim_task/cubit/claim_task_cubit.dart';
 import 'package:tascom/features/get_tasks/cubit/get_tasks_cubit.dart';
 import 'package:tascom/features/save_task/cubit/save_task_cubit.dart';
@@ -51,7 +52,7 @@ class _MyRootScreenState extends State<MyRootScreen> {
           return MultiBlocProvider(
             providers: [
               BlocProvider(create: (_) => getIt<MapCubit>()..getMapTasks()),
-              BlocProvider(create: (_) => getIt<ClaimTaskCubit>()),
+              BlocProvider(create: (_) => getIt<GetTaskCubit>()),
             ],
             child: const MapScreen(),
           );

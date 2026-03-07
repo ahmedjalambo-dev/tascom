@@ -6,20 +6,27 @@ import 'package:latlong2/latlong.dart';
 import 'package:tascom/core/themes/my_colors.dart';
 import 'package:tascom/core/themes/my_text_styles.dart';
 import 'package:tascom/core/widgets/my_app_bar.dart';
-import 'package:tascom/core/widgets/dialogs/claim_confirmation_dialog.dart';
 
-import '../../../core/extentions/extentions.dart';
+import '../../../core/di/injection.dart';
 import '../../../core/routes/my_routes.dart';
+import '../../../core/storage/session_manager.dart';
 import '../../../core/storage/shared_pref_helper.dart';
-import '../../claim_task/cubit/claim_task_cubit.dart';
-import '../../claim_task/cubit/claim_task_state.dart';
+import '../../get_task/cubit/get_task_cubit.dart';
+import '../../get_task/cubit/get_task_state.dart';
+import '../../home/data/models/task_category.dart';
+import '../../home/data/models/task_location.dart';
+import '../../home/data/models/task_metrics.dart';
 import '../../home/data/models/task_model.dart';
-import '../../home/ui/widgets/posts/task_card.dart';
+import '../../home/data/models/task_priority.dart';
+import '../../home/data/models/task_status.dart';
+import '../../home/data/models/user_model.dart';
+import '../../profile/data/services/profile_service.dart';
 import '../cubit/map_cubit.dart';
 import '../cubit/map_state.dart';
 import '../data/models/map_task_mapper.dart';
 import '../data/models/map_tasks_response.dart';
 import 'widgets/map_error_view.dart';
+import 'widgets/map_task_card.dart';
 import 'widgets/task_marker.dart';
 
 class MapScreen extends StatefulWidget {
@@ -32,6 +39,7 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   final MapController _mapController = MapController();
   TaskModel? _selectedTask;
+  bool _isFetchingTask = false;
 
   LatLng _getUserLocation() {
     final locationStr = SharedPrefHelper.getUserLocation();
@@ -51,13 +59,80 @@ class _MapScreenState extends State<MapScreen> {
 
   void _dismissPopup() => setState(() => _selectedTask = null);
 
-  void _openTaskDetails(TaskModel task) =>
-      context.pushNamed(MyRoutes.taskDetails, arguments: task);
+  void _onCardTapped() {
+    if (_selectedTask == null || _isFetchingTask) return;
+    final id = int.tryParse(_selectedTask!.id);
+    if (id == null) return;
+    context.read<GetTaskCubit>().getTask(id);
+  }
 
-  Future<void> _handleClaimTask(String taskId) async {
-    final confirmed = await showClaimConfirmationDialog(context);
-    if (confirmed == true && mounted) {
-      context.read<ClaimTaskCubit>().claimTask(taskId);
+  Future<TaskModel> _toTaskModel(
+    GetTaskSuccess state,
+  ) async {
+    final data = state.data;
+    final currentUserId = SessionManager.instance.currentUserId;
+
+    // Fetch creator info
+    String creatorName = 'Unknown';
+    String? creatorAvatar;
+    double creatorRating = 0;
+    try {
+      final profileService = getIt<ProfileService>();
+      final userResponse = await profileService.getUser(data.creatorId);
+      creatorName = userResponse.data.name;
+      creatorAvatar = userResponse.data.avatar;
+      creatorRating = userResponse.data.rating ?? 0;
+    } catch (_) {}
+
+    return TaskModel(
+      id: data.id,
+      author: UserModel(
+        id: data.creatorId,
+        name: creatorName,
+        avatar: creatorAvatar,
+        rating: creatorRating,
+      ),
+      createdAt: DateTime.parse(data.createdAt),
+      title: data.title,
+      description: data.description,
+      category: TaskCategory.fromApiValue(data.category),
+      priority: TaskPriority.fromApiValue(data.priority),
+      status: TaskStatus.fromApiValue(data.status),
+      location: TaskLocation(
+        name: 'Nearby',
+        latitude: data.latitude,
+        longitude: data.longitude,
+      ),
+      duration: _formatDeadline(data.deadline),
+      metrics: TaskMetrics(points: data.pointsOffered ?? 0, distance: 0),
+      imageUrl: data.assets.isNotEmpty ? data.assets[0]['url'] as String? : null,
+      likeCount: data.numOfLikes ?? 0,
+      commentCount: 0,
+      isClaimed: currentUserId != null &&
+          data.claims.any(
+            (c) => c.claimantId == currentUserId && c.status == 'PENDING',
+          ),
+      isLiked: data.isLiked ?? false,
+      isSaved: data.isSaved ?? false,
+    );
+  }
+
+  String _formatDeadline(String? deadline) {
+    if (deadline == null) return 'No deadline';
+    try {
+      final deadlineDate = DateTime.parse(deadline);
+      final now = DateTime.now();
+      final difference = deadlineDate.difference(now);
+      if (difference.isNegative) return 'Expired';
+      if (difference.inDays > 0) {
+        return '${difference.inDays} day${difference.inDays > 1 ? 's' : ''}';
+      }
+      if (difference.inHours > 0) {
+        return '${difference.inHours} hour${difference.inHours > 1 ? 's' : ''}';
+      }
+      return 'Less than 1 hour';
+    } catch (_) {
+      return 'No deadline';
     }
   }
 
@@ -81,104 +156,100 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final claimState = context.watch<ClaimTaskCubit>().state;
-    final isClaimLoading = _selectedTask != null
-        ? claimState.maybeWhen(
-            loading: (taskId) => taskId == _selectedTask!.id,
-            orElse: () => false,
-          )
-        : false;
-
     return Scaffold(
-      body: BlocListener<ClaimTaskCubit, ClaimTaskState>(
-        listener: (context, state) {
-          state.when(
-            initial: () {},
-            loading: (_) {},
-            success: (_) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Task claimed successfully!'),
-                  behavior: SnackBarBehavior.floating,
-                ),
-              );
-              context.read<MapCubit>().getMapTasks();
-              _dismissPopup();
-            },
-            error: (error) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(error.message ?? 'Failed to claim task'),
-                  behavior: SnackBarBehavior.floating,
-                ),
-              );
-            },
-          );
+      body: BlocListener<GetTaskCubit, GetTaskState>(
+        listener: (context, state) async {
+          if (state is GetTaskLoading) {
+            setState(() => _isFetchingTask = true);
+          } else if (state is GetTaskSuccess) {
+            final navigator = Navigator.of(context);
+            final taskModel = await _toTaskModel(state);
+            setState(() => _isFetchingTask = false);
+            if (mounted) {
+              navigator.pushNamed(MyRoutes.taskDetails, arguments: taskModel);
+            }
+          } else if (state is GetTaskError) {
+            setState(() => _isFetchingTask = false);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.error.message ?? 'Failed to load task'),
+                behavior: SnackBarBehavior.floating,
+              ),
+            );
+          }
         },
         child: Stack(
           children: [
-            _MapLayer(
-              mapController: _mapController,
-              buildMarkers: _buildMarkers,
-              userLocation: _getUserLocation(),
-              onTap: _dismissPopup,
-            ),
-            MyAppBar(
-              title: Text(
-                'Map',
-                style: MyTextStyles.heading.h22.copyWith(
-                  color: MyColors.text.primary,
-                ),
-              ),
-              trailing: [
-                IconButton(
-                  icon: const Icon(Icons.refresh),
-                  onPressed: () => context.read<MapCubit>().getMapTasks(),
-                ),
-              ],
-            ),
-            // Zoom & reposition controls
-            Positioned(
-              bottom: 100.h,
-              right: 16.w,
-              child: _MapControls(
-                onZoomIn: () {
-                  final zoom = _mapController.camera.zoom;
-                  _mapController.move(_mapController.camera.center, zoom + 1);
-                },
-                onZoomOut: () {
-                  final zoom = _mapController.camera.zoom;
-                  _mapController.move(_mapController.camera.center, zoom - 1);
-                },
-                onMyLocation: () {
-                  _mapController.move(_getUserLocation(), 14.0);
-                },
+          _MapLayer(
+            mapController: _mapController,
+            buildMarkers: _buildMarkers,
+            userLocation: _getUserLocation(),
+            onTap: _dismissPopup,
+          ),
+          MyAppBar(
+            title: Text(
+              'Map',
+              style: MyTextStyles.heading.h22.copyWith(
+                color: MyColors.text.primary,
               ),
             ),
-            if (_selectedTask != null)
-              Positioned(
-                bottom: 120.h,
-                left: 16.w,
-                right: 16.w,
-                child: TaskCard(
-                  taskModel: _selectedTask!,
-                  isClaimLoading: isClaimLoading,
-                  onTap: () => _openTaskDetails(_selectedTask!),
-                  onClaimTap: _selectedTask!.isClaimed
-                      ? null
-                      : () => _handleClaimTask(_selectedTask!.id),
-                ),
+            trailing: [
+              IconButton(
+                icon: const Icon(Icons.refresh),
+                onPressed: () => context.read<MapCubit>().getMapTasks(),
               ),
-            BlocBuilder<MapCubit, MapState>(
-              builder: (context, state) {
-                if (state is MapLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                return const SizedBox.shrink();
+            ],
+          ),
+          Positioned(
+            bottom: 100.h,
+            right: 16.w,
+            child: _MapControls(
+              onZoomIn: () {
+                final zoom = _mapController.camera.zoom;
+                _mapController.move(_mapController.camera.center, zoom + 1);
+              },
+              onZoomOut: () {
+                final zoom = _mapController.camera.zoom;
+                _mapController.move(_mapController.camera.center, zoom - 1);
+              },
+              onMyLocation: () {
+                _mapController.move(_getUserLocation(), 14.0);
               },
             ),
-            const MapErrorView(),
-          ],
+          ),
+          if (_selectedTask != null)
+            Positioned(
+              bottom: 120.h,
+              left: 16.w,
+              right: 16.w,
+              child: _isFetchingTask
+                  ? Container(
+                      padding: EdgeInsets.all(16.w),
+                      decoration: BoxDecoration(
+                        color: MyColors.background.primary,
+                        borderRadius: BorderRadius.circular(16.r),
+                        border: Border.all(
+                          color: MyColors.border.postBorder,
+                          width: 1,
+                        ),
+                      ),
+                      child: const Center(child: CircularProgressIndicator()),
+                    )
+                  : MapTaskCard(
+                      taskModel: _selectedTask!,
+                      onTap: _onCardTapped,
+                    ),
+            ),
+          BlocBuilder<MapCubit, MapState>(
+            builder: (context, state) {
+              if (state is MapLoading) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              return const SizedBox.shrink();
+            },
+          ),
+          const MapErrorView(),
+        ],
         ),
       ),
     );
