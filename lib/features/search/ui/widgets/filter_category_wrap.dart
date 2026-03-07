@@ -13,7 +13,7 @@ class FilterCategoryWrap extends StatelessWidget {
   static const List<TaskCategory> _filterCategories = [
     TaskCategory.pet,
     TaskCategory.repairs,
-    TaskCategory.teaching,
+    TaskCategory.tutoring,
     TaskCategory.shopping,
     TaskCategory.transportation,
     TaskCategory.homeService,
@@ -22,7 +22,7 @@ class FilterCategoryWrap extends StatelessWidget {
   static const Map<TaskCategory, String> _filterLabels = {
     TaskCategory.pet: 'Pet Care',
     TaskCategory.repairs: 'Repairs',
-    TaskCategory.teaching: 'Tutoring',
+    TaskCategory.tutoring: 'Tutoring',
     TaskCategory.shopping: 'Errands',
     TaskCategory.transportation: 'Transportation',
     TaskCategory.homeService: 'Home services',

@@ -8,7 +8,7 @@ enum TaskCategory {
   pet,
   shopping,
   transportation,
-  teaching;
+  tutoring;
 
   static TaskCategory fromApiValue(String value) {
     switch (value) {
@@ -21,7 +21,7 @@ enum TaskCategory {
       case 'Transportation':
         return TaskCategory.transportation;
       case 'Tutoring':
-        return TaskCategory.teaching;
+        return TaskCategory.tutoring;
       case 'Errands':
         return TaskCategory.shopping;
       default:
@@ -43,7 +43,7 @@ extension TaskCategoryExtension on TaskCategory {
         return 'Errands';
       case TaskCategory.transportation:
         return 'Transportation';
-      case TaskCategory.teaching:
+      case TaskCategory.tutoring:
         return 'Tutoring';
     }
   }
@@ -60,8 +60,8 @@ extension TaskCategoryExtension on TaskCategory {
         return 'Shopping';
       case TaskCategory.transportation:
         return 'Transportation';
-      case TaskCategory.teaching:
-        return 'Teaching';
+      case TaskCategory.tutoring:
+        return 'Tutoring';
     }
   }
 
@@ -77,7 +77,7 @@ extension TaskCategoryExtension on TaskCategory {
         return MyIcons.cartSolid;
       case TaskCategory.transportation:
         return MyIcons.carSolid;
-      case TaskCategory.teaching:
+      case TaskCategory.tutoring:
         return MyIcons.teachingSolid;
     }
   }
@@ -94,7 +94,7 @@ extension TaskCategoryExtension on TaskCategory {
         return MyIcons.cartStroke;
       case TaskCategory.transportation:
         return MyIcons.carStroke;
-      case TaskCategory.teaching:
+      case TaskCategory.tutoring:
         return MyIcons.teachingStroke;
     }
   }
